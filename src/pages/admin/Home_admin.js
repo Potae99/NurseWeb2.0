@@ -3,6 +3,7 @@ import Addbutton from '../../components/Button/Addbutton'
 import Professertable from '../../components/Table/Professertable'
 import Studenttable from '../../components/Table/Studenttable'
 import Admintable from '../../components/Table/Admintable'
+import DeleteIcon from '../../components/IconTable/DeleteIcon'
 
 function home_admin() {
 
@@ -18,6 +19,8 @@ function home_admin() {
       <Studenttable/>
       <p className=' mt-3 mb-1 ml-2'>ผู้ดูแลระบบ</p>
       <Admintable></Admintable>
+      
+
     </div>
   )
 
