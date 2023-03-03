@@ -13,11 +13,13 @@ import Home_admin_userdetail from './pages/admin/Home_admin_userdetail';
 import Home_admin_edituser from './pages/admin/Home_admin_edituser';
 import Admin_sylllabus from './pages/admin/Admin_sylllabus';
 import Admin_addcuriculum from './pages/admin/Admin_addcuriculum';
+import App from './App';
+import Apitest from './Test.js/Apitest';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <App></App>,
   },
   {
     path: "home_admin",
@@ -43,6 +45,11 @@ const router = createBrowserRouter([
   {
     path: "admin_addcuriculum",
     element: <Admin_addcuriculum/>,
+
+  },
+  {
+    path: "Apitest",
+    element: <Apitest/>,
 
   },
 ]);

@@ -1,29 +1,63 @@
-import React from 'react'
-import DeleteIcon from '../IconTable/DeleteIcon'
-import ViewIcon from '../IconTable/ViewIcon'
+import axios from 'axios';
+import React,{ useState, useEffect } from 'react'
+import DeleteIcon from '../IconTable/DeleteIcon';
+import ViewIcon from '../IconTable/ViewIcon';
 
 function Admintable() {
-  const Admin = [
-    {
-      ลำดับ: 1,
-      admin_id: 'xx55xxx',
-      thainame: 'xxxxxxxx',
+  const [data, setData] = useState([]);
 
-    },
-    {
-      ลำดับ: 2,
-      admin_id: 'x666xxxx',
-      thainame: 'xxxxxxxx',
-    },
-    {
-      ลำดับ: 3,
-      admin_id: 'xx777xxx',
-      thainame: 'xxxxxxxx',
-    }
-  ]
+
+  console.log(process.env.REACT_APP_API_URL + "/teacher/list");
+
+
+  const fetchData = () => {
+    console.log("WTF");
+
+    // const Toast = Swal.mixin({
+    //     toast: true,
+    //     position: 'top-end',
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     timerProgressBar: true,
+    //     didOpen: (toast) => {
+    //       toast.addEventListener('mouseenter', Swal.stopTimer)
+    //       toast.addEventListener('mouseleave', Swal.resumeTimer)
+    //     }
+    //   })
+
+    //   Toast.fire({
+    //     icon: 'error',
+    //     title: 'get data from API error!'
+    //   })
+
+
+
+    axios.get(process.env.REACT_APP_API_URL + "/admin/list")
+        .then(res => {
+            // const persons = res.data;
+            //this.setState({ persons });
+            console.log(res.data);
+
+            if (res.data.error == true) {
+                console.log(res.data)
+                console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+                return;
+            }
+            setData(res.data.data);
+
+        });
+}
+
+
+useEffect(() => {
+    fetchData();
+}, [])
+
   return (
-    <table className=" w-full text-sm text-left  text-black dark:text-gray-400">
-      <thead className="text-xs text-black uppercase bg-blue-200 dark:bg-gray-700 dark:text-black">
+    <table className=" w-full text-sm text-left text-black">
+      <thead className="text-xs text-black uppercase bg-gray-300">
         <tr  >
           <th scope="col" className="py-3 px-6" >ลำดับ</th>
           <th scope="col" className="py-3 px-6">รหัสประจำตัว</th>
@@ -31,24 +65,24 @@ function Admintable() {
           <th scope="col" className="py-3 px-6">การกระทำ</th>
         </tr>
       </thead>
-      {Admin.map((Admin, index) => (
+      {data.map((_,i) => (
         <tbody>
-          <tr data-index={index} className="  hover:bg-gray-300 bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+          <tr className="  hover:bg-gray-200 bg-white border-b"
           >
-            <td className="py-4 px-6" >{Admin.ลำดับ}</td>
-            <td className="py-4 px-6">{Admin.admin_id}</td>
-            <td className="py-4 px-6">{Admin.thainame}</td>
+            <td className="py-4 px-6" >{_.userID}</td>
+            <td className="py-4 px-6">{_.IDnumber}</td>
+            <td className="py-4 px-6">{_.nameTH}</td>
             <td className="py-4 px-6 flex flex-row">
             <div className=''
                             content="Delete Admin"
                             color="error"
-                            onClick={() => console.log("Delete Admin", Admin.admin_id)}>
+                            onClick={() => console.log("Delete Admin",_.userID)}>
               <DeleteIcon></DeleteIcon>
             </div>
             <div className=' ml-3'
                                         content="View Admin"
                                         color="error"
-                                        onClick={() => console.log("View Admin", Admin.admin_id)}>
+                                        onClick={() => console.log("View Admin", _.userID)}>
               <ViewIcon></ViewIcon>
             </div>
             </td>

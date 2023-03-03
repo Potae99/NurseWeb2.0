@@ -77,7 +77,7 @@ function Home_admin_edituser() {
     ];
   return (
     <div className= ' bg-gray-200 slate-500 min-h-screen border'>
-    <h1 className=' text-4xl text-center m-3'>เพิ่มผู้ใช้งาน</h1>
+    <h1 className=' text-4xl text-center mt-7'>แก้ไขข้อมูลผู้ใช้งาน</h1>
     <div className='container mx-auto'>
         <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
         {inputform_data.map((inputform_data, index) => (

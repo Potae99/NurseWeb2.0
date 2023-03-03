@@ -9,7 +9,7 @@ function home_admin() {
 
   return (
     <div className=' bg-gray-200 min-h-screen border'>
-      <h1 className=' text-4xl text-center m-3'>Admin Home</h1>
+      <h1 className=' text-4xl text-center mt-10'>รายชื่อผู้ใช้งาน</h1>
       <div className='grid grid-cols-1  place-items-end mr-4 mt-4'>
         <Addbutton ></Addbutton>
       </div>
