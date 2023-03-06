@@ -45,7 +45,6 @@ function Admin_addcuriculum() {
         {
             course_id: 31052,
             value: '31052'
-
         },
         {
             course_id: 31053,
@@ -56,7 +55,7 @@ function Admin_addcuriculum() {
             course_id: 31054,
             value: '31054'
 
-        },
+        }
 
     ]
 

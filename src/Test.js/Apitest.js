@@ -1,34 +1,51 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 
-function Apitest() {
-  const [post,setPost] = useState({
-    userID:"",
-    IDnumber:"",
-    nameTH:"",
-    nameENG:"",
-    gender:""
-  })
-  const handleInput = (event) =>{
-    setPost({...post,[event.target.name]: event.target.value})
-  }
-  function handleSubmit(event){
-    event.preventDefault()
-    axios.post(process.env.REACT_APP_API_URL + "/student/list",{post})
-    .then(response => console.log(response) )
-    .catch(error => console.log(error))
-  }
+const Apitest = () => {
+    const userToPost = {
 
-  return (
-    <div className=' flex flex-col' onSubmit={handleSubmit}>
-      <input className= " border border-gray-900" type="text" onChange={handleInput} name="userID"></input>
-      <input className= " border border-gray-900" type ="text" onChange={handleInput} name="IDnumber"></input>
-      <input className= " border border-gray-900" type ="text" onChange={handleInput} name="nameTH"></input>
-      <input className= " border border-gray-900" type ="text" onChange={handleInput} name="nameENG"></input>
-      <input className= " border border-gray-900" type ="text" onChange={handleInput} name="gender"></input>
-      <button type='submit'>Submit</button>
-    </div>
-  )
-}
+      nameTH :"โปเต้", 
+      nameENG:"potae", 
+      password:"1234", 
+      gender:"superman", 
+      Idnumber: null, 
+      Birthday: null, 
+      IDnumber_Path: null, 
+      ethnicity: null, 
+      nationality: null, 
+      religion: null, 
+      houseadd_Path: null, 
+      houseadd_houseNo : null, 
+      houseadd_village: null, 
+      houseadd_road: null, 
+      houseadd_alley: null, 
+      houseadd_subDistrict: null, 
+      houseadd_district: null, 
+      houseadd_province: null, 
+      houseadd_postalCode: null, 
+      presentAddress: null, 
+      phone: null, 
+      IDline: null, 
+      email: null
+    
+    };
+    const handleClick = async () => {
+        const response = await axios
+            .post(process.env.REACT_APP_API_URL + "/student", userToPost)
+            .catch((error) => console.log('Error: ', error));
+        if (response && response.data) {
+            console.log(response);
+            console.log(response.data);
+        }
+    };
+    return (
+        <div>
+          <h1>{}</h1>
+          <p>{}</p>
+          <p>{}</p>
+            <button onClick={handleClick}>Click to send POST request</button>
+        </div>
+    );
+};
 
-export default Apitest
+export default Apitest;
