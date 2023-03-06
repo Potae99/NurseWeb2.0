@@ -13,11 +13,11 @@ export default class PersonAdd extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    const user = {
+    const data = {
       name: this.state.name
     };
 
-    axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
+    axios.post(`https://jsonplaceholder.typicode.com/users`, { data })
       .then(res => {
         console.log(res);
         console.log(res.data);

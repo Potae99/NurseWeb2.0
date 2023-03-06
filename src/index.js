@@ -15,6 +15,7 @@ import Admin_sylllabus from './pages/admin/Admin_sylllabus';
 import Admin_addcuriculum from './pages/admin/Admin_addcuriculum';
 import App from './App';
 import Apitest from './Test.js/Apitest';
+import Test2 from './Test.js/Test2';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,11 @@ const router = createBrowserRouter([
   {
     path: "Apitest",
     element: <Apitest/>,
+
+  },
+  {
+    path: "Apitest2",
+    element: <Test2/>,
 
   },
 ]);

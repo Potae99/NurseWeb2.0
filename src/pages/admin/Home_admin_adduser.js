@@ -5,9 +5,7 @@ import Backbutton
 import  Axios  from 'axios'; 
 //import Swal from 'sweetalert2'
 function Home_admin_adduser() {
-    const axios = require('axios'). default;
-    const url = 'http://18.136.148.247:11339/student/list';
-
+    
     const Role = [
         {
             role: 'นิสิต',
@@ -24,78 +22,37 @@ function Home_admin_adduser() {
     ]
     const inputform_data = [
         {
-            for: 'TName',
+            for: 'nameTH',
             Head: 'ชื่อ-สกุล',
-            type: 'TName',
-            id: 'TName',
+            type: 'nameTH',
+            id: 'nameTH',
             placeholder: 'ชื่อจริง-นามสกุล'
         },
         {
-            for: 'EName',
+            for: 'nameENG',
             Head: 'ชื่อ-สกุล(ภาษาอังกฤษ)',
-            type: 'EName',
-            id: 'EName',
+            type: 'nameENG',
+            id: 'nameENG',
             placeholder: 'ชื่อจริง-นามสกุล(ภาษาอังกฤษ)'
         },
         {
-            for: 'TName',
-            Head: 'ชื่อ-สกุล',
-            type: 'TName',
-            id: 'TName',
-            placeholder: 'ชื่อจริง-นามสกุล'
+            for: 'IDnumber',
+            Head: 'รหัสนิสิต',
+            type: 'IDnumber',
+            id: 'IDnumber',
+            placeholder: 'รหัสนิสิต'
         },
         {
-            for: 'TName',
-            Head: 'ชื่อ-สกุล',
-            type: 'TName',
-            id: 'TName',
-            placeholder: 'ชื่อจริง-นามสกุล'
+            for: 'gender',
+            Head: 'เพศ',
+            type: 'gender',
+            id: 'gender',
+            placeholder: 'เพศ'
         },
-        {
-            for: 'TName',
-            Head: 'ชื่อ-สกุล',
-            type: 'TName',
-            id: 'TName',
-            placeholder: 'ชื่อจริง-นามสกุล'
-        },
-        {
-            for: 'TName',
-            Head: 'ชื่อ-สกุล',
-            type: 'TName',
-            id: 'TName',
-            placeholder: 'ชื่อจริง-นามสกุล'
-        },
-        {
-            for: 'TName',
-            Head: 'ชื่อ-สกุล',
-            type: 'TName',
-            id: 'TName',
-            placeholder: 'ชื่อจริง-นามสกุล'
-        },
-        {
-            for: 'TName',
-            Head: 'ชื่อ-สกุล',
-            type: 'TName',
-            id: 'TName',
-            placeholder: 'ชื่อจริง-นามสกุล'
-        },
-        {
-            for: 'TName',
-            Head: 'ชื่อ-สกุล',
-            type: 'TName',
-            id: 'TName',
-            placeholder: 'ชื่อจริง-นามสกุล'
-        },
-        {
-            for: 'TName',
-            Head: 'ชื่อ-สกุล',
-            type: 'TName',
-            id: 'TName',
-            placeholder: 'ชื่อจริง-นามสกุล'
-        },
+        
 
     ];
-    const url =(process.env.REACT_APP_API_URL + "/student/list")
+    //const url =(process.env.REACT_APP_API_URL + "/student/list")
     const [data,setData] = useState({
         "userID":"",
         "IDnumber":"",
@@ -112,6 +69,7 @@ function Home_admin_adduser() {
     }
     function submit(e){
         e.preventDefault();
+        /*
         Axios.post(url,{
             "userID":data.userID,
             "IDnumber":data.IDnumber,
@@ -121,14 +79,14 @@ function Home_admin_adduser() {
         })
         .then(res =>{
             console.log(res.data.data)
-        })
+        })*/
     }
     return (
         <div className=' bg-gray-200 slate-500 min-h-screen border'>
             <h1 className=' text-4xl text-center m-3'>เพิ่มผู้ใช้งาน</h1>
             <div onSubmit={(e) =>submit(e)} className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
                 <div className=' flex flex-row'>
-                    <p className=' text-2xl ml-3' >รายวิชา</p>
+                    <p className=' text-2xl ml-3' >ผู้ใช้งาน</p>
                     <select className='block ml-3  w-1/4 p-2 mb-3 text-sm text-black border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500' name="course_id" id="course_id">
                         {Role.map((Role, index) => (
                             <option value={Role.value}>{Role.role}</option>
