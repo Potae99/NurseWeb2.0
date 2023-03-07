@@ -1,8 +1,12 @@
 import React from 'react'
+import Student_popup from './components/Button/Student_popup'
 
 function App() {
   return (
-    <div>App</div>
+    <div>
+      <Student_popup></Student_popup>
+    </div>
+    
     // import React from 'react';
 // import Savebutton from '../../components/Button/Savebutton';
 // import Backbutton from '../../components/Button/Backbutton';
