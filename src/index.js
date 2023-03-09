@@ -8,7 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home_admin from './pages/admin/Home_admin';
-import Home_admin_adduser from './pages/admin/Home_admin_adduser';
+import Home_admin_addstudent from './pages/admin/Home_admin_addstudent';
 import Home_admin_userdetail from './pages/admin/Home_admin_userdetail';
 import Home_admin_edituser from './pages/admin/Home_admin_edituser';
 import Admin_sylllabus from './pages/admin/Admin_sylllabus';
@@ -21,6 +21,7 @@ import Curriculum_detail from './pages/admin/Curriculum_detail';
 import Admin_course from './pages/admin/Admin_course';
 import Admin_course_detail from './pages/admin/Admin_course_detail';
 import Home_admin_addteacher from './pages/admin/Home_admin_addteacher';
+import Home_admin_addAdmin from './pages/admin/Home_admin_addAdmin';
 
 const router = createBrowserRouter([
   {
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
     element: <Home_admin/>,
   },
   {
-    path: "admin/user/add",
-    element: <Home_admin_adduser/>,
+    path: "admin/add/student",
+    element: <Home_admin_addstudent/>,
   },
   {
     path: "admin/user/detail",
@@ -86,6 +87,12 @@ const router = createBrowserRouter([
   {
     path: "/admin/add/teacher",
     element: <Home_admin_addteacher/>,
+
+
+  },
+  {
+    path: "/admin/add/admin",
+    element: <Home_admin_addAdmin/>,
 
 
   },

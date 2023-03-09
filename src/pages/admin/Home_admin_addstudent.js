@@ -223,7 +223,7 @@ import axios from 'axios';
 
 
 
-function Home_admin_adduser() {
+function Home_admin_addstudent() {
     const [houseadd_province, sethouseadd_province] = useState("");
     const [houseadd_subDistrict, sethouseadd_subDistrict] = useState("");
     const [houseadd_road, sethouseadd_road] = useState("");
@@ -338,17 +338,6 @@ function Home_admin_adduser() {
     return (
         <div className=' bg-gray-200 slate-500 min-h-screen border'>
             <h1 className=' text-4xl text-center m-3'>เพิ่มผู้ใช้งาน</h1>
-            <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
-                <div className=' flex flex-row'>
-                    <p className=' text-2xl ml-3' >ผู้ใช้งาน</p>
-                    <select className='block ml-3  w-1/4 p-2 mb-3 text-sm text-black border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500' name="course_id" id="course_id">
-                            <option onClick={GotoaddStudent} >นิสิต</option>
-                            <option onClick={GotoaddTeacher} >อาจาร์ย</option>
-                            <option onClick={GotoaddAdmin} >ผู้ดูแลระบบ</option>
-                    </select>
-                </div>
-            </div>
-
             <div className='container mx-auto'>
                 <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                     <div >
@@ -709,4 +698,4 @@ function Home_admin_adduser() {
     )
 }
 
-export default Home_admin_adduser
+export default Home_admin_addstudent
