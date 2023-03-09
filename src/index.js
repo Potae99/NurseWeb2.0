@@ -60,7 +60,7 @@ const router = createBrowserRouter([
 
   },
   {
-    path: "student_detail",
+    path: "student_detail/:userID",
     element: <Home_admin_studentDetail/>,
 
   },

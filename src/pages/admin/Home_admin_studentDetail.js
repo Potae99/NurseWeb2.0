@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Editbutton from '../../components/Button/Editbutton';
 import Deletebutton from '../../components/Button/Deletebutton';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function Home_admin_studentDetail() {
 
     const [data, setData] = useState([]);
     // const [newnameTH, setNewNameTH] = useState('');
 
-
+    const { userID } = useParams();
 
     // console.log(process.env.REACT_APP_API_URL + "/student/list");
 
@@ -16,7 +17,7 @@ function Home_admin_studentDetail() {
         // console.log("WTF");
 
 
-        axios.post(process.env.REACT_APP_API_URL + "/student/detail", {userID: 1})
+        axios.post(process.env.REACT_APP_API_URL + "/student/detail", {userID:userID})
             .then(res => {
                 console.log(res.data);
 
