@@ -250,7 +250,7 @@ function Home_admin_adduser() {
     const [data, setData] = useState([]);
 
 
-    const [data, setData] = useState([]);
+    
     // const getSutdent = () => {
     //     axios.get(process.env.REACT_APP_API_URL + "/student/list").then((response) => {
     //         setData(response.data.data);
@@ -314,12 +314,12 @@ function Home_admin_adduser() {
                     phone: phone
                 }
             ])
-            window.location.href = "home_admin";
+            window.location.href = "/";
         })
     }
 
     const BacktoHomeAdmin = () => {
-        window.location.href = 'home_admin';
+        window.location.href = '/';
     }
 
     const Role = [

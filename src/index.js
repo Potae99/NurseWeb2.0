@@ -23,11 +23,11 @@ import Admin_course_detail from './pages/admin/Admin_course_detail';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/App",
     element: <App></App>,
   },
   {
-    path: "admin/home",
+    path: "/",
     element: <Home_admin/>,
   },
   {

@@ -7,7 +7,7 @@ import DeleteIcon from '../../components/IconTable/DeleteIcon'
 function home_admin() {
 
   const GotoAdduser = () => {
-    window.location.href = 'admin_adduser';
+    window.location.href = 'admin/user/add';
   }
 
   return (
