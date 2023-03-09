@@ -2,6 +2,7 @@ import React from 'react'
 import Professertable from '../../components/Table/Professertable'
 import Studenttable from '../../components/Table/Studenttable'
 import Admintable from '../../components/Table/Admintable'
+import DeleteIcon from '../../components/IconTable/DeleteIcon'
 
 function home_admin() {
 

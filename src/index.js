@@ -17,6 +17,9 @@ import Home_admin_studentDetail from './pages/admin/Home_admin_studentDetail';
 import App from './App';
 import Apitest from './Test.js/Apitest';
 import Test2 from './Test.js/Test2';
+import Curriculum_detail from './pages/admin/Curriculum_detail';
+import Admin_course from './pages/admin/Admin_course';
+import Admin_course_detail from './pages/admin/Admin_course_detail';
 
 const router = createBrowserRouter([
   {
@@ -24,28 +27,28 @@ const router = createBrowserRouter([
     element: <App></App>,
   },
   {
-    path: "home_admin",
+    path: "admin/home",
     element: <Home_admin/>,
   },
   {
-    path: "admin_adduser",
+    path: "admin/user/add",
     element: <Home_admin_adduser/>,
   },
   {
-    path: "admin_userdetail",
+    path: "admin/user/detail",
     element: <Home_admin_userdetail/>,
   },
   {
-    path: "admin_useredit",
+    path: "admin/user/edit",
     element: <Home_admin_edituser/>,
   },
   {
-    path: "admin_syllabus",
+    path: "admin/syllabus",
     element: <Admin_sylllabus/>,
 
   },
   {
-    path: "admin_addcuriculum",
+    path: "admin/curriculum/add",
     element: <Admin_addcuriculum/>,
 
   },
@@ -60,8 +63,23 @@ const router = createBrowserRouter([
 
   },
   {
+
     path: "student_detail/:userID",
     element: <Home_admin_studentDetail/>,
+
+    path: "/admin/curriculum/detail",
+    element: <Curriculum_detail/>,
+
+  },
+  {
+    path: "/admin/course",
+    element: <Admin_course/>,
+
+  },
+  {
+    path: "/admin/course/detail",
+    element: <Admin_course_detail/>,
+
 
   },
 ]);
