@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ViewIcon() {
+function ViewIconStudent() {
 
     const GotoUserDetail = () => {
         window.location.href = "admin_userdetail"
@@ -17,4 +17,4 @@ function ViewIcon() {
     )
 }
 
-export default ViewIcon
+export default ViewIconStudent

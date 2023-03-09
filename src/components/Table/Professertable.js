@@ -23,6 +23,10 @@ function Professertable() {
 
 
 
+  const GotoUserDetail = () => {
+    window.location.href = "admin_userdetail"
+  }
+
 
 
 
