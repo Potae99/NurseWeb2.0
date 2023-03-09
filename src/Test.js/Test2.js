@@ -33,11 +33,11 @@ function Test2() {
     const [password, setpassword] = useState("");
 
     const [data, setData] = useState([]);
-    const getTeacher = () => {
-        axios.get(process.env.REACT_APP_API_URL + "/teacher/list").then((response) => {
-            setData(response.data.data);
-        })
-    }
+    // const getTeacher = () => {
+    //     axios.get(process.env.REACT_APP_API_URL + "/teacher/list").then((response) => {
+    //         setData(response.data.data);
+    //     })
+    // }
 
     const addteacher = () =>{
       axios.post(process.env.REACT_APP_API_URL + "/teacher",{

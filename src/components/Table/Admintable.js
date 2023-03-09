@@ -38,7 +38,7 @@ function Admintable() {
             //this.setState({ persons });
             console.log(res.data);
 
-            if (res.data.error == true) {
+            if (res.data.error === true) {
                 console.log(res.data)
                 console.log("ERROR FOUND WHEN GET DATA FROM API ");
 

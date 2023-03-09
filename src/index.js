@@ -13,6 +13,7 @@ import Home_admin_userdetail from './pages/admin/Home_admin_userdetail';
 import Home_admin_edituser from './pages/admin/Home_admin_edituser';
 import Admin_sylllabus from './pages/admin/Admin_sylllabus';
 import Admin_addcuriculum from './pages/admin/Admin_addcuriculum';
+import Home_admin_studentDetail from './pages/admin/Home_admin_studentDetail';
 import App from './App';
 import Apitest from './Test.js/Apitest';
 import Test2 from './Test.js/Test2';
@@ -56,6 +57,11 @@ const router = createBrowserRouter([
   {
     path: "Apitest2",
     element: <Test2/>,
+
+  },
+  {
+    path: "student_detail",
+    element: <Home_admin_studentDetail/>,
 
   },
 ]);
