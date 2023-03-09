@@ -1,60 +1,57 @@
 import axios from 'axios';
-import React,{ useState, useEffect } from 'react'
-import DeleteIcon from '../IconTable/DeleteIcon';
+import React, { useState, useEffect } from 'react'
 import ViewIcon from '../IconTable/ViewIcon';
 
 
 function Professertable() {
-  const [data, setData] = useState([]);
+  const [teacherlist, setteacherlist] = useState([]);
 
 
-  console.log(process.env.REACT_APP_API_URL + "/teacher/list");
+
+  console.log(process.env.REACT_APP_API_URL + "/teacher");
+
+  const deleteTeacher = (userID) => {
+    axios.delete(`http://18.136.148.247:15856//teacher/${userID}`).then((response) => {
+      setteacherlist(
+        teacherlist.filter((_) => {
+          return _.userID !== userID;
+        })
+
+      )
+    })
+  }
+
+
+
+
 
 
   const fetchData = () => {
     console.log("WTF");
 
-    // const Toast = Swal.mixin({
-    //     toast: true,
-    //     position: 'top-end',
-    //     showConfirmButton: false,
-    //     timer: 3000,
-    //     timerProgressBar: true,
-    //     didOpen: (toast) => {
-    //       toast.addEventListener('mouseenter', Swal.stopTimer)
-    //       toast.addEventListener('mouseleave', Swal.resumeTimer)
-    //     }
-    //   })
-
-    //   Toast.fire({
-    //     icon: 'error',
-    //     title: 'get data from API error!'
-    //   })
 
 
 
     axios.get(process.env.REACT_APP_API_URL + "/teacher/list")
-        .then(res => {
-            // const persons = res.data;
-            //this.setState({ persons });
-            console.log(res.data);
+      .then(res => {
+        console.log(res.data);
 
-            if (res.data.error == true) {
-                console.log(res.data)
-                console.log("ERROR FOUND WHEN GET DATA FROM API ");
+        if (res.data.error === true) {
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API ");
 
 
-                return;
-            }
-            setData(res.data.data);
+          return;
+        }
+        setteacherlist(res.data.data);
 
-        });
-}
+      });
+  }
 
 
-useEffect(() => {
+  useEffect(() => {
     fetchData();
-}, [])
+  }, [])
 
 
   return (
@@ -67,26 +64,31 @@ useEffect(() => {
           <th scope="col" className="py-3 px-6">การกระทำ</th>
         </tr>
       </thead>
-      {data.map((_,i) => (
+      {teacherlist.map((_, i) => (
         <tbody>
-          <tr  className="   hover:bg-gray-200 bg-white border-b"
+          <tr className="   hover:bg-gray-200 bg-white border-b"
           >
             <td className="py-4 px-6" >{_.userID}</td>
             <td className="py-4 px-6">{_.IDnumber}</td>
             <td className="py-4 px-6">{_.nameTH}</td>
             <td className="py-4 px-6 flex flex-row">
-            <div className=''
-                            content="Delete professor"
-                            color="error"
-                            onClick={() => console.log("Delete professor", _.userID)}>
-              <DeleteIcon></DeleteIcon>
-            </div>
-            <div className=' ml-3'
-                                        content="View professor"
-                                        color="error"
-                                        onClick={() => console.log("View professor", _.userID)}>
-              <ViewIcon></ViewIcon>
-            </div>
+              <div className=''
+                content="Delete professor"
+                color="error"
+                onClick={() => { deleteTeacher(_.userID)  }}>
+                <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" stroke-width="6.54545" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M19.4258 38.0104V23.4346" stroke="black" stroke-width="6.54545" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M28.2407 38.0104V23.4346" stroke="black" stroke-width="6.54545" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" stroke-width="6.54545" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div className=' ml-3'
+                content="View professor"
+                color="error"
+                onClick={() => console.log("View professor", _.userID)}>
+                <ViewIcon></ViewIcon>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -95,6 +97,7 @@ useEffect(() => {
 
 
     </table>
+    
 
 
   )

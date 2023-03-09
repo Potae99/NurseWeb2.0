@@ -247,11 +247,7 @@ function Home_admin_adduser() {
     const [phone, setPhone] = useState("");
 
     const [data, setData] = useState([]);
-    const getSutdent = () => {
-        axios.get(process.env.REACT_APP_API_URL + "/student/list").then((response) => {
-            setData(response.data.data);
-        })
-    }
+
 
     
 
