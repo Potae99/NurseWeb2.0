@@ -20,6 +20,7 @@ import Test2 from './Test.js/Test2';
 import Curriculum_detail from './pages/admin/Curriculum_detail';
 import Admin_course from './pages/admin/Admin_course';
 import Admin_course_detail from './pages/admin/Admin_course_detail';
+import Home_admin_addteacher from './pages/admin/Home_admin_addteacher';
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,12 @@ const router = createBrowserRouter([
   {
     path: "/admin/course/detail",
     element: <Admin_course_detail/>,
+
+
+  },
+  {
+    path: "/admin/add/teacher",
+    element: <Home_admin_addteacher/>,
 
 
   },

@@ -26,8 +26,8 @@ function Professertable() {
 
 
   const deleteTeacher = (userID) => {
-    axios.delete(
-      `http://18.136.148.247:15856/teacher`, {data:{ userID: userID }}).then((response) => {
+    axios.delete(process.env.REACT_APP_API_URL+
+      `/teacher`, {data:{ userID: userID }}).then((response) => {
       setteacherlist(
         teacherlist.filter((_) => {
           return _.userID !== userID;
@@ -43,10 +43,6 @@ function Professertable() {
       if (error.response) {
         console.log(error.response);
       }});
-
-
-
-
 
   }
 
