@@ -4,7 +4,7 @@ import Studenttable from '../../components/Table/Studenttable'
 import Admintable from '../../components/Table/Admintable'
 import DeleteIcon from '../../components/IconTable/DeleteIcon'
 
-function home_admin() {
+function Home_admin() {
 
   const GotoAdduser = () => {
     window.location.href = 'admin/user/add';
@@ -12,6 +12,7 @@ function home_admin() {
 
   return (
     <div>
+
       <div className=' bg-gray-200 min-h-screen border'>
         <h1 className=' text-4xl text-center mt-10'>รายชื่อผู้ใช้งาน</h1>
         <div className='grid grid-cols-1  place-items-end mr-4 mt-4'>
@@ -46,4 +47,4 @@ function home_admin() {
 
 }
 
-export default home_admin
+export default Home_admin

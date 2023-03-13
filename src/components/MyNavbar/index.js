@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   Button,
@@ -12,19 +12,15 @@ import {
   Avatar,
 } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.js";
-// import { VariantsSelectorWrapper } from "./VariantsSelectorWrapper.js";
-import { signOut, signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { VariantsSelectorWrapper } from "./VariantsSelectorWrapper.js";
+// import { useNavigate } from "react-router-dom";
 
-import Men from "../../public/user/men.png"
-import Image from 'next/image'
 
-export default function MyNavbar({session}) {
-  // const { data: session, status } = useSession();
-  const router = useRouter();
+export default function MyNavbar({ session, setToken }) {
+  // let navigate = useNavigate();
 
-  const [variant, setVariant] = React.useState("default");
-  const [activeColor, setActiveColor] = React.useState("primary");
+  const [variant, setVariant] = useState("default");
+  const [activeColor, setActiveColor] = useState("primary");
 
   const { isDark } = useTheme();
 
@@ -42,8 +38,8 @@ export default function MyNavbar({session}) {
 
 
   const handleSignOut = () => {
-    signOut();
-    router.push("/api/auth/signin");
+    localStorage.clear();
+    setToken(null);
   };
 
   return (
@@ -64,21 +60,7 @@ export default function MyNavbar({session}) {
         variant={variant}
         className=""
       >
-        {/* <Navbar.Link href="#">Features</Navbar.Link>
-          <Navbar.Link isActive href="#">Customers</Navbar.Link>
-          <Navbar.Link href="#">Pricing</Navbar.Link>
-          <Navbar.Link href="#">Company</Navbar.Link> */}
       </Navbar.Content>
-      {/* <Navbar.Content>
-          <Navbar.Link color="inherit" href="#">
-            Login
-          </Navbar.Link>
-          <Navbar.Item>
-            <Button auto flat as={Link} color={activeColor} href="#">
-              Sign Up
-            </Button>
-          </Navbar.Item>
-        </Navbar.Content> */}
       <Navbar.Content
         css={{
           "@xs": {
@@ -90,18 +72,11 @@ export default function MyNavbar({session}) {
         <Dropdown placement="bottom-right">
           <Navbar.Item>
             <Dropdown.Trigger>
-              {/* <Avatar
-                bordered
-                as="button"
-                color="secondary"
-                size="md"
-                src={Men}//"user/men.png"//"https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              /> */}
-              <Image
-              className="bg-contain w-12 rounded-full ring-2 ring-orange-400"
-              src={Men}
-              alt = "user picture"
-              />
+              <img 
+                // src={require('./logo.jpeg')}
+                className="bg-contain w-12 rounded-full ring-2 ring-orange-400"
+                src={require("../../public/user/men.png")}
+                alt="user picture" />
 
 
             </Dropdown.Trigger>
@@ -110,30 +85,21 @@ export default function MyNavbar({session}) {
             aria-label="User menu actions"
             color="secondary"
             onAction={(actionKey) => console.log({ actionKey })}
-            // className="sticky"
+          // className="sticky"
           >
             <Dropdown.Item key="profile" css={{ height: "$18" }}>
               <Text b color="inherit" css={{ d: "flex" }}>
                 สวัสดี
               </Text>
               <Text b color="inherit" css={{ d: "flex" }}>
-                {!session ? "": session.nameTH}
+                {!session ? "" : session.nameTH}
               </Text>
             </Dropdown.Item>
             <Dropdown.Item key="settings" withDivider>
               การตั้งค่า
             </Dropdown.Item>
-            {/* <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
-            <Dropdown.Item key="analytics" withDivider>
-              Analytics
-            </Dropdown.Item>
-            <Dropdown.Item key="system">System</Dropdown.Item>
-            <Dropdown.Item key="configurations">Configurations</Dropdown.Item>
-            <Dropdown.Item key="help_and_feedback" withDivider>
-              Help & Feedback
-            </Dropdown.Item> */}
             <Dropdown.Item key="logout" withDivider color="error">
-              <div onClick={handleSignOut}>
+              <div onClick={()=> handleSignOut()}>
                 ออกจากระบบ
               </div>
             </Dropdown.Item>
