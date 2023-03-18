@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function Admin_student_edit() {
+function Admin_teacher_edit() {
 
     const [houseadd_province, sethouseadd_province] = useState("");
     const [houseadd_subDistrict, sethouseadd_subDistrict] = useState("");
@@ -34,7 +34,7 @@ function Admin_student_edit() {
     const {userID} = useParams();
 
     const fetchData = () => {
-        axios.post(process.env.REACT_APP_API_URL + "/student/detail" , {userID:userID})
+        axios.get(process.env.REACT_APP_API_URL + "/teacher" , {params: {userID:userID}})
         .then(res => {
             console.log(res.data);
 
@@ -70,8 +70,8 @@ function Admin_student_edit() {
         });
     }
 
-    const backToStudentDetail = (userID) => {
-        window.location.href = "/admin/student/detail/" + userID;
+    const backToTeacherDetail = (userID) => {
+        window.location.href = "/admin/teacher/" + userID;
     }
 
     useEffect(() => {
@@ -80,7 +80,7 @@ function Admin_student_edit() {
 
     return (
         <div className=' bg-gray-200 slate-500 min-h-screen border'>
-            <h1 className=' text-4xl text-center m-3'>แก้ไขข้อมูลนิสิต</h1>
+            <h1 className=' text-4xl text-center m-3'>แก้ไขข้อมูลอาจารย์</h1>
 
             <div className='container mx-auto'>
                 <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
@@ -464,4 +464,4 @@ function Admin_student_edit() {
   
 }
 
-export default Admin_student_edit
+export default Admin_teacher_edit

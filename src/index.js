@@ -23,6 +23,8 @@ import Admin_course_detail from './pages/admin/Admin_course_detail';
 import Admin_student_edit from './pages/admin/Admin_student_edit';
 import Admin_teacher_detail from './pages/admin/Admin_teacher_detail';
 import Admin_detail from './pages/admin/Admin_detail';
+import Admin_teacher_detail from './pages/admin/Admin_teacher_detail';
+import Admin_teacher_edit from './pages/admin/Admin_teacher_edit';
 
 const router = createBrowserRouter([
   {
@@ -96,6 +98,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/:userID",
     element: <Admin_detail/>,
+  },
+  {
+    path: "/admin/teacher/edit/:userID",
+    element: <Admin_teacher_edit/>,
   }
 ]);
 
