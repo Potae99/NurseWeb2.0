@@ -10,7 +10,7 @@ function Studenttable() {
   console.log(process.env.REACT_APP_API_URL + "/student/list");
 
   const GotoStudentDetail = (userID) => {
-    window.location = '/student/detail/' + userID;
+    window.location = '/admin/student/detail/' + userID;
   }
 
 
@@ -64,7 +64,7 @@ function Studenttable() {
   return (
     <div>
       <Routes>
-        <Route path='/student/detail/:userID' element={<Home_admin_studentDetail />} />
+        <Route path='/admin/student/detail/:userID' element={<Home_admin_studentDetail />} />
       </Routes>
       <table className=" w-full text-sm text-left text-black ">
         <thead className="text-xs text-black uppercase bg-gray-300">

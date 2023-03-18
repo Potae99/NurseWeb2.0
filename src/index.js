@@ -20,6 +20,9 @@ import Test2 from './Test.js/Test2';
 import Curriculum_detail from './pages/admin/Curriculum_detail';
 import Admin_course from './pages/admin/Admin_course';
 import Admin_course_detail from './pages/admin/Admin_course_detail';
+import Admin_student_edit from './pages/admin/Admin_student_edit';
+import Admin_teacher_detail from './pages/admin/Admin_teacher_detail';
+import Admin_detail from './pages/admin/Admin_detail';
 
 const router = createBrowserRouter([
   {
@@ -64,8 +67,10 @@ const router = createBrowserRouter([
   },
   {
 
-    path: "/student/detail/:userID",
+    path: "/admin/student/detail/:userID",
     element: <Home_admin_studentDetail/>,
+  },
+  {
 
     path: "/admin/curriculum/detail",
     element: <Curriculum_detail/>,
@@ -79,9 +84,19 @@ const router = createBrowserRouter([
   {
     path: "/admin/course/detail",
     element: <Admin_course_detail/>,
-
-
   },
+  {
+    path: "/admin/student/edit/:userID",
+    element: <Admin_student_edit/>,
+  },
+  {
+    path: "/admin/teacher/:userID",
+    element: <Admin_teacher_detail/>,
+  },
+  {
+    path: "/admin/:userID",
+    element: <Admin_detail/>,
+  }
 ]);
 
 
