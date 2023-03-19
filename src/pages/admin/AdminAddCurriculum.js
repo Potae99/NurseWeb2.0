@@ -2,7 +2,7 @@ import React from 'react'
 import Addcoursebutton from '../../components/Button/Addcoursebutton';
 import Coursetable from '../../components/Table/Coursetable';
 
-function Admin_addcuriculum() {
+function AdminAddCurriculum() {
 
     const inputform_data = [
         {
@@ -130,4 +130,4 @@ function Admin_addcuriculum() {
     )
 }
 
-export default Admin_addcuriculum
+export default AdminAddCurriculum

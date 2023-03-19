@@ -2,7 +2,7 @@ import React from 'react'
 import Addcoursebutton2 from '../../components/Button/Addcoursebutton2'
 import Allcoursetable from '../../components/Table/Allcoursetable'
 
-function Admin_course() {
+function AdminCourse() {
   return (
     <div className='border bg-gray-200 min-h-screen'>
         <h1 className=' text-center text-4xl'>COURSE</h1>
@@ -21,4 +21,4 @@ function Admin_course() {
   )
 }
 
-export default Admin_course
+export default AdminCourse

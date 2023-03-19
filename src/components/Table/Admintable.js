@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React,{ useState, useEffect } from 'react'
 import DeleteIcon from '../IconTable/DeleteIcon';
-import ViewIcon from '../IconTable/ViewIcon';
 
 function Admintable() {
   const [data, setData] = useState([]);
@@ -11,26 +10,6 @@ function Admintable() {
 
 
   const fetchData = () => {
-    console.log("WTF");
-
-    // const Toast = Swal.mixin({
-    //     toast: true,
-    //     position: 'top-end',
-    //     showConfirmButton: false,
-    //     timer: 3000,
-    //     timerProgressBar: true,
-    //     didOpen: (toast) => {
-    //       toast.addEventListener('mouseenter', Swal.stopTimer)
-    //       toast.addEventListener('mouseleave', Swal.resumeTimer)
-    //     }
-    //   })
-
-    //   Toast.fire({
-    //     icon: 'error',
-    //     title: 'get data from API error!'
-    //   })
-
-
 
     axios.get(process.env.REACT_APP_API_URL + "/admin/list")
         .then(res => {

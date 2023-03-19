@@ -3,7 +3,7 @@ import Deletebutton from '../../components/Button/Deletebutton';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function Admin_teacher_detail() {
+function AdminTeacherDetail() {
 
     const [data, setData] = useState([]);
     // const [newnameTH, setNewNameTH] = useState('');
@@ -51,7 +51,7 @@ function Admin_teacher_detail() {
 
     useEffect(() => {
         fetchData();
-    },[])
+    })
 
     // const detail = [
     //     {
@@ -136,4 +136,4 @@ function Admin_teacher_detail() {
     )
 }
 
-export default Admin_teacher_detail
+export default AdminTeacherDetail

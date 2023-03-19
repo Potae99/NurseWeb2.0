@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 
-export default function Student_popup() {
+export default function StudentPopup() {
     const [showModal, setShowModal] = useState(false);
     return (
         <>

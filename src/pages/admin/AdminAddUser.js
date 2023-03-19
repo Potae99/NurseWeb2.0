@@ -1,11 +1,8 @@
-import Savebutton from '../../components/Button/Savebutton';
-import Backbutton from '../../components/Button/Backbutton';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
-function Admin_teacher_edit() {
-
+function AdminAddUser() {
     const [houseadd_province, sethouseadd_province] = useState("");
     const [houseadd_subDistrict, sethouseadd_subDistrict] = useState("");
     const [houseadd_road, sethouseadd_road] = useState("");
@@ -31,56 +28,95 @@ function Admin_teacher_edit() {
 
     const [data, setData] = useState([]);
 
-    const {userID} = useParams();
+    const addStudent = () => {
 
-    const fetchData = () => {
-        axios.get(process.env.REACT_APP_API_URL + "/teacher" , {params: {userID:userID}})
-        .then(res => {
-            console.log(res.data);
-
-            if (res.data.error === true) {
-                console.log(res.data)
-                console.log("ERROR FOUND WHEN GET DATA FROM API");
-                return;
-            }
-            setData(res.data.data);
-            setnameTH(res.data.data.nameTH);
-            setnameENG(res.data.data.nameENG);
-            sethouseadd_province(res.data.data.houseadd_province);
-            sethouseadd_subDistrict(res.data.data.houseadd_subDistrict);
-            sethouseadd_road(res.data.data.houseadd_road);
-            sethouseadd_houseNo(res.data.data.houseadd_houseNo);
-            setpassword(res.data.data.password);
-            setBirthday(res.data.data.Birthday);
-            setIDline(res.data.data.IDline);
-            setIDnumber(res.data.data.IDnumber);
-            setemail(res.data.data.email);
-            setethnicity(res.data.data.ethnicity);
-            setgender(res.data.data.gender);
-            sethouseadd_alley(res.data.data.houseadd_alley);
-            sethouseadd_district(res.data.data.houseadd_district);
-            sethouseadd_postalCode(res.data.data.houseadd_postalCode);
-            sethouseadd_village(res.data.data.houseadd_village);
-            setnationality(res.data.data.nationality);
-            setpresentAddress(res.data.data.presentAddress);
-            setreligion(res.data.data.religion);
-            setPhone(res.data.data.phone);
-        }).catch(error => {
-            console.log(error.res);
-        });
+        axios.post(process.env.REACT_APP_API_URL + "/student", {
+            houseadd_province: houseadd_province,
+            houseadd_subDistrict: houseadd_subDistrict,
+            houseadd_road: houseadd_road,
+            houseadd_houseNo: houseadd_houseNo,
+            IDnumber_Path: IDnumber_Path,
+            password: password,
+            Birthday: Birthday,
+            IDline: IDline,
+            IDnumber: IDnumber,
+            email: email,
+            ethnicity: ethnicity,
+            gender: gender,
+            houseadd_alley: houseadd_alley,
+            houseadd_district: houseadd_district,
+            houseadd_postalCode: houseadd_postalCode,
+            houseadd_village: houseadd_village,
+            nameENG: nameENG,
+            nameTH: nameTH,
+            nationality: nationality,
+            presentAddress: presentAddress,
+            religion: religion,
+            phone: phone
+        }).then(() => {
+            setData([
+                ...data,
+                {
+                    houseadd_province: houseadd_province,
+                    houseadd_subDistrict: houseadd_subDistrict,
+                    houseadd_road: houseadd_road,
+                    houseadd_houseNo: houseadd_houseNo,
+                    IDnumber_Path: IDnumber_Path,
+                    password: password,
+                    Birthday: Birthday,
+                    IDline: IDline,
+                    IDnumber: IDnumber,
+                    email: email,
+                    ethnicity: ethnicity,
+                    gender: gender,
+                    houseadd_alley: houseadd_alley,
+                    houseadd_district: houseadd_district,
+                    houseadd_postalCode: houseadd_postalCode,
+                    houseadd_village: houseadd_village,
+                    nameENG: nameENG,
+                    nameTH: nameTH,
+                    nationality: nationality,
+                    presentAddress: presentAddress,
+                    religion: religion,
+                    phone: phone
+                }
+            ])
+            window.location.href = "/admin/home";
+        })
     }
 
-    const backToTeacherDetail = (userID) => {
-        window.location.href = "/admin/teacher/" + userID;
+    const BacktoHomeAdmin = () => {
+        window.location.href = '/admin/home';
     }
 
-    useEffect(() => {
-        fetchData();
-    }, [])
+    const Role = [
+        {
+            role: 'นิสิต',
+            value: 'นิสิต'
+        },
+        {
+            role: 'ผู้ดูแลระบบ',
+            value: 'ผู้ดูแลระบบ'
+        },
+        {
+            role: 'อาจารย์',
+            value: 'อาจารย์'
+        }
+    ];
 
     return (
         <div className=' bg-gray-200 slate-500 min-h-screen border'>
-            <h1 className=' text-4xl text-center m-3'>แก้ไขข้อมูลอาจารย์</h1>
+            <h1 className=' text-4xl text-center m-3'>เพิ่มผู้ใช้งาน</h1>
+            <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
+                <div className=' flex flex-row'>
+                    <p className=' text-2xl ml-3' >ผู้ใช้งาน</p>
+                    <select className='block ml-3  w-1/4 p-2 mb-3 text-sm text-black border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-300 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500' name="course_id" id="course_id">
+                        {Role.map((Role) => (
+                            <option value={Role.value}>{Role.role}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
 
             <div className='container mx-auto'>
                 <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
@@ -94,7 +130,7 @@ function Admin_teacher_edit() {
                                 type="text"
                                 value={nameTH}
                                 name="nameTH"
-                                placeholder='ชื่อไทย'
+                                placeholder="ชื่อไทย"
                                 class="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             />
@@ -108,7 +144,6 @@ function Admin_teacher_edit() {
                                     setnameENG(event.target.value)
                                 }}
                                 type="text"
-                                value={nameENG}
                                 name="nameENG"
                                 placeholder="ชื่ออังกฤษ"
                                 class="w-full rounded-md border border-while (condition) {
@@ -124,7 +159,6 @@ function Admin_teacher_edit() {
                                     setIDnumber(event.target.value)
                                 }}
                                 type="text"
-                                value={IDnumber}
                                 name="IDnumber"
                                 placeholder="รหัสประจำตัวประชาชน"
                                 class="w-full rounded-md border border-while (condition) {
@@ -155,7 +189,6 @@ function Admin_teacher_edit() {
                                     setpassword(event.target.value)
                                 }}
                                 type="text"
-                                value={password}
                                 name="Password"
                                 placeholder="Password"
                                 class="w-full rounded-md border border-while (condition) {
@@ -171,7 +204,6 @@ function Admin_teacher_edit() {
                                     setBirthday(event.target.value)
                                 }}
                                 type="date"
-                                value={Birthday}
                                 name="Birthday"
                                 placeholder="วันเกิด"
                                 class="w-full rounded-md border border-while (condition) {
@@ -187,7 +219,6 @@ function Admin_teacher_edit() {
                                     setemail(event.target.value)
                                 }}
                                 type="text"
-                                value={email}
                                 name="Email"
                                 placeholder="Email"
                                 class="w-full rounded-md border border-while (condition) {
@@ -203,7 +234,6 @@ function Admin_teacher_edit() {
                                     setgender(event.target.value)
                                 }}
                                 type="text"
-                                value={gender}
                                 name="Gender"
                                 placeholder="เพศ"
                                 class="w-full rounded-md border border-while (condition) {
@@ -219,7 +249,6 @@ function Admin_teacher_edit() {
                                     sethouseadd_houseNo(event.target.value)
                                 }}
                                 type="text"
-                                value={houseadd_houseNo}
                                 name="houseadd_houseNo"
                                 placeholder="บ้านเลขที่"
                                 class="w-full rounded-md border border-while (condition) {
@@ -235,7 +264,6 @@ function Admin_teacher_edit() {
                                     sethouseadd_village(event.target.value)
                                 }}
                                 type="text"
-                                value={houseadd_village}
                                 name="houseadd_village"
                                 placeholder="หมู่บ้าน"
                                 class="w-full rounded-md border border-while (condition) {
@@ -251,7 +279,6 @@ function Admin_teacher_edit() {
                                     sethouseadd_subDistrict(event.target.value)
                                 }}
                                 type="text"
-                                value={houseadd_subDistrict}
                                 name="houseadd_subDistrict"
                                 placeholder="ตำบล"
                                 class="w-full rounded-md border border-while (condition) {
@@ -267,7 +294,6 @@ function Admin_teacher_edit() {
                                     sethouseadd_district(event.target.value)
                                 }}
                                 type="text"
-                                value={houseadd_district}
                                 name="houseadd_district"
                                 placeholder="อำเภอ"
                                 class="w-full rounded-md border border-while (condition) {
@@ -283,7 +309,6 @@ function Admin_teacher_edit() {
                                     sethouseadd_province(event.target.value)
                                 }}
                                 type="text"
-                                value={houseadd_province}
                                 name="houseadd_province"
                                 placeholder="จังหวัด"
                                 class="w-full rounded-md border border-while (condition) {
@@ -299,7 +324,6 @@ function Admin_teacher_edit() {
                                     sethouseadd_postalCode(event.target.value)
                                 }}
                                 type="text"
-                                value={houseadd_postalCode}
                                 name="houseadd_postalCode"
                                 placeholder="รหัสไปรษณีย์"
                                 class="w-full rounded-md border border-while (condition) {
@@ -315,7 +339,6 @@ function Admin_teacher_edit() {
                                     sethouseadd_road(event.target.value)
                                 }}
                                 type="text"
-                                value={houseadd_road}
                                 name="houseadd_road"
                                 placeholder="ถนน"
                                 class="w-full rounded-md border border-while (condition) {
@@ -331,7 +354,6 @@ function Admin_teacher_edit() {
                                     sethouseadd_alley(event.target.value)
                                 }}
                                 type="text"
-                                value={houseadd_alley}
                                 name="houseadd_alley"
                                 placeholder="ซอย"
                                 class="w-full rounded-md border border-while (condition) {
@@ -347,7 +369,6 @@ function Admin_teacher_edit() {
                                     setethnicity(event.target.value)
                                 }}
                                 type="text"
-                                value={ethnicity}
                                 name="ethnicity"
                                 placeholder="สัญชาติ"
                                 class="w-full rounded-md border border-while (condition) {
@@ -363,7 +384,6 @@ function Admin_teacher_edit() {
                                     setnationality(event.target.value)
                                 }}
                                 type="text"
-                                value={nationality}
                                 name="nationality"
                                 placeholder="เชื้อชาติ"
                                 class="w-full rounded-md border border-while (condition) {
@@ -379,7 +399,6 @@ function Admin_teacher_edit() {
                                     setreligion(event.target.value)
                                 }}
                                 type="text"
-                                value={religion}
                                 name="religion"
                                 placeholder="ศาสนา"
                                 class="w-full rounded-md border border-while (condition) {
@@ -395,7 +414,6 @@ function Admin_teacher_edit() {
                                     setpresentAddress(event.target.value)
                                 }}
                                 type="text"
-                                value={presentAddress}
                                 name="presentAddress"
                                 placeholder="ที่อยู่ปัจจุบัน"
                                 class="w-full rounded-md border border-while (condition) {
@@ -411,7 +429,6 @@ function Admin_teacher_edit() {
                                     setIDline(event.target.value)
                                 }}
                                 type="text"
-                                value={IDline}
                                 name="IDline"
                                 placeholder="IDline"
                                 class="w-full rounded-md border border-while (condition) {
@@ -427,7 +444,6 @@ function Admin_teacher_edit() {
                                     setPhone(event.target.value)
                                 }}
                                 type="text"
-                                value={phone}
                                 name="phone"
                                 placeholder="มือถือ"
                                 class="w-full rounded-md border border-while (condition) {
@@ -439,7 +455,7 @@ function Admin_teacher_edit() {
             </div>
             <div className='  grid grid-cols-2 '>
                 <div className=' ml-3'>
-                    <button  class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                    <button onClick={BacktoHomeAdmin} class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
                         <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
                             <svg class="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </span>
@@ -448,7 +464,7 @@ function Admin_teacher_edit() {
                     </button>
                 </div>
                 <div className=' absolute right-0 mr-3'>
-                    <button class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                    <button onClick={addStudent} class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
                         <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
                             <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" stroke-width="3.18" stroke-linecap="round" stroke-linejoin="round" />
@@ -460,8 +476,7 @@ function Admin_teacher_edit() {
                 </div>
             </div>
         </div>
-      )
-  
+    )
 }
 
-export default Admin_teacher_edit
+export default AdminAddUser

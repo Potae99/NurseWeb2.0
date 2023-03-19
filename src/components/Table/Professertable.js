@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom';
-import Admin_teacher_detail from '../../pages/admin/Admin_teacher_detail';
+import AdminTeacherDetail from '../../pages/admin/AdminTeacherDetail';
 
 
 function Professertable() {
@@ -32,11 +32,7 @@ function Professertable() {
 
 
   const fetchData = () => {
-    console.log("WTF");
-
-
-
-
+    
     axios.get(process.env.REACT_APP_API_URL + "/teacher/list")
       .then(res => {
         console.log(res.data);
@@ -62,7 +58,7 @@ function Professertable() {
   return (
     <div>
       <Routes>
-        <Route path='/admin/teacher/detail/:userID' element= {<Admin_teacher_detail/>}/>
+        <Route path='/admin/teacher/detail/:userID' element= {<AdminTeacherDetail/>}/>
       </Routes>
       <table className=" w-full text-sm text-left text-black">
         <thead className="text-xs text-black uppercase bg-gray-300">

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import DeleteIcon from '../IconTable/DeleteIcon';
 import { Route, Routes } from 'react-router-dom';
-import Home_admin_studentDetail from '../../pages/admin/Home_admin_studentDetail';
+import AdminStudentDetail from '../../pages/admin/AdminStudentDetail';
  
 function Studenttable() {
   const [data, setData] = useState([]);
@@ -15,27 +15,7 @@ function Studenttable() {
 
 
   const fetchData = () => {
-    console.log("WTF");
-
-    // const Toast = Swal.mixin({
-    //     toast: true,
-    //     position: 'top-end',
-    //     showConfirmButton: false,
-    //     timer: 3000,
-    //     timerProgressBar: true,
-    //     didOpen: (toast) => {
-    //       toast.addEventListener('mouseenter', Swal.stopTimer)
-    //       toast.addEventListener('mouseleave', Swal.resumeTimer)
-    //     }
-    //   })
-
-    //   Toast.fire({
-    //     icon: 'error',
-    //     title: 'get data from API error!'
-    //   })
-
-
-
+    
     axios.get(process.env.REACT_APP_API_URL + "/student/list")
       .then(res => {
         // const persons = res.data;
@@ -64,7 +44,7 @@ function Studenttable() {
   return (
     <div>
       <Routes>
-        <Route path='/admin/student/detail/:userID' element={<Home_admin_studentDetail />} />
+        <Route path='/admin/student/detail/:userID' element={<AdminStudentDetail />} />
       </Routes>
       <table className=" w-full text-sm text-left text-black ">
         <thead className="text-xs text-black uppercase bg-gray-300">
@@ -75,7 +55,7 @@ function Studenttable() {
             <th scope="col" className="py-3 px-6">การกระทำ</th>
           </tr>
         </thead>
-        {data.map((_, i) => (
+        {data.map((_) => (
           <tbody>
             <tr className=" hover:bg-gray-200 bg-white border-b"
             >
