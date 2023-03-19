@@ -2,9 +2,10 @@ import React from 'react'
 import Deletecourse from '../../components/Button/Deletecourse'
 import CourseStudenttable from '../../components/Table/CourseStudenttable'
 import Student_popup from '../../components/Button/Student_popup'
-
+import Layout from '../../components/Layout'
 function Admin_course_detail() {
   return (
+    
     <div className='border bg-gray-200 min-h-screen'>
         <h1 className=' mt-3 ml-3 text-4xl'>ข้อมูลรายวิชา</h1>
         <div className=' flex flex-row-reverse'>
@@ -25,6 +26,7 @@ function Admin_course_detail() {
             <CourseStudenttable/>
         </div>
     </div>
+    
   )
 }
 

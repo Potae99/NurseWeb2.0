@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Editbutton from '../../components/Button/Editbutton'
 import Deletebutton from '../../components/Button/Deletebutton'
 import axios from 'axios';
+import Layout from '../../components/Layout';
 
 function Home_admin_userdetail() {
 
@@ -46,6 +47,7 @@ useEffect(() => {
 
 // ]
 return (
+    
     <div className=" bg-rose-200 min-h-screen border">
         <div className=" font-bold text-4xl m-10 grid grid-cols-1">ข้อมูลนิสิต</div>
         <div className=' flex flex-row-reverse  '>
@@ -86,6 +88,7 @@ return (
             </div>
         ))}
     </div>
+   
 )
 }
 

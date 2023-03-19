@@ -1,9 +1,11 @@
 import React from 'react'
 import Addcoursebutton2 from '../../components/Button/Addcoursebutton2'
 import Allcoursetable from '../../components/Table/Allcoursetable'
+import Layout from '../../components/Layout'
 
 function Admin_course() {
   return (
+   
     <div className='border bg-gray-200 min-h-screen'>
         <h1 className=' text-center text-4xl'>COURSE</h1>
         
@@ -18,6 +20,7 @@ function Admin_course() {
         </div>
 
     </div>
+    
   )
 }
 

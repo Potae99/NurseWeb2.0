@@ -3,6 +3,7 @@ import Editbutton from '../../components/Button/Editbutton';
 import Deletebutton from '../../components/Button/Deletebutton';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Layout from '../../components/Layout';
 
 function Home_admin_studentDetail() {
 
@@ -70,6 +71,8 @@ function Home_admin_studentDetail() {
 
     // ]
     return (
+       
+        
         <div className=" bg-rose-200 min-h-screen border">
             <div className=" font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลนิสิต</div>
             <div className=' flex flex-row-reverse  '>
@@ -123,6 +126,8 @@ function Home_admin_studentDetail() {
                 </div>
             
         </div>
+        
+        
     )
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import Addcoursebutton from '../../components/Button/Addcoursebutton';
 import Coursetable from '../../components/Table/Coursetable';
+import Layout from '../../components/Layout';
 
 function Admin_addcuriculum() {
 
@@ -62,6 +63,7 @@ function Admin_addcuriculum() {
 
 
     return (
+        
         <div className='border bg-gray-200 min-h-screen'>
             <h1 className=' text-center text-4xl'>เพิ่มหลักสูตร</h1>
             <div className='container mx-auto'>
@@ -127,6 +129,7 @@ function Admin_addcuriculum() {
 
 
         </div>
+        
     )
 }
 

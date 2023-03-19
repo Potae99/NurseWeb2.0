@@ -1,10 +1,12 @@
 import React from 'react'
 import Curriculumtable from '../../components/Table/Curriculumtable';
 import Addcuriculumbutton from '../../components/Button/Addcuriculumbutton';
+import Layout from '../../components/Layout';
 
 
 function Admin_sylllabus() {
   return (
+    
     <div className=' border bg-gray-300 min-h-screen'>
       <h1 className=' text-center text-4xl mt-3'>SYLLABUS</h1>
       <div className=' flex flex-row-reverse'>
@@ -18,6 +20,7 @@ function Admin_sylllabus() {
       </div>
       
     </div>
+    
   )
 }
 

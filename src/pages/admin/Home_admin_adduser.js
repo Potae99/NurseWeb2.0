@@ -220,6 +220,7 @@ import React from 'react'
 // import Savebutton from './components/Button/Savebutton';
 import { useState } from 'react';
 import axios from 'axios';
+import Layout from '../../components/Layout';
 
 
 
@@ -338,6 +339,7 @@ function Home_admin_adduser() {
     ];
 
     return (
+        
         <div className=' bg-gray-200 slate-500 min-h-screen border'>
             <h1 className=' text-4xl text-center m-3'>เพิ่มผู้ใช้งาน</h1>
             <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
@@ -708,6 +710,7 @@ function Home_admin_adduser() {
                 </div>
             </div>
         </div>
+        
     )
 }
 

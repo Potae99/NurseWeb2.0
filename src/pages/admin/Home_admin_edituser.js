@@ -1,6 +1,7 @@
 import Savebutton from '../../components/Button/Savebutton';
 import Backbutton from '../../components/Button/Backbutton';
 import React from 'react'
+import Layout from '../../components/Layout';
 
 function Home_admin_edituser() {
     const inputform_data = [
@@ -76,6 +77,7 @@ function Home_admin_edituser() {
         },
     ];
     return (
+       
         <div className= ' bg-gray-200 slate-500 min-h-screen border'>
         <h1 className=' text-4xl text-center mt-7'>แก้ไขข้อมูลผู้ใช้งาน</h1>
         <div className='container mx-auto'>
@@ -106,6 +108,7 @@ function Home_admin_edituser() {
         </div>
         </div>
     </div>
+   
       )
   
 }
