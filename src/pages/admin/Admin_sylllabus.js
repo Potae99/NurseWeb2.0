@@ -1,7 +1,7 @@
 import React from 'react'
 import Curriculumtable from '../../components/Table/Curriculumtable';
 import Addcuriculumbutton from '../../components/Button/Addcuriculumbutton';
-import Layout from '../../components/Layout';
+
 
 
 function Admin_sylllabus() {

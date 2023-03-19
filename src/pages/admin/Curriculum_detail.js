@@ -1,7 +1,7 @@
 import React from 'react'
 import Coursetable from '../../components/Table/Coursetable'
 import Deletebutton from '../../components/Button/Deletebutton'
-import Layout from '../../components/Layout'
+
 
 function Curriculum_detail() {
   return (
@@ -14,7 +14,12 @@ function Curriculum_detail() {
             </div>
 
         </div>
-        <div>
+        <div className=' ml-3'>
+          <p>ชื่อ</p>
+          <p>ชื่ออังกฤษ</p>
+          <p>ปีที่สร้าง</p>
+          <p>เริ่มต้นหลักสูตร</p>
+          <p>สิ้นสุดหลักสูตร</p>
 
         </div>
         <p  className='mt-3 ml-3 text-left text-2xl'>รายวิชา</p>

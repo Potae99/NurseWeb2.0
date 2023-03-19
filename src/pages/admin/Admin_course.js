@@ -1,7 +1,7 @@
 import React from 'react'
 import Addcoursebutton2 from '../../components/Button/Addcoursebutton2'
 import Allcoursetable from '../../components/Table/Allcoursetable'
-import Layout from '../../components/Layout'
+
 
 function Admin_course() {
   return (

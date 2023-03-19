@@ -3,7 +3,7 @@ import Editbutton from '../../components/Button/Editbutton';
 import Deletebutton from '../../components/Button/Deletebutton';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Layout from '../../components/Layout';
+
 
 function Home_admin_studentDetail() {
 

@@ -1,7 +1,7 @@
 import Savebutton from '../../components/Button/Savebutton';
 import Backbutton from '../../components/Button/Backbutton';
 import React from 'react'
-import Layout from '../../components/Layout';
+
 
 function Home_admin_edituser() {
     const inputform_data = [
