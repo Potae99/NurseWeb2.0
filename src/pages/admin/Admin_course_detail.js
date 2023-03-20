@@ -2,7 +2,6 @@ import React from 'react'
 import Deletecourse from '../../components/Button/Deletecourse'
 import CourseStudenttable from '../../components/Table/CourseStudenttable'
 import Student_popup from '../../components/Button/Student_popup'
-import Layout from '../../components/Layout'
 function Admin_course_detail() {
   return (
     

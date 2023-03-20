@@ -1,7 +1,6 @@
 import React from 'react'
 import Addcoursebutton from '../../components/Button/Addcoursebutton';
 import Coursetable from '../../components/Table/Coursetable';
-import Layout from '../../components/Layout';
 
 function Admin_addcuriculum() {
 

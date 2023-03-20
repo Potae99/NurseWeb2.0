@@ -17,6 +17,7 @@ import Admin_addcuriculum from './pages/admin/Admin_addcuriculum';
 import Home_admin_studentDetail from './pages/admin/Home_admin_studentDetail';
 import Admin_course from './pages/admin/Admin_course';
 import Admin_course_detail from './pages/admin/Admin_course_detail';
+import Admin_course_add from './pages/admin/Admin_course_add';
 
 // test
 import Apitest from './Test.js/Apitest';
@@ -83,6 +84,10 @@ const router = [
   {
     path: "/admin/course/detail",
     element: <Admin_course_detail />,
+  },
+  {
+    path: "/admin/course/add",
+    element: <Admin_course_add />,
   },
 ];
 
