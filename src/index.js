@@ -25,6 +25,7 @@ import AdminTeacherEdit from './pages/admin/AdminTeacherEdit';
 import AdminAddStudent from './pages/admin/AdminAddStudent';
 import AdminAddTeacher from './pages/admin/AdminAddTeacher';
 import AdminAddAdmin from './pages/admin/AdminAddAdmin';
+import AdminDetailEdit from './pages/admin/AdminDetailEdit';
 
 const router = createBrowserRouter([
   {
@@ -61,7 +62,7 @@ const router = createBrowserRouter([
   },
   {
 
-    path: "/admin/student/detail/:userID",
+    path: "/admin/student/detail/:userID/*",
     element: <AdminStudentDetail/>,
   },
   {
@@ -80,15 +81,15 @@ const router = createBrowserRouter([
     element: <AdminCourseDetail/>,
   },
   {
-    path: "/admin/student/edit/:userID",
+    path: "/admin/student/edit/:userID/*",
     element: <AdminStudentEdit/>,
   },
   {
-    path: "/admin/teacher/:userID",
+    path: "/admin/teacher/:userID/*",
     element: <AdminTeacherDetail/>,
   },
   {
-    path: "/admin/:userID",
+    path: "/admin/detail/:userID/*",
     element: <AdminDetail/>,
   },
   {
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/add/admin",
     element: <AdminAddAdmin/>,
+  },
+  {
+    path: "/admin/detail/edit/:userID/*",
+    element: <AdminDetailEdit/>,
   }
 ]);
 

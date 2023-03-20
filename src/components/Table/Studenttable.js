@@ -2,13 +2,25 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom';
 import AdminStudentDetail from '../../pages/admin/AdminStudentDetail';
+import Swal from 'sweetalert2';
 
 function Studenttable() {
-  const [data, setData] = useState([]);
 
   const [studentlist, setStudentList] = useState([]);
 
   console.log(process.env.REACT_APP_API_URL + "/student/list");
+  
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 
   const GotoStudentDetail = (userID) => {
     window.location = '/admin/student/detail/' + userID;
@@ -30,7 +42,7 @@ function Studenttable() {
 
           return;
         }
-        setData(res.data.data);
+        setStudentList(res.data.data);
 
       });
   }
@@ -48,6 +60,12 @@ function Studenttable() {
           return _.userID !== userID;
         })
       );
+
+      Toast.fire({
+        icon: 'success',
+        title: 'Delete data success'
+      })
+
     }).catch(function (error) {
       if (error.response) {
         console.log(error.response);
@@ -69,7 +87,7 @@ function Studenttable() {
             <th scope="col" className="py-3 px-6">การกระทำ</th>
           </tr>
         </thead>
-        {data.map((_) => (
+        {studentlist.map((_) => (
           <tbody>
             <tr className=" hover:bg-gray-200 bg-white border-b"
             >
