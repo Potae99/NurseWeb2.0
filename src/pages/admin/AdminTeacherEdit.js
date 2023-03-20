@@ -26,6 +26,7 @@ function AdminTeacherEdit() {
     const [presentAddress, setpresentAddress] = useState("");
     const [religion, setreligion] = useState("");
     const [phone, setPhone] = useState("");
+    const [teacherID, setTeacherID] = useState('');
 
     const { userID } = useParams();
 
@@ -60,6 +61,7 @@ function AdminTeacherEdit() {
                 setpresentAddress(res.data.data.presentAddress);
                 setreligion(res.data.data.religion);
                 setPhone(res.data.data.phone);
+                setTeacherID(res.data.data.teacherID);
             }).catch(error => {
                 console.log(error.res);
             });
@@ -71,7 +73,7 @@ function AdminTeacherEdit() {
 
     useEffect(() => {
         fetchData();
-    })
+    },[])
 
     return (
         <div>
@@ -84,8 +86,24 @@ function AdminTeacherEdit() {
                 <div className='container mx-auto'>
                     <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                         <div >
+                            <p>รหัสประจำตัว</p>
+                            <div className="mb-5 flex justify-center ">
+                                <input
+                                    onChange={(event) => {
+                                        setTeacherID(event.target.value)
+                                    }}
+                                    type="text"
+                                    value={teacherID}
+                                    name="teacherID"
+                                    placeholder='รหัสประจำตัว'
+                                    className="w-full rounded-md border border-while (condition) {
+                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                />
+                            </div>
+                        </div>
+                        <div >
                             <p>ชื่อไทย</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setnameTH(event.target.value)
@@ -94,14 +112,14 @@ function AdminTeacherEdit() {
                                     value={nameTH}
                                     name="nameTH"
                                     placeholder='ชื่อไทย'
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>ชื่ออังกฤษ</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setnameENG(event.target.value)
@@ -110,14 +128,14 @@ function AdminTeacherEdit() {
                                     value={nameENG}
                                     name="nameENG"
                                     placeholder="ชื่ออังกฤษ"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>รหัสประจำตัวประชาชน</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setIDnumber(event.target.value)
@@ -126,14 +144,14 @@ function AdminTeacherEdit() {
                                     value={IDnumber}
                                     name="IDnumber"
                                     placeholder="รหัสประจำตัวประชาชน"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         {/* <div >
                         <p>IDnumber_Path</p>
-                        <div class="mb-5 flex justify-center ">
+                        <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
                                     setIDnumber_Path(event.target.value)
@@ -141,14 +159,14 @@ function AdminTeacherEdit() {
                                 type="text"
                                 name="IDnumber_Path"
                                 placeholder="IDnumber_Path"
-                                class="w-full rounded-md border border-while (condition) {
+                                className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             />
                         </div>
                     </div> */}
                         <div >
                             <p>Password</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setpassword(event.target.value)
@@ -157,14 +175,14 @@ function AdminTeacherEdit() {
                                     value={password}
                                     name="Password"
                                     placeholder="Password"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>วันเกิด</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setBirthday(event.target.value)
@@ -173,14 +191,14 @@ function AdminTeacherEdit() {
                                     value={Birthday}
                                     name="Birthday"
                                     placeholder="วันเกิด"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>Email</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setemail(event.target.value)
@@ -189,14 +207,14 @@ function AdminTeacherEdit() {
                                     value={email}
                                     name="Email"
                                     placeholder="Email"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>เพศ</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setgender(event.target.value)
@@ -205,14 +223,14 @@ function AdminTeacherEdit() {
                                     value={gender}
                                     name="Gender"
                                     placeholder="เพศ"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>บ้านเลขที่</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         sethouseadd_houseNo(event.target.value)
@@ -221,14 +239,14 @@ function AdminTeacherEdit() {
                                     value={houseadd_houseNo}
                                     name="houseadd_houseNo"
                                     placeholder="บ้านเลขที่"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>หมู่บ้าน</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         sethouseadd_village(event.target.value)
@@ -237,14 +255,14 @@ function AdminTeacherEdit() {
                                     value={houseadd_village}
                                     name="houseadd_village"
                                     placeholder="หมู่บ้าน"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>ตำบล</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         sethouseadd_subDistrict(event.target.value)
@@ -253,14 +271,14 @@ function AdminTeacherEdit() {
                                     value={houseadd_subDistrict}
                                     name="houseadd_subDistrict"
                                     placeholder="ตำบล"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>อำเภอ</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         sethouseadd_district(event.target.value)
@@ -269,14 +287,14 @@ function AdminTeacherEdit() {
                                     value={houseadd_district}
                                     name="houseadd_district"
                                     placeholder="อำเภอ"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>จังหวัด</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         sethouseadd_province(event.target.value)
@@ -285,14 +303,14 @@ function AdminTeacherEdit() {
                                     value={houseadd_province}
                                     name="houseadd_province"
                                     placeholder="จังหวัด"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>รหัสไปรษณีย์</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         sethouseadd_postalCode(event.target.value)
@@ -301,14 +319,14 @@ function AdminTeacherEdit() {
                                     value={houseadd_postalCode}
                                     name="houseadd_postalCode"
                                     placeholder="รหัสไปรษณีย์"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>ถนน</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         sethouseadd_road(event.target.value)
@@ -317,14 +335,14 @@ function AdminTeacherEdit() {
                                     value={houseadd_road}
                                     name="houseadd_road"
                                     placeholder="ถนน"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>ซอย</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         sethouseadd_alley(event.target.value)
@@ -333,14 +351,14 @@ function AdminTeacherEdit() {
                                     value={houseadd_alley}
                                     name="houseadd_alley"
                                     placeholder="ซอย"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>สัญชาติ</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setethnicity(event.target.value)
@@ -349,14 +367,14 @@ function AdminTeacherEdit() {
                                     value={ethnicity}
                                     name="ethnicity"
                                     placeholder="สัญชาติ"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>เชื้อชาติ</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setnationality(event.target.value)
@@ -365,14 +383,14 @@ function AdminTeacherEdit() {
                                     value={nationality}
                                     name="nationality"
                                     placeholder="เชื้อชาติ"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>ศาสนา</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setreligion(event.target.value)
@@ -381,14 +399,14 @@ function AdminTeacherEdit() {
                                     value={religion}
                                     name="religion"
                                     placeholder="ศาสนา"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>ที่อยู่ปัจจุบัน</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setpresentAddress(event.target.value)
@@ -397,14 +415,14 @@ function AdminTeacherEdit() {
                                     value={presentAddress}
                                     name="presentAddress"
                                     placeholder="ที่อยู่ปัจจุบัน"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>IDline</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setIDline(event.target.value)
@@ -413,14 +431,14 @@ function AdminTeacherEdit() {
                                     value={IDline}
                                     name="IDline"
                                     placeholder="IDline"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div>
                         <div >
                             <p>มือถือ</p>
-                            <div class="mb-5 flex justify-center ">
+                            <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={(event) => {
                                         setPhone(event.target.value)
@@ -429,7 +447,7 @@ function AdminTeacherEdit() {
                                     value={phone}
                                     name="phone"
                                     placeholder="มือถือ"
-                                    class="w-full rounded-md border border-while (condition) {
+                                    className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
@@ -438,23 +456,23 @@ function AdminTeacherEdit() {
                 </div>
                 <div className='  grid grid-cols-2 '>
                     <div className=' ml-3'>
-                        <button onClick={() => backToTeacherDetail(userID)} class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
-                                <svg class="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        <button onClick={() => backToTeacherDetail(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                                <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </span>
-                            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
-                            <span class="relative invisible">Button Text</span>
+                            <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
+                            <span className="relative invisible">Button Text</span>
                         </button>
                     </div>
                     <div className=' absolute right-0 mr-3'>
-                        <button class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                        <button className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
                                 <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" stroke-width="3.18" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </span>
-                            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
-                            <span class="relative invisible">Button Text</span>
+                            <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
+                            <span className="relative invisible">Button Text</span>
                         </button>
                     </div>
                 </div>

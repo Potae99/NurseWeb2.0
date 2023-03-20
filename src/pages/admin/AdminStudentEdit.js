@@ -27,6 +27,7 @@ function AdminStudentEdit() {
     const [presentAddress, setpresentAddress] = useState("");
     const [religion, setreligion] = useState("");
     const [phone, setPhone] = useState("");
+    const [studentID, setStudentID] = useState('');
 
     const [data, setData] = useState([]);
 
@@ -56,7 +57,8 @@ function AdminStudentEdit() {
             nationality: nationality,
             presentAddress: presentAddress,
             religion: religion,
-            phone: phone
+            phone: phone,
+            studentID:studentID
         }).then(() => {
             setData([
                 ...data,
@@ -83,7 +85,8 @@ function AdminStudentEdit() {
                     nationality: nationality,
                     presentAddress: presentAddress,
                     religion: religion,
-                    phone: phone
+                    phone: phone,
+                    studentID:studentID
                 }
             ])
             window.location.href = "/admin/student/detail/" + userID;
@@ -122,6 +125,7 @@ function AdminStudentEdit() {
                 setpresentAddress(res.data.data.presentAddress);
                 setreligion(res.data.data.religion);
                 setPhone(res.data.data.phone);
+                setStudentID(res.data.data.studentID);
             }).catch(error => {
                 console.log(error.res);
             });
@@ -133,19 +137,35 @@ function AdminStudentEdit() {
 
     useEffect(() => {
         fetchData();
-    })
+    }, [])
 
     return (
         <div>
             <Routes>
-                <Route path='/admin/student/detail/:userID' element={<AdminStudentDetail/>}/>
+                <Route path='/admin/student/detail/:userID' element={<AdminStudentDetail />} />
             </Routes>
-            
+
             <div className=' bg-gray-200 slate-500 min-h-screen border'>
                 <h1 className=' text-4xl text-center m-3'>แก้ไขข้อมูลนิสิต</h1>
 
                 <div className='container mx-auto'>
                     <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
+                        <div >
+                            <p>รหัสนิสิต</p>
+                            <div class="mb-5 flex justify-center ">
+                                <input
+                                    onChange={(event) => {
+                                        setStudentID(event.target.value)
+                                    }}
+                                    type="text"
+                                    value={studentID}
+                                    name="studentID"
+                                    placeholder='รหัสนิสิต'
+                                    class="w-full rounded-md border border-while (condition) {
+                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                />
+                            </div>
+                        </div>
                         <div >
                             <p>ชื่อไทย</p>
                             <div class="mb-5 flex justify-center ">

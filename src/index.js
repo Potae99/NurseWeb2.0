@@ -23,6 +23,8 @@ import AdminTeacherDetail from './pages/admin/AdminTeacherDetail';
 import AdminDetail from './pages/admin/AdminDetail';
 import AdminTeacherEdit from './pages/admin/AdminTeacherEdit';
 import AdminAddStudent from './pages/admin/AdminAddStudent';
+import AdminAddTeacher from './pages/admin/AdminAddTeacher';
+import AdminAddAdmin from './pages/admin/AdminAddAdmin';
 
 const router = createBrowserRouter([
   {
@@ -90,12 +92,20 @@ const router = createBrowserRouter([
     element: <AdminDetail/>,
   },
   {
-    path: "/admin/teacher/edit/:userID",
+    path: "/admin/teacher/edit/:userID/*",
     element: <AdminTeacherEdit/>,
   },
   {
     path: "/admin/add/student",
     element: <AdminAddStudent/>,
+  },
+  {
+    path: "/admin/add/teacher",
+    element: <AdminAddTeacher/>,
+  },
+  {
+    path: "/admin/add/admin",
+    element: <AdminAddAdmin/>,
   }
 ]);
 
