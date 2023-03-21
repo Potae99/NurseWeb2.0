@@ -1,10 +1,12 @@
 import React from 'react'
-import StudentPopup from './components/Button/StudentPopup'
+import Student_popup from './components/Button/Student_popup'
+import DropDown from './components/Button/DropDown'
 
 function App() {
   return (
     <div>
-      <StudentPopup></StudentPopup>
+      <Student_popup></Student_popup>
+      <DropDown></DropDown>
     </div>
     
     // import React from 'react';
