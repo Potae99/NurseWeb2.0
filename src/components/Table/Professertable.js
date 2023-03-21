@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import AdminTeacherDetail from '../../pages/admin/AdminTeacherDetail';
 import Swal from 'sweetalert2';
 
+import Swal from 'sweetalert2';
 
 function Professertable() {
   const [teacherlist, setTeacherList] = useState([]);
@@ -53,6 +54,7 @@ function Professertable() {
 
 
   const fetchData = () => {
+
 
     axios.get(process.env.REACT_APP_API_URL + "/teacher/list")
       .then(res => {

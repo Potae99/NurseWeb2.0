@@ -29,7 +29,7 @@ import AdminDetailEdit from './pages/admin/AdminDetailEdit';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/App",
     element: <App></App>,
   },
   {
