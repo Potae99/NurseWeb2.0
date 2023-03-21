@@ -7,15 +7,25 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Home_admin from './pages/admin/Home_admin';
-import Home_admin_adduser from './pages/admin/Home_admin_adduser';
-import Home_admin_userdetail from './pages/admin/Home_admin_userdetail';
-import Home_admin_edituser from './pages/admin/Home_admin_edituser';
-import Admin_sylllabus from './pages/admin/Admin_sylllabus';
-import Admin_addcuriculum from './pages/admin/Admin_addcuriculum';
+import AdminHome from './pages/admin/AdminHome';
+import AdminAddUser from './pages/admin/AdminAddUser';
+import AdminSyllabus from './pages/admin/AdminSyllabus';
+import AdminAddCurriculum from './pages/admin/AdminAddCurriculum';
+import AdminStudentDetail from './pages/admin/AdminStudentDetail';
 import App from './App';
 import Apitest from './Test.js/Apitest';
 import Test2 from './Test.js/Test2';
+import CurriculumDetail from './pages/admin/CurriculumDetail';
+import AdminCourse from './pages/admin/AdminCourse';
+import AdminCourseDetail from './pages/admin/AdminCourseDetail';
+import AdminStudentEdit from './pages/admin/AdminStudentEdit';
+import AdminTeacherDetail from './pages/admin/AdminTeacherDetail';
+import AdminDetail from './pages/admin/AdminDetail';
+import AdminTeacherEdit from './pages/admin/AdminTeacherEdit';
+import AdminAddStudent from './pages/admin/AdminAddStudent';
+import AdminAddTeacher from './pages/admin/AdminAddTeacher';
+import AdminAddAdmin from './pages/admin/AdminAddAdmin';
+import AdminDetailEdit from './pages/admin/AdminDetailEdit';
 
 const router = createBrowserRouter([
   {
@@ -23,29 +33,21 @@ const router = createBrowserRouter([
     element: <App></App>,
   },
   {
-    path: "home_admin",
-    element: <Home_admin/>,
+    path: "/admin/home/*",
+    element: <AdminHome/>,
   },
   {
-    path: "admin_adduser",
-    element: <Home_admin_adduser/>,
+    path: "/admin/user/add",
+    element: <AdminAddUser/>,
   },
   {
-    path: "admin_userdetail",
-    element: <Home_admin_userdetail/>,
-  },
-  {
-    path: "admin_useredit",
-    element: <Home_admin_edituser/>,
-  },
-  {
-    path: "admin_syllabus",
-    element: <Admin_sylllabus/>,
+    path: "admin/syllabus",
+    element: <AdminSyllabus/>,
 
   },
   {
-    path: "admin_addcuriculum",
-    element: <Admin_addcuriculum/>,
+    path: "admin/curriculum/add",
+    element: <AdminAddCurriculum/>,
 
   },
   {
@@ -58,6 +60,58 @@ const router = createBrowserRouter([
     element: <Test2/>,
 
   },
+  {
+
+    path: "/admin/student/detail/:userID/*",
+    element: <AdminStudentDetail/>,
+  },
+  {
+
+    path: "/admin/curriculum/detail",
+    element: <CurriculumDetail/>,
+
+  },
+  {
+    path: "/admin/course",
+    element: <AdminCourse/>,
+
+  },
+  {
+    path: "/admin/course/detail",
+    element: <AdminCourseDetail/>,
+  },
+  {
+    path: "/admin/student/edit/:userID/*",
+    element: <AdminStudentEdit/>,
+  },
+  {
+    path: "/admin/teacher/:userID/*",
+    element: <AdminTeacherDetail/>,
+  },
+  {
+    path: "/admin/detail/:userID/*",
+    element: <AdminDetail/>,
+  },
+  {
+    path: "/admin/teacher/edit/:userID/*",
+    element: <AdminTeacherEdit/>,
+  },
+  {
+    path: "/admin/add/student",
+    element: <AdminAddStudent/>,
+  },
+  {
+    path: "/admin/add/teacher",
+    element: <AdminAddTeacher/>,
+  },
+  {
+    path: "/admin/add/admin",
+    element: <AdminAddAdmin/>,
+  },
+  {
+    path: "/admin/detail/edit/:userID/*",
+    element: <AdminDetailEdit/>,
+  }
 ]);
 
 
