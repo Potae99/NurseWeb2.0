@@ -18,11 +18,13 @@ import Home_admin_studentDetail from './pages/admin/Home_admin_studentDetail';
 import Admin_course from './pages/admin/Admin_course';
 import Admin_course_detail from './pages/admin/Admin_course_detail';
 import Admin_course_add from './pages/admin/Admin_course_add';
+import Admin_addcourse_Syllabus from './pages/admin/Admin_addcourse_Syllabus';
 
 // test
 import Apitest from './Test.js/Apitest';
 import Test2 from './Test.js/Test2';
 import Curriculum_detail from './pages/admin/Curriculum_detail';
+import Admin_category_add from './pages/admin/Admin_category_add.';
 
 
 
@@ -88,6 +90,14 @@ const router = [
   {
     path: "/admin/course/add",
     element: <Admin_course_add />,
+  },
+  {
+    path: "/admin/category/add",
+    element: <Admin_category_add />,
+  },
+  {
+    path: "/admin/category/add",
+    element: <Admin_category_add />,
   },
 ];
 

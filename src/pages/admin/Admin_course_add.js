@@ -25,7 +25,7 @@ function Home_admin_adduser() {
             creditStudy:creditStudy,
             studyTimeTheory:studyTimeTheory,
             studyTimePractice:studyTimePractice,
-            studyTimeSelf:studyTimeSelf,
+            studyTimeSelf:studyTimeSelf
             
         }).then(() => {
             setData([
@@ -39,7 +39,7 @@ function Home_admin_adduser() {
                     creditStudy:creditStudy,
                     studyTimeTheory:studyTimeTheory,
                     studyTimePractice:studyTimePractice,
-                    studyTimeSelf:studyTimeSelf,
+                    studyTimeSelf:studyTimeSelf
                    
                 }
             ])

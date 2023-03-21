@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React,{ useState, useEffect } from 'react'
-import DeleteIcon from '../IconTable/DeleteIcon';
 import ViewIcon from '../IconTable/ViewIcon';
 
 function Curriculumtable() {
