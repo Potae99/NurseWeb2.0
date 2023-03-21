@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Route, Routes, useParams } from 'react-router-dom';
-import AdminTeacherEdit from './AdminTeacherEdit';
+import EditTeacher from './EditTeacher';
 import Swal from 'sweetalert2';
 
-function AdminTeacherDetail() {
+function TeacherDetail() {
 
     const [data, setData] = useState([]);
     const [teacherlist, setTeacherList] = useState([]);
@@ -29,7 +29,7 @@ function AdminTeacherDetail() {
                         return _.userID !== userID;
                     })
                 )
-                window.location.href = "/admin/home";
+                window.location.href = "/";
 
                 Toast.fire({
                     icon: 'success',
@@ -75,10 +75,10 @@ function AdminTeacherDetail() {
     return (
         <div className=''>
             <Routes>
-                <Route path='/admin/teacher/edit/:userID' element={<AdminTeacherEdit />} />
+                <Route path='/admin/teacher/edit/:userID' element={<EditTeacher />} />
             </Routes>
             <div className=" min-h-screen border space-y-5">
-                <div className=" font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลอาจารย์</div>
+                <div className=" text-black font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลอาจารย์</div>
                 <div className=' flex flex-row-reverse  '>
                     <div className='   mr-3'>
                         <button onClick={() => GoToTeacherEdit(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
@@ -106,21 +106,21 @@ function AdminTeacherDetail() {
                 </div>
 
                 <div>
-                    <div className=' text-3xl text-center mb-5'>อาจารย์ : {data.nameTH}</div>
+                    <div className=' text-black text-3xl text-center mb-5'>อาจารย์ : {data.nameTH}</div>
                     <div className=" grid grid-cols-1 place-items-center">
-                        <div className=" block bg-gray-200 w-2/3 p-auto rounded-2xl">
+                        <div className=" text-black block bg-gray-200 w-2/3 p-auto rounded-2xl">
                             <div className=" flex justify-around">
                                 <div className=" ml-7">
                                     {
                                         data.nameTH ?
                                             <>
-                                                <div className=" m-3">ชื่อสกุล : {data.nameTH}</div></> :
+                                                <div className=" text-black m-3">ชื่อสกุล : {data.nameTH}</div></> :
                                             <></>
                                     }
                                     {
                                         data.teacherID ?
                                             <>
-                                                <div className=" m-3">รหัสประจำตัว : {data.teacherID}</div></> :
+                                                <div className=" text-black m-3">รหัสประจำตัว : {data.teacherID}</div></> :
                                             <></>
                                     }
                                 </div>
@@ -147,4 +147,4 @@ function AdminTeacherDetail() {
     )
 }
 
-export default AdminTeacherDetail
+export default TeacherDetail

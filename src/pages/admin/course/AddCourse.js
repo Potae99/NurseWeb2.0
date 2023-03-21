@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
-function Home_admin_adduser() {
+function AddCourse() {
     
     const [categoryID, setcategoryID] = useState("");
     const [courseNameTH, setcourseNameTH] = useState("");
@@ -209,4 +209,4 @@ function Home_admin_adduser() {
     )
 }
 
-export default Home_admin_adduser
+export default AddCourse

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Route, Routes, useParams } from 'react-router-dom';
-import AdminStudentEdit from './AdminStudentEdit';
+import EditStudent from './EditStudent';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 
-function AdminStudentDetail() {
+function StudentDetail() {
 
     const [data, setData] = useState([]);
     const [studentlist, setStudentList] = useState([]);
@@ -79,9 +79,9 @@ function AdminStudentDetail() {
     return (
         <div>
             <Routes>
-                <Route path='/admin/student/edit/:userID' element={<AdminStudentEdit />} />
+                <Route path='/admin/student/edit/:userID' element={<EditStudent />} />
             </Routes>
-            <div className=" min-h-screen border space-y-5 mb-10">
+            <div className=" text-black min-h-screen border space-y-5 mb-10">
                 <div className=" font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลนิสิต</div>
                 <div className=' flex flex-row-reverse  '>
                     <div className='   mr-3'>
@@ -302,4 +302,4 @@ function AdminStudentDetail() {
     )
 }
 
-export default AdminStudentDetail
+export default StudentDetail

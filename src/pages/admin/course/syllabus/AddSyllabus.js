@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { useState } from 'react';
 
-function Admin_addcuriculum() {
+function AddSyllabus() {
     const [syllabusName, setsyllabusName] = useState("");
     const [syllabusDate, setsyllabusDate] = useState("");
     const [startUse, setstartUse] = useState("");
@@ -159,4 +159,4 @@ function Admin_addcuriculum() {
     )
 }
 
-export default AdminAddCurriculum
+export default AddSyllabus

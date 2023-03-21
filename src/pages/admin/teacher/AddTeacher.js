@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 
-function AdminAddTeacher() {
+function AddTeacher() {
     const [password, setpassword] = useState("");
     const [nameENG, setnameENG] = useState("");
     const [nameTH, setnameTH] = useState("");
@@ -30,16 +30,16 @@ function AdminAddTeacher() {
                     IDnumber: IDnumber
                 }
             ])
-            window.location.href = "/admin/home";
+            window.location.href = "/";
         })
     }
 
     const BacktoHomeAdmin = () => {
-        window.location.href = '/admin/home';
+        window.location.href = '/';
     }
 
     return (
-        <div className=' bg-gray-200 slate-500 min-h-screen border'>
+        <div className=' bg-gray-100 slate-500 min-h-screen border'>
             <h1 className=' text-4xl text-center m-3 text-black'>เพิ่มผู้ใช้งาน</h1>
             <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
                 <div className=' flex flex-row'>
@@ -139,7 +139,7 @@ function AdminAddTeacher() {
                         <span className="relative invisible">Button Text</span>
                     </button>
                 </div>
-                <div className=' absolute right-0 mr-3'>
+                <div className=' absolute right-0 mr-7'>
                     <button onClick={addStudent} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
                             <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -155,4 +155,4 @@ function AdminAddTeacher() {
     )
 }
 
-export default AdminAddTeacher
+export default AddTeacher

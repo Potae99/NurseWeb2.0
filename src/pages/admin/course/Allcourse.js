@@ -1,8 +1,8 @@
 import React from 'react'
-import Addcoursebutton2 from '../../components/Button/Addcoursebutton2'
-import Allcoursetable from '../../components/Table/Allcoursetable'
+import Addcoursebutton2 from '../../../components/Button/Addcoursebutton2'
+import Allcoursetable from '../../../components/Table/Allcoursetable'
 
-function AdminCourse() {
+function Allcourse() {
   return (
    
     <div className='border bg-gray-200 min-h-screen'>
@@ -23,4 +23,4 @@ function AdminCourse() {
   )
 }
 
-export default AdminCourse
+export default Allcourse

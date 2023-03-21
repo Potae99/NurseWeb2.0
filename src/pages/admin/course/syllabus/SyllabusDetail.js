@@ -1,8 +1,8 @@
 import React from 'react'
-import Coursetable from '../../components/Table/Coursetable'
-import Deletebutton from '../../components/Button/Deletebutton'
+import Coursetable from '../../../../components/Table/Coursetable'
+import Deletebutton from '../../../../components/Button/Deletebutton'
 
-function CurriculumDetail() {
+function SyllabusDetail() {
   return (
     
     <div className='border bg-gray-200 min-h-screen' >
@@ -30,4 +30,4 @@ function CurriculumDetail() {
   )
 }
 
-export default CurriculumDetail
+export default SyllabusDetail

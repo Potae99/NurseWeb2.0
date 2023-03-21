@@ -1,8 +1,8 @@
 import React from 'react'
-import CourseStudenttable from '../../components/Table/CourseStudenttable'
-import StudentPopup from '../../components/Button/StudentPopup'
+import CourseStudenttable from '../../../components/Table/CourseStudenttable'
+import StudentPopup from '../../../components/Button/StudentPopup'
 
-function AdminCourseDetail() {
+function CourseDetail() {
   return (
     
     <div className='border bg-gray-200 min-h-screen'>
@@ -29,4 +29,4 @@ function AdminCourseDetail() {
   )
 }
 
-export default AdminCourseDetail
+export default CourseDetail

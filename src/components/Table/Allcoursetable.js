@@ -2,7 +2,7 @@ import axios from 'axios';
 import React,{ useState, useEffect } from 'react'
 import ViewIcon from '../IconTable/ViewIcon';
 
-function Admintable() {
+function Allcoursetable() {
   const [data, setData] = useState([]);
 
 
@@ -90,4 +90,4 @@ useEffect(() => {
   )
 }
 
-export default Admintable
+export default Allcoursetable

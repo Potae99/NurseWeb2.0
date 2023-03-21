@@ -1,9 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom';
-import AdminTeacherDetail from '../../pages/admin/AdminTeacherDetail';
-import Swal from 'sweetalert2';
-
+import TeacherDetail from '../../pages/admin/teacher/TeacherDetail';
 import Swal from 'sweetalert2';
 
 function Professertable() {
@@ -47,7 +45,7 @@ function Professertable() {
 
 
   const GotoTeacherDetail = (userID) => {
-    window.location.href = "/admin/teacher/" + userID;
+    window.location.href = "/admin/teacher/detail/" + userID;
   }
 
 
@@ -81,7 +79,7 @@ function Professertable() {
   return (
     <div>
       <Routes>
-        <Route path='/admin/teacher/detail/:userID' element={<AdminTeacherDetail />} />
+        <Route path='/admin/teacher/detail/:userID' element={<TeacherDetail />} />
       </Routes>
       <table className=" w-full text-sm text-left text-black">
         <thead className="text-xs text-black uppercase bg-gray-300">

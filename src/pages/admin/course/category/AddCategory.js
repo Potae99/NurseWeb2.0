@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useState } from 'react';
 
 
-function Admin_category_add() {
+function AddCategory() {
   const [categoryName, setcategoryName] = useState("");
   const [data, setData] = useState([]);
 
@@ -75,4 +75,4 @@ function Admin_category_add() {
   )
 }
 
-export default Admin_category_add
+export default AddCategory

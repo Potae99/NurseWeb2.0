@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom';
-import AdminStudentDetail from '../../pages/admin/AdminStudentDetail';
+import StudentDetail from '../../pages/admin/student/StudentDetail';
 import Swal from 'sweetalert2';
 
 function Studenttable() {
@@ -25,22 +25,10 @@ function Studenttable() {
 
   console.log(process.env.REACT_APP_API_URL + "/student");
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
-
   const deletestudent = (userID) => {
     axios.delete(process.env.REACT_APP_API_URL+
       `/student`, {data:{ userID: userID }}).then((response) => {
-      setstudentlist(
+      setStudentList(
         studentlist.filter((_) => {
           return _.userID !== userID;
         })
@@ -58,41 +46,9 @@ function Studenttable() {
 
   }
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
-
   const GotoStudentDetail = (userID) => {
     window.location = '/admin/student/detail/' + userID;
   }
-      const deleteStudent = (userID) => {
-        axios.delete(
-          process.env.REACT_APP_API_URL + "/student", {data:{ userID: userID }}).then((response) => {
-          setstudentlist(
-            studentlist.filter((_) => {
-              return _.userID !== userID;
-            })
-          );
-    
-          Toast.fire({
-            icon: 'success',
-            title: 'Delete data success'
-          })
-    
-        }).catch(function (error) {
-          if (error.response) {
-            console.log(error.response);
-          }});
-      }
-
   const fetchData = () => {
 
     axios.get(process.env.REACT_APP_API_URL + "/student/list")
@@ -111,40 +67,15 @@ function Studenttable() {
         setStudentList(res.data.data);
 
       });
-
-
   }
-
-
   useEffect(() => {
     fetchData();
   }, [])
 
-  const deleteStudent = (userID) => {
-    axios.delete(process.env.REACT_APP_API_URL + "/student", {data:{userID: userID}})
-    .then((response) => {
-      setStudentList(
-        studentlist.filter((_) => {
-          return _.userID !== userID;
-        })
-      );
-
-      Toast.fire({
-        icon: 'success',
-        title: 'Delete data success'
-      })
-
-    }).catch(function (error) {
-      if (error.response) {
-        console.log(error.response);
-      }
-    });
-  }
-
   return (
     <div>
       <Routes>
-        <Route path='/admin/student/detail/:userID' element={<AdminStudentDetail />} />
+        <Route path='/admin/student/detail/:userID' element={<StudentDetail />} />
       </Routes>
       <table className=" w-full text-sm text-left text-black ">
         <thead className="text-xs text-black uppercase bg-gray-300">
@@ -166,7 +97,7 @@ function Studenttable() {
                 <div className=''
                   content="Delete student"
                   color="error"
-                  onClick={() => { deleteStudent(_.userID) }}>
+                  onClick={() => { deletestudent(_.userID) }}>
                   <button>
                     <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
