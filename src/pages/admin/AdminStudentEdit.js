@@ -108,7 +108,7 @@ function AdminStudentEdit() {
                 sethouseadd_road(res.data.data.houseadd_road);
                 sethouseadd_houseNo(res.data.data.houseadd_houseNo);
                 setpassword(res.data.data.password);
-                setBirthday((format(new Date (res.data.data.Birthday), 'yyyy-MM-dd')));
+                setBirthday((format(new Date(res.data.data.Birthday), 'yyyy-MM-dd')));
                 setIDline(res.data.data.IDline);
                 setIDnumber(res.data.data.IDnumber);
                 setemail(res.data.data.email);
@@ -125,7 +125,7 @@ function AdminStudentEdit() {
                 setStudentID(res.data.data.studentID);
             }).catch(error => {
                 console.log(error.res);
-            });  
+            });
     }
 
     const backToStudentDetail = (userID) => {
@@ -212,22 +212,6 @@ function AdminStudentEdit() {
                             </div>
                         </div>
                         <div >
-                            <p>Password</p>
-                            <div className="mb-5 flex justify-center ">
-                                <input
-                                    value={password}
-                                    onChange={(event) => {
-                                        setpassword(event.target.value)
-                                    }}
-                                    type="text"
-                                    name="Password"
-                                    placeholder="Password"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
-                            </div>
-                        </div>
-                        <div >
                             <p>วันเกิด</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
@@ -259,7 +243,7 @@ function AdminStudentEdit() {
                                 />
                             </div>
                         </div>
-                        <div >
+                        {/* <div >
                             <p>เพศ</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
@@ -274,6 +258,16 @@ function AdminStudentEdit() {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
+                        </div> */}
+                        <div>
+                            <label>
+                                เพศ
+                                <select value={gender} onChange={(event => {setgender(event.target.value)})} name='เพศ' className="w-full rounded-md border border-while (condition) {
+                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
+                                    <option value={"ชาย"}>ชาย</option>
+                                    <option value={"หญิง"}>หญิง</option>
+                                </select>
+                            </label>
                         </div>
                         <div >
                             <p>บ้านเลขที่</p>
@@ -302,6 +296,38 @@ function AdminStudentEdit() {
                                     type="text"
                                     name="houseadd_village"
                                     placeholder="หมู่บ้าน"
+                                    className="w-full rounded-md border border-while (condition) {
+                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                />
+                            </div>
+                        </div>
+                        <div >
+                            <p>ถนน</p>
+                            <div className="mb-5 flex justify-center ">
+                                <input
+                                    value={houseadd_road}
+                                    onChange={(event) => {
+                                        sethouseadd_road(event.target.value)
+                                    }}
+                                    type="text"
+                                    name="houseadd_road"
+                                    placeholder="ถนน"
+                                    className="w-full rounded-md border border-while (condition) {
+                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                />
+                            </div>
+                        </div>
+                        <div >
+                            <p>ซอย</p>
+                            <div className="mb-5 flex justify-center ">
+                                <input
+                                    value={houseadd_alley}
+                                    onChange={(event) => {
+                                        sethouseadd_alley(event.target.value)
+                                    }}
+                                    type="text"
+                                    name="houseadd_alley"
+                                    placeholder="ซอย"
                                     className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
@@ -366,38 +392,6 @@ function AdminStudentEdit() {
                                     type="text"
                                     name="houseadd_postalCode"
                                     placeholder="รหัสไปรษณีย์"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
-                            </div>
-                        </div>
-                        <div >
-                            <p>ถนน</p>
-                            <div className="mb-5 flex justify-center ">
-                                <input
-                                    value={houseadd_road}
-                                    onChange={(event) => {
-                                        sethouseadd_road(event.target.value)
-                                    }}
-                                    type="text"
-                                    name="houseadd_road"
-                                    placeholder="ถนน"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
-                            </div>
-                        </div>
-                        <div >
-                            <p>ซอย</p>
-                            <div className="mb-5 flex justify-center ">
-                                <input
-                                    value={houseadd_alley}
-                                    onChange={(event) => {
-                                        sethouseadd_alley(event.target.value)
-                                    }}
-                                    type="text"
-                                    name="houseadd_alley"
-                                    placeholder="ซอย"
                                     className="w-full rounded-md border border-while (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />

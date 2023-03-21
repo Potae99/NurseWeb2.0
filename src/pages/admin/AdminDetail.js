@@ -79,8 +79,8 @@ function AdminDetail() {
                 <Route path='/admin/detail/edit/:userID' element={<AdminDetailEdit />} />
             </Routes>
 
-            <div className=" min-h-screen border">
-                <div className=" font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลนิสิต</div>
+            <div className=" min-h-screen border space-y-5">
+                <div className=" font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลผู้ดูแลระบบ</div>
                 <div className=' flex flex-row-reverse  '>
                     <div className='   mr-3'>
                         <button onClick={() => goToAdminDetailEdit(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
@@ -108,27 +108,37 @@ function AdminDetail() {
                 </div>
 
                 <div>
-                    <div className=' grid grid-cols-1 place-items-center'>
-                        <div className=''>
-                            <div>
-                                <p className=" m-5">ชื่อสกุล : {data.nameTH}</p>
-
-                                <div className=" m-5">รหัสประจำตัว : {data.adminID}</div>
-                            </div>
-                            <div>
-                                <div className=" m-5">บทบาท : ผู้ดูแลระบบ</div>
-                            </div>
-                        </div>
-                    </div>
+                    <div className=' text-3xl text-center mb-5'>ผู้ดูแลระบบ : {data.nameTH}</div>
                     <div className=" grid grid-cols-1 place-items-center">
                         <div className=" block bg-gray-200 w-2/3 p-auto rounded-2xl">
                             <div className=" flex justify-around">
                                 <div className=" ml-7">
-                                    <div className=" m-3">เลขบัตรประจำตัวประชาชน : {data.IDnumber}</div>
-                                    <div className=" m-3">เพศ : {data.gender}</div>
+                                    {
+                                        data.nameTH ?
+                                            <>
+                                                <div className=" m-3">ชื่อสกุล : {data.nameTH}</div></> :
+                                            <></>
+                                    }
+                                    {
+                                        data.adminID ?
+                                            <>
+                                                <div className=" m-3">รหัสประจำตัว : {data.adminID}</div></> :
+                                            <></>
+                                    }
                                 </div>
                                 <div className=" mr-7">
-                                    <div className=" m-3">ชื่ออังกฤษ : {data.nameENG}</div>
+                                    {
+                                        data.nameENG ?
+                                            <>
+                                                <div className=" m-3">ชื่ออังกฤษ : {data.nameENG}</div></> :
+                                            <></>
+                                    }
+                                    {
+                                        data.IDnumber ?
+                                            <>
+                                                <div className=" m-3">เลขบัตรประจำตัวประชาชน : {data.IDnumber}</div></> :
+                                            <></>
+                                    }
                                 </div>
                             </div>
                         </div>

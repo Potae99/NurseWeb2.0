@@ -44,7 +44,7 @@ function AdminAddAdmin() {
             <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
                 <div className=' flex flex-row'>
                     <p className=' text-2xl ml-3 text-black' >ผู้ใช้งาน :</p>
-                    <p className=' text-2xl ml-3 text-black'>อาจารย์</p>
+                    <p className=' text-2xl ml-3 text-black'>ผู้ดูแลระบบ</p>
                 </div>
             </div>
 
