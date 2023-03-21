@@ -54,6 +54,7 @@ function SideNavbar({ session }) {
     ]
   };
 
+  MenuItems = _menuItems[session.level];
 
   let activeMenu = useMemo(
     () => MenuItems.find((menu) => menu.link === window.location.pathname), //menuItems["admin"].find((menu) => menu.link === router.pathname),

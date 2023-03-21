@@ -17,7 +17,7 @@ const Layout = ({ children, session, setToken }) => {
         {/* <Suspense fallback={<LoadingPage />}> */}
           <SideNavbar session={session} />
 
-          <div className="bg-primary flex-1 ml-0 md:ml-[240px]">
+          <div className="bg-white flex-1 ml-0 md:ml-[240px]">
             <MyNavbar session={session} setToken={setToken} />
 
             <div className="mt-4 ml-3 mr-3 mb-3 p-3">
