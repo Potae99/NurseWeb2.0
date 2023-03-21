@@ -46,6 +46,7 @@ useEffect(() => {
 
 // ]
 return (
+    
     <div className=" bg-rose-200 min-h-screen border">
         <div className=" font-bold text-4xl m-10 grid grid-cols-1">ข้อมูลนิสิต</div>
         <div className=' flex flex-row-reverse  '>
@@ -86,6 +87,7 @@ return (
             </div>
         ))}
     </div>
+   
 )
 }
 

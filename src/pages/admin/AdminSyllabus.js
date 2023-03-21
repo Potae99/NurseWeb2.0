@@ -5,6 +5,7 @@ import Addcuriculumbutton from '../../components/Button/Addcuriculumbutton';
 
 function AdminSyllabus() {
   return (
+    
     <div className=' border bg-gray-300 min-h-screen'>
       <h1 className=' text-center text-4xl mt-3'>SYLLABUS</h1>
       <div className=' flex flex-row-reverse'>
@@ -18,6 +19,7 @@ function AdminSyllabus() {
       </div>
       
     </div>
+    
   )
 }
 

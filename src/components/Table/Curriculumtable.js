@@ -1,45 +1,79 @@
-import React from 'react'
+import axios from 'axios';
+import React,{ useState, useEffect } from 'react'
+import ViewIcon from '../IconTable/ViewIcon';
 
 function Curriculumtable() {
-  const curriculum = [
-    {
-      Year_built: 2022,
-      Curriculum_name: 'หลักสูตรพยาบาล',
-      Year_started: '01/12/2022',
-      End_year:'31/01/2025'
+  const [data, setData] = useState([]);
+  const fetchData = () => {
+    console.log("WTF");
 
-    },
-    {
-      Year_built: 2022,
-      Curriculum_name: 'หลักสูตรพยาบาล',
-      Year_started: '01/12/2022',
-      End_year:'31/01/2025'
-    },
-    {
-      Year_built: 2022,
-      Curriculum_name: 'หลักสูตรพยาบาล',
-      Year_started: '01/12/2022',
-      End_year:'31/01/2025'
-    },
-  ];
+    // const Toast = Swal.mixin({
+    //     toast: true,
+    //     position: 'top-end',
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     timerProgressBar: true,
+    //     didOpen: (toast) => {
+    //       toast.addEventListener('mouseenter', Swal.stopTimer)
+    //       toast.addEventListener('mouseleave', Swal.resumeTimer)
+    //     }
+    //   })
+
+    //   Toast.fire({
+    //     icon: 'error',
+    //     title: 'get data from API error!'
+    //   })
+
+
+
+    axios.get(process.env.REACT_APP_API_URL + "/course/syllabuses")
+        .then(res => {
+            // const persons = res.data;
+            //this.setState({ persons });
+            console.log(res.data);
+
+            if (res.data.error === true) {
+                console.log(res.data)
+                console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+                return;
+            }
+            setData(res.data.data);
+
+        });
+}
+
+
+useEffect(() => {
+    fetchData();
+}, [])
+
   return (
-    <table className=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table className=" w-full text-sm text-left text-black">
+      <thead className="text-xs text-black uppercase bg-gray-300">
         <tr  >
           <th scope="col" className="py-3 px-6" >ปีที่สร้าง</th>
-          <th scope="col" className="py-3 px-6">ชื่อหลักสูตร</th>
+          <th scope="col" className="py-3 px-6">ชื่อ</th>
           <th scope="col" className="py-3 px-6">ระยะเวลา</th>
           <th scope="col" className="py-3 px-6">การกระทำ</th>
         </tr>
       </thead>
-      {curriculum.map((curriculum, index) => (
+      {data.map((_,i) => (
         <tbody>
-          <tr data-index={index} className=" hover:bg-green-300 bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+          <tr className="  hover:bg-gray-200 bg-white border-b"
           >
-            <td className="py-4 px-6" >{curriculum.Year_built}</td>
-            <td className="py-4 px-6">{curriculum.Curriculum_name}</td>
-            <td className="py-4 px-6">{curriculum.Year_started}-{curriculum.End_year}</td>
-            <td className="py-4 px-6"></td>
+            <td className="py-4 px-6" >{_.syllabusDate}</td>
+            <td className="py-4 px-6">{_.syllabusName}</td>
+            <td className="py-4 px-6">{_.startUse}-{_.endUse}</td>
+            <td className="py-4 px-6 flex flex-row">
+            <div className=' ml-3'
+                                        content="View Admin"
+                                        color="error"
+                                        onClick={() => console.log("View Admin", _.userID)}>
+              <ViewIcon></ViewIcon>
+            </div>
+            </td>
           </tr>
         </tbody>
 
@@ -47,6 +81,8 @@ function Curriculumtable() {
 
 
     </table>
+    
+
   )
 }
 

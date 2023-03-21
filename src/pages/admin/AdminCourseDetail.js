@@ -4,6 +4,7 @@ import StudentPopup from '../../components/Button/StudentPopup'
 
 function AdminCourseDetail() {
   return (
+    
     <div className='border bg-gray-200 min-h-screen'>
         <h1 className=' mt-3 ml-3 text-4xl'>ข้อมูลรายวิชา</h1>
         <div className=' flex flex-row-reverse'>
@@ -24,6 +25,7 @@ function AdminCourseDetail() {
             <CourseStudenttable/>
         </div>
     </div>
+    
   )
 }
 

@@ -4,6 +4,7 @@ import Allcoursetable from '../../components/Table/Allcoursetable'
 
 function AdminCourse() {
   return (
+   
     <div className='border bg-gray-200 min-h-screen'>
         <h1 className=' text-center text-4xl'>COURSE</h1>
         
@@ -18,6 +19,7 @@ function AdminCourse() {
         </div>
 
     </div>
+    
   )
 }
 

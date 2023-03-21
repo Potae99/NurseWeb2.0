@@ -58,10 +58,40 @@ function Studenttable() {
 
   }
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   const GotoStudentDetail = (userID) => {
     window.location = '/admin/student/detail/' + userID;
   }
-
+      const deleteStudent = (userID) => {
+        axios.delete(
+          process.env.REACT_APP_API_URL + "/student", {data:{ userID: userID }}).then((response) => {
+          setstudentlist(
+            studentlist.filter((_) => {
+              return _.userID !== userID;
+            })
+          );
+    
+          Toast.fire({
+            icon: 'success',
+            title: 'Delete data success'
+          })
+    
+        }).catch(function (error) {
+          if (error.response) {
+            console.log(error.response);
+          }});
+      }
 
   const fetchData = () => {
 
@@ -81,6 +111,8 @@ function Studenttable() {
         setStudentList(res.data.data);
 
       });
+
+
   }
 
 

@@ -1,34 +1,93 @@
-import React from 'react'
+import axios from 'axios';
+import React,{ useState, useEffect } from 'react'
+import ViewIcon from '../IconTable/ViewIcon';
 
-function Allcoursetable() {
-    return (
-        <table className=" w-full text-sm text-left  text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700  uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr  >
-                    <th scope="col" className="py-3 px-6" >ลำดับ</th>
-                    <th scope="col" className="py-3 px-6">ชื่อไทย</th>
-                    <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
-                    <th scope="col" className="py-3 px-6">หน่วยกิต</th>
-                    <th scope="col" className="py-3 px-6">เวลา</th>
-                    <th scope="col" className="py-3 px-6">การกระทำ</th>
-                </tr>
-            </thead>
-            {/* {curriculum.map((curriculum, index) => (
-      <tbody>
-        <tr data-index={index} className=" hover:bg-green-300 bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-        >
-          <td className="py-4 px-6" >{curriculum.Year_built}</td>
-          <td className="py-4 px-6">{curriculum.Curriculum_name}</td>
-          <td className="py-4 px-6">{curriculum.Year_started}-{curriculum.End_year}</td>
-          <td className="py-4 px-6"></td>
+function Admintable() {
+  const [data, setData] = useState([]);
+
+
+  console.log(process.env.REACT_APP_API_URL + "/course");
+
+
+  const fetchData = () => {
+    console.log("WTF");
+
+    // const Toast = Swal.mixin({
+    //     toast: true,
+    //     position: 'top-end',
+    //     showConfirmButton: false,
+    //     timer: 3000,
+    //     timerProgressBar: true,
+    //     didOpen: (toast) => {
+    //       toast.addEventListener('mouseenter', Swal.stopTimer)
+    //       toast.addEventListener('mouseleave', Swal.resumeTimer)
+    //     }
+    //   })
+
+    //   Toast.fire({
+    //     icon: 'error',
+    //     title: 'get data from API error!'
+    //   })
+
+
+
+    axios.get(process.env.REACT_APP_API_URL + "/course")
+        .then(res => {
+            // const persons = res.data;
+            //this.setState({ persons });
+            console.log(res.data);
+
+            if (res.data.error === true) {
+                console.log(res.data)
+                console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+                return;
+            }
+            setData(res.data.data);
+
+        });
+}
+useEffect(() => {
+    fetchData();
+}, [])
+  return (
+    <table className=" w-full text-sm text-left text-black">
+      <thead className="text-xs text-black uppercase bg-gray-300">
+        <tr  >
+          <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
+          <th scope="col" className="py-3 px-6">ชื่อไทย</th>
+          <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
+          <th scope="col" className="py-3 px-6">หน่วยกิต</th>
+          <th scope="col" className="py-3 px-6">การกระทำ</th>
         </tr>
-      </tbody>
+      </thead>
+      {data.map((_,i) => (
+        <tbody>
+          <tr className="  hover:bg-gray-200 bg-white border-b"
+          >
+            <td className="py-4 px-6" >{_.courseID}</td>
+            <td className="py-4 px-6">{_.courseNameTH}</td>
+            <td className="py-4 px-6">{_.courseNameENG}</td>
+            <td className="py-4 px-6">{_.creditStudy}</td>
+            <td className="py-4 px-6 flex flex-row">
+            <div className=' ml-3'
+                                        content="View Course"
+                                        color="error"
+                                        onClick={() => console.log("View Course", _.courseID)}>
+              <ViewIcon></ViewIcon>
+            </div>
+            </td>
+          </tr>
+        </tbody>
 
-    ))} */}
+      ))}
 
 
-        </table>
-    )
+    </table>
+    
+
+  )
 }
 
-export default Allcoursetable
+export default Admintable

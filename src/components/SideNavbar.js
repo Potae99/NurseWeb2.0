@@ -1,22 +1,22 @@
 import React, { useState, useMemo } from "react";
 import classNames from "classnames";
-import Link from "next/link";
-import { useRouter } from "next/router";
+// import Link from "next/link";
+// import { useRouter } from "next/router";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Disclosure } from "@headlessui/react";
-import {
-  MdOutlineSpaceDashboard,
-  MdOutlineAnalytics,
-  MdOutlineIntegrationInstructions,
-  MdOutlineMoreHoriz,
-  MdOutlineSettings,
-  MdOutlineLogout,
-} from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
-import { FaRegComments } from "react-icons/fa";
-import { BiMessageSquareDots } from "react-icons/bi";
-import { signOut, signIn, useSession } from "next-auth/react";
+// import {
+//   MdOutlineSpaceDashboard,
+//   MdOutlineAnalytics,
+//   MdOutlineIntegrationInstructions,
+//   MdOutlineMoreHoriz,
+//   MdOutlineSettings,
+//   MdOutlineLogout,
+// } from "react-icons/md";
+// import { CgProfile } from "react-icons/cg";
+// import { FaRegComments } from "react-icons/fa";
+// import { BiMessageSquareDots } from "react-icons/bi";
+// import { signOut, signIn, useSession } from "next-auth/react";
 
 import {
   ArticleIcon,
@@ -34,7 +34,7 @@ function SideNavbar({ session }) {
   const [toggleCollapse, setToggleCollapse] = useState(false);
   const [isCollapsible, setIsCollapsible] = useState(false);
   // const [isMenuItems, setMenuItems] = useState([]);
-  const router = useRouter();
+  // const router = useRouter();
 
   let MenuItems = [];
 
@@ -54,23 +54,12 @@ function SideNavbar({ session }) {
     ]
   };
 
-  // if(!session){
-  //   router.push("/api/auth/signin");
-  //   // return <div>Loading </div>;
-  // }
-
-  if (session && session.role != undefined) {
-    MenuItems = _menuItems[session.role]; // session.level
-  }
-
 
   let activeMenu = useMemo(
-    () => MenuItems.find((menu) => menu.link === router.pathname), //menuItems["admin"].find((menu) => menu.link === router.pathname),
-    [router.pathname]
+    () => MenuItems.find((menu) => menu.link === window.location.pathname), //menuItems["admin"].find((menu) => menu.link === router.pathname),
+    [window.location.pathname]
     // if did not find menu.link === router.pathname
     // if activeMenu is empty
-
-
   );
 
   const wrapperClasses = classNames(
@@ -109,8 +98,8 @@ function SideNavbar({ session }) {
   };
 
   const handleSignOut = () => {
-    signOut();
-    router.push("/");
+    // signOut();
+    // router.push("/");
   };
 
 
@@ -150,7 +139,8 @@ function SideNavbar({ session }) {
             const classes = getNavItemClasses(menu);
             return (
               <div key={"sideNavBar_" + menu.id} className={classes}>
-                <Link href={menu.link} className="text-white flex py-4 px-3 items-center w-full h-full">
+
+                <a href={menu.link} className="text-white flex py-4 px-3 items-center w-full h-full">
                   {/* <a className="flex py-4 px-3 items-center w-full h-full"> */}
                   <div style={{ width: "2.5rem" }}>
                     <Icon />
@@ -164,9 +154,8 @@ function SideNavbar({ session }) {
                       {menu.label}
                     </span>
                   )}
+                </a>
 
-                  {/* </a> */}
-                </Link>
               </div>
             );
           })}
