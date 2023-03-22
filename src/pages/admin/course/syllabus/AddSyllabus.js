@@ -57,8 +57,8 @@ function AddSyllabus() {
                                 type="text"
                                 name="syllabusName"
                                 placeholder="ชื่อหลักสูตร"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -72,8 +72,8 @@ function AddSyllabus() {
                                 type="date"
                                 name="syllabusDate"
                                 placeholder="ระยะเวลาหลักสูตร"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -87,8 +87,8 @@ function AddSyllabus() {
                                 type="date"
                                 name="startUse"
                                 placeholder="ระยะเวลาเริ่มหลักสูตร"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -102,8 +102,8 @@ function AddSyllabus() {
                                 type="date"
                                 name="endUse"
                                 placeholder="ระยะเวลาสิ้นสุดหลักสูตร"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -117,8 +117,8 @@ function AddSyllabus() {
                                 type="text"
                                 name="detail"
                                 placeholder="รายละเอียด"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                class="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>

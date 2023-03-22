@@ -4,10 +4,14 @@ import Studenttable from '../../components/Table/Studenttable'
 import Admintable from '../../components/Table/Admintable'
 import DropDown from '../../components/Button/DropDown'
 
-function AdminHome() {
 
+
+function AdminHome() {
+  
   return (
+    
     <div>
+      
       <div className=' min-h-screen'>
         <h1 className=' text-black text-4xl text-center mt-10'>จัดการผู้ใช้</h1>
         <div className='grid grid-cols-1  place-items-end mr-4 mt-4'>
