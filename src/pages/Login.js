@@ -47,6 +47,7 @@ export default function Login({ setToken }) {
     }
 
     axios.post(process.env.REACT_APP_API_URL + path, data)
+      
       .then(res => {
         // console.log(res);
         console.log(res.data);
@@ -60,7 +61,8 @@ export default function Login({ setToken }) {
           window.location.href = "/teacher/home"
         }
         else if (level == "student"){
-          window.location.href = "/student/home"
+          
+          window.location.href = "/student/home";
         }
         else {
           window.location.href = "/error"

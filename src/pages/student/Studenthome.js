@@ -25,7 +25,7 @@ function Studenthome() {
     const fetchData = () => {
 
 
-        axios.post(process.env.REACT_APP_API_URL + "/student/detail", { userID: userID })
+        axios.post(process.env.REACT_APP_API_URL + "/student/detail", {userID: userID})
             .then(res => {
                 console.log(res.data);
 
@@ -50,7 +50,7 @@ function Studenthome() {
 
     return (
         <div>
-            <div className=" text-black min-h-screen border space-y-5 mb-10">
+            <div className=" text-black min-h-screen space-y-5 mb-10">
                 <div className=" font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลนิสิต</div>
                 <div>
                     <div className=' text-3xl text-center mb-5'>นิสิต : {data.nameTH}</div>
