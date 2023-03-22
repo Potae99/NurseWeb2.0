@@ -40,10 +40,10 @@ function SideNavbar({ session }) {
 
   const _menuItems = {
     "admin": [
-      { id: 1, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/user/admin/userManagement" },
+      { id: 1, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/admin/home" },
       { id: 2, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/user/admin/subjectManagement" },
       { id: 3, label: "ภาคการศึกษา", icon: UsersIcon, link: "/user/admin/semesterManagement" },
-      { id: 4, label: "ผลการประเมิน", icon: VideosIcon, link: "/user/admin/semesterManagement" }
+      { id: 4, label: "ผลการประเมิน", icon: VideosIcon, link: "/user/admin/semesterManagement" },
     ],
     "teacher": [
       { id: 1, label: "ผลการประเมินของฉัน", icon: HomeIcon, link: "/user/teacher/estimateMyself" },
@@ -134,30 +134,31 @@ function SideNavbar({ session }) {
             </button>
           )}
         </div>
-
+        
         <div className="flex flex-col items-start mt-24">
           {MenuItems.map(({ icon: Icon, ...menu }) => {
             const classes = getNavItemClasses(menu);
             return (
-              <div key={"sideNavBar_" + menu.id} className={classes}>
+              <div key={"sideNavBar_" + menu.id} className={ (menu.link === window.location.pathname ? "bg-stone-600 " : " ") + "  flex items-center cursor-pointer rounded w-full overflow-hidden whitespace-nowrap transition duration-300 "}>
+              <a href={menu.link} className={(menu.link === window.location.pathname ? "text-white" : "text-stone-300 ") + "  hover:text-white flex py-4 px-3 items-center w-full h-full"}>
+                {/* <a className="flex py-4 px-3 items-center w-full h-full"> */}
+                <div style={{ width: "2.5rem" }}>
+                  <Icon />
+                </div>
+                {!toggleCollapse && (
+                  <p
+                    // className={classNames(
+                    //   "text-md font-medium text-stone-300 hover:text-white"
+                    // )}
+                  >
+                    {menu.label}
+                  </p>
+                )}
 
-                <a href={menu.link} className="text-white flex py-4 px-3 items-center w-full h-full">
-                  {/* <a className="flex py-4 px-3 items-center w-full h-full"> */}
-                  <div style={{ width: "2.5rem" }}>
-                    <Icon />
-                  </div>
-                  {!toggleCollapse && (
-                    <span
-                      className={classNames(
-                        "text-md font-medium text-text-light"
-                      )}
-                    >
-                      {menu.label}
-                    </span>
-                  )}
-                </a>
+                {/* </a> */}
+              </a>
+            </div>
 
-              </div>
             );
           })}
 
