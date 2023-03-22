@@ -1,8 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
-
+import { format } from 'date-fns';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 function AddStudent() {
+
+
+ 
     const [houseadd_province, sethouseadd_province] = useState("");
     const [houseadd_subDistrict, sethouseadd_subDistrict] = useState("");
     const [houseadd_road, sethouseadd_road] = useState("");
@@ -93,6 +98,7 @@ function AddStudent() {
     }
 
     return (
+        
         <div className=' bg-gray-100 slate-500 min-h-screen border'>
             <h1 className=' text-4xl text-center m-3 text-black'>เพิ่มผู้ใช้งาน</h1>
             <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
@@ -199,16 +205,25 @@ function AddStudent() {
                     <div >
                         <p>วันเกิด</p>
                         <div className="mb-5 flex justify-center ">
-                            <input
+                        <DatePicker
+                        dateFormat="dd/MM/yyyy"
+                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                         selected={Birthday} 
+                         onChange={(date) => {
+                             console.log()
+                            setBirthday(date);
+                        
+                        }}
+                             />
+                            {/* <input
                                 onChange={(event) => {
-                                    setBirthday(event.target.value)
+                                    setBirthday((format(new Date(event.target.value), 'dd-MM-yyyy')));
                                 }}
                                 type="date"
                                 name="Birthday"
                                 placeholder="วันเกิด"
-                                className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                            />
+                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            /> */}
                         </div>
                     </div>
                     <div >

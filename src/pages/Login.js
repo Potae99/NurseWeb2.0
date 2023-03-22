@@ -35,12 +35,35 @@ export default function Login({ setToken }) {
 
     // console.log(data);
 
-    axios.post(process.env.REACT_APP_API_URL + `/admin/auth`, data)
+    let path = "/student/auth";
+    if (level == "admin"){
+      path = "/admin/auth";
+    }
+    // else if (level == "student"){
+    //   path = "/student/auth"
+    // }
+    else if (level == "teacher"){
+      path = "/teacher/auth"
+    }
+
+    axios.post(process.env.REACT_APP_API_URL + path, data)
       .then(res => {
         // console.log(res);
         console.log(res.data);
         if (res.data && res.data.error == true) {
           throw new Error("login fail")
+        }
+        if (level == "admin"){
+          window.location.href = "/admin/home"
+        }
+        else if (level == "teacher"){
+          window.location.href = "/teacher/home"
+        }
+        else if (level == "student"){
+          window.location.href = "/student/home"
+        }
+        else {
+          window.location.href = "/error"
         }
 
         Toast.fire({

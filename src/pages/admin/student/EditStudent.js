@@ -108,7 +108,7 @@ function EditStudent() {
                 sethouseadd_road(res.data.data.houseadd_road);
                 sethouseadd_houseNo(res.data.data.houseadd_houseNo);
                 setpassword(res.data.data.password);
-                setBirthday((format(new Date(res.data.data.Birthday), 'yyyy-MM-dd')));
+                setBirthday((format(new Date(res.data.data.Birthday), 'dd-MM-yyyy')));
                 setIDline(res.data.data.IDline);
                 setIDnumber(res.data.data.IDnumber);
                 setemail(res.data.data.email);

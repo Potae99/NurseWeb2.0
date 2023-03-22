@@ -46,97 +46,139 @@ import useToken from '../src/components/useToken';
 
 
 const router = [
-  
+
   {
     path: "/Apitest",
     element: <Apitest />,
+    level: "admin"
 
   },
   {
     path: "/Apitest2",
     element: <Test2 />,
+    level: "admin"
 
   },
-  
+
   {
     path: "/course/add",
     element: <AddCourse />,
+    level: "admin"
+
   },
   {
     path: "/course/category/add",
     element: <AddCategory />,
+    level: "admin"
+
   },
   {
     path: "/admin/edit/:userID/*",
     element: <EditAdmin />,
+    level: "admin"
+
   },
   {
     path: "/admin/student/edit/:userID/*",
     element: <EditStudent />,
+    level: "admin"
+
   },
   {
     path: "/admin/teacher/edit/:userID/*",
     element: <EditTeacher />,
+    level: "admin"
+
   },
   {
-    path: "*",
+    path: "/admin/home",
     element: <AdminHome />,
+    level: "admin"
+
   },
   {
     path: "/admin/add/student",
     element: <AddStudent />,
+    level: "admin"
+
   },
   {
     path: "/admin/add/teacher",
     element: <AddTeacher />,
+    level: "admin"
+
   },
   {
     path: "/admin/add/admin",
     element: <AddAdmin />,
+    level: "admin"
+
   },
   {
     path: "/admin/detail/:userID/*",
     element: <AdminDetail />,
+    level: "admin"
+
   },
   {
     path: "/admin/student/detail/:userID/*",
     element: <StudentDetail />,
+    level: "admin"
+
   },
   {
     path: "/admin/teacher/detail/:userID/*",
     element: <TeacherDetail />,
+    level: "admin"
+
   },
   {
     path: "/student/home",
     element: <Studenthome />,
+    level: "student"
+
   },
   {
     path: "/teacher/home",
     element: <Teacherhome />,
+    level: "teacher"
+
   },
   {
     path: "/admin/course/category/Add",
     element: <AddCategory />,
+    level: "student"
+
   },
   {
     path: "/admin/course/syllabus/Add",
     element: <AddSyllabus />,
+    level: "admin"
+
   },
   {
     path: "/admin/course/syllabus/adminsyllabus",
     element: <AdminSyllabus />,
+    level: "admin"
+
   },
   {
     path: "/admin/course/syllabus/detail/:userID/*",
     element: <SyllabusDetail />,
+    level: "admin"
+
   },
   {
     path: "/admin/course/all",
     element: <Allcourse />,
+    level: "admin"
+
   },
   {
     path: "/admin/course/detail",
     element: <CourseDetail />,
+    level: "admin"
+
   },
 ];
 
@@ -171,13 +213,14 @@ function App() {
 
         <Router>
           {/* <div> */}
-            <Routes>
-              {
-                router.map((item, index) => (
-                  <Route path={item.path} element={item.element} />
-                ))
-              }
-            </Routes>
+          <Routes>
+            {
+              router.map((item, index) => {
+                if(item.level == token.level)
+                return (<Route path={item.path} element={item.element} />);
+              })
+            }
+          </Routes>
           {/* </div> */}
         </Router>
 
