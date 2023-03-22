@@ -30,7 +30,7 @@ const Sidebar = () => {
 
 
   const _menuItems=   {"admin":[
-    { id: 1, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/admin/home" },
+    { id: 1, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/user/admin/userManagement" },
     { id: 2, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/user/admin/subjectManagement" },
     { id: 3, label: "ภาคการศึกษา", icon: UsersIcon, link: "/user/admin/semesterManagement" },
     { id: 4, label: "ผลการประเมิน", icon: VideosIcon, link: "/user/admin/semesterManagement" }
