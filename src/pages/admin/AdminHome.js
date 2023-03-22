@@ -8,8 +8,8 @@ function AdminHome() {
 
   return (
     <div>
-      <div className=' min-h-screen border'>
-        <h1 className=' text-black text-4xl text-center mt-10'>รายชื่อผู้ใช้งาน</h1>
+      <div className=' min-h-screen'>
+        <h1 className=' text-black text-4xl text-center mt-10'>จัดการผู้ใช้</h1>
         <div className='grid grid-cols-1  place-items-end mr-4 mt-4'>
           <DropDown></DropDown>
         </div>

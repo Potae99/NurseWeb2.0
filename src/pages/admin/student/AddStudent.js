@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
-import { format } from 'date-fns';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import { format } from 'date-fns';
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 function AddStudent() {
 
 

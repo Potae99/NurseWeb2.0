@@ -64,7 +64,7 @@ function Professertable() {
         <Route path='/admin/teacher/detail/:userID' element={<TeacherDetail />} />
       </Routes>
       <table className=" w-full text-sm text-left text-black">
-        <thead className="text-xs text-black uppercase bg-gray-300">
+        <thead className="text-xs text-black uppercase bg-orange-300">
           <tr  >
             <th scope="col" className="py-3 px-6" >ลำดับ</th>
             <th scope="col" className="py-3 px-6">รหัสประจำตัว</th>
@@ -72,11 +72,11 @@ function Professertable() {
             <th scope="col" className="py-3 px-6">การกระทำ</th>
           </tr>
         </thead>
-        {teacherlist.map((_, i) => (
+        {teacherlist.map((_, index) => (
           <tbody>
             <tr className="   hover:bg-gray-200 bg-white border-b"
             >
-              <td className="py-4 px-6" >{_.userID}</td>
+              <td className="py-4 px-6" >{index + 1}</td>
               <td className="py-4 px-6">{_.teacherID}</td>
               <td className="py-4 px-6">{_.nameTH}</td>
               <td className="py-4 px-6 flex flex-row">
