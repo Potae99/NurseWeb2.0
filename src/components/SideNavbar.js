@@ -40,9 +40,9 @@ function SideNavbar({ session }) {
 
   const _menuItems = {
     "admin": [
-      { id: 1, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/user/admin/userManagement" },
-      { id: 2, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/user/admin/subjectManagement" },
-      { id: 3, label: "ภาคการศึกษา", icon: UsersIcon, link: "/user/admin/semesterManagement" },
+      { id: 1, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/admin/home" },
+      { id: 2, label: "จัดการหลักสูร", icon: ArticleIcon, link: "/admin/course/syllabus/adminsyllabus" },
+      { id: 3, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/admin/course/all" },
       { id: 4, label: "ผลการประเมิน", icon: VideosIcon, link: "/user/admin/semesterManagement" }
     ],
     "teacher": [

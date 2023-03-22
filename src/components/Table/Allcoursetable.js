@@ -52,8 +52,9 @@ useEffect(() => {
     fetchData();
 }, [])
   return (
+    <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
     <table className=" w-full text-sm text-left text-black">
-      <thead className="text-xs text-black uppercase bg-gray-300">
+      <thead className="text-xs text-black uppercase bg-orange-400">
         <tr  >
           <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
           <th scope="col" className="py-3 px-6">ชื่อไทย</th>
@@ -85,7 +86,7 @@ useEffect(() => {
 
 
     </table>
-    
+    </div>
 
   )
 }

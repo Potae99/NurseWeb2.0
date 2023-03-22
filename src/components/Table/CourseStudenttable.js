@@ -3,6 +3,7 @@ import DeleteIcon from '../IconTable/DeleteIcon'
 
 function CourseStudenttable() {
   return (
+    <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
     <table className=" w-full text-sm text-left text-black ">
     <thead className="text-xs text-black uppercase bg-gray-300">
       <tr  >
@@ -29,6 +30,7 @@ function CourseStudenttable() {
         </tr>
       </tbody>
   </table>
+  </div>
   )
 }
 
