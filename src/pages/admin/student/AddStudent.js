@@ -205,7 +205,7 @@ function AddStudent() {
                     <div >
                         <p>วันเกิด</p>
                         <div className="mb-5 flex justify-center ">
-                        <DatePicker
+                        {/* <DatePicker
                         dateFormat="dd/MM/yyyy"
                         className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                          selected={Birthday} 
@@ -214,16 +214,16 @@ function AddStudent() {
                             setBirthday(date);
                         
                         }}
-                             />
-                            {/* <input
+                             /> */}
+                            <input
                                 onChange={(event) => {
-                                    setBirthday((format(new Date(event.target.value), 'dd-MM-yyyy')));
+                                    setBirthday(event.target.value)
                                 }}
                                 type="date"
                                 name="Birthday"
                                 placeholder="วันเกิด"
                                 className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                            /> */}
+                            />
                         </div>
                     </div>
                     <div >
