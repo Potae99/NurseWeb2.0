@@ -29,7 +29,7 @@ function TeacherDetail() {
                         return _.userID !== userID;
                     })
                 )
-                window.location.href = "/";
+                window.location.href = "/admin/home";
 
                 Toast.fire({
                     icon: 'success',

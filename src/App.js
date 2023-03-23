@@ -25,6 +25,7 @@ import SyllabusDetail from './pages/admin/course/syllabus/SyllabusDetail';
 import AddCourse from './pages/admin/course/AddCourse';
 import Allcourse from './pages/admin/course/Allcourse';
 import CourseDetail from './pages/admin/course/CourseDetail';
+import Addscholarship from './pages/admin/Scholarship/Addscholarship';
 
 
 //student
@@ -177,6 +178,12 @@ const router = [
   {
     path: "/admin/course/detail",
     element: <CourseDetail />,
+    level: "admin"
+
+  },
+  {
+    path: "/admin/scholarship/add",
+    element: <Addscholarship />,
     level: "admin"
 
   },

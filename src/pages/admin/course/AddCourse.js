@@ -69,8 +69,7 @@ function AddCourse() {
                                 type="text"
                                 name="categoryID"
                                 placeholder="หมวดหมู่วิชา"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
@@ -84,8 +83,7 @@ function AddCourse() {
                                 type="text"
                                 name="courseNameTH"
                                 placeholder="ชื่อไทย"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
@@ -99,8 +97,7 @@ function AddCourse() {
                                 type="text"
                                 name="courseNameENG"
                                 placeholder="ชื่ออังกฤษ"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
@@ -114,8 +111,7 @@ function AddCourse() {
                                 type="text"
                                 name="detail"
                                 placeholder="รายละเอียดวิชา"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
@@ -129,8 +125,7 @@ function AddCourse() {
                                 type="text"
                                 name="creditStudy"
                                 placeholder="หน่วยกิต"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
@@ -144,8 +139,7 @@ function AddCourse() {
                                 type="text"
                                 name="studyTimeTheory"
                                 placeholder="เวลา"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
@@ -159,8 +153,7 @@ function AddCourse() {
                                 type="text"
                                 name="studyTimePractice"
                                 placeholder="เวลาปฎิบัติ"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
@@ -174,8 +167,7 @@ function AddCourse() {
                                 type="text"
                                 name="studyTimeSelf"
                                 placeholder="เวลาศึกษาด้วยตนเอง"
-                                class="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
