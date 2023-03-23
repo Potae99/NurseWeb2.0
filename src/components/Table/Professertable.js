@@ -21,20 +21,11 @@ function Professertable() {
     }
   })
 
-
-
-
-
-
   const GotoTeacherDetail = (userID) => {
     window.location.href = "/admin/teacher/detail/" + userID;
   }
 
-
-
-
   const fetchData = () => {
-
 
     axios.get(process.env.REACT_APP_API_URL + "/teacher/list")
       .then(res => {
@@ -44,7 +35,6 @@ function Professertable() {
           console.log(res.data)
           console.log("ERROR FOUND WHEN GET DATA FROM API ");
 
-
           return;
         }
         setTeacherList(res.data.data);
@@ -52,18 +42,16 @@ function Professertable() {
       });
   }
 
-
   useEffect(() => {
     fetchData();
   }, [])
-
 
   return (
     <div>
       <Routes>
         <Route path='/admin/teacher/detail/:userID' element={<TeacherDetail />} />
       </Routes>
-      <table className=" w-full text-sm text-left text-black">
+      <table  className=" w-full text-sm text-left text-black">
         <thead className="text-xs text-black uppercase bg-orange-300">
           <tr  >
             <th scope="col" className="py-3 px-6" >ลำดับ</th>
@@ -73,7 +61,7 @@ function Professertable() {
           </tr>
         </thead>
         {teacherlist.map((_, index) => (
-          <tbody>
+          <tbody key={index}>
             <tr className="   hover:bg-gray-200 bg-white border-b"
             >
               <td className="py-4 px-6" >{index + 1}</td>

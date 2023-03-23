@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 // import { format } from 'date-fns';
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
@@ -29,10 +30,16 @@ function AddStudent() {
     const [religion, setreligion] = useState("");
     const [phone, setPhone] = useState("");
     const [studentID, setStudentID] = useState("");
+    const [scholarship_id, setscholarship_id] = useState("");
+    const [yearStartEnroll, setyearStartEnroll] = useState("");
+    const [status, setStatus] = useState("");
 
     const [data, setData] = useState([]);
 
     const [province, setProvince] = useState([]);
+    const { province_id } = useParams();
+    const [amphures, setamphures] = useState([]);
+    const [scholarship, setScholarship] = useState([]);
 
     const fetchData = () => {
         axios.get(process.env.REACT_APP_API_URL + "/location")
@@ -44,11 +51,42 @@ function AddStudent() {
                     console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
-                setProvince(res.data.data.province);
+                setProvince(res.data.data);
 
             }).catch(error => {
                 console.log(error.res);
             });
+
+        axios.get(process.env.REACT_APP_API_URL + "/student/scholarship")
+            .then(res => {
+                console.log(res.data);
+
+                if (res.data.error === true) {
+                    console.log(res.data)
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setScholarship(res.data.data);
+
+            }).catch(error => {
+                console.log(error.res);
+            });
+
+        // axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: province_id } })
+        //     .then(res => {
+        //         console.log(res.data);
+
+        //         if (res.data.error === true) {
+        //             console.log(res.data)
+        //             console.log("ERROR FOUND WHEN GET DATA FROM API");
+        //             return;
+        //         }
+        //         setamphures(res.data.data);
+
+        //     }).catch(error => {
+        //         console.log(error.res);
+        //     });
+        
     }
 
     useEffect(() => {
@@ -80,7 +118,11 @@ function AddStudent() {
             presentAddress: presentAddress,
             religion: religion,
             phone: phone,
-            studentID: studentID
+            studentID: studentID,
+            scholarship_id: scholarship_id,
+            yearStartEnroll: yearStartEnroll,
+            status: status
+
         }).then(() => {
             setData([
                 ...data,
@@ -107,7 +149,11 @@ function AddStudent() {
                     presentAddress: presentAddress,
                     religion: religion,
                     phone: phone,
-                    studentID: studentID
+                    studentID: studentID,
+                    scholarship_id: scholarship_id,
+                    yearStartEnroll: yearStartEnroll,
+                    status: status
+
                 }
             ])
             window.location.href = "/admin/home";
@@ -132,7 +178,58 @@ function AddStudent() {
             <div className='container mx-auto text-black'>
                 <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                     <div >
-                        <p>รหัสนิสิต</p>
+                        <p>ปีที่เริ่มศึกษา</p>
+                        <div className="mb-5 flex justify-center ">
+                            <input
+                                onChange={(event) => {
+                                    setyearStartEnroll(event.target.value)
+                                }}
+                                type="text"
+                                value={yearStartEnroll}
+                                name="yearStartEnroll"
+                                placeholder="ปีที่เริ่มศึกษา"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            />
+                        </div>
+                    </div>
+                    <div >
+                        <p>สถานะ</p>
+                        <div className="mb-5 flex justify-center ">
+                            <select
+                                onChange={(event) => {
+                                    setStatus(event.target.value)
+                                }}
+                                type="text"
+                                value={status}
+                                name="status"
+                                placeholder="สถานะ"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            >
+                                <option value={"กำลังศึกษา"}>กำลังศึกษา</option>
+                                <option value={"จบการศึกษา"}>จบการศึกษา</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div >
+                        <p>ประเภททุนการศึกษา</p>
+                        <div className="mb-5 flex justify-center ">
+                            <select
+                                onChange={(event) => {
+                                    setscholarship_id(event.target.value)
+                                }}
+                                type="text"
+                                value={scholarship_id}
+                                name="scholarship_id"
+                                placeholder="ประเภททุนการศึกษา"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            >
+                                {
+                                    scholarship.map((_,index) => (<option key={index} value={scholarship.name}>{_.name}</option>))
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div ><p>รหัสนิสิต</p>                        
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -146,8 +243,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>ชื่อไทย</p>
+                    <div ><p>ชื่อไทย</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -161,8 +257,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>ชื่ออังกฤษ</p>
+                    <div ><p>ชื่ออังกฤษ</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -175,8 +270,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>รหัสประจำตัวประชาชน</p>
+                    <div ><p>รหัสประจำตัวประชาชน</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -189,22 +283,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    {/* <div >
-                        <p>IDnumber_Path</p>
-                        <div className="mb-5 flex justify-center ">
-                            <input
-                                onChange={(event) => {
-                                    setIDnumber_Path(event.target.value)
-                                }}
-                                type="text"
-                                name="IDnumber_Path"
-                                placeholder="IDnumber_Path"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                            />
-                        </div>
-                    </div> */}
-                    <div >
-                        <p>Password</p>
+                    <div ><p>Password</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -217,8 +296,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>วันเกิด</p>
+                    <div ><p>วันเกิด</p>
                         <div className="mb-5 flex justify-center ">
                             {/* <DatePicker
                         dateFormat="dd/MM/yyyy"
@@ -241,8 +319,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>Email</p>
+                    <div ><p>Email</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -255,17 +332,19 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div>
-                        <label>
-                            เพศ
-                            <select value={gender} onChange={(event => { setgender(event.target.value) })} name='เพศ' className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
+                    <div><label>เพศ
+                            <select 
+                            value={gender} 
+                            onChange={(event => { setgender(event.target.value) })} 
+                            name='เพศ' 
+                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            >
                                 <option value={"หญิง"}>หญิง</option>
                                 <option value={"ชาย"}>ชาย</option>
                             </select>
                         </label>
                     </div>
-                    <div >
-                        <p>บ้านเลขที่</p>
+                    <div ><p>บ้านเลขที่</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -278,8 +357,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>หมู่บ้าน</p>
+                    <div ><p>หมู่บ้าน</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -292,8 +370,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>ถนน</p>
+                    <div ><p>ถนน</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -306,8 +383,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>ซอย</p>
+                    <div ><p>ซอย</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -323,26 +399,32 @@ function AddStudent() {
                     <div >
                         <p>จังหวัด</p>
                         <div className="mb-5 flex justify-center ">
-                            <select 
+                            <select
+                            disabled={false}
+                            value={houseadd_province}
                             onChange={(event => { sethouseadd_province(event.target.value) })} 
                             name='จังหวัด' 
-                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                {/* {
-                                    province.map((_,i) => <option>{_.name_th}</option>)
-                                } */}
-                                
+                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            >
+                                {
+                                    province.map((_,index) => (<option key={index} value={province.name_th}>{_.name_th}</option>))
+                                }
                             </select>
                         </div>
                     </div>
                     <div >
                         <p>อำเภอ</p>
                         <div className="mb-5 flex justify-center ">
-                            <select 
-                            value={houseadd_district} 
+                        <select
+                            disabled={false}
+                            value={houseadd_district}
                             onChange={(event => { sethouseadd_district(event.target.value) })} 
                             name='อำเภอ' 
-                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                <option value={houseadd_district}>{houseadd_district}</option>
+                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            >
+                                {
+                                    amphures.map((_,index) => (<option key={index} value={amphures.name_th}>{_.name_th}</option>))
+                                }
                             </select>
                         </div>
                     </div>
@@ -371,8 +453,7 @@ function AddStudent() {
                         </div>
                     </div>
 
-                    <div >
-                        <p>สัญชาติ</p>
+                    <div ><p>สัญชาติ</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -385,8 +466,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>เชื้อชาติ</p>
+                    <div ><p>เชื้อชาติ</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -399,8 +479,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>ศาสนา</p>
+                    <div ><p>ศาสนา</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -427,8 +506,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>IDline</p>
+                    <div ><p>IDline</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -441,8 +519,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>มือถือ</p>
+                    <div ><p>มือถือ</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {

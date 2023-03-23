@@ -25,6 +25,7 @@ import SyllabusDetail from './pages/admin/course/syllabus/SyllabusDetail';
 import AddCourse from './pages/admin/course/AddCourse';
 import Allcourse from './pages/admin/course/Allcourse';
 import CourseDetail from './pages/admin/course/CourseDetail';
+import AddWorkHistory from './pages/admin/workHistory/AddWorkHistory';
 
 
 //student
@@ -91,7 +92,7 @@ const router = [
 
   },
   {
-    path: "/admin/home",
+    path: "/admin/home/*",
     element: <AdminHome />,
     level: "admin"
 
@@ -178,8 +179,12 @@ const router = [
     path: "/admin/course/detail",
     element: <CourseDetail />,
     level: "admin"
-
   },
+  {
+    path: "/admin/student/work/add/:userID/*",
+    element: <AddWorkHistory />,
+    level: "admin"
+  }
 ];
 
 function App() {
@@ -217,7 +222,7 @@ function App() {
             {
               router.map((item, index) => {
                 if(item.level == token.level)
-                return (<Route path={item.path} element={item.element} />);
+                return (<Route key={index} path={item.path} element={item.element} />);
               })
             }
           </Routes>
