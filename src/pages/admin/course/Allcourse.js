@@ -5,7 +5,7 @@ import Allcoursetable from '../../../components/Table/Allcoursetable'
 function Allcourse() {
   return (
    
-    <div className='border bg-gray-200 min-h-screen'>
+    <div className=' bg-white min-h-screen'>
         <h1 className=' text-center text-4xl'>COURSE</h1>
         
         <div className='flex flex-row-reverse'>
