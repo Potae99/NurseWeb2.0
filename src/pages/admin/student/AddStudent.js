@@ -37,7 +37,6 @@ function AddStudent() {
     const [data, setData] = useState([]);
 
     const [province, setProvince] = useState([]);
-    const { province_id } = useParams();
     const [amphures, setamphures] = useState([]);
     const [scholarship, setScholarship] = useState([]);
 
@@ -72,21 +71,6 @@ function AddStudent() {
                 console.log(error.res);
             });
 
-        // axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: province_id } })
-        //     .then(res => {
-        //         console.log(res.data);
-
-        //         if (res.data.error === true) {
-        //             console.log(res.data)
-        //             console.log("ERROR FOUND WHEN GET DATA FROM API");
-        //             return;
-        //         }
-        //         setamphures(res.data.data);
-
-        //     }).catch(error => {
-        //         console.log(error.res);
-        //     });
-        
     }
 
     useEffect(() => {
@@ -164,6 +148,25 @@ function AddStudent() {
         window.location.href = '/admin/home';
     }
 
+    const onchangeProvince = (province_id) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: province_id } })
+            .then(res => {
+                console.log(res.data);
+
+                if (res.data.error === true) {
+                    console.log(res.data)
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setamphures(res.data.data);
+
+            }).catch(error => {
+                console.log(error.res);
+    
+            });
+        console.log(province_id)
+    }
+
     return (
 
         <div className=' bg-white slate-500 min-h-screen'>
@@ -224,12 +227,12 @@ function AddStudent() {
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
                                 {
-                                    scholarship.map((_,index) => (<option key={index} value={scholarship.name}>{_.name}</option>))
+                                    scholarship.map((_, index) => (<option key={index} value={scholarship.name}>{_.name}</option>))
                                 }
                             </select>
                         </div>
                     </div>
-                    <div ><p>รหัสนิสิต</p>                        
+                    <div ><p>รหัสนิสิต</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -333,16 +336,16 @@ function AddStudent() {
                         </div>
                     </div>
                     <div><label>เพศ
-                            <select 
-                            value={gender} 
-                            onChange={(event => { setgender(event.target.value) })} 
-                            name='เพศ' 
+                        <select
+                            value={gender}
+                            onChange={(event => { setgender(event.target.value) })}
+                            name='เพศ'
                             className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                            >
-                                <option value={"หญิง"}>หญิง</option>
-                                <option value={"ชาย"}>ชาย</option>
-                            </select>
-                        </label>
+                        >
+                            <option value={"หญิง"}>หญิง</option>
+                            <option value={"ชาย"}>ชาย</option>
+                        </select>
+                    </label>
                     </div>
                     <div ><p>บ้านเลขที่</p>
                         <div className="mb-5 flex justify-center ">
@@ -400,14 +403,23 @@ function AddStudent() {
                         <p>จังหวัด</p>
                         <div className="mb-5 flex justify-center ">
                             <select
-                            disabled={false}
-                            value={houseadd_province}
-                            onChange={(event => { sethouseadd_province(event.target.value) })} 
-                            name='จังหวัด' 
-                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                // disabled={false}
+                                // value={houseadd_province}
+                                // onChange={(event => { 
+                                //     sethouseadd_province(event.target.value);
+                                    
+                                //     // list select from filter provideID get API
+                                //     // TODO: setChoiceAmmpher(res.data)
+
+                                //     // setamphures();
+                                //     // setTumbon();
+                                //  })}
+                                onChange = { (event) => {onchangeProvince(event.target.value)}}
+                                name='จังหวัด'
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
                                 {
-                                    province.map((_,index) => (<option key={index} value={province.name_th}>{_.name_th}</option>))
+                                    province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
                                 }
                             </select>
                         </div>
@@ -415,15 +427,15 @@ function AddStudent() {
                     <div >
                         <p>อำเภอ</p>
                         <div className="mb-5 flex justify-center ">
-                        <select
-                            disabled={false}
-                            value={houseadd_district}
-                            onChange={(event => { sethouseadd_district(event.target.value) })} 
-                            name='อำเภอ' 
-                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            <select
+                                disabled={false}
+                                value={houseadd_district}
+                                onChange={(event => { sethouseadd_district(event.target.value) })}
+                                name='อำเภอ'
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
                                 {
-                                    amphures.map((_,index) => (<option key={index} value={amphures.name_th}>{_.name_th}</option>))
+                                    amphures.map((_, index) => (<option key={index} value={amphures.name_th}>{_.name_th}</option>))
                                 }
                             </select>
                         </div>
@@ -431,11 +443,11 @@ function AddStudent() {
                     <div >
                         <p>ตำบล</p>
                         <div className="mb-5 flex justify-center ">
-                            <select 
-                            value={houseadd_subDistrict} 
-                            onChange={(event => { sethouseadd_subDistrict(event.target.value) })} 
-                            name='ตำบล' 
-                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
+                            <select
+                                value={houseadd_subDistrict}
+                                onChange={(event => { sethouseadd_subDistrict(event.target.value) })}
+                                name='ตำบล'
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
                                 <option value={houseadd_subDistrict}>{houseadd_subDistrict}</option>
                             </select>
                         </div>
@@ -443,11 +455,11 @@ function AddStudent() {
                     <div >
                         <p>รหัสไปรษณีย์</p>
                         <div className="mb-5 flex justify-center ">
-                            <select 
-                            value={houseadd_postalCode} 
-                            onChange={(event => { sethouseadd_postalCode(event.target.value) })} 
-                            name='รหัสไปรษณีย์' 
-                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
+                            <select
+                                value={houseadd_postalCode}
+                                onChange={(event => { sethouseadd_postalCode(event.target.value) })}
+                                name='รหัสไปรษณีย์'
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
                                 <option value={houseadd_postalCode}>{houseadd_postalCode}</option>
                             </select>
                         </div>

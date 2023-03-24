@@ -69,8 +69,12 @@ function StudentDetail() {
         window.location.href = "/admin/student/edit/" + userID;
     }
 
-    const goTOWorkHistory = (userID) => {
+    const goToAddWorkHistoryList = (userID) => {
         window.location.href = "/admin/student/work/add/" + userID;
+    }
+
+    const goToWorkHistoryList = (userID) => {
+        window.location.href = "/admin/student/work/list/" + userID
     }
 
     useEffect(() => {
@@ -98,6 +102,18 @@ function StudentDetail() {
                     </div>
 
                     <div className='  mr-3'>
+                        <button onClick={() => goToAddWorkHistoryList(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                                <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </span>
+                            <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มประวัติการทำงาน</span>
+                            <span className="relative invisible">Button Text</span>
+                        </button>
+                    </div>
+
+                    <div className='  mr-3'>
                         <button onClick={() => deleteStudent(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
                             <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
                                 <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -105,18 +121,6 @@ function StudentDetail() {
                                 </svg>
                             </span>
                             <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">ลบ</span>
-                            <span className="relative invisible">Button Text</span>
-                        </button>
-                    </div>
-
-                    <div className='  mr-3'>
-                        <button onClick={() => goTOWorkHistory(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
-                                <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </span>
-                            <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มประวัติการทำงาน</span>
                             <span className="relative invisible">Button Text</span>
                         </button>
                     </div>
@@ -129,112 +133,112 @@ function StudentDetail() {
                             <div className=" flex justify-around">
                                 <div className=" ml-7">
                                     {data.nameTH ?
-                                            <>
+                                        <>
                                             <div className=" m-3">ชื่อสกุล : {data.nameTH}</div>
-                                            </> :<></>
+                                        </> : <></>
                                     }
                                     {data.studentID ?
-                                            <>
-                                                <div className=" m-3">รหัสประจำตัว : {data.studentID}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">รหัสประจำตัว : {data.studentID}</div>
+                                        </> : <></>
                                     }
                                     {data.gender ?
-                                            <>
-                                                <div className=" m-3">เพศ : {data.gender}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">เพศ : {data.gender}</div>
+                                        </> : <></>
                                     }
                                     {data.nationality ?
-                                            <>
-                                                <div className=" m-3">สัญชาติ : {data.nationality}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">สัญชาติ : {data.nationality}</div>
+                                        </> : <></>
                                     }
                                     {data.phone ?
-                                            <>
-                                                <div className=" m-3">มือถือ : {data.phone}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">มือถือ : {data.phone}</div>
+                                        </> : <></>
                                     }
                                     {data.email ?
-                                            <>
-                                                <div className=" m-3">Email : {data.email}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">Email : {data.email}</div>
+                                        </> : <></>
                                     }
                                     {data.houseadd_houseNo ?
-                                            <>
-                                                <div className=" m-3">บ้านเลขที่ : {data.houseadd_houseNo}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">บ้านเลขที่ : {data.houseadd_houseNo}</div>
+                                        </> : <></>
                                     }
                                     {data.houseadd_road ?
-                                            <>
-                                                <div className=" m-3">ถนน : {data.houseadd_road}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">ถนน : {data.houseadd_road}</div>
+                                        </> : <></>
                                     }
                                     {data.houseadd_subDistrict ?
-                                            <>
-                                                <div className=" m-3">ตำบล : {data.houseadd_subDistrict}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">ตำบล : {data.houseadd_subDistrict}</div>
+                                        </> : <></>
                                     }
                                     {data.presentAddress ?
-                                            <>
-                                                <div className=" m-3">ที่อยู่ปัจจุบัน : {data.presentAddress}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">ที่อยู่ปัจจุบัน : {data.presentAddress}</div>
+                                        </> : <></>
                                     }
                                 </div>
 
                                 <div className=" mr-7">
                                     {data.nameENG ?
-                                            <>
-                                                <div className=" m-3">ชื่ออังกฤษ : {data.nameENG}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">ชื่ออังกฤษ : {data.nameENG}</div>
+                                        </> : <></>
                                     }
                                     {data.IDnumber ?
-                                            <>
-                                                <div className=" m-3">เลขประจำตัวประชาชน : {data.IDnumber}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">เลขประจำตัวประชาชน : {data.IDnumber}</div>
+                                        </> : <></>
                                     }
                                     {data.ethnicity ?
-                                            <>
-                                                <div className=" m-3">เชื้อชาติ : {data.ethnicity}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">เชื้อชาติ : {data.ethnicity}</div>
+                                        </> : <></>
                                     }
                                     {data.religion ?
-                                            <>
-                                                <div className=" m-3">ศาสนา : {data.religion}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">ศาสนา : {data.religion}</div>
+                                        </> : <></>
                                     }
                                     {data.IDline ?
-                                            <>
-                                                <div className=" m-3">IDline : {data.IDline}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">IDline : {data.IDline}</div>
+                                        </> : <></>
                                     }
                                     {data.Birthday ?
-                                            <>
-                                                <div className=" m-3">วันเกิด : {format(new Date(data.Birthday), 'yyyy-MM-dd')}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">วันเกิด : {format(new Date(data.Birthday), 'yyyy-MM-dd')}</div>
+                                        </> : <></>
                                     }
                                     {data.houseadd_village ?
-                                            <>
-                                                <div className=" m-3">หมู่บ้าน : {data.houseadd_village}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">หมู่บ้าน : {data.houseadd_village}</div>
+                                        </> : <></>
                                     }
                                     {data.houseadd_alley ?
-                                            <>
-                                                <div className=" m-3">ซอย : {data.houseadd_alley}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">ซอย : {data.houseadd_alley}</div>
+                                        </> : <></>
                                     }
                                     {data.houseadd_district ?
-                                            <>
-                                                <div className=" m-3">อำเภอ : {data.houseadd_district}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">อำเภอ : {data.houseadd_district}</div>
+                                        </> : <></>
                                     }
                                     {data.houseadd_postalCode ?
-                                            <>
-                                                <div className=" m-3">รหัสไปรษณีย์ : {data.houseadd_postalCode}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">รหัสไปรษณีย์ : {data.houseadd_postalCode}</div>
+                                        </> : <></>
                                     }
                                     {data.houseadd_province ?
-                                            <>
-                                                <div className=" m-3">จังหวัด : {data.houseadd_province}</div>
-                                            </> :<></>
+                                        <>
+                                            <div className=" m-3">จังหวัด : {data.houseadd_province}</div>
+                                        </> : <></>
                                     }
                                 </div>
                             </div>
@@ -242,6 +246,18 @@ function StudentDetail() {
                     </div>
                 </div>
             </div>
+            <div className='  mr-3 place-items-end grid'>
+                        <button onClick={() => goToWorkHistoryList(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                                <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </span>
+                            <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">ประวัติการทำงาน</span>
+                            <span className="relative invisible">Button Text</span>
+                        </button>
+            </div>
+            
         </div>
     )
 }

@@ -26,6 +26,8 @@ import AddCourse from './pages/admin/course/AddCourse';
 import Allcourse from './pages/admin/course/Allcourse';
 import CourseDetail from './pages/admin/course/CourseDetail';
 import AddWorkHistory from './pages/admin/workHistory/AddWorkHistory';
+import WorkHistoryList from './pages/admin/workHistory/WorkHistoryList';
+import WorkHistoryDetail from './pages/admin/workHistory/WorkHistoryDetail';
 
 
 //student
@@ -48,141 +50,124 @@ import useToken from '../src/components/useToken';
 
 const router = [
 
-  {
-    path: "/Apitest",
+  {path: "/Apitest",
     element: <Apitest />,
     level: "admin"
-
   },
-  {
-    path: "/Apitest2",
+  {path: "/Apitest2",
     element: <Test2 />,
     level: "admin"
 
   },
-
-  {
-    path: "/course/add",
+  {path: "/course/add",
     element: <AddCourse />,
     level: "admin"
 
   },
-  {
-    path: "/course/category/add",
+  {path: "/course/category/add",
     element: <AddCategory />,
     level: "admin"
 
   },
-  {
-    path: "/admin/edit/:userID/*",
+  {path: "/admin/edit/:userID/*",
     element: <EditAdmin />,
     level: "admin"
 
   },
-  {
-    path: "/admin/student/edit/:userID/*",
+  {path: "/admin/student/edit/:userID/*",
     element: <EditStudent />,
     level: "admin"
 
   },
-  {
-    path: "/admin/teacher/edit/:userID/*",
+  {path: "/admin/teacher/edit/:userID/*",
     element: <EditTeacher />,
     level: "admin"
 
   },
-  {
-    path: "/admin/home/*",
+  {path: "/admin/home/*",
     element: <AdminHome />,
     level: "admin"
 
   },
-  {
-    path: "/admin/add/student",
+  {path: "/admin/add/student",
     element: <AddStudent />,
     level: "admin"
 
   },
-  {
-    path: "/admin/add/teacher",
+  {path: "/admin/add/teacher",
     element: <AddTeacher />,
     level: "admin"
 
   },
-  {
-    path: "/admin/add/admin",
+  {path: "/admin/add/admin",
     element: <AddAdmin />,
     level: "admin"
 
   },
-  {
-    path: "/admin/detail/:userID/*",
+  {path: "/admin/detail/:userID/*",
     element: <AdminDetail />,
     level: "admin"
 
   },
-  {
-    path: "/admin/student/detail/:userID/*",
+  {path: "/admin/student/detail/:userID/*",
     element: <StudentDetail />,
     level: "admin"
 
   },
-  {
-    path: "/admin/teacher/detail/:userID/*",
+  {path: "/admin/teacher/detail/:userID/*",
     element: <TeacherDetail />,
     level: "admin"
 
   },
-  {
-    path: "/student/home",
+  {path: "/student/home",
     element: <Studenthome />,
     level: "student"
 
   },
-  {
-    path: "/teacher/home",
+  {path: "/teacher/home",
     element: <Teacherhome />,
     level: "teacher"
 
   },
-  {
-    path: "/admin/course/category/Add",
+  {path: "/admin/course/category/Add",
     element: <AddCategory />,
     level: "student"
 
   },
-  {
-    path: "/admin/course/syllabus/Add",
+  {path: "/admin/course/syllabus/Add",
     element: <AddSyllabus />,
     level: "admin"
 
   },
-  {
-    path: "/admin/course/syllabus/adminsyllabus",
+  {path: "/admin/course/syllabus/adminsyllabus",
     element: <AdminSyllabus />,
     level: "admin"
 
   },
-  {
-    path: "/admin/course/syllabus/detail/:userID/*",
+  {path: "/admin/course/syllabus/detail/:userID/*",
     element: <SyllabusDetail />,
     level: "admin"
 
   },
-  {
-    path: "/admin/course/all",
+  {path: "/admin/course/all",
     element: <Allcourse />,
     level: "admin"
 
   },
-  {
-    path: "/admin/course/detail",
+  {path: "/admin/course/detail",
     element: <CourseDetail />,
     level: "admin"
   },
-  {
-    path: "/admin/student/work/add/:userID/*",
+  {path: "/admin/student/work/add/:userID/*",
     element: <AddWorkHistory />,
+    level: "admin"
+  },
+  {path: "/admin/student/work/list/:userID/*",
+    element: <WorkHistoryList />,
+    level: "admin"
+  },
+  {path: "/admin/student/work/detail/:workHistoryID/*",
+    element: <WorkHistoryDetail />,
     level: "admin"
   }
 ];

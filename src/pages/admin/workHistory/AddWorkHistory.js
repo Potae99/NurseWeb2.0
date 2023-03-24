@@ -60,7 +60,7 @@ function AddWorkHistory() {
                     province: province
                 }
             ])
-            window.location.href = "/admin/student/detail/" + userID;
+            window.location.href = "/admin/student/work/list/" + userID;
         })
     }
 
