@@ -176,7 +176,7 @@ const router = [
 
   },
   {
-    path: "/admin/course/detail",
+    path: "/admin/course/detail/:courseID/*",
     element: <CourseDetail />,
     level: "admin"
 

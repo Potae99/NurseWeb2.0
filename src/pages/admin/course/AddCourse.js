@@ -43,12 +43,12 @@ function AddCourse() {
                    
                 }
             ])
-            window.location.href = "/";
+            window.location.href = "/admin/course/all";
         })
     }
 
     const BacktoCourse = () => {
-        window.location.href = '/';
+        window.location.href = '/admin/course/all';
     }
 
     return (
