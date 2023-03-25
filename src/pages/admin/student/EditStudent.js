@@ -10,7 +10,6 @@ function EditStudent() {
     const [houseadd_subDistrict, sethouseadd_subDistrict] = useState("");
     const [houseadd_road, sethouseadd_road] = useState("");
     const [houseadd_houseNo, sethouseadd_houseNo] = useState("");
-    const [password, setpassword] = useState("");
     const [Birthday, setBirthday] = useState("");
     const [IDline, setIDline] = useState("");
     const [IDnumber, setIDnumber] = useState("");
@@ -40,7 +39,6 @@ function EditStudent() {
             houseadd_subDistrict: houseadd_subDistrict,
             houseadd_road: houseadd_road,
             houseadd_houseNo: houseadd_houseNo,
-            password: password,
             Birthday: Birthday,
             IDline: IDline,
             IDnumber: IDnumber,
@@ -67,7 +65,6 @@ function EditStudent() {
                     houseadd_subDistrict: houseadd_subDistrict,
                     houseadd_road: houseadd_road,
                     houseadd_houseNo: houseadd_houseNo,
-                    password: password,
                     Birthday: Birthday,
                     IDline: IDline,
                     IDnumber: IDnumber,
@@ -107,7 +104,6 @@ function EditStudent() {
                 sethouseadd_subDistrict(res.data.data.houseadd_subDistrict);
                 sethouseadd_road(res.data.data.houseadd_road);
                 sethouseadd_houseNo(res.data.data.houseadd_houseNo);
-                setpassword(res.data.data.password);
                 setBirthday((format(new Date(res.data.data.Birthday), 'dd-MM-yyyy')));
                 setIDline(res.data.data.IDline);
                 setIDnumber(res.data.data.IDnumber);

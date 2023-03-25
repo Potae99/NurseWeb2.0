@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function AddAdmin() {
     const [password, setpassword] = useState("");
@@ -10,6 +11,18 @@ function AddAdmin() {
     const [IDnumber, setIDnumber] = useState("");
 
     const [data, setData] = useState([]);
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
 
     const addAdmin = () => {
 
@@ -30,16 +43,25 @@ function AddAdmin() {
                     IDnumber: IDnumber
                 }
             ])
-            window.location.href = "/";
+            
+            Toast.fire({
+                icon: 'success',
+                title: 'Add admin success'
+            }).then(
+                ()=>{
+                    window.location.href = "/admin/home";
+                }
+            )
+
         })
     }
 
     const BacktoHomeAdmin = () => {
-        window.location.href = '/';
+        window.location.href = '/admin/home';
     }
 
     return (
-        <div className=' bg-gray-100 slate-500 min-h-screen border'>
+        <div className=' bg-white slate-500 min-h-screen '>
             <h1 className=' text-4xl text-center m-3 text-black'>เพิ่มผู้ใช้งาน</h1>
             <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
                 <div className=' flex flex-row'>

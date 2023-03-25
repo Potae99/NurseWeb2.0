@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 // import { format } from 'date-fns';
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
@@ -37,8 +38,22 @@ function AddStudent() {
     const [data, setData] = useState([]);
 
     const [province, setProvince] = useState([]);
-    const [amphures, setamphures] = useState([]);
+    const [amphures, setAmphures] = useState([]);
+    const [tambons, setTambons] = useState([]);
+    // const [zip_code, setZip_code] = useState('');
     const [scholarship, setScholarship] = useState([]);
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
 
     const fetchData = () => {
         axios.get(process.env.REACT_APP_API_URL + "/location")
@@ -141,6 +156,11 @@ function AddStudent() {
                 }
             ])
             window.location.href = "/admin/home";
+            
+            Toast.fire({
+                icon: 'success',
+                title: 'Add student success'
+            })
         })
     }
 
@@ -158,14 +178,52 @@ function AddStudent() {
                     console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
-                setamphures(res.data.data);
+                setAmphures(res.data.data);
 
             }).catch(error => {
                 console.log(error.res);
-    
+
             });
         console.log(province_id)
     }
+
+    const onchangeAmphures = (amphure_id) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/tambons", { params: { amphure_id: amphure_id } })
+            .then(res => {
+                console.log(res.data);
+
+                if (res.data.error === true) {
+                    console.log(res.data)
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setTambons(res.data.data);
+
+            }).catch(error => {
+                console.log(error.res);
+
+            });
+        console.log(amphure_id)
+    }
+
+    // const getZipCode = (tambon_id) => {
+    //     axios.get(process.env.REACT_APP_API_URL + "/location/tambons", { params: { amphure_id: amphure_id } })
+    //         .then(res => {
+    //             console.log(res.data);
+
+    //             if (res.data.error === true) {
+    //                 console.log(res.data)
+    //                 console.log("ERROR FOUND WHEN GET DATA FROM API");
+    //                 return;
+    //             }
+    //             setTambons(res.data.data);
+
+    //         }).catch(error => {
+    //             console.log(error.res);
+
+    //         });
+    //     console.log(tambon_id)
+    // }
 
     return (
 
@@ -180,8 +238,7 @@ function AddStudent() {
 
             <div className='container mx-auto text-black'>
                 <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
-                    <div >
-                        <p>ปีที่เริ่มศึกษา</p>
+                    <div ><p>ปีที่เริ่มศึกษา</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
@@ -195,8 +252,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>สถานะ</p>
+                    <div ><p>สถานะ</p>
                         <div className="mb-5 flex justify-center ">
                             <select
                                 onChange={(event) => {
@@ -213,8 +269,7 @@ function AddStudent() {
                             </select>
                         </div>
                     </div>
-                    <div >
-                        <p>ประเภททุนการศึกษา</p>
+                    <div ><p>ประเภททุนการศึกษา</p>
                         <div className="mb-5 flex justify-center ">
                             <select
                                 onChange={(event) => {
@@ -407,14 +462,14 @@ function AddStudent() {
                                 // value={houseadd_province}
                                 // onChange={(event => { 
                                 //     sethouseadd_province(event.target.value);
-                                    
+
                                 //     // list select from filter provideID get API
                                 //     // TODO: setChoiceAmmpher(res.data)
 
-                                //     // setamphures();
+                                //     // setAmphures();
                                 //     // setTumbon();
                                 //  })}
-                                onChange = { (event) => {onchangeProvince(event.target.value)}}
+                                onChange={(event) => { onchangeProvince(event.target.value) }}
                                 name='จังหวัด'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
@@ -428,14 +483,15 @@ function AddStudent() {
                         <p>อำเภอ</p>
                         <div className="mb-5 flex justify-center ">
                             <select
-                                disabled={false}
-                                value={houseadd_district}
-                                onChange={(event => { sethouseadd_district(event.target.value) })}
+                                // disabled={false}
+                                // value={houseadd_district}
+                                // onChange={(event => { sethouseadd_district(event.target.value) })}
+                                onChange={(event) => onchangeAmphures(event.target.value)}
                                 name='อำเภอ'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
                                 {
-                                    amphures.map((_, index) => (<option key={index} value={amphures.name_th}>{_.name_th}</option>))
+                                    amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
                                 }
                             </select>
                         </div>
@@ -444,24 +500,26 @@ function AddStudent() {
                         <p>ตำบล</p>
                         <div className="mb-5 flex justify-center ">
                             <select
-                                value={houseadd_subDistrict}
-                                onChange={(event => { sethouseadd_subDistrict(event.target.value) })}
+                                // value={houseadd_subDistrict}
+                                // onChange={(event => { sethouseadd_subDistrict(event.target.value) })}
+                                // onChange={(event) => getZipCode(event.target.value)}
                                 name='ตำบล'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                <option value={houseadd_subDistrict}>{houseadd_subDistrict}</option>
+                                {
+                                    tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
+                                }
                             </select>
                         </div>
                     </div>
                     <div >
                         <p>รหัสไปรษณีย์</p>
                         <div className="mb-5 flex justify-center ">
-                            <select
+                            <input
                                 value={houseadd_postalCode}
                                 onChange={(event => { sethouseadd_postalCode(event.target.value) })}
                                 name='รหัสไปรษณีย์'
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                <option value={houseadd_postalCode}>{houseadd_postalCode}</option>
-                            </select>
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            />
                         </div>
                     </div>
 

@@ -15,7 +15,7 @@ export default function Login({ setToken }) {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 1500,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -55,23 +55,37 @@ export default function Login({ setToken }) {
           throw new Error("login fail")
         }
         if (level == "admin"){
-          window.location.href = "/admin/home"
+          Toast.fire({
+            icon: 'success',
+            title: res.data.message
+          })
+          .then(() => {window.location.href = "/admin/home"})
+          
         }
         else if (level == "teacher"){
-          window.location.href = "/teacher/home"
+          Toast.fire({
+            icon: 'success',
+            title: res.data.message
+          })
+          .then(() => {window.location.href = "/teacher/home"})
+          
         }
         else if (level == "student"){
+          Toast.fire({
+            icon: 'success',
+            title: res.data.message
+          })
+          .then(() => {window.location.href = "/student/home";})
           
-          window.location.href = "/student/home";
         }
         else {
           window.location.href = "/error"
         }
 
-        Toast.fire({
-          icon: 'success',
-          title: res.data.message
-        });
+        // Toast.fire({
+        //   icon: 'success',
+        //   title: res.data.message
+        // });
 
         setToken(res.data.data);
       }).catch(error => {
