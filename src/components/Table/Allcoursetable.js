@@ -60,7 +60,7 @@ useEffect(() => {
   return (
     <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
     <table className=" w-full text-sm text-left text-black">
-      <thead className="text-xs text-black uppercase bg-orange-400">
+      <thead className="text-sm text-black uppercase bg-orange-300">
         <tr  >
           <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
           <th scope="col" className="py-3 px-6">ชื่อไทย</th>
@@ -71,7 +71,7 @@ useEffect(() => {
       </thead>
       {data.map((_,i) => (
         <tbody>
-          <tr className="  hover:bg-gray-200 bg-white border-b"
+          <tr className="  hover:bg-gray-200 bg-white border-black"
           >
             <td className="py-4 px-6" >{i+1}</td>
             <td className="py-4 px-6">{_.courseNameTH}</td>

@@ -28,8 +28,10 @@ import CourseDetail from './pages/admin/course/CourseDetail';
 import Addscholarship from './pages/admin/Scholarship/Addscholarship';
 
 
+
 //student
 import Studenthome from './pages/student/Studenthome';
+import Studenteval from './pages/student/Studenteval';
 
 //teacher
 import Teacherhome from './pages/teacher/Teacherhome';
@@ -187,6 +189,13 @@ const router = [
     level: "admin"
 
   },
+  {
+    path: "/student/eval",
+    element: <Studenteval />,
+    level: "admin"
+
+  },
+
 ];
 
 function App() {

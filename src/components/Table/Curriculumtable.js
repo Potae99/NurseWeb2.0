@@ -52,7 +52,7 @@ useEffect(() => {
   return (
     <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
     <table className=" w-full text-sm text-left text-black">
-      <thead className="text-xs text-black uppercase bg-orange-400">
+      <thead className="text-sm text-black uppercase bg-orange-300">
         <tr  >
           <th scope="col" className="py-3 px-6" >ปีที่สร้าง</th>
           <th scope="col" className="py-3 px-6">ชื่อ</th>

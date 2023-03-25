@@ -15,7 +15,7 @@ export default function Login({ setToken }) {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 4000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -94,7 +94,7 @@ export default function Login({ setToken }) {
         </> :
         <>
           {/*container*/}
-          < div className=" bg-gray-300 h-screen items-center p-4 flex justify-center">
+          < div className=" bg-gray-400 h-screen items-center p-4 flex justify-center">
             {/*login card*/}
             <div className=" bg-current  flex flex-col items-center max-w-screen-lg overflow-y-hidden rounded-lg shadow-lg bg-orange-400 w-full md:flex-row">
               {/*logo*/}
@@ -210,7 +210,7 @@ export default function Login({ setToken }) {
                     </div>
                     <div className="relative">
                       <input
-                        className="border border-gray-400 outline-none placeholder-gray-400 pl-9 pr-4 py-1 rounded-md transition focus:ring-2 focus:ring-orange-300"
+                        className="border border-gray-400 outline-none placeholder-gray-400 pl-9 pr-4 py-1 rounded-md transition focus:ring-2 focus:ring-orange-400"
                         placeholder="รหัสผ่าน..."
                         type="password"
                         id="password"
