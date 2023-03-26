@@ -5,6 +5,16 @@ import Swal from 'sweetalert2';
 
 function Teacherhome() {
 
+    const getToken = () => {
+        // NOTE: sessionStorage store session in ONLY tabs in chrome
+        // can replace sessionStorage -> localStorage to save to local
+        const tokenString = localStorage.getItem('token');
+        const userToken = JSON.parse(tokenString);
+        return userToken
+    };
+
+    const [token, setToken] = useState(getToken());
+
     const [data, setData] = useState([]);
 
     const Toast = Swal.mixin({
@@ -22,7 +32,7 @@ function Teacherhome() {
 
     const fetchData = () => {
 
-        axios.get(process.env.REACT_APP_API_URL + "/teacher", { params: { userID: userID } })
+        axios.get(process.env.REACT_APP_API_URL + "/teacher", { params: { userID: token.userID } })
             .then(res => {
                 console.log(res.data);
 

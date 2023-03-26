@@ -16,7 +16,7 @@ function StudentDetail() {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000,
+        timer: 700,
         timerProgressBar: true,
         didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -32,12 +32,12 @@ function StudentDetail() {
                         return _.userID !== userID;
                     })
                 )
-                window.location.href = "/admin/home";
-
+                
                 Toast.fire({
                     icon: 'success',
                     title: 'Delete data success'
                 })
+                .then(() => {window.location.href = "/admin/home";})
 
 
             }).catch(function (error) {
@@ -128,10 +128,33 @@ function StudentDetail() {
 
                 <div>
                     <div className=' text-3xl text-center mb-5'>นิสิต : {data.nameTH}</div>
+                    {
+                        data.status == 1 ?
+                        <>
+                        <div className=' grid place-items-center'>
+                        <div className=' flex'>
+                            <p className=' text-xl text-center mb-5'>สถานะ : </p>
+                            <p className=' text-green-500 text-xl text-center mb-5 ml-5'>กำลังศึกษา</p>
+                        </div>
+                        </div>
+                        </>:<></>
+                    }
+                    {
+                        data.status == 0 ?
+                        <>
+                        <div className=' grid place-items-center'>
+                        <div className=' flex'>
+                            <p className=' text-xl text-center mb-5'>สถานะ : </p>
+                            <p className=' text-red-500 text-xl text-center mb-5 ml-5'>จบศึกษา</p>
+                        </div>
+                        </div>
+                        </>:<></>
+                    }
                     <div className=" grid grid-cols-1 place-items-center">
-                        <div className=" block bg-gray-200 w-auto p-auto rounded-2xl">
+                        <div className=" block bg-gray-100 w-11/12 p-auto rounded-2xl">
                             <div className=" flex justify-around">
                                 <div className=" ml-7">
+                                    
                                     {data.nameTH ?
                                         <>
                                             <div className=" m-3">ชื่อสกุล : {data.nameTH}</div>
@@ -212,7 +235,7 @@ function StudentDetail() {
                                     }
                                     {data.Birthday ?
                                         <>
-                                            <div className=" m-3">วันเกิด : {format(new Date(data.Birthday), 'yyyy-MM-dd')}</div>
+                                            <div className=" m-3">วันเกิด : {format(new Date(data.Birthday), 'dd/MM/yyyy')}</div>
                                         </> : <></>
                                     }
                                     {data.houseadd_village ?
@@ -238,6 +261,11 @@ function StudentDetail() {
                                     {data.houseadd_province ?
                                         <>
                                             <div className=" m-3">จังหวัด : {data.houseadd_province}</div>
+                                        </> : <></>
+                                    }
+                                    {data.yearStartEnroll ?
+                                        <>
+                                            <div className=" m-3">ปีที่เริ่มศึกษา : {data.yearStartEnroll}</div>
                                         </> : <></>
                                     }
                                 </div>

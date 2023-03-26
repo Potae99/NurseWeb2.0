@@ -13,7 +13,7 @@ function TeacherDetail() {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 1500,
+        timer: 700,
         timerProgressBar: true,
         didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)

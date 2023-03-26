@@ -143,8 +143,8 @@ function AddStudent() {
             setData([
                 ...data,
                 {
-                    houseadd_province: houseadd_province,
-                    houseadd_subDistrict: houseadd_subDistrict,
+                    houseadd_province: province,
+                    houseadd_subDistrict: tambons,
                     houseadd_road: houseadd_road,
                     houseadd_houseNo: houseadd_houseNo,
                     IDnumber_Path: IDnumber_Path,
@@ -156,7 +156,7 @@ function AddStudent() {
                     ethnicity: ethnicity,
                     gender: gender,
                     houseadd_alley: houseadd_alley,
-                    houseadd_district: houseadd_district,
+                    houseadd_district: amphures,
                     houseadd_postalCode: houseadd_postalCode,
                     houseadd_village: houseadd_village,
                     nameENG: nameENG,
@@ -172,13 +172,14 @@ function AddStudent() {
 
                 }
             ])
-            window.location.href = "/admin/home";
             
             Toast.fire({
                 icon: 'success',
                 title: 'Add student success'
             })
+            .then(() => {window.location.href = "/admin/home";})
         })
+        console.log(data)
     }
 
     const BacktoHomeAdmin = () => {
@@ -228,10 +229,15 @@ function AddStudent() {
             return event.target.value == item.tambon_id
         })
         console.log(filterTambons[0].name_th)
-        console.log(filterTambons[0].zip_code)
-
+        // console.log(filterTambons[0].zip_code)
+        
+        sethouseadd_postalCode(filterTambons[0].zip_code)
         setZipCode( filterTambons[0].zip_code)
+        
+        sethouseadd_subDistrict(filterTambons[0].name_th)
+        
     }
+    console.log(houseadd_postalCode)
 
     return (
 
@@ -265,6 +271,7 @@ function AddStudent() {
                             <select
                                 onChange={(event) => {
                                     setStatus(event.target.value)
+                                    console.log(event.target.value)
                                 }}
                                 type="text"
                                 value={status}
@@ -272,27 +279,32 @@ function AddStudent() {
                                 placeholder="สถานะ"
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
-                                <option selected ></option>
-                                <option value={"กำลังศึกษา"}>กำลังศึกษา</option>
-                                <option value={"จบการศึกษา"}>จบการศึกษา</option>
+                                <option selected value={""} ></option>
+                                <option value={1}>กำลังศึกษา</option>
+                                <option value={0}>จบการศึกษา</option>
                             </select>
                         </div>
                     </div>
                     <div ><p>ประเภททุนการศึกษา</p>
                         <div className="mb-5 flex justify-center ">
                             <select
+                                value={scholarship_id}
                                 onChange={(event) => {
+                                    // const filterProvince = scholarship.filter(item => {
+                                    //     return event.target.value == item.scholarship_id
+                                    // })
                                     setscholarship_id(event.target.value)
+                                    console.log(event.target.value)
                                 }}
                                 type="text"
-                                value={scholarship_id}
+                                
                                 name="scholarship_id"
                                 placeholder="ประเภททุนการศึกษา"
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
-                                <option selected></option>
+                                <option selected value={""}></option>
                                 {
-                                    scholarship.map((_, index) => (<option key={index} value={scholarship.name}>{_.name}</option>))
+                                    scholarship.map((_, index) => (<option key={index} value={_.scholarship_id}>{_.name}</option>))
                                 }
                             </select>
                         </div>
@@ -403,14 +415,17 @@ function AddStudent() {
                     <div><label>เพศ
                         <select
                             value={gender}
-                            onChange={(event => { setgender(event.target.value) })}
+                            onChange={(event => { 
+                                setgender(event.target.value)
+                                console.log(event.target.value) 
+                            })}
                             name='gender'
                             className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                         >
-                            <option selected></option>
+                            <option selected value={""}></option>
                             <option value={"หญิง"}>หญิง</option>
                             <option value={"ชาย"}>ชาย</option>
-                            <option value={"ชาย"}>ไม่ระบุ</option>
+                            <option value={"ไม่ระบุ"}>ไม่ระบุ</option>
                         </select>
                     </label>
                     </div>
@@ -481,11 +496,19 @@ function AddStudent() {
                                 //     // setAmphures();
                                 //     // setTumbon();
                                 //  })}
-                                onChange={(event) => { onchangeProvince(event) }}
+                                onChange={(event) => { 
+                                    const filterProvince = province.filter(item => {
+                                        return event.target.value == item.province_id
+                                    })
+                                    sethouseadd_province(filterProvince[0].name_th)
+                                    onchangeProvince(event)
+                                    console.log(filterProvince[0].name_th)
+                                }}
+                                    
                                 name='province'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
-                                <option selected></option>
+                                <option selected value={""}></option>
                                 {
                                     province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
                                 }
@@ -499,11 +522,18 @@ function AddStudent() {
                                 // disabled={false}
                                 // value={houseadd_district}
                                 // onChange={(event => { sethouseadd_district(event.target.value) })}
-                                onChange={(event) => onchangeAmphures(event)}
+                                onChange={(event) => {
+                                    const filterAmphures = amphures.filter(item => {
+                                        return event.target.value == item.amphure_id
+                                    })
+                                    sethouseadd_district(filterAmphures[0].name_th)
+                                    onchangeAmphures(event)
+                                    console.log(filterAmphures[0].name_th)
+                                }}
                                 name='amphures'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
-                                <option selected></option>
+                                <option selected value={""}></option>
                                 {
                                     amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
                                 }
@@ -516,10 +546,15 @@ function AddStudent() {
                             <select
                                 // value={houseadd_subDistrict}
                                 // onChange={(event => { sethouseadd_subDistrict(event.target.value) })}
-                                onChange={(event) => onchangeTambons(event)}
+                                onChange={(event) => {
+                                    
+                                    // sethouseadd_subDistrict(event.target.value)
+                                    onchangeTambons(event)
+                                    
+                                }}
                                 name='tambons'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                <option selected></option>
+                                <option selected value={""}></option>
                                 {
                                     tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
                                 }
@@ -531,7 +566,7 @@ function AddStudent() {
                         <div className="mb-5 flex justify-center ">
                             <input
                                 value={zipCode}
-                                onChange={(event => { sethouseadd_postalCode(event.target.value) })}
+                                
                                 name='zipCode'
                                 className="w-full rounded-md border border-while 
                                 bg-white py-3 px-6 text-base font-medium text-black 

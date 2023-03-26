@@ -5,7 +5,15 @@ import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 
 function Studenthome() {
-    console.log(localStorage.getItem('token'));
+    const getToken = () => {
+        // NOTE: sessionStorage store session in ONLY tabs in chrome
+        // can replace sessionStorage -> localStorage to save to local
+        const tokenString = localStorage.getItem('token');
+        const userToken = JSON.parse(tokenString);
+        return userToken
+    };
+
+    const [token, setToken] = useState(getToken());
 
     const [data, setData] = useState([]);
     const [studentlist, setStudentList] = useState([]);
@@ -26,7 +34,7 @@ function Studenthome() {
     const fetchData = () => {
 
 
-        axios.post(process.env.REACT_APP_API_URL + "/student/detail", {userID: userID})
+        axios.post(process.env.REACT_APP_API_URL + "/student/detail", {userID: token.userID})
             .then(res => {
                 console.log(res.data);
 
