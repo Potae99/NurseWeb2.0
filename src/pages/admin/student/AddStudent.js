@@ -40,7 +40,7 @@ function AddStudent() {
     const [province, setProvince] = useState([]);
     const [amphures, setAmphures] = useState([]);
     const [tambons, setTambons] = useState([]);
-    // const [zip_code, setZip_code] = useState('');
+    const [zipCode, setZipCode] = useState('');
     const [scholarship, setScholarship] = useState([]);
 
     const Toast = Swal.mixin({
@@ -88,9 +88,26 @@ function AddStudent() {
 
     }
 
+    // selectlist_amphures = []
+    useEffect(() => {
+        // fetchData();
+        if(province && province == ""){
+            // load selectlist_amphures of amphures
+        }
+    }, [province])
+
+    useEffect(() => {
+        // fetchData();
+        if(amphures && amphures == ""){
+            // load selectlist_tambon of tambon
+        }
+    }, [amphures])
+
+
     useEffect(() => {
         fetchData();
     }, [])
+
 
     const addStudent = () => {
 
@@ -168,8 +185,8 @@ function AddStudent() {
         window.location.href = '/admin/home';
     }
 
-    const onchangeProvince = (province_id) => {
-        axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: province_id } })
+    const onchangeProvince = (event) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: event.target.value } })
             .then(res => {
                 console.log(res.data);
 
@@ -184,11 +201,11 @@ function AddStudent() {
                 console.log(error.res);
 
             });
-        console.log(province_id)
+        console.log(event.target.value)
     }
 
-    const onchangeAmphures = (amphure_id) => {
-        axios.get(process.env.REACT_APP_API_URL + "/location/tambons", { params: { amphure_id: amphure_id } })
+    const onchangeAmphures = (event) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/tambons", { params: { amphure_id: event.target.value } })
             .then(res => {
                 console.log(res.data);
 
@@ -203,27 +220,18 @@ function AddStudent() {
                 console.log(error.res);
 
             });
-        console.log(amphure_id)
+        console.log(event.target.value)
     }
 
-    // const getZipCode = (tambon_id) => {
-    //     axios.get(process.env.REACT_APP_API_URL + "/location/tambons", { params: { amphure_id: amphure_id } })
-    //         .then(res => {
-    //             console.log(res.data);
+    const onchangeTambons = (event) => {
+        const filterTambons = tambons.filter(item => {
+            return event.target.value == item.tambon_id
+        })
+        console.log(filterTambons[0].name_th)
+        console.log(filterTambons[0].zip_code)
 
-    //             if (res.data.error === true) {
-    //                 console.log(res.data)
-    //                 console.log("ERROR FOUND WHEN GET DATA FROM API");
-    //                 return;
-    //             }
-    //             setTambons(res.data.data);
-
-    //         }).catch(error => {
-    //             console.log(error.res);
-
-    //         });
-    //     console.log(tambon_id)
-    // }
+        setZipCode( filterTambons[0].zip_code)
+    }
 
     return (
 
@@ -264,6 +272,7 @@ function AddStudent() {
                                 placeholder="สถานะ"
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
+                                <option selected ></option>
                                 <option value={"กำลังศึกษา"}>กำลังศึกษา</option>
                                 <option value={"จบการศึกษา"}>จบการศึกษา</option>
                             </select>
@@ -281,6 +290,7 @@ function AddStudent() {
                                 placeholder="ประเภททุนการศึกษา"
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
+                                <option selected></option>
                                 {
                                     scholarship.map((_, index) => (<option key={index} value={scholarship.name}>{_.name}</option>))
                                 }
@@ -394,11 +404,13 @@ function AddStudent() {
                         <select
                             value={gender}
                             onChange={(event => { setgender(event.target.value) })}
-                            name='เพศ'
+                            name='gender'
                             className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                         >
+                            <option selected></option>
                             <option value={"หญิง"}>หญิง</option>
                             <option value={"ชาย"}>ชาย</option>
+                            <option value={"ชาย"}>ไม่ระบุ</option>
                         </select>
                     </label>
                     </div>
@@ -469,10 +481,11 @@ function AddStudent() {
                                 //     // setAmphures();
                                 //     // setTumbon();
                                 //  })}
-                                onChange={(event) => { onchangeProvince(event.target.value) }}
-                                name='จังหวัด'
+                                onChange={(event) => { onchangeProvince(event) }}
+                                name='province'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
+                                <option selected></option>
                                 {
                                     province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
                                 }
@@ -486,10 +499,11 @@ function AddStudent() {
                                 // disabled={false}
                                 // value={houseadd_district}
                                 // onChange={(event => { sethouseadd_district(event.target.value) })}
-                                onChange={(event) => onchangeAmphures(event.target.value)}
-                                name='อำเภอ'
+                                onChange={(event) => onchangeAmphures(event)}
+                                name='amphures'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
+                                <option selected></option>
                                 {
                                     amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
                                 }
@@ -502,9 +516,10 @@ function AddStudent() {
                             <select
                                 // value={houseadd_subDistrict}
                                 // onChange={(event => { sethouseadd_subDistrict(event.target.value) })}
-                                // onChange={(event) => getZipCode(event.target.value)}
-                                name='ตำบล'
+                                onChange={(event) => onchangeTambons(event)}
+                                name='tambons'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
+                                <option selected></option>
                                 {
                                     tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
                                 }
@@ -515,11 +530,14 @@ function AddStudent() {
                         <p>รหัสไปรษณีย์</p>
                         <div className="mb-5 flex justify-center ">
                             <input
-                                value={houseadd_postalCode}
+                                value={zipCode}
                                 onChange={(event => { sethouseadd_postalCode(event.target.value) })}
-                                name='รหัสไปรษณีย์'
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                name='zipCode'
+                                className="w-full rounded-md border border-while 
+                                bg-white py-3 px-6 text-base font-medium text-black 
+                                outline-none focus:border-[#423bce] focus:shadow-md"
                             />
+                            
                         </div>
                     </div>
 
@@ -562,8 +580,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>ที่อยู่ปัจจุบัน</p>
+                    <div ><p>ที่อยู่ปัจจุบัน</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {

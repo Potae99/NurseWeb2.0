@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 
 function Studenthome() {
+    console.log(localStorage.getItem('token'));
 
     const [data, setData] = useState([]);
     const [studentlist, setStudentList] = useState([]);

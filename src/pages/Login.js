@@ -15,7 +15,7 @@ export default function Login({ setToken }) {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 1500,
+    timer: 700,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -76,7 +76,6 @@ export default function Login({ setToken }) {
             title: res.data.message
           })
           .then(() => {window.location.href = "/student/home";})
-          
         }
         else {
           window.location.href = "/error"
