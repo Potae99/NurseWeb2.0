@@ -27,10 +27,17 @@ function EditStudent() {
     const [religion, setreligion] = useState("");
     const [phone, setPhone] = useState("");
     const [studentID, setStudentID] = useState("");
+    const [scholarship_name, setScholarship_name] = useState("");
+    const [yearStartEnroll, setyearStartEnroll] = useState("");
+    const [status, setStatus] = useState("");
 
     const [data, setData] = useState("");
 
     const { userID } = useParams();
+
+    const [province, setProvince] = useState([]);
+    const [amphures, setAmPhures] = useState([]);
+    const [tambons, setTambons] = useState([]);
 
     const editStudent = () => {
         axios.put(process.env.REACT_APP_API_URL + "/student", {
@@ -55,14 +62,18 @@ function EditStudent() {
             presentAddress: presentAddress,
             religion: religion,
             phone: phone,
-            studentID: studentID
+            studentID: studentID,
+            scholarship_name: scholarship_name,
+            yearStartEnroll: yearStartEnroll,
+            status: status
+
         }).then(() => {
             setData([
                 ...data,
                 {
                     userID: userID,
-                    houseadd_province: houseadd_province,
-                    houseadd_subDistrict: houseadd_subDistrict,
+                    houseadd_province: province,
+                    houseadd_subDistrict: tambons,
                     houseadd_road: houseadd_road,
                     houseadd_houseNo: houseadd_houseNo,
                     Birthday: Birthday,
@@ -81,7 +92,10 @@ function EditStudent() {
                     presentAddress: presentAddress,
                     religion: religion,
                     phone: phone,
-                    studentID: studentID
+                    studentID: studentID,
+                    scholarship_name: scholarship_name,
+                    yearStartEnroll: yearStartEnroll,
+                    status: status
                 }
             ])
             window.location.href = "/admin/student/detail/" + userID;
@@ -104,7 +118,7 @@ function EditStudent() {
                 sethouseadd_subDistrict(res.data.data.houseadd_subDistrict);
                 sethouseadd_road(res.data.data.houseadd_road);
                 sethouseadd_houseNo(res.data.data.houseadd_houseNo);
-                setBirthday((format(new Date(res.data.data.Birthday), 'dd-MM-yyyy')));
+                setBirthday((format(new Date(res.data.data.Birthday), 'yyyy-MM-dd')));
                 setIDline(res.data.data.IDline);
                 setIDnumber(res.data.data.IDnumber);
                 setemail(res.data.data.email);
@@ -119,8 +133,26 @@ function EditStudent() {
                 setreligion(res.data.data.religion);
                 setPhone(res.data.data.phone);
                 setStudentID(res.data.data.studentID);
+                setScholarship_name(res.data.data.scholarship_name);
+                setStatus(res.data.data.status);
+                setyearStartEnroll(res.data.data.yearStartEnroll);
             }).catch(error => {
                 console.log(error.res);
+            });
+
+        axios.get(process.env.REACT_APP_API_URL + "/location")
+            .then(res => {
+                console.log(res.data)
+
+                if (res.data.error === true) {
+                    console.log(res.data);
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setProvince(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res)
             });
     }
 
@@ -131,6 +163,23 @@ function EditStudent() {
     useEffect(() => {
         fetchData();
     }, [])
+
+    const onchangeProvince = (event) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: event.target.value } })
+            .then(res => {
+                console.log(res.data);
+
+                if (res.data.error === true) {
+                    console.log(res.data);
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setAmPhures(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res);
+            });
+    }
 
     return (
         <div>
@@ -143,8 +192,55 @@ function EditStudent() {
 
                 <div className='container mx-auto'>
                     <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
-                        <div >
-                            <p>รหัสนิสิต</p>
+                        <div ><p>ปีที่เริ่มศึกษา</p>
+                            <div className="mb-5 flex justify-center ">
+                                <input
+                                    value={yearStartEnroll}
+                                    onChange={(event) => {
+                                        setyearStartEnroll(event.target.value)
+                                    }}
+                                    type="text"
+                                    name="yearStartEnroll"
+                                    placeholder='ปีที่เริ่มศึกษา'
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
+                            </div>
+                        </div>
+                        {/* <div >
+                            <p>สถานะ</p>
+                            <div className="mb-5 flex justify-center ">
+                                <input
+                                    value={status}
+                                    onChange={(event) => {
+                                        setStatus(event.target.value)
+                                    }}
+                                    type="text"
+                                    name="status"
+                                    placeholder='สถานะ'
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                />
+                            </div>
+                        </div> */}
+                        <div ><p>สถานะ</p>
+                            <div className="mb-5 flex justify-center ">
+                                <select
+                                    onChange={(event) => {
+                                        setStatus(event.target.value)
+                                        // console.log(event.target.value)
+                                    }}
+                                    type="text"
+                                    value={status}
+                                    name="status"
+                                    placeholder="สถานะ"
+                                    className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                >
+                                    <option selected value={""} ></option>
+                                    <option value={1}>กำลังศึกษา</option>
+                                    <option value={0}>จบการศึกษา</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ><p>รหัสนิสิต</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={studentID}
@@ -154,13 +250,11 @@ function EditStudent() {
                                     type="text"
                                     name="studentID"
                                     placeholder='รหัสนิสิต'
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
-                        <div >
-                            <p>ชื่อไทย</p>
+                        <div ><p>ชื่อไทย</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={nameTH}
@@ -170,13 +264,11 @@ function EditStudent() {
                                     type="text"
                                     name="nameTH"
                                     placeholder='ชื่อไทย'
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
-                        <div >
-                            <p>ชื่ออังกฤษ</p>
+                        <div ><p>ชื่ออังกฤษ</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={nameENG}
@@ -186,13 +278,11 @@ function EditStudent() {
                                     type="text"
                                     name="nameENG"
                                     placeholder="ชื่ออังกฤษ"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
-                        <div >
-                            <p>รหัสประจำตัวประชาชน</p>
+                        <div ><p>รหัสประจำตัวประชาชน</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={IDnumber}
@@ -202,13 +292,11 @@ function EditStudent() {
                                     type="text"
                                     name="IDnumber"
                                     placeholder="รหัสประจำตัวประชาชน"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
-                        <div >
-                            <p>วันเกิด</p>
+                        <div ><p>วันเกิด</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={Birthday}
@@ -218,13 +306,11 @@ function EditStudent() {
                                     type="date"
                                     name="Birthday"
                                     placeholder="วันเกิด"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
-                        <div >
-                            <p>Email</p>
+                        <div ><p>Email</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={email}
@@ -234,9 +320,8 @@ function EditStudent() {
                                     type="text"
                                     name="Email"
                                     placeholder="Email"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                         {/* <div >
@@ -250,23 +335,20 @@ function EditStudent() {
                                     type="text"
                                     name="Gender"
                                     placeholder="เพศ"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
                             </div>
                         </div> */}
-                        <div>
-                            <label>
-                                เพศ
-                                <select value={gender} onChange={(event => {setgender(event.target.value)})} name='เพศ' className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                    <option value={"ชาย"}>ชาย</option>
-                                    <option value={"หญิง"}>หญิง</option>
-                                </select>
-                            </label>
+                        <div><label>เพศ
+                            <select value={gender} onChange={(event => { setgender(event.target.value) })} name='เพศ' className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
+                                <option selected value={""}></option>
+                                <option value={"หญิง"}>หญิง</option>
+                                <option value={"ชาย"}>ชาย</option>
+                                <option value={"ไม่ระบุ"}>ไม่ระบุ</option>
+                            </select>
+                        </label>
                         </div>
-                        <div >
-                            <p>บ้านเลขที่</p>
+                        <div ><p>บ้านเลขที่</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={houseadd_houseNo}
@@ -276,13 +358,11 @@ function EditStudent() {
                                     type="text"
                                     name="houseadd_houseNo"
                                     placeholder="บ้านเลขที่"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
-                        <div >
-                            <p>หมู่บ้าน</p>
+                        <div ><p>หมู่บ้าน</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={houseadd_village}
@@ -292,13 +372,11 @@ function EditStudent() {
                                     type="text"
                                     name="houseadd_village"
                                     placeholder="หมู่บ้าน"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
-                        <div >
-                            <p>ถนน</p>
+                        <div ><p>ถนน</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={houseadd_road}
@@ -308,13 +386,11 @@ function EditStudent() {
                                     type="text"
                                     name="houseadd_road"
                                     placeholder="ถนน"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
-                        <div >
-                            <p>ซอย</p>
+                        <div ><p>ซอย</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     value={houseadd_alley}
@@ -324,25 +400,44 @@ function EditStudent() {
                                     type="text"
                                     name="houseadd_alley"
                                     placeholder="ซอย"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
-                        <div >
-                            <p>ตำบล</p>
+                        {/* <div >
+                            <p>จังหวัด</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={houseadd_subDistrict}
+                                    value={houseadd_province}
                                     onChange={(event) => {
-                                        sethouseadd_subDistrict(event.target.value)
+                                        sethouseadd_province(event.target.value)
                                     }}
                                     type="text"
-                                    name="houseadd_subDistrict"
-                                    placeholder="ตำบล"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    name="houseadd_province"
+                                    placeholder="จังหวัด"
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 />
+                            </div>
+                        </div> */}
+                        <div ><p>จังหวัด</p>
+                            <div className="mb-5 flex justify-center ">
+                                <select
+                                    onChange={(event) => {
+                                        const filterProvince = province.filter(item => {
+                                            return event.target.value == item.province_id
+                                        })
+                                        sethouseadd_province(filterProvince[0].name_th)
+                                        onchangeProvince(event)
+                                    }}
+                                    value={houseadd_province}
+                                    name='province'
+                                    className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                >
+                                    <option selected value={""}></option>
+                                    {
+                                        province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
+                                    }
+                                </select>
                             </div>
                         </div>
                         <div >
@@ -356,25 +451,23 @@ function EditStudent() {
                                     type="text"
                                     name="houseadd_district"
                                     placeholder="อำเภอ"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                         <div >
-                            <p>จังหวัด</p>
+                            <p>ตำบล</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={houseadd_province}
+                                    value={houseadd_subDistrict}
                                     onChange={(event) => {
-                                        sethouseadd_province(event.target.value)
+                                        sethouseadd_subDistrict(event.target.value)
                                     }}
                                     type="text"
-                                    name="houseadd_province"
-                                    placeholder="จังหวัด"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    name="houseadd_subDistrict"
+                                    placeholder="ตำบล"
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                         <div >
@@ -388,9 +481,8 @@ function EditStudent() {
                                     type="text"
                                     name="houseadd_postalCode"
                                     placeholder="รหัสไปรษณีย์"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                         <div >
@@ -404,9 +496,8 @@ function EditStudent() {
                                     type="text"
                                     name="ethnicity"
                                     placeholder="สัญชาติ"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                         <div >
@@ -420,9 +511,8 @@ function EditStudent() {
                                     type="text"
                                     name="nationality"
                                     placeholder="เชื้อชาติ"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                         <div >
@@ -436,9 +526,8 @@ function EditStudent() {
                                     type="text"
                                     name="religion"
                                     placeholder="ศาสนา"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                         <div >
@@ -452,9 +541,8 @@ function EditStudent() {
                                     type="text"
                                     name="presentAddress"
                                     placeholder="ที่อยู่ปัจจุบัน"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                         <div >
@@ -468,9 +556,8 @@ function EditStudent() {
                                     type="text"
                                     name="IDline"
                                     placeholder="IDline"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                         <div >
@@ -484,9 +571,8 @@ function EditStudent() {
                                     type="text"
                                     name="phone"
                                     placeholder="มือถือ"
-                                    className="w-full rounded-md border border-while (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                />
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                ></input>
                             </div>
                         </div>
                     </div>

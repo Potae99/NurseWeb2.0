@@ -44,6 +44,9 @@ function SideNavbar({ session }) {
       { id: 2, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/user/admin/subjectManagement" },
       { id: 3, label: "ภาคการศึกษา", icon: UsersIcon, link: "/user/admin/semesterManagement" },
       { id: 4, label: "ผลการประเมิน", icon: VideosIcon, link: "/user/admin/semesterManagement" },
+      // { id: 5, label: "", icon: VideosIcon, link: "/user/admin/semesterManagement" },
+      { id: 6, label: "สรุปจำนวนนักเรียน", icon: VideosIcon, link: "/admin/summary" },
+
     ],
     "teacher": [
       { id: 1, label: "ผลการประเมินของฉัน", icon: HomeIcon, link: "/user/teacher/estimateMyself" },

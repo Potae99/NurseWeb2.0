@@ -169,7 +169,7 @@ const router = [
   {path: "/admin/student/work/detail/:workHistoryID/*",
     element: <WorkHistoryDetail />,
     level: "admin"
-  }
+  },
 ];
 
 function App() {

@@ -31,7 +31,7 @@ function AddStudent() {
     const [religion, setreligion] = useState("");
     const [phone, setPhone] = useState("");
     const [studentID, setStudentID] = useState("");
-    const [scholarship_id, setscholarship_id] = useState("");
+    const [scholarship_name, setScholarship_name] = useState("");
     const [yearStartEnroll, setyearStartEnroll] = useState("");
     const [status, setStatus] = useState("");
 
@@ -42,6 +42,7 @@ function AddStudent() {
     const [tambons, setTambons] = useState([]);
     const [zipCode, setZipCode] = useState('');
     const [scholarship, setScholarship] = useState([]);
+    
 
     const Toast = Swal.mixin({
         toast: true,
@@ -135,7 +136,7 @@ function AddStudent() {
             religion: religion,
             phone: phone,
             studentID: studentID,
-            scholarship_id: scholarship_id,
+            scholarship_name: scholarship_name,
             yearStartEnroll: yearStartEnroll,
             status: status
 
@@ -166,7 +167,7 @@ function AddStudent() {
                     religion: religion,
                     phone: phone,
                     studentID: studentID,
-                    scholarship_id: scholarship_id,
+                    scholarship_name: scholarship_name,
                     yearStartEnroll: yearStartEnroll,
                     status: status
 
@@ -179,7 +180,7 @@ function AddStudent() {
             })
             .then(() => {window.location.href = "/admin/home";})
         })
-        console.log(data)
+        // console.log(data)
     }
 
     const BacktoHomeAdmin = () => {
@@ -188,7 +189,7 @@ function AddStudent() {
 
     const onchangeProvince = (event) => {
         axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: event.target.value } })
-            .then(res => {
+            .then( res => {
                 console.log(res.data);
 
                 if (res.data.error === true) {
@@ -202,7 +203,7 @@ function AddStudent() {
                 console.log(error.res);
 
             });
-        console.log(event.target.value)
+        // console.log(event.target.value)
     }
 
     const onchangeAmphures = (event) => {
@@ -221,15 +222,14 @@ function AddStudent() {
                 console.log(error.res);
 
             });
-        console.log(event.target.value)
+        // console.log(event.target.value)
     }
 
     const onchangeTambons = (event) => {
         const filterTambons = tambons.filter(item => {
             return event.target.value == item.tambon_id
         })
-        console.log(filterTambons[0].name_th)
-        // console.log(filterTambons[0].zip_code)
+        // console.log(filterTambons[0].name_th)
         
         sethouseadd_postalCode(filterTambons[0].zip_code)
         setZipCode( filterTambons[0].zip_code)
@@ -237,7 +237,7 @@ function AddStudent() {
         sethouseadd_subDistrict(filterTambons[0].name_th)
         
     }
-    console.log(houseadd_postalCode)
+    // console.log(houseadd_postalCode)
 
     return (
 
@@ -271,7 +271,7 @@ function AddStudent() {
                             <select
                                 onChange={(event) => {
                                     setStatus(event.target.value)
-                                    console.log(event.target.value)
+                                    // console.log(event.target.value)
                                 }}
                                 type="text"
                                 value={status}
@@ -288,23 +288,22 @@ function AddStudent() {
                     <div ><p>ประเภททุนการศึกษา</p>
                         <div className="mb-5 flex justify-center ">
                             <select
-                                value={scholarship_id}
                                 onChange={(event) => {
-                                    // const filterProvince = scholarship.filter(item => {
-                                    //     return event.target.value == item.scholarship_id
-                                    // })
-                                    setscholarship_id(event.target.value)
-                                    console.log(event.target.value)
+                                    const filterScholarship = scholarship.filter(item => {
+                                        return event.target.value == item.scholarship_id
+                                    })
+                                    setScholarship_name(filterScholarship[0].scholarship_name)
+                                    // console.log(scholarship_name)
                                 }}
                                 type="text"
                                 
-                                name="scholarship_id"
+                                name="scholarship_name"
                                 placeholder="ประเภททุนการศึกษา"
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
                                 <option selected value={""}></option>
                                 {
-                                    scholarship.map((_, index) => (<option key={index} value={_.scholarship_id}>{_.name}</option>))
+                                    scholarship.map((_, index) => (<option key={index} value={_.scholarship_id}>{_.scholarship_name}</option>))
                                 }
                             </select>
                         </div>
@@ -417,7 +416,7 @@ function AddStudent() {
                             value={gender}
                             onChange={(event => { 
                                 setgender(event.target.value)
-                                console.log(event.target.value) 
+                                // console.log(event.target.value) 
                             })}
                             name='gender'
                             className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
@@ -481,8 +480,7 @@ function AddStudent() {
                             />
                         </div>
                     </div>
-                    <div >
-                        <p>จังหวัด</p>
+                    <div ><p>จังหวัด</p>
                         <div className="mb-5 flex justify-center ">
                             <select
                                 // disabled={false}
@@ -502,7 +500,7 @@ function AddStudent() {
                                     })
                                     sethouseadd_province(filterProvince[0].name_th)
                                     onchangeProvince(event)
-                                    console.log(filterProvince[0].name_th)
+                                    // console.log(filterProvince[0].name_th)
                                 }}
                                     
                                 name='province'
@@ -515,8 +513,7 @@ function AddStudent() {
                             </select>
                         </div>
                     </div>
-                    <div >
-                        <p>อำเภอ</p>
+                    <div ><p>อำเภอ</p>
                         <div className="mb-5 flex justify-center ">
                             <select
                                 // disabled={false}
@@ -528,7 +525,7 @@ function AddStudent() {
                                     })
                                     sethouseadd_district(filterAmphures[0].name_th)
                                     onchangeAmphures(event)
-                                    console.log(filterAmphures[0].name_th)
+                                    // console.log(filterAmphures[0].name_th)
                                 }}
                                 name='amphures'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
@@ -540,8 +537,7 @@ function AddStudent() {
                             </select>
                         </div>
                     </div>
-                    <div >
-                        <p>ตำบล</p>
+                    <div ><p>ตำบล</p>
                         <div className="mb-5 flex justify-center ">
                             <select
                                 // value={houseadd_subDistrict}
@@ -561,8 +557,7 @@ function AddStudent() {
                             </select>
                         </div>
                     </div>
-                    <div >
-                        <p>รหัสไปรษณีย์</p>
+                    <div ><p>รหัสไปรษณีย์</p>
                         <div className="mb-5 flex justify-center ">
                             <input
                                 value={zipCode}

@@ -10,6 +10,8 @@ function StudentDetail() {
     const [data, setData] = useState([]);
     const [studentlist, setStudentList] = useState([]);
 
+    const [scholarship, setScholarship] = useState([]);
+
     const { userID } = useParams();
 
     const Toast = Swal.mixin({
@@ -63,6 +65,21 @@ function StudentDetail() {
             }).catch(error => {
                 console.log(error.res);
             });
+
+            axios.get(process.env.REACT_APP_API_URL + "/student/scholarship")
+            .then(res => {
+                console.log(res.data);
+
+                if (res.data.error === true) {
+                    console.log(res.data)
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setScholarship(res.data.data);
+
+            }).catch(error => {
+                console.log(error.res);
+            });
     }
 
     const gotoStudentEdit = (userID) => {
@@ -80,6 +97,8 @@ function StudentDetail() {
     useEffect(() => {
         fetchData();
     }, [])
+
+    console.log(data)
 
     return (
         <div>
@@ -151,7 +170,7 @@ function StudentDetail() {
                         </>:<></>
                     }
                     <div className=" grid grid-cols-1 place-items-center">
-                        <div className=" block bg-gray-100 w-11/12 p-auto rounded-2xl">
+                        <div className=" block bg-gray-200 w-11/12 p-auto rounded-2xl">
                             <div className=" flex justify-around">
                                 <div className=" ml-7">
                                     
@@ -200,9 +219,19 @@ function StudentDetail() {
                                             <div className=" m-3">ตำบล : {data.houseadd_subDistrict}</div>
                                         </> : <></>
                                     }
+                                    {data.houseadd_province ?
+                                        <>
+                                            <div className=" m-3">จังหวัด : {data.houseadd_province}</div>
+                                        </> : <></>
+                                    }
                                     {data.presentAddress ?
                                         <>
                                             <div className=" m-3">ที่อยู่ปัจจุบัน : {data.presentAddress}</div>
+                                        </> : <></>
+                                    }
+                                    {data.scholarship_name ?
+                                        <>
+                                            <div className=" m-3">ประเภททุน : {data.scholarship_name}</div>
                                         </> : <></>
                                     }
                                 </div>
@@ -258,11 +287,7 @@ function StudentDetail() {
                                             <div className=" m-3">รหัสไปรษณีย์ : {data.houseadd_postalCode}</div>
                                         </> : <></>
                                     }
-                                    {data.houseadd_province ?
-                                        <>
-                                            <div className=" m-3">จังหวัด : {data.houseadd_province}</div>
-                                        </> : <></>
-                                    }
+                                    
                                     {data.yearStartEnroll ?
                                         <>
                                             <div className=" m-3">ปีที่เริ่มศึกษา : {data.yearStartEnroll}</div>
