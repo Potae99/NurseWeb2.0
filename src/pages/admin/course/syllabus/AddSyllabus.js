@@ -34,7 +34,7 @@ function AddSyllabus() {
 
                 }
             ])
-            window.location.href = "/";
+            window.location.href = "/admin/course/syllabus/adminsyllabus";
         })
     }
 

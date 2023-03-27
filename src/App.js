@@ -26,12 +26,14 @@ import AddCourse from './pages/admin/course/AddCourse';
 import Allcourse from './pages/admin/course/Allcourse';
 import CourseDetail from './pages/admin/course/CourseDetail';
 import Addscholarship from './pages/admin/Scholarship/Addscholarship';
+import Addcourse_tosyllabus from './pages/admin/course/syllabus/Addcourse_tosyllabus';
 
 
 
 //student
 import Studenthome from './pages/student/Studenthome';
-import Studenteval from './pages/student/Studenteval';
+import Studentevalpractice from './pages/student/Studentevalpractice';
+import Studentevaltheory from './pages/student/Studentevaltheory';
 
 //teacher
 import Teacherhome from './pages/teacher/Teacherhome';
@@ -166,7 +168,7 @@ const router = [
 
   },
   {
-    path: "/admin/course/syllabus/detail/:userID/*",
+    path: "/admin/course/syllabus/detail/:syllabusID/*",
     element: <SyllabusDetail />,
     level: "admin"
 
@@ -190,8 +192,20 @@ const router = [
 
   },
   {
-    path: "/student/eval",
-    element: <Studenteval />,
+    path: "/student/eval/practice",
+    element: <Studentevalpractice />,
+    level: "admin"
+
+  },
+  {
+    path: "/student/eval/theory",
+    element: <Studentevaltheory />,
+    level: "admin"
+
+  },
+  {
+    path: "/admin/course/syllabus/adminsyllabus/addcourse",
+    element: <Addcourse_tosyllabus />,
     level: "admin"
 
   },

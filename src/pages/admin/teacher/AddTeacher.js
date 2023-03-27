@@ -93,6 +93,7 @@ function AddTeacher() {
                                 }}
                                 type="text"
                                 name="nameENG"
+                                value={nameENG}
                                 placeholder="ชื่ออังกฤษ"
                                 className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                 required
@@ -109,6 +110,7 @@ function AddTeacher() {
                                 }}
                                 type="text"
                                 name="IDnumber"
+                                value={IDnumber}
                                 placeholder="รหัสประจำตัวประชาชน"
                                 className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                 required
@@ -125,6 +127,7 @@ function AddTeacher() {
                                 }}
                                 type="text"
                                 name="Password"
+                                value={password}
                                 placeholder="Password"
                                 className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                 required
