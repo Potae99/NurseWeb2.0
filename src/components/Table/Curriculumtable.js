@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import ViewIcon from '../IconTable/ViewIcon';
+import Swal from 'sweetalert2';
 
 function Curriculumtable() {
   const [data, setData] = useState([]);
@@ -45,7 +45,7 @@ function Curriculumtable() {
   }
   const GotoAdminDetail = (syllabusID
 ) => {
-    window.location.href = "/admin/course/syllabus/detail/" + syllabusID
+    window.location.href = "/admin/course/syllabus/" + syllabusID
 ;
   }
 

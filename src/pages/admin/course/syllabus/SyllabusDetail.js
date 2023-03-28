@@ -1,77 +1,44 @@
 import axios from 'axios';
-// import StudentPopup from '../../../components/Button/StudentPopup'
 import React, { useEffect, useState } from 'react'
-import { Route, Routes, useParams } from 'react-router-dom';
-import Swal from 'sweetalert2';
-
+import { useParams } from 'react-router-dom';
 
 
 function SyllabusDetail() {
   const [data, setData] = useState([]);
-  const [syllabus, setsyllabus] = useState([]);
+  // const [course, setcourse] = useState([]);ตารางวิชา
   const { syllabusID } = useParams();
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
-  const deleteSyllabus = (syllabusID) => {
-    axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", { data: { syllabusID: syllabusID } })
-      .then((response) => {
-        setsyllabus(
-          syllabus.filter((_) => {
-            return _.syllabusID !== syllabusID;
-          })
-        )
-        window.location.href = "/admin/home";
-
-        Toast.fire({
-          icon: 'success',
-          title: 'Delete data success'
-        })
-
-
-      }).catch(function (error) {
-        if (error.response) {
-          console.log(error.response);
-        }
-      });
-  }
   const fetchData = () => {
 
 
     axios.get(process.env.REACT_APP_API_URL + "/course/syllabus", { params: { syllabusID: syllabusID } })
-        .then(res => {
-            console.log(res.data);
+      .then(res => {
+        console.log(res.data);
 
-            if (res.data.error === true) {
-                console.log(res.data)
-                console.log("ERROR FOUND WHEN GET DATA FROM API");
-                return;
-            }
-            setData(res.data.data);
+        if (res.data.error === true) {
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API");
+          return;
+        }
+        setData(res.data.data.results);
+        // setcourse(res.data.data.course); ตารางวิชา
 
-        }).catch(error => {
-            console.log(error.res);
-        });
-}
-useEffect(() => {
-  fetchData();
-}, [])
- 
-console.log(data)
+
+      }).catch(error => {
+        console.log(error.res);
+      });
+  }
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  console.log(syllabusID)
+
 
   return (
 
     <div className='bg-white min-h-screen' >
-      <h1 className=' mt-3 ml-3 text-left text-4xl'>ข้อมูลหลักสูตร</h1>
+      <h1 className=' mt-3 ml-3 text-left text-4xl'>ข้อมูลหลักสูตร:{syllabusID}</h1>
       <div className='flex flex-row-reverse '>
         <div className=' mr-3'>
           {/* <Deletebutton></Deletebutton> */}
@@ -79,13 +46,14 @@ console.log(data)
 
       </div>
       <div className=' ml-3'>
-        {/* {
-          data.syllabusName ?
+        {
+          data.syllabusDate ?
             <>
               <div className=" m-3">ชื่อหลักสูตร : {data.syllabusName}</div></> :
             <></>
-        } */}
-        <div className=" m-3">ชื่อหลักสูตร : {data.syllabusName}</div>
+        }
+
+        {/* <div className=" m-3">ชื่อหลักสูตร : {data.syllabusName}</div> */}
         {
           data.syllabusDate ?
             <>
@@ -117,7 +85,7 @@ console.log(data)
             <></>
         }
       </div>
-      <p className='mt-3 ml-3 text-left text-2xl'>รายวิชา</p>
+      <p className='mt-3 ml-3 text-left text-2xl'>รายวิชาในหลักสูตร</p>
 
 
 

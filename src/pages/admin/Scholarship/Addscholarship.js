@@ -3,7 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useState, useEffect } from 'react';
 function Addscholarship() {
-    const [name, setname] = useState("");
+    const [scholarship_name, setscholarship_name] = useState("");
     const [data, setData] = useState([]);
 
     const Toast = Swal.mixin({
@@ -65,13 +65,13 @@ function Addscholarship() {
     const Addscholarship = () => {
         axios.post(process.env.REACT_APP_API_URL + "/student/scholarship", {
 
-            name: name
+            scholarship_name: scholarship_name
 
         }).then(() => {
             setData([
                 ...data,
                 {
-                    name: name
+                    scholarship_name: scholarship_name
                 }
             ])
         })
@@ -92,10 +92,10 @@ function Addscholarship() {
                     <div class="mb-5 flex justify-center ">
                         <input
                             onChange={(event) => {
-                                setname(event.target.value)
+                                setscholarship_name(event.target.value)
                             }}
                             type="text"
-                            name="name"
+                            name="scholarship_name"
                             placeholder="ชื่อทุน"
                             class=" px-10 rounded-md border border-while bg-gray-100 py-3  text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                         />
@@ -130,7 +130,7 @@ function Addscholarship() {
                                     <tr className="  hover:bg-gray-200 bg-white border-b"
                                     >
                                         <td className="py-4 px-6" >{index + 1}</td>
-                                        <td className="py-4 px-6">{_.name}</td>
+                                        <td className="py-4 px-6">{_.scholarship_name}</td>
                                         <td className='py-4 px-6 flex flex-row'>
                                             <div className=''
                                                 content="Delete professor"

@@ -1,8 +1,7 @@
 import axios from 'axios';
-import CourseStudenttable from '../../../components/Table/CourseStudenttable'
 import StudentPopup from '../../../components/Button/StudentPopup'
 import React, { useEffect, useState } from 'react'
-import { Route, Routes, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function CourseDetail() {
     const [data, setData] = useState([]);
@@ -127,10 +126,7 @@ function CourseDetail() {
                         <StudentPopup></StudentPopup>
                     </div>
                 </div>
-                <p className='ml-3'>รายชื่อนิสิต</p>
-                <div>
-                    <CourseStudenttable />
-                </div>
+              
             </div>
         </div>
 
