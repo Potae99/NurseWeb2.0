@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Route, Routes, useParams } from 'react-router-dom';
 import StudentDetail from './StudentDetail';
 import { format } from 'date-fns';
+import Swal from 'sweetalert2';
 
 function EditStudent() {
 
@@ -36,44 +37,26 @@ function EditStudent() {
     const { userID } = useParams();
 
     const [province, setProvince] = useState([]);
-    const [amphures, setAmPhures] = useState([]);
+    const [amphures, setAmphures] = useState([]);
     const [tambons, setTambons] = useState([]);
+    const [zipCode, setZipCode] = useState('');
+    const [scholarship, setScholarship] = useState([]);
 
     const editStudent = () => {
-        axios.put(process.env.REACT_APP_API_URL + "/student", {
-            userID: userID,
-            houseadd_province: houseadd_province,
-            houseadd_subDistrict: houseadd_subDistrict,
-            houseadd_road: houseadd_road,
-            houseadd_houseNo: houseadd_houseNo,
-            Birthday: Birthday,
-            IDline: IDline,
-            IDnumber: IDnumber,
-            email: email,
-            ethnicity: ethnicity,
-            gender: gender,
-            houseadd_alley: houseadd_alley,
-            houseadd_district: houseadd_district,
-            houseadd_postalCode: houseadd_postalCode,
-            houseadd_village: houseadd_village,
-            nameENG: nameENG,
-            nameTH: nameTH,
-            nationality: nationality,
-            presentAddress: presentAddress,
-            religion: religion,
-            phone: phone,
-            studentID: studentID,
-            scholarship_name: scholarship_name,
-            yearStartEnroll: yearStartEnroll,
-            status: status
-
-        }).then(() => {
-            setData([
-                ...data,
-                {
+        Swal.fire({
+            title: 'ข้อมูลมีการเปลี่ยนแปลง',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'บันทึก',
+            denyButtonText: `ไม่บันทึก`,
+            cancelButtonText: 'ยกเลิก'
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                axios.put(process.env.REACT_APP_API_URL + "/student", {
                     userID: userID,
-                    houseadd_province: province,
-                    houseadd_subDistrict: tambons,
+                    houseadd_province: houseadd_province,
+                    houseadd_subDistrict: houseadd_subDistrict,
                     houseadd_road: houseadd_road,
                     houseadd_houseNo: houseadd_houseNo,
                     Birthday: Birthday,
@@ -96,9 +79,47 @@ function EditStudent() {
                     scholarship_name: scholarship_name,
                     yearStartEnroll: yearStartEnroll,
                     status: status
-                }
-            ])
-            window.location.href = "/admin/student/detail/" + userID;
+
+                }).then(() => {
+                    setData([
+                        ...data,
+                        {
+                            userID: userID,
+                            houseadd_province: province,
+                            houseadd_subDistrict: tambons,
+                            houseadd_road: houseadd_road,
+                            houseadd_houseNo: houseadd_houseNo,
+                            Birthday: Birthday,
+                            IDline: IDline,
+                            IDnumber: IDnumber,
+                            email: email,
+                            ethnicity: ethnicity,
+                            gender: gender,
+                            houseadd_alley: houseadd_alley,
+                            houseadd_district: amphures,
+                            houseadd_postalCode: houseadd_postalCode,
+                            houseadd_village: houseadd_village,
+                            nameENG: nameENG,
+                            nameTH: nameTH,
+                            nationality: nationality,
+                            presentAddress: presentAddress,
+                            religion: religion,
+                            phone: phone,
+                            studentID: studentID,
+                            scholarship_name: scholarship_name,
+                            yearStartEnroll: yearStartEnroll,
+                            status: status
+                        }
+                    ])
+                    Swal.fire('Saved!', '', 'success')
+                    .then(() => {window.location.href = "/admin/student/detail/" + userID;})
+                    
+                })
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+                    .then(() => {window.location.href = "/admin/student/detail/" + userID; })
+
+            }
         })
     }
 
@@ -154,6 +175,20 @@ function EditStudent() {
             .catch(error => {
                 console.log(error.res)
             });
+
+        axios.get(process.env.REACT_APP_API_URL + "/student/scholarship")
+            .then(res => {
+                console.log(res.data)
+
+                if (res.data.error === true) {
+                    console.log(res.data);
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                }
+                setScholarship(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res);
+            })
     }
 
     const backToStudentDetail = (userID) => {
@@ -174,11 +209,38 @@ function EditStudent() {
                     console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
-                setAmPhures(res.data.data);
+                setAmphures(res.data.data);
             })
             .catch(error => {
                 console.log(error.res);
             });
+    }
+
+    const onchangeAmphures = (event) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/tambons", { params: { amphure_id: event.target.value } })
+            .then(res => {
+                console.log(res.data)
+
+                if (res.data.error === true) {
+                    console(res.data);
+                    console("ERROR FOUND WHEN GET DATA FROM API");
+                }
+                setTambons(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res);
+            });
+    }
+
+    const onchangeTambons = (event) => {
+        const filterTambons = tambons.filter(item => {
+            return event.target.value == item.tambon_id
+        })
+        sethouseadd_postalCode(filterTambons[0].zip_code)
+        setZipCode(filterTambons[0].zip_code)
+
+        sethouseadd_subDistrict(filterTambons[0].name_th)
+
     }
 
     return (
@@ -195,7 +257,8 @@ function EditStudent() {
                         <div ><p>ปีที่เริ่มศึกษา</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={yearStartEnroll}
+                                    // value={yearStartEnroll}
+                                    defaultValue={yearStartEnroll}
                                     onChange={(event) => {
                                         setyearStartEnroll(event.target.value)
                                     }}
@@ -203,7 +266,7 @@ function EditStudent() {
                                     name="yearStartEnroll"
                                     placeholder='ปีที่เริ่มศึกษา'
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         {/* <div >
@@ -234,16 +297,37 @@ function EditStudent() {
                                     placeholder="สถานะ"
                                     className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 >
-                                    <option selected value={""} ></option>
+                                    <option value={""} ></option>
                                     <option value={1}>กำลังศึกษา</option>
                                     <option value={0}>จบการศึกษา</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ><p>ประเภททุนการศึกษา</p>
+                            <div className="mb-5 flex justify-center ">
+                                <select
+                                    onChange={(event) => {
+                                        const filterScholarship = scholarship.filter(item => {
+                                            return event.target.value == item.scholarship_id
+                                        })
+                                        setScholarship_name(filterScholarship[0].scholarship_name)
+                                    }}
+                                    type="text"
+                                    value={scholarship_name}
+                                    name='scholarship_name'
+                                    className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                >
+                                    <option value={""}>{scholarship_name}</option>
+                                    {
+                                        scholarship.map((_, index) => (<option key={index} value={_.scholarship_id}>{_.scholarship_name}</option>))
+                                    }
                                 </select>
                             </div>
                         </div>
                         <div ><p>รหัสนิสิต</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={studentID}
+                                    defaultValue={studentID}
                                     onChange={(event) => {
                                         setStudentID(event.target.value)
                                     }}
@@ -251,13 +335,13 @@ function EditStudent() {
                                     name="studentID"
                                     placeholder='รหัสนิสิต'
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div ><p>ชื่อไทย</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={nameTH}
+                                    defaultValue={nameTH}
                                     onChange={(event) => {
                                         setnameTH(event.target.value)
                                     }}
@@ -265,13 +349,13 @@ function EditStudent() {
                                     name="nameTH"
                                     placeholder='ชื่อไทย'
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div ><p>ชื่ออังกฤษ</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={nameENG}
+                                    defaultValue={nameENG}
                                     onChange={(event) => {
                                         setnameENG(event.target.value)
                                     }}
@@ -279,13 +363,13 @@ function EditStudent() {
                                     name="nameENG"
                                     placeholder="ชื่ออังกฤษ"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div ><p>รหัสประจำตัวประชาชน</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={IDnumber}
+                                    defaultValue={IDnumber}
                                     onChange={(event) => {
                                         setIDnumber(event.target.value)
                                     }}
@@ -293,13 +377,13 @@ function EditStudent() {
                                     name="IDnumber"
                                     placeholder="รหัสประจำตัวประชาชน"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div ><p>วันเกิด</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={Birthday}
+                                    defaultValue={Birthday}
                                     onChange={(event) => {
                                         setBirthday(event.target.value)
                                     }}
@@ -307,13 +391,13 @@ function EditStudent() {
                                     name="Birthday"
                                     placeholder="วันเกิด"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div ><p>Email</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={email}
+                                    defaultValue={email}
                                     onChange={(event) => {
                                         setemail(event.target.value)
                                     }}
@@ -321,7 +405,7 @@ function EditStudent() {
                                     name="Email"
                                     placeholder="Email"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         {/* <div >
@@ -341,7 +425,7 @@ function EditStudent() {
                         </div> */}
                         <div><label>เพศ
                             <select value={gender} onChange={(event => { setgender(event.target.value) })} name='เพศ' className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                <option selected value={""}></option>
+                                <option value={""}></option>
                                 <option value={"หญิง"}>หญิง</option>
                                 <option value={"ชาย"}>ชาย</option>
                                 <option value={"ไม่ระบุ"}>ไม่ระบุ</option>
@@ -351,7 +435,7 @@ function EditStudent() {
                         <div ><p>บ้านเลขที่</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={houseadd_houseNo}
+                                    defaultValue={houseadd_houseNo}
                                     onChange={(event) => {
                                         sethouseadd_houseNo(event.target.value)
                                     }}
@@ -359,13 +443,13 @@ function EditStudent() {
                                     name="houseadd_houseNo"
                                     placeholder="บ้านเลขที่"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div ><p>หมู่บ้าน</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={houseadd_village}
+                                    defaultValue={houseadd_village}
                                     onChange={(event) => {
                                         sethouseadd_village(event.target.value)
                                     }}
@@ -373,13 +457,13 @@ function EditStudent() {
                                     name="houseadd_village"
                                     placeholder="หมู่บ้าน"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div ><p>ถนน</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={houseadd_road}
+                                    defaultValue={houseadd_road}
                                     onChange={(event) => {
                                         sethouseadd_road(event.target.value)
                                     }}
@@ -387,13 +471,13 @@ function EditStudent() {
                                     name="houseadd_road"
                                     placeholder="ถนน"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div ><p>ซอย</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={houseadd_alley}
+                                    defaultValue={houseadd_alley}
                                     onChange={(event) => {
                                         sethouseadd_alley(event.target.value)
                                     }}
@@ -401,7 +485,7 @@ function EditStudent() {
                                     name="houseadd_alley"
                                     placeholder="ซอย"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         {/* <div >
@@ -419,7 +503,16 @@ function EditStudent() {
                                 />
                             </div>
                         </div> */}
-                        <div ><p>จังหวัด</p>
+                        <div >
+                            <p>จังหวัด</p>
+                            <div className=' mb-5 flex justify-center'>
+                                <input
+                                    value={houseadd_province}
+                                    name='houseadd_province'
+                                    className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+                                />
+                            </div>
+                            <p>แก้ไขจังหวัด</p>
                             <div className="mb-5 flex justify-center ">
                                 <select
                                     onChange={(event) => {
@@ -429,11 +522,11 @@ function EditStudent() {
                                         sethouseadd_province(filterProvince[0].name_th)
                                         onchangeProvince(event)
                                     }}
-                                    value={houseadd_province}
+                                    type="text"
                                     name='province'
                                     className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 >
-                                    <option selected value={""}></option>
+                                    <option value={""}>---โปรดระบุจังหวัด---</option>
                                     {
                                         province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
                                     }
@@ -442,39 +535,65 @@ function EditStudent() {
                         </div>
                         <div >
                             <p>อำเภอ</p>
-                            <div className="mb-5 flex justify-center ">
+                            <div className=' mb-5 flex justify-center'>
                                 <input
                                     value={houseadd_district}
+                                    name='houseadd_district'
+                                    className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+                                />
+                            </div>
+                            <p>แก้ไขอำเภอ</p>
+                            <div className="mb-5 flex justify-center ">
+                                <select
                                     onChange={(event) => {
-                                        sethouseadd_district(event.target.value)
+                                        const filterAmphures = amphures.filter(item => {
+                                            return event.target.value == item.amphure_id
+                                        })
+                                        sethouseadd_district(filterAmphures[0].name_th)
+                                        onchangeAmphures(event)
                                     }}
                                     type="text"
-                                    name="houseadd_district"
-                                    placeholder="อำเภอ"
-                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                    name='houseadd_district'
+                                    className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                >
+                                    <option value={""}>---โปรดระบุจังหวัด---</option>
+                                    {
+                                        amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
+                                    }
+                                </select>
                             </div>
                         </div>
                         <div >
                             <p>ตำบล</p>
-                            <div className="mb-5 flex justify-center ">
+                            <div className=' mb-5 flex justify-center'>
                                 <input
                                     value={houseadd_subDistrict}
+                                    name='houseadd_subDistrict'
+                                    className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+                                />
+                            </div>
+                            <p>แก้ไขตำบล</p>
+                            <div className="mb-5 flex justify-center ">
+                                <select
                                     onChange={(event) => {
-                                        sethouseadd_subDistrict(event.target.value)
+                                        onchangeTambons(event)
                                     }}
                                     type="text"
-                                    name="houseadd_subDistrict"
-                                    placeholder="ตำบล"
-                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                    name='houseadd_subdistrict'
+                                    className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                >
+                                    <option value={""}>---โปรดระบุอำเภอ---</option>
+                                    {
+                                        tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
+                                    }
+                                </select>
                             </div>
                         </div>
                         <div >
                             <p>รหัสไปรษณีย์</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={houseadd_postalCode}
+                                    defaultValue={houseadd_postalCode}
                                     onChange={(event) => {
                                         sethouseadd_postalCode(event.target.value)
                                     }}
@@ -482,14 +601,14 @@ function EditStudent() {
                                     name="houseadd_postalCode"
                                     placeholder="รหัสไปรษณีย์"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div >
                             <p>สัญชาติ</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={ethnicity}
+                                    defaultValue={ethnicity}
                                     onChange={(event) => {
                                         setethnicity(event.target.value)
                                     }}
@@ -497,14 +616,14 @@ function EditStudent() {
                                     name="ethnicity"
                                     placeholder="สัญชาติ"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div >
                             <p>เชื้อชาติ</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={nationality}
+                                    defaultValue={nationality}
                                     onChange={(event) => {
                                         setnationality(event.target.value)
                                     }}
@@ -512,14 +631,14 @@ function EditStudent() {
                                     name="nationality"
                                     placeholder="เชื้อชาติ"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div >
                             <p>ศาสนา</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={religion}
+                                    defaultValue={religion}
                                     onChange={(event) => {
                                         setreligion(event.target.value)
                                     }}
@@ -527,14 +646,14 @@ function EditStudent() {
                                     name="religion"
                                     placeholder="ศาสนา"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div >
                             <p>ที่อยู่ปัจจุบัน</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={presentAddress}
+                                    defaultValue={presentAddress}
                                     onChange={(event) => {
                                         setpresentAddress(event.target.value)
                                     }}
@@ -542,14 +661,14 @@ function EditStudent() {
                                     name="presentAddress"
                                     placeholder="ที่อยู่ปัจจุบัน"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div >
                             <p>IDline</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={IDline}
+                                    defaultValue={IDline}
                                     onChange={(event) => {
                                         setIDline(event.target.value)
                                     }}
@@ -557,14 +676,14 @@ function EditStudent() {
                                     name="IDline"
                                     placeholder="IDline"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                         <div >
                             <p>มือถือ</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    value={phone}
+                                    defaultValue={phone}
                                     onChange={(event) => {
                                         setPhone(event.target.value)
                                     }}
@@ -572,7 +691,7 @@ function EditStudent() {
                                     name="phone"
                                     placeholder="มือถือ"
                                     className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                ></input>
+                                />
                             </div>
                         </div>
                     </div>

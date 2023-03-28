@@ -561,7 +561,6 @@ function AddStudent() {
                         <div className="mb-5 flex justify-center ">
                             <input
                                 value={zipCode}
-                                
                                 name='zipCode'
                                 className="w-full rounded-md border border-while 
                                 bg-white py-3 px-6 text-base font-medium text-black 

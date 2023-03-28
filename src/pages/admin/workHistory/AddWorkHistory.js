@@ -23,6 +23,11 @@ function AddWorkHistory() {
 
     const [nameTH, setnameTH] = useState([]);
 
+    const [provinceApi, setProvinceApi] = useState([]);
+    const [amphures, setAmphures] = useState([]);
+    const [tambons, setTambons] = useState([]);
+    const [zipCode, setZipCode] = useState('');
+
     const {userID} = useParams();
 
     const Toast = Swal.mixin({
@@ -98,6 +103,21 @@ function AddWorkHistory() {
             }).catch(error => {
                 console.log(error.res);
             });
+
+        axios.get(process.env.REACT_APP_API_URL + "/location")
+            .then( res => {
+            console.log(res.data);
+
+            if (res.data.error === true){
+                console.log(res.data);
+                console.log("ERROR FOUND WHEN GET DATA FROM API");
+                return;
+            }
+            setProvinceApi(res.data.data);
+        })
+        .catch( error => {
+            console.log(error.res);
+        })
     }
 
     useEffect(() => {
@@ -106,6 +126,52 @@ function AddWorkHistory() {
 
     const BacktoStudentDetail = (userID) => {
         window.location.href = '/admin/student/detail/' + userID;
+    }
+
+    const onchangeProvince = (event) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/amphures", {params: {province_id: event.target.value}})
+            .then( res => {
+            console.log(res.data);
+
+            if (res.data.error === true){
+                console.log(res.data);
+                console.log("ERROR FOUND WHEN GET DATA FROM API");
+                return;
+            }
+            setAmphures(res.data.data);
+        })
+        .catch( error => {
+            console.log(error.res);
+        })
+    }
+
+    const onchangeAmphures = (event) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/tambons", {params: {amphure_id: event.target.value}})
+            .then( res => {
+            console.log(res.data);
+
+            if (res.data.error === true){
+                console.log(res.data);
+                console.log("ERROR FOUND WHEN GET DATA FROM API");
+                return;
+            }
+            setTambons(res.data.data);
+        })
+        .catch( error => {
+            console.log(error.res);
+        })
+    }
+
+    const onchangeTambons = (event) => {
+        const filterTambons = tambons.filter(item => {
+            return event.target.value == item.tambon_id
+        })
+        // console.log(filterTambons[0].name_th)
+        
+        setPostalCode(filterTambons[0].zip_code)
+        setZipCode( filterTambons[0].zip_code)
+        
+        setSubDistrict(filterTambons[0].name_th)
     }
 
     return (
@@ -123,6 +189,7 @@ function AddWorkHistory() {
                         <p>เริ่ม</p>
                         <div className="mb-5 flex justify-center ">
                             <input
+                                defaultValue={startWork}
                                 onChange={(event) => {
                                     setStartWork(event.target.value)
                                 }}
@@ -142,7 +209,7 @@ function AddWorkHistory() {
                                     setEndWork(event.target.value)
                                 }}
                                 type="date"
-                                value={endWork}
+                                defaultValue={endWork}
                                 name="endWork"
                                 placeholder="สิ้นสุดการทำงาน"
                                 className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
@@ -158,8 +225,8 @@ function AddWorkHistory() {
                                     setDepartment(event.target.value)
                                 }}
                                 type="text"
-                                value={department}
-                                name="แผนก"
+                                defaultValue={department}
+                                name="department"
                                 placeholder="แผนก"
                                 className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             />
@@ -170,11 +237,12 @@ function AddWorkHistory() {
                         <p>ชื่อสถานที่ทำงาน</p>
                         <div className="mb-5 flex justify-center ">
                             <input
+                                defaultValue={workAddressName}
                                 onChange={(event) => {
                                     setWorkAddressName(event.target.value)
                                 }}
                                 type="text"
-                                name="ชื่อสถานที่ทำงาน"
+                                name="workAddressName"
                                 placeholder="ชื่อสถานที่ทำงาน"
                                 className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             />
@@ -185,6 +253,7 @@ function AddWorkHistory() {
                         <p>บ้านเลขที่</p>
                         <div className="mb-5 flex justify-center ">
                             <input
+                                defaultValue={houseNo}
                                 onChange={(event) => {
                                     setHouseNo(event.target.value)
                                 }}
@@ -200,6 +269,7 @@ function AddWorkHistory() {
                         <p>หมู่บ้าน</p>
                         <div className="mb-5 flex justify-center ">
                             <input
+                                defaultValue={village}
                                 onChange={(event) => {
                                     setVillage(event.target.value)
                                 }}
@@ -215,6 +285,7 @@ function AddWorkHistory() {
                         <p>ถนน</p>
                         <div className="mb-5 flex justify-center ">
                             <input
+                                defaultValue={road}
                                 onChange={(event) => {
                                     setRoad(event.target.value)
                                 }}
@@ -230,6 +301,7 @@ function AddWorkHistory() {
                         <p>ซอย</p>
                         <div className="mb-5 flex justify-center ">
                             <input
+                                defaultValue={alley}
                                 onChange={(event) => {
                                     setAlley(event.target.value)
                                 }}
@@ -244,59 +316,95 @@ function AddWorkHistory() {
                     <div >
                         <p>จังหวัด</p>
                         <div className="mb-5 flex justify-center ">
-                            <input
-                                onChange={(event) => {
-                                    setProvince(event.target.value)
+                            <select
+                                // disabled={false}
+                                // value={houseadd_province}
+                                // onChange={(event => { 
+                                //     sethouseadd_province(event.target.value);
+
+                                //     // list select from filter provideID get API
+                                //     // TODO: setChoiceAmmpher(res.data)
+
+                                //     // setAmphures();
+                                //     // setTumbon();
+                                //  })}
+                                onChange={(event) => { 
+                                    const filterProvince = provinceApi.filter(item => {
+                                        return event.target.value == item.province_id
+                                    })
+                                    setProvince(filterProvince[0].name_th)
+                                    onchangeProvince(event)
+                                    // console.log(filterProvince[0].name_th)
                                 }}
-                                type="text"
-                                name="province"
-                                placeholder="จังหวัด"
-                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                            />
+                                    
+                                name='province'
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            >
+                                <option value={""}></option>
+                                {
+                                    provinceApi.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
+                                }
+                            </select>
                         </div>
                     </div>
 
                     <div >
                         <p>อำเภอ</p>
                         <div className="mb-5 flex justify-center ">
-                            <input
+                            <select
+                                // disabled={false}
+                                // value={houseadd_district}
+                                // onChange={(event => { sethouseadd_district(event.target.value) })}
                                 onChange={(event) => {
-                                    setDistrict(event.target.value)
+                                    const filterAmphures = amphures.filter(item => {
+                                        return event.target.value == item.amphure_id
+                                    })
+                                    setDistrict(filterAmphures[0].name_th)
+                                    onchangeAmphures(event)
+                                    // console.log(filterAmphures[0].name_th)
                                 }}
-                                type="text"
-                                name="district"
-                                placeholder="อำเภอ"
-                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                            />
+                                name='District'
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            >
+                                <option value={""}></option>
+                                {
+                                    amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
+                                }
+                            </select>
                         </div>
                     </div>
 
                     <div >
                         <p>ตำบล</p>
                         <div className="mb-5 flex justify-center ">
-                            <input
+                            <select
+                                // value={houseadd_subDistrict}
+                                // onChange={(event => { sethouseadd_subDistrict(event.target.value) })}
                                 onChange={(event) => {
-                                    setSubDistrict(event.target.value)
+                                    
+                                    // sethouseadd_subDistrict(event.target.value)
+                                    onchangeTambons(event)
+                                    
                                 }}
-                                type="text"
-                                name="subDistrict"
-                                placeholder="ตำบล"
-                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                            />
+                                name='subDistrict'
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
+                                <option value={""}></option>
+                                {
+                                    tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
+                                }
+                            </select>
                         </div>
                     </div>
 
                     <div >
                         <p>รหัสไปรษณีย์</p>
                         <div className="mb-5 flex justify-center ">
-                            <input
-                                onChange={(event) => {
-                                    setPostalCode(event.target.value)
-                                }}
-                                type="text"
-                                name="postalCode"
-                                placeholder="รหัสไปรษณีย์"
-                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                        <input
+                                defaultValue={zipCode}
+                                name='zipCode'
+                                className="w-full rounded-md border border-while 
+                                bg-white py-3 px-6 text-base font-medium text-black 
+                                outline-none focus:border-[#423bce] focus:shadow-md"
                             />
                         </div>
                     </div>

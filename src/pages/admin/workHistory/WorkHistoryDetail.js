@@ -26,6 +26,12 @@ function WorkHistoryDetail() {
 
     const { workHistoryID } = useParams();
 
+    const [provinceApi, setProvinceApi] = useState([]);
+    const [amphures, setAmphures] = useState([]);
+    const [tambons, setTambons] = useState([]);
+    const [zipCode, setZipCode] = useState('');
+
+
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -46,12 +52,12 @@ function WorkHistoryDetail() {
                         return _.workHistoryID !== workHistoryID;
                     })
                 )
-                
+
                 Toast.fire({
                     icon: 'success',
                     title: 'Delete data success'
                 })
-                .then(() => {window.location.href = "/admin/student/work/list/" + userID;})
+                    .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
 
 
             }).catch(function (error) {
@@ -89,6 +95,21 @@ function WorkHistoryDetail() {
             }).catch(error => {
                 console.log(error.res);
             });
+
+        axios.get(process.env.REACT_APP_API_URL + "/location")
+            .then(res => {
+                console.log(res.data)
+
+                if (res.data.error === true) {
+                    console.log(res.data);
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setProvinceApi(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res)
+            });
     }
 
     useEffect(() => {
@@ -103,62 +124,104 @@ function WorkHistoryDetail() {
             confirmButtonText: 'บันทึก',
             denyButtonText: `ไม่บันทึก`,
             cancelButtonText: 'ยกเลิก'
-          }).then((result) => {
+        }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-              
-              axios.put(process.env.REACT_APP_API_URL + "/student/workHistory", {
-                workHistoryID: workHistoryID,
-                startWork: startWork,
-                endWork: endWork,
-                department: department,
-                workAddressName: workAddressName,
-                houseNo: houseNo,
-                village: village,
-                road: road,
-                alley: alley,
-                province: province,
-                district: district,
-                subDistrict: subDistrict,
-                postalCode: postalCode,
-                userID:userID
-    
-            }).then(() => {
-                setData([
-                    ...data,
-                    {
-                        workHistoryID: workHistoryID,
-                        startWork: startWork,
-                        endWork: endWork,
-                        department: department,
-                        workAddressName: workAddressName,
-                        houseNo: houseNo,
-                        village: village,
-                        road: road,
-                        alley: alley,
-                        province: province,
-                        district: district,
-                        subDistrict: subDistrict,
-                        postalCode: postalCode,
-                        userID:userID
-                    }
-                ])
-                Swal.fire('Saved!', '', 'success')
-                .then(() => {window.location.href = "/admin/student/work/list/" + userID;})
-                
-            })
+
+                axios.put(process.env.REACT_APP_API_URL + "/student/workHistory", {
+                    workHistoryID: workHistoryID,
+                    startWork: startWork,
+                    endWork: endWork,
+                    department: department,
+                    workAddressName: workAddressName,
+                    houseNo: houseNo,
+                    village: village,
+                    road: road,
+                    alley: alley,
+                    province: province,
+                    district: district,
+                    subDistrict: subDistrict,
+                    postalCode: postalCode,
+                    userID: userID
+
+                }).then(() => {
+                    setData([
+                        ...data,
+                        {
+                            workHistoryID: workHistoryID,
+                            startWork: startWork,
+                            endWork: endWork,
+                            department: department,
+                            workAddressName: workAddressName,
+                            houseNo: houseNo,
+                            village: village,
+                            road: road,
+                            alley: alley,
+                            province: province,
+                            district: district,
+                            subDistrict: subDistrict,
+                            postalCode: postalCode,
+                            userID: userID
+                        }
+                    ])
+                    Swal.fire('Saved!', '', 'success')
+                        .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
+
+                })
             } else if (result.isDenied) {
-              Swal.fire('Changes are not saved', '', 'info')
-              .then(() => {window.location.href = "/admin/student/work/list/" + userID;})
-              
+                Swal.fire('Changes are not saved', '', 'info')
+                    .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
+
             }
-          })
+        })
     }
 
     const BacktoWorkHistoryList = (userID) => {
         window.location.href = "/admin/student/work/list/" + userID;
     }
 
+    const onchangeProvince = (event) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: event.target.value } })
+            .then(res => {
+                console.log(res.data);
+
+                if (res.data.error === true) {
+                    console.log(res.data);
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setAmphures(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res);
+            });
+    }
+
+    const onchangeAmphures = (event) => {
+        axios.get(process.env.REACT_APP_API_URL + "/location/tambons", { params: { amphure_id: event.target.value } })
+            .then(res => {
+                console.log(res.data)
+
+                if (res.data.error === true) {
+                    console(res.data);
+                    console("ERROR FOUND WHEN GET DATA FROM API");
+                }
+                setTambons(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res);
+            });
+    }
+
+    const onchangeTambons = (event) => {
+        const filterTambons = tambons.filter(item => {
+            return event.target.value == item.tambon_id
+        })
+        setPostalCode(filterTambons[0].zip_code)
+        setZipCode(filterTambons[0].zip_code)
+
+        setSubDistrict(filterTambons[0].name_th)
+    }
     return (
         <div>
             <div className=" text-black min-h-screen border space-y-5 mb-10">
@@ -170,7 +233,7 @@ function WorkHistoryDetail() {
                                 <p>เริ่ม</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
-                                        value={startWork}
+                                        defaultValue={startWork}
                                         onChange={(event) => {
                                             setStartWork(event.target.value)
                                         }}
@@ -186,11 +249,11 @@ function WorkHistoryDetail() {
                                 <p>สิ้นสุด</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
+                                        defaultValue={endWork}
                                         onChange={(event) => {
                                             setEndWork(event.target.value)
                                         }}
                                         type="date"
-                                        value={endWork}
                                         name="endWork"
                                         placeholder="สิ้นสุดการทำงาน"
                                         className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
@@ -202,11 +265,11 @@ function WorkHistoryDetail() {
                                 <p>แผนก</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
+                                        defaultValue={department}
                                         onChange={(event) => {
                                             setDepartment(event.target.value)
                                         }}
                                         type="text"
-                                        value={department}
                                         name="แผนก"
                                         placeholder="แผนก"
                                         className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
@@ -218,7 +281,7 @@ function WorkHistoryDetail() {
                                 <p>ชื่อสถานที่ทำงาน</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
-                                        value={workAddressName}
+                                        defaultValue={workAddressName}
                                         onChange={(event) => {
                                             setWorkAddressName(event.target.value)
                                         }}
@@ -234,7 +297,7 @@ function WorkHistoryDetail() {
                                 <p>บ้านเลขที่</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
-                                        value={houseNo}
+                                        defaultValue={houseNo}
                                         onChange={(event) => {
                                             setHouseNo(event.target.value)
                                         }}
@@ -250,7 +313,7 @@ function WorkHistoryDetail() {
                                 <p>หมู่บ้าน</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
-                                        value={village}
+                                        defaultValue={village}
                                         onChange={(event) => {
                                             setVillage(event.target.value)
                                         }}
@@ -266,7 +329,7 @@ function WorkHistoryDetail() {
                                 <p>ถนน</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
-                                        value={road}
+                                        defaultValue={road}
                                         onChange={(event) => {
                                             setRoad(event.target.value)
                                         }}
@@ -282,7 +345,7 @@ function WorkHistoryDetail() {
                                 <p>ซอย</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
-                                        value={alley}
+                                        defaultValue={alley}
                                         onChange={(event) => {
                                             setAlley(event.target.value)
                                         }}
@@ -296,65 +359,106 @@ function WorkHistoryDetail() {
 
                             <div >
                                 <p>จังหวัด</p>
-                                <div className="mb-5 flex justify-center ">
+                                <div className=' mb-5 flex justify-center'>
                                     <input
-                                        value={province}
+                                        defaultValue={province}
+                                        name='province'
+                                        className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+                                    />
+                                </div>
+                                <p>จังหวัด</p>
+                                <div className="mb-5 flex justify-center ">
+                                    <select
                                         onChange={(event) => {
-                                            setProvince(event.target.value)
+                                            const filterProvince = provinceApi.filter(item => {
+                                                return event.target.value == item.province_id
+                                            })
+                                            setProvince(filterProvince[0].name_th)
+                                            onchangeProvince(event)
                                         }}
                                         type="text"
-                                        name="province"
-                                        placeholder="จังหวัด"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                    />
+                                        name='province'
+                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    >
+                                        <option value={""}>---โปรดระบุจังหวัด---</option>
+                                        {
+                                            provinceApi.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
+                                        }
+                                    </select>
                                 </div>
                             </div>
 
                             <div >
                                 <p>อำเภอ</p>
-                                <div className="mb-5 flex justify-center ">
+                                <div className=' mb-5 flex justify-center'>
                                     <input
-                                        value={district}
+                                        defaultValue={district}
+                                        name='district'
+                                        className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+                                    />
+                                </div>
+                                <p>แก้ไขอำเภอ</p>
+                                <div className="mb-5 flex justify-center ">
+                                    <select
                                         onChange={(event) => {
-                                            setDistrict(event.target.value)
+                                            const filterAmphures = amphures.filter(item => {
+                                                return event.target.value == item.amphure_id
+                                            })
+                                            setDistrict(filterAmphures[0].name_th)
+                                            onchangeAmphures(event)
                                         }}
                                         type="text"
-                                        name="district"
-                                        placeholder="อำเภอ"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                    />
+                                        name='district'
+                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    >
+                                        <option value={""}>---โปรดระบุจังหวัด---</option>
+                                        {
+                                            amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
+                                        }
+                                    </select>
                                 </div>
                             </div>
 
                             <div >
                                 <p>ตำบล</p>
-                                <div className="mb-5 flex justify-center ">
+                                <div className=' mb-5 flex justify-center'>
                                     <input
-                                        value={subDistrict}
+                                        defaultValue={subDistrict}
+                                        name='subDistrict'
+                                        className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+                                    />
+                                </div>
+                                <p>แก้ไขตำบล</p>
+                                <div className="mb-5 flex justify-center ">
+                                    <select
                                         onChange={(event) => {
-                                            setSubDistrict(event.target.value)
+                                            onchangeTambons(event)
                                         }}
                                         type="text"
-                                        name="subDistrict"
-                                        placeholder="ตำบล"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                    />
+                                        name='subDistrict'
+                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    >
+                                        <option value={""}>---โปรดระบุอำเภอ---</option>
+                                        {
+                                            tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
+                                        }
+                                    </select>
                                 </div>
                             </div>
 
                             <div >
                                 <p>รหัสไปรษณีย์</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
-                                        value={postalCode}
-                                        onChange={(event) => {
-                                            setPostalCode(event.target.value)
-                                        }}
-                                        type="text"
-                                        name="postalCode"
-                                        placeholder="รหัสไปรษณีย์"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                    />
+                                <input
+                                    defaultValue={postalCode}
+                                    onChange={(event) => {
+                                        setPostalCode(event.target.value)
+                                    }}
+                                    type="text"
+                                    name="postalCode"
+                                    placeholder="รหัสไปรษณีย์"
+                                    className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                />
                                 </div>
                             </div>
                         </div>
