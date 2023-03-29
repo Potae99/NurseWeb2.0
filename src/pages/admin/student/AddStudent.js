@@ -279,7 +279,7 @@ function AddStudent() {
                                 placeholder="สถานะ"
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
-                                <option selected value={""} ></option>
+                                <option value={""} ></option>
                                 <option value={1}>กำลังศึกษา</option>
                                 <option value={0}>จบการศึกษา</option>
                             </select>
@@ -301,7 +301,7 @@ function AddStudent() {
                                 placeholder="ประเภททุนการศึกษา"
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
-                                <option selected value={""}></option>
+                                <option value={""}></option>
                                 {
                                     scholarship.map((_, index) => (<option key={index} value={_.scholarship_id}>{_.scholarship_name}</option>))
                                 }
@@ -421,7 +421,7 @@ function AddStudent() {
                             name='gender'
                             className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                         >
-                            <option selected value={""}></option>
+                            <option value={""}></option>
                             <option value={"หญิง"}>หญิง</option>
                             <option value={"ชาย"}>ชาย</option>
                             <option value={"ไม่ระบุ"}>ไม่ระบุ</option>
@@ -506,7 +506,7 @@ function AddStudent() {
                                 name='province'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
-                                <option selected value={""}></option>
+                                <option value={""}></option>
                                 {
                                     province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
                                 }
@@ -530,7 +530,7 @@ function AddStudent() {
                                 name='amphures'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                             >
-                                <option selected value={""}></option>
+                                <option value={""}></option>
                                 {
                                     amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
                                 }
@@ -550,7 +550,7 @@ function AddStudent() {
                                 }}
                                 name='tambons'
                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                <option selected value={""}></option>
+                                <option value={""}></option>
                                 {
                                     tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
                                 }
@@ -560,7 +560,7 @@ function AddStudent() {
                     <div ><p>รหัสไปรษณีย์</p>
                         <div className="mb-5 flex justify-center ">
                             <input
-                                value={zipCode}
+                                defaultValue={zipCode}
                                 name='zipCode'
                                 className="w-full rounded-md border border-while 
                                 bg-white py-3 px-6 text-base font-medium text-black 

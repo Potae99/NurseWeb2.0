@@ -303,7 +303,16 @@ function EditStudent() {
                                 </select>
                             </div>
                         </div>
-                        <div ><p>ประเภททุนการศึกษา</p>
+                        <div >
+                            <p>ประเภททุนการศึกษา</p>
+                            <div className=' mb-5 flex justify-center'>
+                                <input
+                                    defaultValue={scholarship_name}
+                                    name='scholarship_name'
+                                    className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+                                />
+                            </div>
+                            <p>แก้ไขทุนการศึกษา</p>
                             <div className="mb-5 flex justify-center ">
                                 <select
                                     onChange={(event) => {
@@ -313,11 +322,10 @@ function EditStudent() {
                                         setScholarship_name(filterScholarship[0].scholarship_name)
                                     }}
                                     type="text"
-                                    value={scholarship_name}
                                     name='scholarship_name'
                                     className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                 >
-                                    <option value={""}>{scholarship_name}</option>
+                                    <option value={""}>---โปรดระบุประเภททุน---</option>
                                     {
                                         scholarship.map((_, index) => (<option key={index} value={_.scholarship_id}>{_.scholarship_name}</option>))
                                     }
@@ -507,7 +515,7 @@ function EditStudent() {
                             <p>จังหวัด</p>
                             <div className=' mb-5 flex justify-center'>
                                 <input
-                                    value={houseadd_province}
+                                    defaultValue={houseadd_province}
                                     name='houseadd_province'
                                     className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
                                 />
@@ -537,7 +545,7 @@ function EditStudent() {
                             <p>อำเภอ</p>
                             <div className=' mb-5 flex justify-center'>
                                 <input
-                                    value={houseadd_district}
+                                    defaultValue={houseadd_district}
                                     name='houseadd_district'
                                     className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
                                 />
@@ -567,7 +575,7 @@ function EditStudent() {
                             <p>ตำบล</p>
                             <div className=' mb-5 flex justify-center'>
                                 <input
-                                    value={houseadd_subDistrict}
+                                    defaultValue={houseadd_subDistrict}
                                     name='houseadd_subDistrict'
                                     className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
                                 />
