@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 function Allcoursetable() {
   const [data, setData] = useState([]);
-  const {courseID} =useParams();
+  const { courseID } = useParams();
 
   const gotoCoursedetail =(courseID) =>{
     window.location.href="/admin/course/detail/" + courseID;
@@ -16,7 +16,6 @@ function Allcoursetable() {
 
 
   const fetchData = () => {
-    console.log("WTF");
 
     // const Toast = Swal.mixin({
     //     toast: true,
@@ -62,6 +61,7 @@ useEffect(() => {
     <table className=" w-full text-sm text-left text-black">
       <thead className="text-sm text-black uppercase bg-orange-300">
         <tr  >
+          <th scope="col" className="py-3 px-6" >ลำดับ</th>
           <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
           <th scope="col" className="py-3 px-6">ชื่อไทย</th>
           <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
@@ -69,11 +69,12 @@ useEffect(() => {
           <th scope="col" className="py-3 px-6">การกระทำ</th>
         </tr>
       </thead>
-      {data.map((_,i) => (
-        <tbody>
+      {data.map((_,index) => (
+        <tbody key={index}>
           <tr className="  hover:bg-gray-200 bg-white border-black"
           >
-            <td className="py-4 px-6" >{i+1}</td>
+            <td className="py-4 px-6" >{index + 1}</td>
+            <td className="py-4 px-6" >{_.courseID}</td>
             <td className="py-4 px-6">{_.courseNameTH}</td>
             <td className="py-4 px-6">{_.courseNameENG}</td>
             <td className="py-4 px-6">{_.creditStudy}&#10098;{_.studyTimeTheory}-{_.studyTimePractice}-{_.studyTimeSelf}&#10099;</td>

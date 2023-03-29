@@ -27,6 +27,7 @@ import Allcourse from './pages/admin/course/Allcourse';
 import CourseDetail from './pages/admin/course/CourseDetail';
 import Addscholarship from './pages/admin/Scholarship/Addscholarship';
 import Addcourse_tosyllabus from './pages/admin/course/syllabus/Addcourse_tosyllabus';
+import CategoryDetail from "./pages/admin/course/category/CategoryDetail"
 
 
 
@@ -209,6 +210,12 @@ const router = [
     level: "admin"
 
   },
+  {
+    path: "/admin/course/category/detail/:categoryID/*",
+    element: <CategoryDetail />,
+    level: "admin"
+
+  }
 
 ];
 
@@ -247,7 +254,7 @@ function App() {
             {
               router.map((item, index) => {
                 if(item.level == token.level)
-                return (<Route path={item.path} element={item.element} />);
+                return (<Route key={index} path={item.path} element={item.element} />);
               })
             }
           </Routes>
