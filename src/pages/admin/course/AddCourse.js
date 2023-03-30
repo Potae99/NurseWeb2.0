@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 function AddCourse() {
@@ -13,6 +13,8 @@ function AddCourse() {
     const [studyTimeSelf, setstudyTimeSelf] = useState("");
    
     const [data, setData] = useState([]);
+
+    const [category, setCategory] = useState([]);
 
     const addCourse = () => {
 
@@ -51,18 +53,39 @@ function AddCourse() {
         window.location.href = '/admin/course/all';
     }
 
+    const fetchData = () => {
+        axios.get(process.env.REACT_APP_API_URL + "/course/category")
+        .then( res => {
+            console.log(res.data);
+
+            if (res.data.error === true){
+                console.log(res.data);
+                console.log("ERROR FOUND WHEN GET DATA FROM API");
+                return;
+            }
+            setCategory(res.data.data);
+        })
+        .catch( error => {
+            console.log(error.res)
+        })
+    }
+
+    useEffect(() => {
+        fetchData();
+    },[])
+
     return (
         
-        <div className= ' bg-white slate-500 min-h-screen '>
-            <h1 className=' text-4xl text-center m-3'>เพิ่มผู้ใช้งาน</h1>
+        <div className= ' text-black bg-white slate-500 min-h-screen '>
+            <h1 className=' text-4xl text-center m-3'>เพิ่มรายวิชา</h1>
             <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
             </div>
             <div className='container mx-auto'>
                 <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                     <div >
                         <p>หมวดหมู่วิชา</p>
-                        <div class="mb-5 flex justify-center ">
-                            <input
+                        <div className="mb-5 flex justify-center ">
+                            {/* <input
                                 onChange={(event) => {
                                     setcategoryID(event.target.value)
                                 }}
@@ -70,12 +93,29 @@ function AddCourse() {
                                 name="categoryID"
                                 placeholder="หมวดหมู่วิชา"
                                 class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                            />
+                            /> */}
+                            <select 
+                                className='w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md'
+                                placeholder='หมวดหมู่วิชา'
+                                name='categoryID'
+                                type="text"
+                                onChange={(event) => {
+                                    const filterCategory = category.filter(item => {
+                                        return event.target.value == item.categoryID
+                                    })
+                                    setcategoryID(filterCategory[0].categoryID)
+                                }}
+                                >
+                                    <option value={""}></option>
+                                    {
+                                        category.map((_,index) => (<option key={index} value={_.categoryID}>{_.categoryName}</option>))
+                                    }
+                            </select>
                         </div>
                     </div>
                     <div >
                         <p>ชื่อไทย</p>
-                        <div class="mb-5 flex justify-center ">
+                        <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
                                     setcourseNameTH(event.target.value)
@@ -83,13 +123,13 @@ function AddCourse() {
                                 type="text"
                                 name="courseNameTH"
                                 placeholder="ชื่อไทย"
-                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
                     <div >
                         <p>ชื่ออังกฤษ</p>
-                        <div class="mb-5 flex justify-center ">
+                        <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
                                     setcourseNameENG(event.target.value)
@@ -97,13 +137,13 @@ function AddCourse() {
                                 type="text"
                                 name="courseNameENG"
                                 placeholder="ชื่ออังกฤษ"
-                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
                     <div >
                         <p>รายละเอียดวิชา</p>
-                        <div class="mb-5 flex justify-center ">
+                        <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
                                     setdetail(event.target.value)
@@ -111,13 +151,13 @@ function AddCourse() {
                                 type="text"
                                 name="detail"
                                 placeholder="รายละเอียดวิชา"
-                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
                     <div >
                         <p>หน่วยกิต</p>
-                        <div class="mb-5 flex justify-center ">
+                        <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
                                     setcreditStudy(event.target.value)
@@ -125,13 +165,13 @@ function AddCourse() {
                                 type="text"
                                 name="creditStudy"
                                 placeholder="หน่วยกิต"
-                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
                     <div >
-                        <p>เวลา</p>
-                        <div class="mb-5 flex justify-center ">
+                        <p>ชั่วโมงทฤษฎี</p>
+                        <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
                                     setstudyTimeTheory(event.target.value)
@@ -139,13 +179,13 @@ function AddCourse() {
                                 type="text"
                                 name="studyTimeTheory"
                                 placeholder="เวลา"
-                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
                     <div >
-                        <p>เวลาปฎิบัติ</p>
-                        <div class="mb-5 flex justify-center ">
+                        <p>ชั่วโมงปฏิบัติ</p>
+                        <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
                                     setstudyTimePractice(event.target.value)
@@ -153,13 +193,13 @@ function AddCourse() {
                                 type="text"
                                 name="studyTimePractice"
                                 placeholder="เวลาปฎิบัติ"
-                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
                     <div >
-                        <p>เวลาศึกษาด้วยตนเอง</p>
-                        <div class="mb-5 flex justify-center ">
+                        <p>ชั่วโมงศึกษาด้วยตนเอง</p>
+                        <div className="mb-5 flex justify-center ">
                             <input
                                 onChange={(event) => {
                                     setstudyTimeSelf(event.target.value)
@@ -167,7 +207,7 @@ function AddCourse() {
                                 type="text"
                                 name="studyTimeSelf"
                                 placeholder="เวลาศึกษาด้วยตนเอง"
-                                class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             />
                         </div>
                     </div>
@@ -176,23 +216,23 @@ function AddCourse() {
             </div>
             <div className='  grid grid-cols-2 '>
                 <div className=' ml-3'>
-                    <button onClick={BacktoCourse} class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
-                        <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
-                            <svg class="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <button onClick={BacktoCourse} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
+                            <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </span>
-                        <span class="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
-                        <span class="relative invisible">Button Text</span>
+                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
+                        <span className="relative invisible">Button Text</span>
                     </button>
                 </div>
                 <div className=' absolute right-0 mr-3'>
-                    <button onClick={addCourse} class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
-                        <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
+                    <button onClick={addCourse} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
                             <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" stroke-width="3.18" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </span>
-                        <span class="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
-                        <span class="relative invisible">Button Text</span>
+                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
+                        <span className="relative invisible">Button Text</span>
                     </button>
                 </div>
             </div>

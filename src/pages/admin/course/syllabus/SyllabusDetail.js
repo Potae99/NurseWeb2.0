@@ -14,6 +14,8 @@ function SyllabusDetail() {
   const [courseID, setcourseID] = useState("");
   const [showModal, setShowModal] = useState(false);
 
+  const [syllabusList, setSyllabusList] = useState([]);
+
 
   const Toast = Swal.mixin({
     toast: true,
@@ -26,13 +28,13 @@ function SyllabusDetail() {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
-  const deleteCourse = (courseID,syllabusID) => {
-    axios.delete(process.env.REACT_APP_API_URL + "/course/inSyllabus", {course:{courseID: courseID,syllabusID:syllabusID}})
+  const deleteCourse = (courseID, syllabusID) => {
+    axios.delete(process.env.REACT_APP_API_URL + "/course/inSyllabus", { course: { courseID: courseID, syllabusID: syllabusID } })
       .then((response) => {
         setCourse(
           course.filter((_) => {
             return _.courseID !== courseID;
-            
+
           })
         )
 
@@ -92,13 +94,56 @@ function SyllabusDetail() {
     fetchData();
   }, [])
 
-  console.log(syllabusID)
+  const backToAdminSyllabus = () => {
+    window.location.href = "/admin/course/syllabus/adminsyllabus"
+  }
+
+  const deleteSyllabus = (syllabusID) => {
+    Swal.fire({
+      title: 'ต้องการลบหลักสูตรหรือไม่?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      denyButtonText: `ไม่ใช่`,
+      cancelButtonText: 'ยกเลิก'
+  })
+  .then((results) => {
+    if (results.isConfirmed){
+      axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", {data: {syllabusID:syllabusID}})
+      .then( res => {
+          setSyllabusList(
+            syllabusList.filter((_) => {
+              return _.syllabusID !== syllabusID;
+            })
+          )
+          Swal.fire('Deleted!', '', 'success')
+          .then(() => {window.location.href = "/admin/course/syllabus/adminsyllabus"})
+      })
+    }
+    else if (results.isDenied){
+      window.location.href = "/admin/course/syllabus/" + syllabusID;
+    }
+  })
+    
+  }
 
 
   return (
 
     <div className=' text-black bg-white min-h-screen' >
-      <h1 className=' mt-3 ml-3 text-left text-4xl'>ข้อมูลหลักสูตร : {syllabusID}</h1>
+      <div className=' grid grid-cols-1 place-items-center'>
+        <div className=' flex'>
+          <h1 className=' mt-3 ml-3 text-center text-4xl mb-5'>ข้อมูลหลักสูตร</h1>
+          <button className=' ml-3' onClick={() => deleteSyllabus(syllabusID)}>
+            <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M19.4258 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M28.2407 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
       <div className='flex flex-row-reverse '>
         <div className=' mr-3'>
           {/* <Deletebutton></Deletebutton> */}
@@ -148,7 +193,7 @@ function SyllabusDetail() {
       <div className=' flex flex-row-reverse'>
         <>
           <div className="flex  items-center justify-center">
-            <a type="button" onClick={() => setShowModal(true)} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
+            <button type="button" onClick={() => setShowModal(true)} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
               <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-orange-300 group-hover:h-full"></span>
               <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
                 <svg width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +206,7 @@ function SyllabusDetail() {
                 </svg>
               </span>
               <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">เพิ่มรายวิชา</span>
-            </a>
+            </button>
           </div>
           {showModal ? (
             <>
@@ -213,7 +258,7 @@ function SyllabusDetail() {
         <table className=" w-full text-sm text-left text-black ">
           <thead className="text-sm text-black uppercase bg-orange-300">
             <tr  >
-            <th scope="col" className="py-3 px-6" >ลำดับ</th>
+              <th scope="col" className="py-3 px-6" >ลำดับ</th>
               <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
               <th scope="col" className="py-3 px-6">ชื่อไทย</th>
               <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
@@ -250,6 +295,17 @@ function SyllabusDetail() {
             </tbody>
           ))}
         </table>
+        <div className=' mt-5'>
+          <div className=''>
+            <button onClick={backToAdminSyllabus} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+              <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
+                <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </span>
+              <span className="absolute flex items-center justify-center w-full h-full text-balck transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
+              <span className="relative invisible">Button Text</span>
+            </button>
+          </div>
+        </div>
       </div>
 
 

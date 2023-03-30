@@ -32,7 +32,7 @@ function CourseDetail() {
     }, [])
     return (
         <div>
-            <div className=' bg-white min-h-screen'>
+            <div className=' text-black bg-white min-h-screen'>
                 <h1 className=' mt-3 ml-3 text-4xl'>ข้อมูลรายวิชา</h1>
                 <div className=' flex flex-row-reverse'>
                     <div className='mr-3'>
