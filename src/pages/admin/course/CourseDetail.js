@@ -120,13 +120,7 @@ function CourseDetail() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className=' flex flex-row-reverse'>
-                    <div className='mr-3'>
-                        <StudentPopup></StudentPopup>
-                    </div>
-                </div>
-              
+                </div>             
             </div>
         </div>
 

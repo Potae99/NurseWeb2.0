@@ -68,7 +68,7 @@ function Admintable() {
       </thead>
       {adminlist.map((_, index) => (
         <tbody key={index}>
-          <tr className="  hover:bg-gray-200 bg-white border-b"
+          <tr className="  hover:bg-gray-200 bg-white"
           >
             <td className="py-4 px-6" >{index + 1}</td>
             <td className="py-4 px-6">{_.adminID}</td>
