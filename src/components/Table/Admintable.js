@@ -56,8 +56,9 @@ function Admintable() {
   
 
   return (
+    <div className=' relative overflow-x-auto shadow-md sm:rounded-lg'>
     <table className=" w-full text-sm text-left text-black">
-      <thead className="text-xs text-black uppercase bg-orange-300">
+      <thead className="text-sm text-black uppercase bg-orange-300">
         <tr  >
           <th scope="col" className="py-3 px-6" >ลำดับ</th>
           <th scope="col" className="py-3 px-6">รหัสประจำตัว</th>
@@ -91,6 +92,7 @@ function Admintable() {
 
 
     </table>
+    </div>
 
 
   )

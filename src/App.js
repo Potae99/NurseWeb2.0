@@ -28,10 +28,16 @@ import CourseDetail from './pages/admin/course/CourseDetail';
 import AddWorkHistory from './pages/admin/workHistory/AddWorkHistory';
 import WorkHistoryList from './pages/admin/workHistory/WorkHistoryList';
 import WorkHistoryDetail from './pages/admin/workHistory/WorkHistoryDetail';
+import Addscholarship from './pages/admin/Scholarship/Addscholarship';
+import Addcourse_tosyllabus from './pages/admin/course/syllabus/Addcourse_tosyllabus';
+import CategoryDetail from "./pages/admin/course/category/CategoryDetail"
+
 
 
 //student
 import Studenthome from './pages/student/Studenthome';
+import Studentevalpractice from './pages/student/Studentevalpractice';
+import Studentevaltheory from './pages/student/Studentevaltheory';
 
 //teacher
 import Teacherhome from './pages/teacher/Teacherhome';
@@ -144,7 +150,8 @@ const router = [
     level: "admin"
 
   },
-  {path: "/admin/course/syllabus/detail/:userID/*",
+  {
+    path: "/admin/course/syllabus/:syllabusID/*",
     element: <SyllabusDetail />,
     level: "admin"
 
@@ -170,6 +177,37 @@ const router = [
     element: <WorkHistoryDetail />,
     level: "admin"
   },
+  {
+    path: "/admin/scholarship/add",
+    element: <Addscholarship />,
+    level: "admin"
+
+  },
+  {
+    path: "/student/eval/practice",
+    element: <Studentevalpractice />,
+    level: "admin"
+
+  },
+  {
+    path: "/student/eval/theory",
+    element: <Studentevaltheory />,
+    level: "admin"
+
+  },
+  {
+    path: "/admin/course/syllabus/adminsyllabus/addcourse",
+    element: <Addcourse_tosyllabus />,
+    level: "admin"
+
+  },
+  {
+    path: "/admin/course/category/detail/:categoryID/*",
+    element: <CategoryDetail />,
+    level: "admin"
+
+  }
+
 ];
 
 function App() {

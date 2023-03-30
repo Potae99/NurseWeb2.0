@@ -109,7 +109,7 @@ export default function Login({ setToken }) {
         </> :
         <>
           {/*container*/}
-          < div className=" bg-gray-300 h-screen items-center p-4 flex justify-center">
+          < div className=" bg-gray-400 h-screen items-center p-4 flex justify-center">
             {/*login card*/}
             <div className=" bg-current  flex flex-col items-center max-w-screen-lg overflow-y-hidden rounded-lg shadow-lg bg-orange-400 w-full md:flex-row">
               {/*logo*/}
@@ -153,7 +153,7 @@ export default function Login({ setToken }) {
                             <Menu.Item>
                               {({ active }) => (
                                 <button
-                                  className={`${active ? 'bg-orange-400 text-white' : 'text-gray-900'
+                                  className={`${active ? 'bg-orange-600 text-white' : 'text-gray-900'
                                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                                   onClick={() => { setLevel("student"); }}
                                 >
@@ -176,7 +176,7 @@ export default function Login({ setToken }) {
                             <Menu.Item>
                               {({ active }) => (
                                 <button
-                                  className={`${active ? 'bg-orange-400 text-white' : 'text-gray-900'
+                                  className={`${active ? 'bg-orange-600 text-white' : 'text-gray-900'
                                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                                   onClick={() => { setLevel("teacher"); }}
                                 >
@@ -215,7 +215,7 @@ export default function Login({ setToken }) {
                   >
                     <div className="relative">
                       <input
-                        className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 rounded-md transition focus:ring-2 focus:ring-orange-400"
+                        className="border border-gray-400 outline-none placeholder-gray-400 pl-9 pr-4 py-1 rounded-md transition focus:ring-2 focus:ring-orange-400"
                         placeholder="เลขประจำตัวประชาชน..."
                         type="text"
                         id="IDnumber"
@@ -225,7 +225,7 @@ export default function Login({ setToken }) {
                     </div>
                     <div className="relative">
                       <input
-                        className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 rounded-md transition focus:ring-2 focus:ring-orange-400"
+                        className="border border-gray-400 outline-none placeholder-gray-400 pl-9 pr-4 py-1 rounded-md transition focus:ring-2 focus:ring-orange-400"
                         placeholder="รหัสผ่าน..."
                         type="password"
                         id="password"

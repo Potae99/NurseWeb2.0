@@ -56,7 +56,7 @@ function Teacherhome() {
 
     return (
         <div className=''>
-            <div className=" min-h-screen border space-y-5">
+            <div className=" min-h-screen  space-y-5">
                 <div className=" text-black font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลอาจารย์</div>
              
 

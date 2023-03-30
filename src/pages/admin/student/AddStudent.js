@@ -318,7 +318,9 @@ function AddStudent() {
                                 value={studentID}
                                 name="studentID"
                                 placeholder="รหัสนิสิต"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                maxlength="13"
+                                required
                             />
                         </div>
                     </div>
@@ -332,7 +334,8 @@ function AddStudent() {
                                 value={nameTH}
                                 name="nameTH"
                                 placeholder="ชื่อไทย"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -345,7 +348,8 @@ function AddStudent() {
                                 type="text"
                                 name="nameENG"
                                 placeholder="ชื่ออังกฤษ"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -371,7 +375,8 @@ function AddStudent() {
                                 type="text"
                                 name="Password"
                                 placeholder="Password"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -379,7 +384,8 @@ function AddStudent() {
                         <div className="mb-5 flex justify-center ">
                             {/* <DatePicker
                         dateFormat="dd/MM/yyyy"
-                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                        className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                        required
                          selected={Birthday} 
                          onChange={(date) => {
                              console.log()
@@ -394,7 +400,8 @@ function AddStudent() {
                                 type="date"
                                 name="Birthday"
                                 placeholder="วันเกิด"
-                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -437,7 +444,8 @@ function AddStudent() {
                                 type="text"
                                 name="houseadd_houseNo"
                                 placeholder="บ้านเลขที่"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -450,7 +458,8 @@ function AddStudent() {
                                 type="text"
                                 name="houseadd_village"
                                 placeholder="หมู่บ้าน"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -463,7 +472,8 @@ function AddStudent() {
                                 type="text"
                                 name="houseadd_road"
                                 placeholder="ถนน"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -476,7 +486,8 @@ function AddStudent() {
                                 type="text"
                                 name="houseadd_alley"
                                 placeholder="ซอย"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -579,7 +590,8 @@ function AddStudent() {
                                 type="text"
                                 name="ethnicity"
                                 placeholder="สัญชาติ"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -592,7 +604,8 @@ function AddStudent() {
                                 type="text"
                                 name="nationality"
                                 placeholder="เชื้อชาติ"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -605,7 +618,8 @@ function AddStudent() {
                                 type="text"
                                 name="religion"
                                 placeholder="ศาสนา"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -618,7 +632,8 @@ function AddStudent() {
                                 type="text"
                                 name="presentAddress"
                                 placeholder="ที่อยู่ปัจจุบัน"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -631,7 +646,8 @@ function AddStudent() {
                                 type="text"
                                 name="IDline"
                                 placeholder="IDline"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -644,7 +660,8 @@ function AddStudent() {
                                 type="text"
                                 name="phone"
                                 placeholder="มือถือ"
-                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                required
                             />
                         </div>
                     </div>
@@ -652,22 +669,22 @@ function AddStudent() {
             </div>
             <div className='  grid grid-cols-2 '>
                 <div className=' ml-3'>
-                    <button onClick={BacktoHomeAdmin} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                    <button onClick={BacktoHomeAdmin} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium  text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
                             <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </span>
-                        <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
+                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
                         <span className="relative invisible">Button Text</span>
                     </button>
                 </div>
                 <div className=' absolute right-0 mr-7'>
-                    <button onClick={addStudent} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                    <button onClick={addStudent} type="submit" className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
                             <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </span>
-                        <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
+                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
                         <span className="relative invisible">Button Text</span>
                     </button>
                 </div>

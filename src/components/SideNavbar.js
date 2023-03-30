@@ -41,19 +41,19 @@ function SideNavbar({ session }) {
   const _menuItems = {
     "admin": [
       { id: 1, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/admin/home" },
-      { id: 2, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/user/admin/subjectManagement" },
-      { id: 3, label: "ภาคการศึกษา", icon: UsersIcon, link: "/user/admin/semesterManagement" },
+      { id: 2, label: "จัดการหลักสูตร", icon: ArticleIcon, link: "/admin/course/syllabus/adminsyllabus" },
+      { id: 3, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/admin/course/all" },
       { id: 4, label: "ผลการประเมิน", icon: VideosIcon, link: "/user/admin/semesterManagement" },
-      // { id: 5, label: "", icon: VideosIcon, link: "/user/admin/semesterManagement" },
-      { id: 6, label: "สรุปจำนวนนักเรียน", icon: VideosIcon, link: "/admin/summary" },
-
+      { id: 5, label: "ทุนการศึกษา", icon: ArticleIcon, link: "/admin/scholarship/add" }
     ],
     "teacher": [
       { id: 1, label: "ผลการประเมินของฉัน", icon: HomeIcon, link: "/user/teacher/estimateMyself" },
       { id: 2, label: "ผลการประเมินรายวิชา", icon: ArticleIcon, link: "/user/teacher/estimateMySubject" },
     ],
     "student": [
-      { id: 1, label: "การประเมิน", icon: HomeIcon, link: "/user/student/estimate" },
+      { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/user/student/estimate" },
+      { id: 2, label: "รายวิชา", icon: ArticleIcon, link: "/user/student/estimate" },
+      { id: 3, label: "การประเมิน", icon: VideosIcon, link: "/user/student/estimate" },
     ]
   };
 
