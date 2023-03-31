@@ -26,13 +26,13 @@ function SyllabusDetail() {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
-  const deleteCourse = (courseID,syllabusID) => {
-    axios.delete(process.env.REACT_APP_API_URL + "/course/inSyllabus", {course:{courseID: courseID,syllabusID:syllabusID}})
+  const deleteCourse = (courseID) => {
+    axios.delete(process.env.REACT_APP_API_URL + "/course/inSyllabus", { data: { courseID, syllabusID } })
       .then((response) => {
         setCourse(
           course.filter((_) => {
             return _.courseID !== courseID;
-            
+
           })
         )
 
@@ -187,7 +187,10 @@ function SyllabusDetail() {
                         <div className="items-center gap-2 mt-3 sm:flex">
                           <button
                             className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
-                            onClick={addCoursein_syllabus}
+                            onClick={() => {
+                              addCoursein_syllabus();
+                              setShowModal(false);
+                            }}
                           >
                             บันทึก
                           </button>
@@ -213,7 +216,7 @@ function SyllabusDetail() {
         <table className=" w-full text-sm text-left text-black ">
           <thead className="text-sm text-black uppercase bg-orange-300">
             <tr  >
-            <th scope="col" className="py-3 px-6" >ลำดับ</th>
+              <th scope="col" className="py-3 px-6" >ลำดับ</th>
               <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
               <th scope="col" className="py-3 px-6">ชื่อไทย</th>
               <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>

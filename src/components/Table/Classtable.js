@@ -40,7 +40,6 @@ function Classtable() {
                     return;
                 }
                 setData(res.data.data);
-
             });
     }
     useEffect(() => {
@@ -58,7 +57,7 @@ function Classtable() {
                     <tr  >
                         
                         <th scope="col" className="py-3 px-6" >รหัสคาบเรียน</th>
-                        <th scope="col" className="py-3 px-6">ชื่อไทย</th>
+                        <th scope="col" className="py-3 px-6">ชื่อวิชา</th>
                         <th scope="col" className="py-3 px-6">ห้องเรียน</th>
                         <th scope="col" className="py-3 px-6">การกระทำ</th>
                     </tr>
@@ -86,8 +85,6 @@ function Classtable() {
                     </tbody>
 
                 ))}
-
-
             </table>
         </div>
 
