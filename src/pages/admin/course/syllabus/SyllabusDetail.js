@@ -11,10 +11,13 @@ function SyllabusDetail() {
   const [course, setCourse] = useState([]);
   // const [course, setcourse] = useState([]);ตารางวิชา
   const { syllabusID } = useParams();
-  const [courseID, setcourseID] = useState("");
+  const [courseID, setcourseID] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const [syllabusList, setSyllabusList] = useState([]);
+
+  const [courseInSyllabus, setCourseInSyllabus] = useState([]);
+  const [addCourse, setAddCourse] = useState([]);
 
 
   const Toast = Swal.mixin({
@@ -28,28 +31,39 @@ function SyllabusDetail() {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
-  const deleteCourse = (courseID, syllabusID) => {
-    axios.delete(process.env.REACT_APP_API_URL + "/course/inSyllabus", { course: { courseID: courseID, syllabusID: syllabusID } })
-      .then((response) => {
-        setCourse(
-          course.filter((_) => {
-            return _.courseID !== courseID;
+  const deleteCourse = (courseID) => {
+    Swal.fire({
+      title: 'ต้องการลบหลักสูตรหรือไม่?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      denyButtonText: `ไม่ใช่`,
+      cancelButtonText: 'ยกเลิก'
+    })
+      .then((results) => {
+        if (results.isConfirmed) {
+          axios.delete(process.env.REACT_APP_API_URL + "/course/inSyllabus", { data: { courseID, syllabusID } })
+            .then((response) => {
+              setCourse(
+                course.filter((_) => {
+                  return _.courseID !== courseID;
+                })
+              )
 
-          })
-        )
+              Swal.fire('Deleted!', '', 'success')
+                .then(() => { window.location.href = "/admin/course/syllabus/" + syllabusID })
 
-
-        Toast.fire({
-          icon: 'success',
-          title: 'Delete course success'
-        })
-
-
-      }).catch(function (error) {
-        if (error.response) {
-          console.log(error.response);
+            }).catch(function (error) {
+              if (error.response) {
+                console.log(error.response);
+              }
+            });
         }
-      });
+        else if (results.isDenied) {
+          window.location.href = "/admin/course/syllabus/" + syllabusID
+        }
+      })
+
   }
 
 
@@ -60,15 +74,20 @@ function SyllabusDetail() {
       syllabusID: syllabusID
 
     }).then(() => {
-      setData([
-        ...data,
+      setAddCourse([
+        ...addCourse,
         {
           courseID: courseID,
           syllabusID: syllabusID
 
         }
       ])
-      window.location.href = "/admin/course/syllabus/" + syllabusID;
+      Toast.fire({
+        icon: 'success',
+        title: 'add course success'
+      })
+        .then(() => { window.location.href = "/admin/course/syllabus/" + syllabusID; })
+
     })
   }
   const fetchData = () => {
@@ -83,10 +102,25 @@ function SyllabusDetail() {
           return;
         }
         setData(res.data.data.results);
-        setCourse(res.data.data.courses);
+        setCourseInSyllabus(res.data.data.courses);
 
 
       }).catch(error => {
+        console.log(error.res);
+      });
+
+    axios.get(process.env.REACT_APP_API_URL + "/course")
+      .then(res => {
+        console.log(res.data);
+
+        if (res.data.error === true) {
+          console.log(res.data);
+          console.log("ERROR FOUND WHEN GET DATA FROM API");
+          return;
+        }
+        setCourse(res.data.data);
+      })
+      .catch(error => {
         console.log(error.res);
       });
   }
@@ -106,25 +140,25 @@ function SyllabusDetail() {
       confirmButtonText: 'ใช่',
       denyButtonText: `ไม่ใช่`,
       cancelButtonText: 'ยกเลิก'
-  })
-  .then((results) => {
-    if (results.isConfirmed){
-      axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", {data: {syllabusID:syllabusID}})
-      .then( res => {
-          setSyllabusList(
-            syllabusList.filter((_) => {
-              return _.syllabusID !== syllabusID;
+    })
+      .then((results) => {
+        if (results.isConfirmed) {
+          axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", { data: { syllabusID: syllabusID } })
+            .then(res => {
+              setSyllabusList(
+                syllabusList.filter((_) => {
+                  return _.syllabusID !== syllabusID;
+                })
+              )
+              Swal.fire('Deleted!', '', 'success')
+                .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus" })
             })
-          )
-          Swal.fire('Deleted!', '', 'success')
-          .then(() => {window.location.href = "/admin/course/syllabus/adminsyllabus"})
+        }
+        else if (results.isDenied) {
+          window.location.href = "/admin/course/syllabus/" + syllabusID;
+        }
       })
-    }
-    else if (results.isDenied){
-      window.location.href = "/admin/course/syllabus/" + syllabusID;
-    }
-  })
-    
+
   }
 
 
@@ -192,8 +226,8 @@ function SyllabusDetail() {
       <p className='mt-3 ml-3 text-left text-2xl'>รายวิชาในหลักสูตร</p>
       <div className=' flex flex-row-reverse'>
         <>
-          <div className="flex  items-center justify-center">
-            <button type="button" onClick={() => setShowModal(true)} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
+          <div className=" flex items-center justify-center">
+            <button onClick={() => setShowModal(true)} type="button" className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
               <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-orange-300 group-hover:h-full"></span>
               <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
                 <svg width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -210,31 +244,44 @@ function SyllabusDetail() {
           </div>
           {showModal ? (
             <>
-              <div className="fixed inset-0 z-10 overflow-y-auto">
+              <div className=" fixed inset-0 z-10 overflow-y-auto">
                 <div
                   className="fixed inset-0 w-full h-full bg-black opacity-40"
                   onClick={() => setShowModal(false)}
                 ></div>
                 <div className="flex items-center min-h-screen px-4 py-8">
-                  <div className="relative  p-4 mx-auto bg-white rounded-md shadow-lg">
-                    <div className="mt-3 sm:flex">
-                      <div className=" text-center sm:ml-4   sm:text-left">
+                  <div className=" w-auto relative  p-4 mx-auto bg-white rounded-md shadow-lg">
+                    <div className="">
+                      <div className=" text-center sm:ml-4   ">
                         <h4 className="text-lg font-medium text-gray-800">
                           รหัสวิชา
                         </h4>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        <select
+                          className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                           type="text"
+                          name='courseID'
                           placeholder="รหัสวิชา"
+                          // onChange={(event) => {
+                          //   setcourseID(event.target.value)
+                          // }}
                           onChange={(event) => {
+                            const filterCourse = course.filter(item => {
+                              return event.target.value == item.courseID
+                            })
                             setcourseID(event.target.value)
                           }}
-                        ></input>
+                        >
+                          <option value={""}>---โปรดระบุ---</option>
+                          {
+                            course.map((_, index) => (<option key={index} value={_.courseID}>{_.courseID} {_.courseNameTH}</option>))
+                          }
+                        </select>
                         <div className="items-center gap-2 mt-3 sm:flex">
                           <button
-                            className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                            className="w-full mt-2 p-2.5 flex-1 text-white bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                             onClick={addCoursein_syllabus}
                           >
-                            บันทึก
+                            เพิ่ม
                           </button>
                           <button
                             className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-300 focus:ring-2"
@@ -266,7 +313,7 @@ function SyllabusDetail() {
               <th scope="col" className="py-3 px-6">การกระทำ</th>
             </tr>
           </thead>
-          {course.map((_, index) => (
+          {courseInSyllabus.map((_, index) => (
             <tbody key={index}>
               <tr className=" hover:bg-gray-200 bg-white border-b"
               >
@@ -295,6 +342,8 @@ function SyllabusDetail() {
             </tbody>
           ))}
         </table>
+      </div>
+      <>
         <div className=' mt-5'>
           <div className=''>
             <button onClick={backToAdminSyllabus} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
@@ -306,10 +355,7 @@ function SyllabusDetail() {
             </button>
           </div>
         </div>
-      </div>
-
-
-
+      </>
     </div>
 
   )

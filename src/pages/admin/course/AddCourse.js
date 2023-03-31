@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 function AddCourse() {
     
     const [categoryID, setcategoryID] = useState("");
@@ -15,6 +16,18 @@ function AddCourse() {
     const [data, setData] = useState([]);
 
     const [category, setCategory] = useState([]);
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 700,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
 
     const addCourse = () => {
 
@@ -45,7 +58,12 @@ function AddCourse() {
                    
                 }
             ])
-            window.location.href = "/admin/course/all";
+            Toast.fire({
+                icon: 'success',
+                title: 'add course success'
+              })
+              .then(() => { window.location.href = "/admin/course/all";})
+           
         })
     }
 

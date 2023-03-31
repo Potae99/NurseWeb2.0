@@ -70,23 +70,36 @@ function AddCategory() {
   }
 
   const deleteCategory = (categoryID) => {
-    axios.delete(process.env.REACT_APP_API_URL + "/course/category", { data: { categoryID: categoryID } })
-      .then(res => {
-        setCategoryList(
-          categoryList.filter((_) => {
-            return _.categoryID !== categoryID;
-          })
-        )
-
-        Toast.fire({
-          icon: 'success',
-          title: 'Delete course success'
-        }).then(() => {window.location.href = "/course/category/add"})
-
-      })
-      .catch(error => {
-        console.log(error.res);
-      })
+    Swal.fire({
+      title: 'ต้องการลบหลักสูตรหรือไม่?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      denyButtonText: `ไม่ใช่`,
+      cancelButtonText: 'ยกเลิก'
+    })
+    .then((results) => {
+      if (results.isConfirmed){
+        axios.delete(process.env.REACT_APP_API_URL + "/course/category", { data: { categoryID: categoryID } })
+        .then(res => {
+          setCategoryList(
+            categoryList.filter((_) => {
+              return _.categoryID !== categoryID;
+            })
+          )
+          Swal.fire('Deleted!', '', 'success')
+          .then(() => {window.location.href = "/course/category/add"})
+  
+        })
+        .catch(error => {
+          console.log(error.res);
+        })
+      }
+      else if (results.isDenied){
+        window.location.href = "/course/category/add";
+      }
+    })
+    
   }
 
 
@@ -105,7 +118,7 @@ function AddCategory() {
                 type="text"
                 name="categoryName"
                 placeholder="ชื่อหมวดวิชา"
-                className="w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                className=" border-black w-full rounded-md border border-while  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
               />
             </div>
           </div>
