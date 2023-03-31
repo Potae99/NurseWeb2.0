@@ -81,51 +81,72 @@ function Classdetail() {
 
   ///delete teacher
   const deleteTeacher = (userID) => {
-    axios.delete(process.env.REACT_APP_API_URL + "/class/taugh", { data: { userID, classID } })
-      .then((response) => {
-        setteachers(
-          teachers.filter((_) => {
-            return _.userID !== userID;
+    Swal.fire({
+      title: 'ต้องการลบหลักสูตรหรือไม่?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      denyButtonText: `ไม่ใช่`,
+      cancelButtonText: 'ยกเลิก'
+    })
+      .then((results) => {
+        if (results.isConfirmed) {
+          axios.delete(process.env.REACT_APP_API_URL + "/class/taugh", { data: { userID, classID } })
+            .then((response) => {
+              setteachers(
+                teachers.filter((_) => {
+                  return _.userID !== userID;
 
-          })
-        )
+                })
+              )
+              Swal.fire('Deleted!', '', 'success')
 
-
-        Toast.fire({
-          icon: 'success',
-          title: 'Delete teacher success'
-        })
-
-
-      }).catch(function (error) {
-        if (error.response) {
-          console.log(error.response);
+            }).catch(function (error) {
+              if (error.response) {
+                console.log(error.response);
+              }
+            });
         }
-      });
+        else if (results.isDenied) {
+          window.location.href = "/admin/class/detail/" + classID;
+        }
+      })
+
   }
   ////delete Student
   const deleteStudent = (userID) => {
-    axios.delete(process.env.REACT_APP_API_URL + "/class/study", { data: { userID, classID } })
-      .then((response) => {
-        setstudents(
-          students.filter((_) => {
-            return _.userID !== userID;
+    Swal.fire({
+      title: 'ต้องการลบหลักสูตรหรือไม่?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      denyButtonText: `ไม่ใช่`,
+      cancelButtonText: 'ยกเลิก'
+    })
+      .then((results) => {
+        if (results.isConfirmed) {
+          axios.delete(process.env.REACT_APP_API_URL + "/class/study", { data: { userID, classID } })
+            .then((response) => {
+              setstudents(
+                students.filter((_) => {
+                  return _.userID !== userID;
 
-          })
-        )
+                })
+              )
 
+              Swal.fire('Deleted!', '', 'success')
 
-        Toast.fire({
-          icon: 'success',
-          title: 'Delete student success'
-        })
-
-
-      }).catch(function (error) {
-        if (error.response) {
-          console.log(error.response);
+            }).catch(function (error) {
+              if (error.response) {
+                console.log(error.response);
+              }
+            });
         }
-      });
+        else if (results.isDenied) {
+          window.location.href = "/admin/class/detail/" + classID;
+        }
+      })
+
   }
 
 
@@ -190,7 +211,7 @@ function Classdetail() {
       <div className=' flex flex-row-reverse'>
         <div>
           <div className="flex  items-center justify-center">
-            <a type="button" onClick={() => setShowModal1(true)} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
+            <button type="button" onClick={() => setShowModal1(true)} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
               <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-orange-300 group-hover:h-full"></span>
               <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
                 <svg width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -203,7 +224,7 @@ function Classdetail() {
                 </svg>
               </span>
               <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">เพิ่มนิสิต</span>
-            </a>
+            </button>
           </div>
           {showModal1 ? (
             <>
@@ -219,7 +240,7 @@ function Classdetail() {
                         <h4 className="text-lg font-medium text-gray-800">
                           นิสิต
                         </h4>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        <input className=" bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           type="text"
                           placeholder="รหัสนิสิต"
                           onChange={(event) => {
@@ -257,7 +278,7 @@ function Classdetail() {
         </div>
         <div>
           <div className="flex  items-center justify-center">
-            <a type="button" onClick={() => setShowModal2(true)} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
+            <button type="button" onClick={() => setShowModal2(true)} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
               <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-orange-300 group-hover:h-full"></span>
               <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
                 <svg width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -269,8 +290,8 @@ function Classdetail() {
                   <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
-              <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">เพิ่มอาจาร์ย</span>
-            </a>
+              <span className="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">เพิ่มอาจารย์</span>
+            </button>
           </div>
           {showModal2 ? (
             <>
@@ -284,22 +305,35 @@ function Classdetail() {
                     <div className="mt-3 sm:flex">
                       <div className=" text-center sm:ml-4   sm:text-left">
                         <h4 className="text-lg font-medium text-gray-800">
-                          อาจาร์ย
+                          อาจารย์
                         </h4>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        <input className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                           type="text"
-                          placeholder="รหัสประจำตัวอาจาร์ย"
+                          placeholder="รหัสประจำตัวอาจารย์"
                           onChange={(event) => {
                             setuserID(event.target.value)
                           }}
                         ></input>
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        {/* <input className=" bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           type="text"
                           placeholder="ประเภทการสอน"
                           onChange={(event) => {
                             settaughtType(event.target.value)
                           }}
-                        ></input>
+                        ></input> */}
+                        <select
+                          className='w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+                          value={taughtType}
+                          onChange={(event => {
+                            settaughtType(event.target.value)
+                            console.log(event.target.value)
+                          })}
+                          name="taughtType"
+                        >
+                          <option value={""}>---โปรดระบุประเภทการสอน---</option>
+                          <option value={"ภาคทฤษฎี"}>ภาคทฤษฎี</option>
+                          <option value={"ภาคปฏิบัติ"}>ภาคปฏิบัติ</option>
+                        </select>
                         <div className="items-center gap-2 mt-3 sm:flex">
                           <button
                             className="w-full mt-2 p-2.5 flex-1 text-white  bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
