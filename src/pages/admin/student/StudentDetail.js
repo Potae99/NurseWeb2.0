@@ -4,6 +4,7 @@ import { Route, Routes, useParams } from 'react-router-dom';
 import EditStudent from './EditStudent';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
+import LoadingPage from '../../LoadingPage';
 
 function StudentDetail() {
 
@@ -13,6 +14,9 @@ function StudentDetail() {
     const [scholarship, setScholarship] = useState([]);
 
     const { userID } = useParams();
+
+    const [loading, setLoading] = useState(undefined);
+    const [completed, setCompleted] = useState(undefined);
 
     const Toast = Swal.mixin({
         toast: true,
@@ -34,12 +38,12 @@ function StudentDetail() {
                         return _.userID !== userID;
                     })
                 )
-                
+
                 Toast.fire({
                     icon: 'success',
                     title: 'Delete data success'
                 })
-                .then(() => {window.location.href = "/admin/home";})
+                    .then(() => { window.location.href = "/admin/home"; })
 
 
             }).catch(function (error) {
@@ -61,12 +65,17 @@ function StudentDetail() {
                     return;
                 }
                 setData(res.data.data);
+                setLoading(true);
+
+                setTimeout(() => {
+                    setCompleted(true);
+                }, 1000);
 
             }).catch(error => {
                 console.log(error.res);
             });
 
-            axios.get(process.env.REACT_APP_API_URL + "/student/scholarship")
+        axios.get(process.env.REACT_APP_API_URL + "/student/scholarship")
             .then(res => {
                 console.log(res.data);
 
@@ -95,211 +104,218 @@ function StudentDetail() {
     }
 
     useEffect(() => {
-        fetchData();
+        setTimeout(() => {
+            fetchData();
+        }, 2000);
+
     }, [])
 
     console.log(data)
 
     return (
-        <div>
-            <Routes>
-                <Route path='/admin/student/edit/:userID' element={<EditStudent />} />
-            </Routes>
-            <div className=" text-black min-h-screen space-y-5 mb-10">
-                <div className=" font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลนิสิต</div>
-                <div className=' flex flex-row-reverse  '>
-                    <div className='   mr-3'>
-                        <button onClick={() => gotoStudentEdit(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
-                            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
-                                <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </span>
-                            <span className="absolute flex items-center justify-center w-full h-full text-orange-300 transition-all duration-300 transform group-hover:translate-x-full ease">แก้ไข</span>
-                            <span className="relative invisible">Button Text</span>
-                        </button>
-                    </div>
-
-                    <div className='  mr-3'>
-                        <button onClick={() => goToAddWorkHistoryList(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
-                                <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </span>
-                            <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มประวัติการทำงาน</span>
-                            <span className="relative invisible">Button Text</span>
-                        </button>
-                    </div>
-
-                    <div className='  mr-3'>
-                        <button onClick={() => deleteStudent(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
-                                <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </span>
-                            <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">ลบ</span>
-                            <span className="relative invisible">Button Text</span>
-                        </button>
-                    </div>
-                </div>
-
+        <>
+            {!completed ? (
+                <LoadingPage></LoadingPage>
+            ) : (
                 <div>
-                    <div className=' text-3xl text-center mb-5'>นิสิต : {data.nameTH}</div>
-                    {
-                        data.status == 1 ?
-                        <>
-                        <div className=' grid place-items-center'>
-                        <div className=' flex'>
-                            <p className=' text-xl text-center mb-5'>สถานะ : </p>
-                            <p className=' text-green-500 text-xl text-center mb-5 ml-5'>กำลังศึกษา</p>
-                        </div>
-                        </div>
-                        </>:<></>
-                    }
-                    {
-                        data.status == 0 ?
-                        <>
-                        <div className=' grid place-items-center'>
-                        <div className=' flex'>
-                            <p className=' text-xl text-center mb-5'>สถานะ : </p>
-                            <p className=' text-red-500 text-xl text-center mb-5 ml-5'>จบศึกษา</p>
-                        </div>
-                        </div>
-                        </>:<></>
-                    }
-                    <div className=" grid grid-cols-1 place-items-center">
-                        <div className=" block bg-gray-200 w-11/12 p-auto rounded-2xl">
-                            <div className=" flex justify-around">
-                                <div className=" ml-7">
-                                    
-                                    {data.nameTH ?
-                                        <>
-                                            <div className=" m-3">ชื่อสกุล : {data.nameTH}</div>
-                                        </> : <></>
-                                    }
-                                    {data.studentID ?
-                                        <>
-                                            <div className=" m-3">รหัสประจำตัว : {data.studentID}</div>
-                                        </> : <></>
-                                    }
-                                    {data.gender ?
-                                        <>
-                                            <div className=" m-3">เพศ : {data.gender}</div>
-                                        </> : <></>
-                                    }
-                                    {data.nationality ?
-                                        <>
-                                            <div className=" m-3">สัญชาติ : {data.nationality}</div>
-                                        </> : <></>
-                                    }
-                                    {data.phone ?
-                                        <>
-                                            <div className=" m-3">มือถือ : {data.phone}</div>
-                                        </> : <></>
-                                    }
-                                    {data.email ?
-                                        <>
-                                            <div className=" m-3">Email : {data.email}</div>
-                                        </> : <></>
-                                    }
-                                    {data.houseadd_houseNo ?
-                                        <>
-                                            <div className=" m-3">บ้านเลขที่ : {data.houseadd_houseNo}</div>
-                                        </> : <></>
-                                    }
-                                    {data.houseadd_road ?
-                                        <>
-                                            <div className=" m-3">ถนน : {data.houseadd_road}</div>
-                                        </> : <></>
-                                    }
-                                    {data.houseadd_subDistrict ?
-                                        <>
-                                            <div className=" m-3">ตำบล : {data.houseadd_subDistrict}</div>
-                                        </> : <></>
-                                    }
-                                    {data.houseadd_province ?
-                                        <>
-                                            <div className=" m-3">จังหวัด : {data.houseadd_province}</div>
-                                        </> : <></>
-                                    }
-                                    {data.presentAddress ?
-                                        <>
-                                            <div className=" m-3">ที่อยู่ปัจจุบัน : {data.presentAddress}</div>
-                                        </> : <></>
-                                    }
-                                    {data.scholarship_name ?
-                                        <>
-                                            <div className=" m-3">ประเภททุน : {data.scholarship_name}</div>
-                                        </> : <></>
-                                    }
-                                </div>
+                    <Routes>
+                        <Route path='/admin/student/edit/:userID' element={<EditStudent />} />
+                    </Routes>
+                    <div className=" text-black min-h-screen space-y-5 mb-10">
+                        <div className=" font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลนิสิต</div>
+                        <div className=' flex flex-row-reverse  '>
+                            <div className='   mr-3'>
+                                <button onClick={() => gotoStudentEdit(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
+                                        <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <span className="absolute flex items-center justify-center w-full h-full text-orange-300 transition-all duration-300 transform group-hover:translate-x-full ease">แก้ไข</span>
+                                    <span className="relative invisible">Button Text</span>
+                                </button>
+                            </div>
 
-                                <div className=" mr-7">
-                                    {data.nameENG ?
-                                        <>
-                                            <div className=" m-3">ชื่ออังกฤษ : {data.nameENG}</div>
-                                        </> : <></>
-                                    }
-                                    {data.IDnumber ?
-                                        <>
-                                            <div className=" m-3">เลขประจำตัวประชาชน : {data.IDnumber}</div>
-                                        </> : <></>
-                                    }
-                                    {data.ethnicity ?
-                                        <>
-                                            <div className=" m-3">เชื้อชาติ : {data.ethnicity}</div>
-                                        </> : <></>
-                                    }
-                                    {data.religion ?
-                                        <>
-                                            <div className=" m-3">ศาสนา : {data.religion}</div>
-                                        </> : <></>
-                                    }
-                                    {data.IDline ?
-                                        <>
-                                            <div className=" m-3">IDline : {data.IDline}</div>
-                                        </> : <></>
-                                    }
-                                    {data.Birthday ?
-                                        <>
-                                            <div className=" m-3">วันเกิด : {format(new Date(data.Birthday), 'dd/MM/yyyy')}</div>
-                                        </> : <></>
-                                    }
-                                    {data.houseadd_village ?
-                                        <>
-                                            <div className=" m-3">หมู่บ้าน : {data.houseadd_village}</div>
-                                        </> : <></>
-                                    }
-                                    {data.houseadd_alley ?
-                                        <>
-                                            <div className=" m-3">ซอย : {data.houseadd_alley}</div>
-                                        </> : <></>
-                                    }
-                                    {data.houseadd_district ?
-                                        <>
-                                            <div className=" m-3">อำเภอ : {data.houseadd_district}</div>
-                                        </> : <></>
-                                    }
-                                    {data.houseadd_postalCode ?
-                                        <>
-                                            <div className=" m-3">รหัสไปรษณีย์ : {data.houseadd_postalCode}</div>
-                                        </> : <></>
-                                    }
-                                    
-                                    {data.yearStartEnroll ?
-                                        <>
-                                            <div className=" m-3">ปีที่เริ่มศึกษา : {data.yearStartEnroll}</div>
-                                        </> : <></>
-                                    }
+                            <div className='  mr-3'>
+                                <button onClick={() => goToAddWorkHistoryList(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                                        <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มประวัติการทำงาน</span>
+                                    <span className="relative invisible">Button Text</span>
+                                </button>
+                            </div>
+
+                            <div className='  mr-3'>
+                                <button onClick={() => deleteStudent(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+                                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                                        <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">ลบ</span>
+                                    <span className="relative invisible">Button Text</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className=' text-3xl text-center mb-5'>นิสิต : {data.nameTH}</div>
+                            {
+                                data.status == 1 ?
+                                    <>
+                                        <div className=' grid place-items-center'>
+                                            <div className=' flex'>
+                                                <p className=' text-xl text-center mb-5'>สถานะ : </p>
+                                                <p className=' text-green-500 text-xl text-center mb-5 ml-5'>กำลังศึกษา</p>
+                                            </div>
+                                        </div>
+                                    </> : <></>
+                            }
+                            {
+                                data.status == 0 ?
+                                    <>
+                                        <div className=' grid place-items-center'>
+                                            <div className=' flex'>
+                                                <p className=' text-xl text-center mb-5'>สถานะ : </p>
+                                                <p className=' text-red-500 text-xl text-center mb-5 ml-5'>จบศึกษา</p>
+                                            </div>
+                                        </div>
+                                    </> : <></>
+                            }
+                            <div className=" grid grid-cols-1 place-items-center">
+                                <div className=" block bg-gray-200 w-11/12 p-auto rounded-2xl">
+                                    <div className=" flex justify-around">
+                                        <div className=" ml-7">
+
+                                            {data.nameTH ?
+                                                <>
+                                                    <div className=" m-3">ชื่อสกุล : {data.nameTH}</div>
+                                                </> : <></>
+                                            }
+                                            {data.studentID ?
+                                                <>
+                                                    <div className=" m-3">รหัสประจำตัว : {data.studentID}</div>
+                                                </> : <></>
+                                            }
+                                            {data.gender ?
+                                                <>
+                                                    <div className=" m-3">เพศ : {data.gender}</div>
+                                                </> : <></>
+                                            }
+                                            {data.nationality ?
+                                                <>
+                                                    <div className=" m-3">สัญชาติ : {data.nationality}</div>
+                                                </> : <></>
+                                            }
+                                            {data.phone ?
+                                                <>
+                                                    <div className=" m-3">มือถือ : {data.phone}</div>
+                                                </> : <></>
+                                            }
+                                            {data.email ?
+                                                <>
+                                                    <div className=" m-3">Email : {data.email}</div>
+                                                </> : <></>
+                                            }
+                                            {data.houseadd_houseNo ?
+                                                <>
+                                                    <div className=" m-3">บ้านเลขที่ : {data.houseadd_houseNo}</div>
+                                                </> : <></>
+                                            }
+                                            {data.houseadd_road ?
+                                                <>
+                                                    <div className=" m-3">ถนน : {data.houseadd_road}</div>
+                                                </> : <></>
+                                            }
+                                            {data.houseadd_subDistrict ?
+                                                <>
+                                                    <div className=" m-3">ตำบล : {data.houseadd_subDistrict}</div>
+                                                </> : <></>
+                                            }
+                                            {data.houseadd_province ?
+                                                <>
+                                                    <div className=" m-3">จังหวัด : {data.houseadd_province}</div>
+                                                </> : <></>
+                                            }
+                                            {data.presentAddress ?
+                                                <>
+                                                    <div className=" m-3">ที่อยู่ปัจจุบัน : {data.presentAddress}</div>
+                                                </> : <></>
+                                            }
+                                            {data.scholarship_name ?
+                                                <>
+                                                    <div className=" m-3">ประเภททุน : {data.scholarship_name}</div>
+                                                </> : <></>
+                                            }
+                                        </div>
+
+                                        <div className=" mr-7">
+                                            {data.nameENG ?
+                                                <>
+                                                    <div className=" m-3">ชื่ออังกฤษ : {data.nameENG}</div>
+                                                </> : <></>
+                                            }
+                                            {data.IDnumber ?
+                                                <>
+                                                    <div className=" m-3">เลขประจำตัวประชาชน : {data.IDnumber}</div>
+                                                </> : <></>
+                                            }
+                                            {data.ethnicity ?
+                                                <>
+                                                    <div className=" m-3">เชื้อชาติ : {data.ethnicity}</div>
+                                                </> : <></>
+                                            }
+                                            {data.religion ?
+                                                <>
+                                                    <div className=" m-3">ศาสนา : {data.religion}</div>
+                                                </> : <></>
+                                            }
+                                            {data.IDline ?
+                                                <>
+                                                    <div className=" m-3">IDline : {data.IDline}</div>
+                                                </> : <></>
+                                            }
+                                            {data.Birthday ?
+                                                <>
+                                                    <div className=" m-3">วันเกิด : {format(new Date(data.Birthday), 'dd/MM/yyyy')}</div>
+                                                </> : <></>
+                                            }
+                                            {data.houseadd_village ?
+                                                <>
+                                                    <div className=" m-3">หมู่บ้าน : {data.houseadd_village}</div>
+                                                </> : <></>
+                                            }
+                                            {data.houseadd_alley ?
+                                                <>
+                                                    <div className=" m-3">ซอย : {data.houseadd_alley}</div>
+                                                </> : <></>
+                                            }
+                                            {data.houseadd_district ?
+                                                <>
+                                                    <div className=" m-3">อำเภอ : {data.houseadd_district}</div>
+                                                </> : <></>
+                                            }
+                                            {data.houseadd_postalCode ?
+                                                <>
+                                                    <div className=" m-3">รหัสไปรษณีย์ : {data.houseadd_postalCode}</div>
+                                                </> : <></>
+                                            }
+
+                                            {data.yearStartEnroll ?
+                                                <>
+                                                    <div className=" m-3">ปีที่เริ่มศึกษา : {data.yearStartEnroll}</div>
+                                                </> : <></>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className='  mr-3 place-items-end grid'>
+                    <div className='  mr-3 place-items-end grid'>
                         <button onClick={() => goToWorkHistoryList(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
                             <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
                                 <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -309,9 +325,12 @@ function StudentDetail() {
                             <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">ประวัติการทำงาน</span>
                             <span className="relative invisible">Button Text</span>
                         </button>
-            </div>
-            
-        </div>
+                    </div>
+
+                </div>
+            )}
+
+        </>
     )
 }
 

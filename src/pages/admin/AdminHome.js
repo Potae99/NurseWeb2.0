@@ -1,18 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Professertable from '../../components/Table/Professertable'
 import Studenttable from '../../components/Table/Studenttable'
 import Admintable from '../../components/Table/Admintable'
 import DropDown from '../../components/Button/DropDown'
 
+import Lottie from 'react-lottie';
+import * as heart from "../../80501-heart.json"
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: heart.default,
+  rendererSettings: {
+    preserveAspectRation: 'xMidYmid slice'
+  }
+};
+
 
 
 function AdminHome() {
-  
+
+  const [loading, setLoading] = useState(undefined);
+  const [completed, setCompleted] = useState(undefined);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+
+      setTimeout(() => {
+        setCompleted(true);
+      }, 1000);
+    }, 2000);
+  }, []);
+
   return (
-    
+
     <div>
-      
-      <div className=' min-h-screen'>
+      {!completed ? (
+        <Lottie options={defaultOptions} height={200} width={200} />
+      ) : (<div className=' min-h-screen'>
         <h1 className=' text-black text-4xl text-center mt-10'>จัดการผู้ใช้</h1>
         <div className='grid grid-cols-1  place-items-end mr-4 mt-4'>
           <DropDown></DropDown>
@@ -24,12 +50,11 @@ function AdminHome() {
         <p className=' mt-3 mb-1 ml-2 text-black'>ผู้ดูแลระบบ</p>
         <Admintable></Admintable>
 
+      </div>)
+      }
 
-      </div>
     </div>
   )
-
-
 
 }
 
