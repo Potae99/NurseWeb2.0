@@ -1,10 +1,13 @@
 import React from 'react'
 import axios from 'axios';
 import { useState } from 'react';
+import {  useParams } from 'react-router-dom';
 
 function Studentevaltheory() {
     const [data, setData] = useState([]);
-    const [evalTaughID, setevalTaughID] = useState("");
+
+    const { evalTaughID } = useParams();
+
     const [section1_4, setsection1_4] = useState("");
 
     const [section1_5, setsection1_5] = useState("");

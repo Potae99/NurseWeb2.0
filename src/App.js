@@ -40,6 +40,7 @@ import Classdetail from './pages/admin/course/class/Classdetail';
 import Studenthome from './pages/student/Studenthome';
 import Studentevalpractice from './pages/student/Studentevalpractice';
 import Studentevaltheory from './pages/student/Studentevaltheory';
+import StudentevalCourse from './pages/student/StudentevalCourse';
 
 //teacher
 import Teacherhome from './pages/teacher/Teacherhome';
@@ -243,6 +244,12 @@ const router = [
     path: "/admin/class/detail/:classID/*",
     element: <Classdetail />,
     level: "admin"
+
+  },
+  {
+    path: "/student/eval/course",
+    element: <StudentevalCourse />,
+    level: "student"
 
   }
 
