@@ -2,18 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-
-import Lottie from 'react-lottie';
-import * as heart from "../../../80501-heart.json"
-
-const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: heart.default,
-    rendererSettings: {
-        preserveAspectRation: 'xMidYmid slice'
-    }
-};
+import LoadingPage from '../../LoadingPage';
 
 function AddStudent() {
 
@@ -260,7 +249,7 @@ function AddStudent() {
     return (
         <>
             {!completed ? (
-                <Lottie options={defaultOptions} height={200} width={200} />
+                <LoadingPage></LoadingPage>
             ) : (
                 <div className=' bg-white slate-500 min-h-screen'>
                     <h1 className=' text-4xl text-center m-3 text-black'>เพิ่มผู้ใช้งาน</h1>

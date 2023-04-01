@@ -3,19 +3,7 @@ import Professertable from '../../components/Table/Professertable'
 import Studenttable from '../../components/Table/Studenttable'
 import Admintable from '../../components/Table/Admintable'
 import DropDown from '../../components/Button/DropDown'
-
-import Lottie from 'react-lottie';
-import * as heart from "../../80501-heart.json"
-
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: heart.default,
-  rendererSettings: {
-    preserveAspectRation: 'xMidYmid slice'
-  }
-};
-
+import LoadingPage from '../LoadingPage'
 
 
 function AdminHome() {
@@ -37,7 +25,7 @@ function AdminHome() {
 
     <div>
       {!completed ? (
-        <Lottie options={defaultOptions} height={200} width={200} />
+        <LoadingPage></LoadingPage>
       ) : (<div className=' min-h-screen'>
         <h1 className=' text-black text-4xl text-center mt-10'>จัดการผู้ใช้</h1>
         <div className='grid grid-cols-1  place-items-end mr-4 mt-4'>

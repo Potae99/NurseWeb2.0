@@ -24,7 +24,7 @@ function LoadingPage() {
                 setCompleted(true);
             }, 1000);
         }, 2000);
-    })
+    },[])
 
 
   return (

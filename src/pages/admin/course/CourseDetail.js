@@ -3,6 +3,7 @@ import StudentPopup from '../../../components/Button/StudentPopup'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import LoadingPage from '../../LoadingPage';
 
 function CourseDetail() {
     const [data, setData] = useState([]);
@@ -23,6 +24,9 @@ function CourseDetail() {
     const [category, setCategory] = useState([]);
 
     const [categoryName, setCategoryName] = useState('');
+
+    const [loading, setLoading] = useState(undefined);
+    const [completed, setCompleted] = useState(undefined);
 
     const Toast = Swal.mixin({
         toast: true,
@@ -72,8 +76,6 @@ function CourseDetail() {
     }
 
     const fetchData = () => {
-
-
         axios.get(process.env.REACT_APP_API_URL + "/course/detail", { params: { courseID: courseID } })
             .then(res => {
                 console.log(res.data);
@@ -91,6 +93,11 @@ function CourseDetail() {
                 setStudyTimeTheory(res.data.data.studyTimeTheory);
                 setStudyTimePractice(res.data.data.studyTimePractice);
                 setStudyTimeSelf(res.data.data.studyTimeSelf);
+                setLoading(true);
+                
+                setTimeout(() => {
+                    setCompleted(true);
+                }, 1000);
 
             }).catch(error => {
                 console.log(error.res);
@@ -113,7 +120,9 @@ function CourseDetail() {
     }
 
     useEffect(() => {
-        fetchData();
+        setTimeout(() => {
+            fetchData();
+        }, 2000);
     }, [])
 
     const checkDataChange = () => {
@@ -178,14 +187,17 @@ function CourseDetail() {
 
     console.log(categoryInfo)
     return (
-        <div>
+        <>
+        {!completed?(
+            <LoadingPage></LoadingPage>
+        ):(
+            <div>
             <div className=" text-black min-h-screen border space-y-5 mb-10">
                 <div className=" font-bold text-4xl m-7 grid grid-cols-1 place-items-center">ข้อมูลรายวิชา</div>
                 <div>
                     <div className='container mx-auto text-black'>
                         <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
-                            <div >
-                                <p>หมวดวิชา</p>
+                            <div ><p>หมวดวิชา</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
                                         defaultValue={categoryName}
@@ -210,9 +222,7 @@ function CourseDetail() {
                                     </select>
                                 </div>
                             </div>
-
-                            <div >
-                                <p>ชื่อไทย</p>
+                            <div ><p>ชื่อไทย</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
                                         defaultValue={courseNameTH}
@@ -226,9 +236,7 @@ function CourseDetail() {
                                     />
                                 </div>
                             </div>
-
-                            <div >
-                                <p>ชื่ออังกฤษ</p>
+                            <div ><p>ชื่ออังกฤษ</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
                                         defaultValue={courseNameENG}
@@ -242,9 +250,7 @@ function CourseDetail() {
                                     />
                                 </div>
                             </div>
-
-                            <div >
-                                <p>รายละเอียดวิชา</p>
+                            <div ><p>รายละเอียดวิชา</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
                                         defaultValue={detail}
@@ -258,9 +264,7 @@ function CourseDetail() {
                                     />
                                 </div>
                             </div>
-
-                            <div >
-                                <p>หน่วยกิต</p>
+                            <div ><p>หน่วยกิต</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
                                         defaultValue={creditStudy}
@@ -274,9 +278,7 @@ function CourseDetail() {
                                     />
                                 </div>
                             </div>
-
-                            <div >
-                                <p>ชั่วโมงทฤษฎี</p>
+                            <div ><p>ชั่วโมงทฤษฎี</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
                                         defaultValue={studyTimeTheory}
@@ -290,9 +292,7 @@ function CourseDetail() {
                                     />
                                 </div>
                             </div>
-
-                            <div >
-                                <p>ชั่วโมงปฏิบัติ</p>
+                            <div ><p>ชั่วโมงปฏิบัติ</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
                                         defaultValue={studyTimePractice}
@@ -306,9 +306,7 @@ function CourseDetail() {
                                     />
                                 </div>
                             </div>
-
-                            <div >
-                                <p>ชั่วโมงศึกษาด้วยตัวเอง</p>
+                            <div ><p>ชั่วโมงศึกษาด้วยตัวเอง</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
                                         defaultValue={studyTimeSelf}
@@ -362,11 +360,11 @@ function CourseDetail() {
                         <span className="relative invisible">Button Text</span>
                     </button>
                 </div>
-
             </div>
-
         </div>
-
+        )}
+        
+        </>
     )
 }
 

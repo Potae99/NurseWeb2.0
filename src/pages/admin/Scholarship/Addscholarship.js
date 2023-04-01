@@ -2,21 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useState, useEffect } from 'react';
-
-import Lottie from 'react-lottie';
-import * as heart from "../../../80501-heart.json"
-
-const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: heart.default,
-    rendererSettings: {
-        preserveAspectRation: 'xMidYmid slice'
-    }
-};
-
-
-
+import LoadingPage from '../../LoadingPage';
 
 function Addscholarship() {
     const [scholarship_name, setscholarship_name] = useState("");
@@ -133,9 +119,7 @@ function Addscholarship() {
     return (
         <>
             {!completed ? (
-                <div className=''>
-                <Lottie options={defaultOptions} height={200} width={200}/>
-                </div>
+                <LoadingPage></LoadingPage>
             ) : (
                 <div className=' text-black bg-white min-h-screen'>
                     <h1 className='mt-3 ml-3 text-4xl'>ทุนการศึกษา</h1>
