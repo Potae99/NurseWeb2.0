@@ -8412,7 +8412,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8618,6 +8618,13 @@ react-onclickoutside@^6.12.2:
   version "6.12.2"
   resolved "https://registry.npmjs.org/react-onclickoutside/-/react-onclickoutside-6.12.2.tgz"
   integrity sha512-NMXGa223OnsrGVp5dJHkuKxQ4czdLmXSp5jSV9OqiCky9LOpPATn3vLldc+q5fK3gKbEHvr7J1u0yhBh/xYkpA==
+
+react-paginate@^8.1.5:
+  version "8.1.5"
+  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-8.1.5.tgz#59eda2ab13c7d962b19ef815cd84e7e001e641c2"
+  integrity sha512-DnwbzimjyCmiregTP8npoHu2HvJ3NDm9+kBM8mx7dOVc66/4lSWzz0uTd1smRSENf1yD7SCZEOMduXbdyxNj1A==
+  dependencies:
+    prop-types "^15"
 
 react-popper@^2.3.0:
   version "2.3.0"

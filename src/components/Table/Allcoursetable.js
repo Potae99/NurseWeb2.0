@@ -74,7 +74,7 @@ useEffect(() => {
           <tr className="  hover:bg-gray-200 bg-white border-black"
           >
             <td className="py-4 px-6" >{index + 1}</td>
-            <td className="py-4 px-6" >{_.courseID}</td>
+            <td className="py-4 px-6" >{_.courseID_number }</td>
             <td className="py-4 px-6">{_.courseNameTH}</td>
             <td className="py-4 px-6">{_.courseNameENG}</td>
             <td className="py-4 px-6">{_.creditStudy}</td>

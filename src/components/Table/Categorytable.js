@@ -1,77 +1,135 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Categorytable() {
-
-    const [data, setData] = useState([]);
-
-    const {categoryID} = useParams();
-
-    const fetchData = () => {
-        axios.get(process.env.REACT_APP_API_URL + "/course/category")
-            .then(res => {
-                console.log(res.data);
-
-                if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
-                    return;
-                }
-                setData(res.data.data);
-            })
-            .catch(error => {
-                console.log(error.res);
-            });
-    }
+    const [category, setCategory] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(false);
+    const [completed, setCompleted] = useState(false);
+    const itemsPerPage = 5;
+    const totalPages = category ? Math.ceil(category.length / itemsPerPage) : 0;
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
+        const fetchData = () => {
+          axios.get(process.env.REACT_APP_API_URL + "/course/category")
+            .then(res => {
+              console.log(res.data);
+      
+              if (res.data.error === true) {
+                console.log(res.data);
+                console.log("ERROR FOUND WHEN GET DATA FROM API");
+                return;
+              }
+              setCategory(res.data.data);
+              setLoading(true);
+      
+              setTimeout(() => {
+                setCompleted(true);
+              }, 1000);
+            })
+            .catch(error => {
+              console.log(error.res)
+            })
+        }
+      
         fetchData();
-    }, [])
+      }, [searchTerm]);
 
-    const goToCategoryDetail = (categoryID) => {
-        window.location.href = '/admin/course/category/detail/' + categoryID;
+    const handleClick = (e, page) => {
+        e.preventDefault();
+        setCurrentPage(page);
+    };
+
+    const renderTable = () => {
+        if (!category) {
+            return null;
+        }
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        return filterCategory.slice(start, end).map((_, index) => (
+            <tbody key={start + index}>
+              <tr className="hover:bg-gray-200 bg-white border-b">
+                <td className="py-4 px-6">{start + index + 1}</td>
+                <td className="py-4 px-6">{_.categoryName}</td>
+              </tr>
+            </tbody>
+          ));
+    };
+
+    const renderPageNumbers = () => {
+        if (!category) {
+            return null;
+        }
+        const pageNumbers = [];
+        for (let i = 1; i <= totalPages; i++) {
+            pageNumbers.push(
+                <li
+                    key={i}
+                    className={`${currentPage === i ? "bg-blue-500 text-white" : "bg-white text-blue-500"
+                        } hover:bg-blue-200 inline-block mx-1 px-3 py-1 rounded-full cursor-pointer`}
+                >
+                    <a href="#!" onClick={(e) => handleClick(e, i)}>
+                        {i}
+                    </a>
+                </li>
+            );
+        }
+        return pageNumbers;
+    };
+
+    if (!loading) {
+        return <p>Loading...</p>;
     }
 
+    if (loading && completed && category.length === 0) {
+        return <p>No categories found.</p>;
+    }
+
+    const filterCategory = category.filter((item) =>
+        item.categoryName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // if (!filterCategory.length) {
+    //     return (
+    //         <tbody>
+    //             <tr className="hover:bg-gray-200 bg-white border-b">
+    //                 <td colSpan="2" className="py-4 px-6 text-center">
+    //                     No categories found.
+    //                 </td>
+    //             </tr>
+    //         </tbody>
+    //     );
+    // }
+
     return (
-        <div>
-            <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
-                <table className=" w-full text-sm text-left text-black">
-                    <thead className="text-sm text-black uppercase bg-orange-300">
-                        <tr  >
-                            <th scope="col" className="py-3 px-6" >ลำดับ</th>
-                            <th scope="col" className="py-3 px-6">ชื่อหมวดหมู่วิชา</th>
-                            <th scope="col" className="py-3 px-6">การกระทำ</th>
-                        </tr>
-                    </thead>
-                    {data.map((_, index) => (
-                        <tbody key={index}>
-                            <tr className="  hover:bg-gray-200 bg-white border-black"
-                            >
-                                <td className="py-4 px-6" >{index + 1}</td>
-                                <td className="py-4 px-6">{_.categoryName}</td>
-                                <td className="py-4 px-6 flex flex-row">
-                                    <div className=' ml-3'
-                                        content="View Admin"
-                                        color="error"
-                                        onClick={() => console.log("View Admin", _.courseID)}>
-                                        <button onClick={ () => goToCategoryDetail(_.categoryID)}>
-                                            <svg width="20" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M13.0572 0.5C4.86 0.5 0 10.22 0 10.22C0 10.22 4.86 19.94 13.0572 19.94C21.06 19.94 25.92 10.22 25.92 10.22C25.92 10.22 21.06 0.5 13.0572 0.5ZM12.96 3.74C16.5564 3.74 19.44 6.656 19.44 10.22C19.44 13.8164 16.5564 16.7 12.96 16.7C9.396 16.7 6.48 13.8164 6.48 10.22C6.48 6.656 9.396 3.74 12.96 3.74ZM12.96 6.98C11.178 6.98 9.72 8.438 9.72 10.22C9.72 12.002 11.178 13.46 12.96 13.46C14.742 13.46 16.2 12.002 16.2 10.22C16.2 9.896 16.0704 9.6044 16.0056 9.3128C15.7464 9.8312 15.228 10.22 14.58 10.22C13.6728 10.22 12.96 9.5072 12.96 8.6C12.96 7.952 13.3488 7.4336 13.8672 7.1744C13.5756 7.0772 13.284 6.98 12.96 6.98Z" fill="black" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-
-                    ))}
-
-
-                </table>
+        <>
+            <input
+                className=" mb-5 w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                placeholder="ค้นหาหมวดวิชา..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <table className="w-full text-sm text-left text-black">
+                <thead className="text-sm text-black uppercase bg-orange-300">
+                    <tr>
+                        <th scope="col" className="py-3 px-6">
+                            ลำดับ
+                        </th>
+                        <th scope="col" className="py-3 px-6">
+                            ชื่อหมวดวิชา
+                        </th>
+                    </tr>
+                </thead>
+                {renderTable()}
+            </table>
+            <div className="flex justify-center mt-4">
+                <ul className="flex">
+                    {renderPageNumbers()}
+                </ul>
             </div>
-        </div>
-    )
+        </>
+    );
 }
 
 export default Categorytable

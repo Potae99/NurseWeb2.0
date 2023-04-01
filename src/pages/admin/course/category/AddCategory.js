@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import LoadingPage from '../../../LoadingPage';
+import Categorytable from '../../../../components/Table/Categorytable'
 
 
 function AddCategory() {
@@ -150,7 +151,7 @@ function AddCategory() {
             </div>
           </div>
 
-          <div className=" grid grid-cols-1 place-items-center">
+          {/* <div className=" grid grid-cols-1 place-items-center">
             <div className=" text-black block bg-gray-200 w-2/3 p-auto rounded-2xl">
               <div className=' relative overflow-x-auto shadow-md sm:rounded-lg'>
                 <table className=" w-full text-sm text-left text-black">
@@ -188,7 +189,9 @@ function AddCategory() {
                 </table>
               </div>
             </div>
-          </div>
+          </div> */}
+          <Categorytable></Categorytable>
+
           <div className=' mt-7 grid grid-cols-2 '>
             <div className=' ml-3'>
               <button onClick={() => backToCourseAll()} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">

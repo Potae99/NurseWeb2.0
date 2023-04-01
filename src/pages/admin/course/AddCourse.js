@@ -13,6 +13,7 @@ function AddCourse() {
     const [studyTimeTheory, setstudyTimeTheory] = useState("");
     const [studyTimePractice, setstudyTimePractice] = useState("");
     const [studyTimeSelf, setstudyTimeSelf] = useState("");
+    const [courseID_number, setCourseID_number] = useState("");
 
     const [data, setData] = useState([]);
 
@@ -44,7 +45,8 @@ function AddCourse() {
             creditStudy: creditStudy,
             studyTimeTheory: studyTimeTheory,
             studyTimePractice: studyTimePractice,
-            studyTimeSelf: studyTimeSelf
+            studyTimeSelf: studyTimeSelf,
+            courseID_number: courseID_number
 
         }).then(() => {
             setData([
@@ -58,7 +60,8 @@ function AddCourse() {
                     creditStudy: creditStudy,
                     studyTimeTheory: studyTimeTheory,
                     studyTimePractice: studyTimePractice,
-                    studyTimeSelf: studyTimeSelf
+                    studyTimeSelf: studyTimeSelf,
+                    courseID_number: courseID_number
 
                 }
             ])
@@ -143,6 +146,19 @@ function AddCourse() {
                                             category.map((_, index) => (<option key={index} value={_.categoryID}>{_.categoryName}</option>))
                                         }
                                     </select>
+                                </div>
+                            </div>
+                            <div ><p>รหัสวิชา</p>
+                                <div className="mb-5 flex justify-center ">
+                                    <input
+                                        onChange={(event) => {
+                                            setCourseID_number(event.target.value)
+                                        }}
+                                        type="text"
+                                        name="courseID_number"
+                                        placeholder="รหัสวิชา"
+                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                    />
                                 </div>
                             </div>
                             <div ><p>ชื่อไทย</p>
