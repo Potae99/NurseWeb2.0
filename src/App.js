@@ -38,9 +38,10 @@ import Classdetail from './pages/admin/course/class/Classdetail';
 
 //student
 import Studenthome from './pages/student/Studenthome';
-import Studentevalpractice from './pages/student/Studentevalpractice';
-import Studentevaltheory from './pages/student/Studentevaltheory';
-import StudentevalCourse from './pages/student/StudentevalCourse';
+import Studentevalpractice from './pages/student/eval/Studentevalpractice';
+import Studentevaltheory from './pages/student/eval/Studentevaltheory';
+import StudentevalCourse from './pages/student/eval/StudentevalCourse';
+import StudentallEval from './pages/student/eval/StudentallEval';
 
 //teacher
 import Teacherhome from './pages/teacher/Teacherhome';
@@ -249,6 +250,12 @@ const router = [
   {
     path: "/student/eval/course",
     element: <StudentevalCourse />,
+    level: "student"
+
+  },
+  {
+    path: "/student/eval/all",
+    element: <StudentallEval />,
     level: "student"
 
   }

@@ -52,9 +52,9 @@ function SideNavbar({ session }) {
       { id: 2, label: "ผลการประเมินรายวิชา", icon: ArticleIcon, link: "/user/teacher/estimateMySubject" },
     ],
     "student": [
-      { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/user/student/estimate" },
+      { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/student/home" },
       { id: 2, label: "รายวิชา", icon: ArticleIcon, link: "/user/student/estimate" },
-      { id: 3, label: "การประเมิน", icon: VideosIcon, link: "/user/student/estimate" },
+      { id: 3, label: "การประเมิน", icon: VideosIcon, link: "/student/eval/all" },
     ]
   };
 
