@@ -11,9 +11,6 @@ function StudentevalCourse() {
     const [section1_1, setsection1_1] = useState("");
     const [section1_2_1, setsection1_2_1] = useState("");
     const [section1_2_2, setsection1_2_2] = useState("");
-
-
-
     const [section2_1, setsection2_1] = useState("");
 
     const [section2_2, setsection2_2] = useState("");
@@ -91,7 +88,7 @@ function StudentevalCourse() {
     const addeval = () => {
 
 
-        axios.post(process.env.REACT_APP_API_URL + "/eval/taugh/practice", {
+        axios.post(process.env.REACT_APP_API_URL + "/eval/class", {
             studyID: studyID,
             section1_1: section1_1,
             section1_2_1: section1_2_1,
@@ -212,9 +209,46 @@ function StudentevalCourse() {
 
                 }
             ])
-            window.location.href = "/admin/home";
+            window.location.href="/student/eval/all"
+
         })
     }
+
+    // console.log(section1_1)
+    // console.log(section1_2_1)
+    // console.log(section1_2_2)
+
+
+
+    // console.log(section2_1)
+    // console.log(section2_2)
+    // console.log(section2_3)
+    // console.log(section2_4)
+    // console.log(section2_5)
+    // console.log(section2_6)
+    // console.log(section2_7)
+    // console.log(section2_8)
+    // console.log(section2_9)
+    // console.log(section2_10)
+    // console.log(section2_11)
+    // console.log(section2_12)
+    // console.log(section2_13)
+    // console.log(section2_14)
+    // console.log(section2_15)
+    // console.log(section2_16)
+    // console.log(section2_17)
+    // console.log(section2_18)
+    // console.log(section2_19)
+    // console.log(section2_20)
+
+    // console.log(comment1)
+    // console.log(comment2)
+    // console.log(comment3)
+    // console.log(comment4)
+    // console.log(comment5)
+
+
+
     return (
         <div>
             <div className=" text-black min-h-screen  space-y-5 mb-10">
@@ -223,116 +257,51 @@ function StudentevalCourse() {
                     <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล</p>
                     <p>คณะพยาบาลศาสตร์ มหาวิทยาลัยนเรศวร</p>
                 </div>
-                <div className=' text-center'>
-                    <p>รหัสรายวิชา{ }  ชื่อรายวิชา{ }</p>
-                    <p>ผู้รับผิดชอบรายวิชา{ }</p>
-                </div>
                 <div>
                     <p>คำชี้แจง</p>
                     <p>กรุณาทำเครื่องหมายในช่องว่างที่ตรงกับความคิดเห็นของท่าน</p>
 
-                    {/* <p>1.โปรดให้คะแนนประเมินโดย &#9733; = 1 ,&#9733;&#9733; = 2 ,&#9733;&#9733;&#9733; = 3 ,&#9733;&#9733;&#9733;&#9733; = 4 ,&#9733;&#9733;&#9733;&#9733;&#9733; = 5</p>
-            <p>2.เป็นการประเมินภาพรวมของอาจาร์ยทุกท่านที่เข้าร่วมการสอน</p> */}
                 </div>
                 <div>
-                    <p>1. อาจารย์ได้แจกประมวลการเรียนรายวิชา ในชั่วโมงแรกของการเรียน &#40;รายละเอียดเกี่ยวกับวัตถุประสงค์ เนื้อหา ตาราประกอบและวิธีการวัดผล&#41; </p>
-                    <div className=' flex '>
+                    <div>
+                        <p>1. อาจารย์ได้แจกประมวลการเรียนรายวิชา ในชั่วโมงแรกของการเรียน (รายละเอียดเกี่ยวกับวัตถุประสงค์ เนื้อหา ตาราประกอบและวิธีการวัดผล)</p>
+                        <div className=' flex space-x-3'>
+                            <p>ใช่</p>
+                            <input onChange={(event) => {
+                                setsection1_1(event.target.value)
+                            }} type="radio" name="section1_1" value={1} className=" bg-orange-300" />
+                            <p>ไม่ใช่</p>
+                            <input onChange={(event) => {
+                                setsection1_1(event.target.value)
+                            }} type="radio" name="section1_1" value={0} className=" bg-orange-300" />
+                        </div>
+                    </div>
+                    <div>
+                        <p>2.อาจารย์จัดให้มีการสอบ</p>
+                        <p>ก.การสอบย่อย</p>
+                        <div className=' flex space-x-3'>
+                            <p>ใช่</p>
+                            <input onChange={(event) => {
+                                setsection1_2_1(event.target.value)
+                            }} type="radio" name="section1_2_1" value={1} className=" bg-orange-300" />
+                            <p>ไม่ใช่</p>
+                            <input onChange={(event) => {
+                                setsection1_2_1(event.target.value)
+                            }} type="radio" name="section1_2_1" value={0} className=" bg-orange-300" />
+                        </div>
+                        <p>ข.สอบกลางภาค/ปลายภาค</p>
+                        <div className=' flex space-x-3'>
+                            <p>ใช่</p>
+                            <input onChange={(event) => {
+                                setsection1_2_2(event.target.value)
+                            }} type="radio" name="section1_2_2" value={1} className=" bg-orange-300" />
+                            <p>ไม่ใช่ </p>
+                            <input onChange={(event) => {
+                                setsection1_2_2(event.target.value)
+                            }} type="radio" name="section1_2_2" value={0} className=" bg-orange-300" />
+                        </div>
+                    </div>
 
-                        <div className=' flex space-x-3'>
-                            <div className="form-control ml-3">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_1(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_1"
-                                        value={1}
-                                        className="radio checked:bg-green-500"
-                                        checked />
-                                </label>
-                            </div>
-                            <div className="form-control">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ไม่ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_1(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_1"
-                                        value={0}
-                                        className="radio checked:bg-red-500"
-                                        checked />
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <p>2.อาจารย์จัดให้มีการสอบ</p>
-                    <div className=' flex'>
-                        ก.สอบย่อย
-                        <div className=' flex space-x-3'>
-                            <div className="form-control ml-3">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_2_1(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_2_1"
-                                        value={1}
-                                        className="radio checked:bg-green-500"
-                                        checked />
-                                </label>
-                            </div>
-                            <div className="form-control">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ไม่ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_2_1(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_2_1"
-                                        value={0}
-                                        className="radio checked:bg-red-500"
-                                        checked />
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className=' flex'>
-                        ข.สอบกลางภาค/ปลายภาค
-                        <div className=' flex space-x-3'>
-                            <div className="form-control ml-3">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_2_2(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_2_2"
-                                        value={1}
-                                        className="radio checked:bg-green-500"
-                                        checked />
-                                </label>
-                            </div>
-                            <div className="form-control">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ไม่ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_2_2(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_2_2"
-                                        value={0}
-                                        className="radio checked:bg-red-500"
-                                        checked />
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    
                     <p>ส่วนที่ 2 กรุณาทำเครื่องหมาย &#9733; ในช่องว่างที่ตรงกับความคิดเห็นของท่าน</p>
                     <b>เกณฑ์การประเมิน</b>
                     <p>&#9733;&#9733;&#9733;&#9733;&#9733; ตรงกับระดับความคิดเห็น &#40;มากที่สุด สมบูรณ์ ครบถ้วน&#41; </p>
@@ -342,555 +311,555 @@ function StudentevalCourse() {
                     <p>&#9733; ตรงกับระดับความคิดเห็น น้อยที่สุด&#40;ควรแก้ไขปรับปรุง &#41;</p>
                     <div className=" grid grid-cols-1 place-items-center ">
                         <div className=" block bg-gray-100  p-auto rounded-2xl">
-                    <div className="  grid grid-cols-3 gap-4 p-4">
-                        <p>1.อาจารย์ได้แจ้งกำหนดการเรียนในส่วนที่อาจารย์รับผิดชอบอย่างชัดเจน</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_1(event.target.value)
-                            }} type="radio" name="section2_1" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_1(event.target.value)
-                            }} type="radio" name="section2_1" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_1(event.target.value)
-                            }} type="radio" name="section2_1" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_1(event.target.value)
-                            }} type="radio" name="section2_1" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_1(event.target.value)
-                            }} type="radio" name="section2_1" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                 setsection2_1_comment(event.target.value)
-                            }}
-                            name='section2_1_comment'
-                            placeholder='ข้อเสนอแนะที่ 1'
-                             value={section2_1_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        
-                        <p>2.อาจารย์ได้ชี้แจงจุดมุ่งหมายการเรียนการสอนแต่ละครั้งอย่างชัดเจน</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_2(event.target.value)
-                            }} type="radio" name="section2_2" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_2(event.target.value)
-                            }} type="radio" name="section2_2" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_2(event.target.value)
-                            }} type="radio" name="section2_2" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_2(event.target.value)
-                            }} type="radio" name="section2_2" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_2(event.target.value)
-                            }} type="radio" name="section2_2" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_2_comment(event.target.value)
-                            }}
-                            name='section2_2_comment'
-                            placeholder='ข้อเสนอแนะที่ 2'
-                             value={section2_2_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>3.อาจารย์มีความพร้อมในการสอนแต่ละครั้ง</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_3(event.target.value)
-                            }} type="radio" name="section2_3" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_3(event.target.value)
-                            }} type="radio" name="section2_3" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_3(event.target.value)
-                            }} type="radio" name="section2_3" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_3(event.target.value)
-                            }} type="radio" name="section2_3" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_3(event.target.value)
-                            }} type="radio" name="section2_3" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                 setsection2_3_comment(event.target.value)
-                            }}
-                            name='section2_3_comment'
-                            placeholder='ข้อเสนอแนะที่ 3'
-                            value={section2_3_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>4.อาจารย์ได้ชี้แจงหลักเกณฑ์การวัดและประเมินผลในส่วนที่อาจารย์รับผิดชอบอย่างชัดเจน</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_4(event.target.value)
-                            }} type="radio" name="section2_4" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_4(event.target.value)
-                            }} type="radio" name="section2_4" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_4(event.target.value)
-                            }} type="radio" name="section2_4" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_4(event.target.value)
-                            }} type="radio" name="section2_4" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_4(event.target.value)
-                            }} type="radio" name="section2_4" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                 setsection2_4_comment(event.target.value)
-                            }}
-                            name='section2_4_comment'
-                            placeholder='ข้อเสนอแนะที่ 4'
-                            value={section2_4_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>5.อาจารย์อธิบายเนื้อหาวิชาได้อย่างชัดเจนและเข้าใจง่าย</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_5(event.target.value)
-                            }} type="radio" name="section2_5" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_5(event.target.value)
-                            }} type="radio" name="section2_5" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_5(event.target.value)
-                            }} type="radio" name="section2_5" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_5(event.target.value)
-                            }} type="radio" name="section2_5" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_5(event.target.value)
-                            }} type="radio" name="section2_5" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_5_comment(event.target.value)
-                            }}
-                            name='comment'
-                            placeholder='ข้อเสนอแนะที่ 5'
-                            value={section2_5_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>6.อาจารย์ยกตัวอย่างประกอบได้อย่างเหมาะสม</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_6(event.target.value)
-                            }} type="radio" name="section2_6" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_6(event.target.value)
-                            }} type="radio" name="section2_6" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_6(event.target.value)
-                            }} type="radio" name="section2_6" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_6(event.target.value)
-                            }} type="radio" name="section2_6" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_6(event.target.value)
-                            }} type="radio" name="section2_6" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                 setsection2_6_comment(event.target.value)
-                            }}
-                            name='section2_6_comment'
-                            placeholder='ข้อเสนอแนะที่ 6'
-                             value={section2_6_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
+                            <div className="  grid grid-cols-3 gap-4 p-4">
+                                <p>1.อาจารย์ได้แจ้งกำหนดการเรียนในส่วนที่อาจารย์รับผิดชอบอย่างชัดเจน</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_1(event.target.value)
+                                    }} type="radio" name="section2_1" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_1(event.target.value)
+                                    }} type="radio" name="section2_1" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_1(event.target.value)
+                                    }} type="radio" name="section2_1" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_1(event.target.value)
+                                    }} type="radio" name="section2_1" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_1(event.target.value)
+                                    }} type="radio" name="section2_1" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_1_comment(event.target.value)
+                                    }}
+                                    name='section2_1_comment'
+                                    placeholder='ข้อเสนอแนะที่ 1'
+                                    value={section2_1_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
 
-                        <p>7.อาจารย์ตอบคำถามได้ชัดเจน</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_7(event.target.value)
-                            }} type="radio" name="section2_7" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_7(event.target.value)
-                            }} type="radio" name="section2_7" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_7(event.target.value)
-                            }} type="radio" name="section2_7" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_7(event.target.value)
-                            }} type="radio" name="section2_7" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_7(event.target.value)
-                            }} type="radio" name="section2_7" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_7_comment(event.target.value)
-                                
-                            }}
-                            placeholder='ข้อเสนอแนะที่ 7'
-                            name='section2_7_comment'
-                            value={section2_7_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>8.อาจารย์ใช้สื่อการสอนได้เหมาะสมกับเนื้อหาการสอน</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_8(event.target.value)
-                            }} type="radio" name="section2_8" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_8(event.target.value)
-                            }} type="radio" name="section2_8" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_8(event.target.value)
-                            }} type="radio" name="section2_8" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_8(event.target.value)
-                            }} type="radio" name="section2_8" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_8(event.target.value)
-                            }} type="radio" name="section2_8" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_8_comment(event.target.value)
-                            }}
-                            name='comsection2_8_commentment'
-                            placeholder='ข้อเสนอแนะที่ 8'
-                            value={section2_8_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
+                                <p>2.อาจารย์ได้ชี้แจงจุดมุ่งหมายการเรียนการสอนแต่ละครั้งอย่างชัดเจน</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_2(event.target.value)
+                                    }} type="radio" name="section2_2" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_2(event.target.value)
+                                    }} type="radio" name="section2_2" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_2(event.target.value)
+                                    }} type="radio" name="section2_2" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_2(event.target.value)
+                                    }} type="radio" name="section2_2" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_2(event.target.value)
+                                    }} type="radio" name="section2_2" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_2_comment(event.target.value)
+                                    }}
+                                    name='section2_2_comment'
+                                    placeholder='ข้อเสนอแนะที่ 2'
+                                    value={section2_2_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>3.อาจารย์มีความพร้อมในการสอนแต่ละครั้ง</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_3(event.target.value)
+                                    }} type="radio" name="section2_3" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_3(event.target.value)
+                                    }} type="radio" name="section2_3" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_3(event.target.value)
+                                    }} type="radio" name="section2_3" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_3(event.target.value)
+                                    }} type="radio" name="section2_3" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_3(event.target.value)
+                                    }} type="radio" name="section2_3" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_3_comment(event.target.value)
+                                    }}
+                                    name='section2_3_comment'
+                                    placeholder='ข้อเสนอแนะที่ 3'
+                                    value={section2_3_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>4.อาจารย์ได้ชี้แจงหลักเกณฑ์การวัดและประเมินผลในส่วนที่อาจารย์รับผิดชอบอย่างชัดเจน</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_4(event.target.value)
+                                    }} type="radio" name="section2_4" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_4(event.target.value)
+                                    }} type="radio" name="section2_4" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_4(event.target.value)
+                                    }} type="radio" name="section2_4" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_4(event.target.value)
+                                    }} type="radio" name="section2_4" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_4(event.target.value)
+                                    }} type="radio" name="section2_4" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_4_comment(event.target.value)
+                                    }}
+                                    name='section2_4_comment'
+                                    placeholder='ข้อเสนอแนะที่ 4'
+                                    value={section2_4_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>5.อาจารย์อธิบายเนื้อหาวิชาได้อย่างชัดเจนและเข้าใจง่าย</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_5(event.target.value)
+                                    }} type="radio" name="section2_5" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_5(event.target.value)
+                                    }} type="radio" name="section2_5" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_5(event.target.value)
+                                    }} type="radio" name="section2_5" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_5(event.target.value)
+                                    }} type="radio" name="section2_5" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_5(event.target.value)
+                                    }} type="radio" name="section2_5" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_5_comment(event.target.value)
+                                    }}
+                                    name='comment'
+                                    placeholder='ข้อเสนอแนะที่ 5'
+                                    value={section2_5_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>6.อาจารย์ยกตัวอย่างประกอบได้อย่างเหมาะสม</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_6(event.target.value)
+                                    }} type="radio" name="section2_6" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_6(event.target.value)
+                                    }} type="radio" name="section2_6" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_6(event.target.value)
+                                    }} type="radio" name="section2_6" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_6(event.target.value)
+                                    }} type="radio" name="section2_6" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_6(event.target.value)
+                                    }} type="radio" name="section2_6" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_6_comment(event.target.value)
+                                    }}
+                                    name='section2_6_comment'
+                                    placeholder='ข้อเสนอแนะที่ 6'
+                                    value={section2_6_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
 
-                        <p>9.อาจารย์ประเมินการเรียนรู้ของผู้เรียน และให้ข้อมูล ย้อนกลับเป็นระยะๆ</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_9(event.target.value)
-                            }} type="radio" name="section2_9" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_9(event.target.value)
-                            }} type="radio" name="section2_9" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_9(event.target.value)
-                            }} type="radio" name="section2_9" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_9(event.target.value)
-                            }} type="radio" name="section2_9" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_9(event.target.value)
-                            }} type="radio" name="section2_9" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_9_comment(event.target.value)
-                            }}
-                            name='section2_9_comment'
-                            placeholder='ข้อเสนอแนะที่ 9'
-                             value={section2_9_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>10.อาจารย์มีแนวทางและวิธีการสอนที่ทำให้ผู้เรียน สนใจการเรียนตลอดเวลา</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_10(event.target.value)
-                            }} type="radio" name="section2_10" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_10(event.target.value)
-                            }} type="radio" name="section2_10" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_10(event.target.value)
-                            }} type="radio" name="section2_10" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_10(event.target.value)
-                            }} type="radio" name="section2_10" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_10(event.target.value)
-                            }} type="radio" name="section2_10" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_10_comment(event.target.value)
-                            }}
-                            name='section2_10_comment'
-                            placeholder='ข้อเสนอแนะที่ 10'
-                            value={section2_10_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
+                                <p>7.อาจารย์ตอบคำถามได้ชัดเจน</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_7(event.target.value)
+                                    }} type="radio" name="section2_7" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_7(event.target.value)
+                                    }} type="radio" name="section2_7" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_7(event.target.value)
+                                    }} type="radio" name="section2_7" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_7(event.target.value)
+                                    }} type="radio" name="section2_7" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_7(event.target.value)
+                                    }} type="radio" name="section2_7" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_7_comment(event.target.value)
 
-                        <p>11.อาจารย์เข้าสอนและเลิกสอนตรงเวลา</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_11(event.target.value)
-                            }} type="radio" name="section2_11" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_11(event.target.value)
-                            }} type="radio" name="section2_11" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_11(event.target.value)
-                            }} type="radio" name="section2_11" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_11(event.target.value)
-                            }} type="radio" name="section2_11" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_11(event.target.value)
-                            }} type="radio" name="section2_11" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_11_comment(event.target.value)
-                            }}
-                            name='section2_11_comment'
-                            placeholder='ข้อเสนอแนะที่ 11'
-                            value={section2_11_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>12.อาจารย์เปิดโอกาสและกระตุ้นให้ผู้เรียนได้แสดง ความคิดเห็นและซักถาม</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_12(event.target.value)
-                            }} type="radio" name="section2_12" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_12(event.target.value)
-                            }} type="radio" name="section2_12" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_12(event.target.value)
-                            }} type="radio" name="section2_12" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_12(event.target.value)
-                            }} type="radio" name="section2_12" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_12(event.target.value)
-                            }} type="radio" name="section2_12" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                 setsection2_12_comment(event.target.value)
-                            }}
-                            name='section2_12_comment'
-                            placeholder='ข้อเสนอแนะที่ 12'
-                            value={section2_12_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
+                                    }}
+                                    placeholder='ข้อเสนอแนะที่ 7'
+                                    name='section2_7_comment'
+                                    value={section2_7_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>8.อาจารย์ใช้สื่อการสอนได้เหมาะสมกับเนื้อหาการสอน</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_8(event.target.value)
+                                    }} type="radio" name="section2_8" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_8(event.target.value)
+                                    }} type="radio" name="section2_8" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_8(event.target.value)
+                                    }} type="radio" name="section2_8" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_8(event.target.value)
+                                    }} type="radio" name="section2_8" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_8(event.target.value)
+                                    }} type="radio" name="section2_8" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_8_comment(event.target.value)
+                                    }}
+                                    name='comsection2_8_commentment'
+                                    placeholder='ข้อเสนอแนะที่ 8'
+                                    value={section2_8_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
 
-                        <p>13.อาจารย์สอนครอบคลุมเนื้อหาที่รับผิดชอบ</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_13(event.target.value)
-                            }} type="radio" name="section2_13" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_13(event.target.value)
-                            }} type="radio" name="section2_13" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_13(event.target.value)
-                            }} type="radio" name="section2_13" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_13(event.target.value)
-                            }} type="radio" name="section2_13" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_13(event.target.value)
-                            }} type="radio" name="section2_13" value={5} className="mask mask-star-2 bg-orange-300" />
+                                <p>9.อาจารย์ประเมินการเรียนรู้ของผู้เรียน และให้ข้อมูล ย้อนกลับเป็นระยะๆ</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_9(event.target.value)
+                                    }} type="radio" name="section2_9" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_9(event.target.value)
+                                    }} type="radio" name="section2_9" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_9(event.target.value)
+                                    }} type="radio" name="section2_9" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_9(event.target.value)
+                                    }} type="radio" name="section2_9" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_9(event.target.value)
+                                    }} type="radio" name="section2_9" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_9_comment(event.target.value)
+                                    }}
+                                    name='section2_9_comment'
+                                    placeholder='ข้อเสนอแนะที่ 9'
+                                    value={section2_9_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>10.อาจารย์มีแนวทางและวิธีการสอนที่ทำให้ผู้เรียน สนใจการเรียนตลอดเวลา</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_10(event.target.value)
+                                    }} type="radio" name="section2_10" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_10(event.target.value)
+                                    }} type="radio" name="section2_10" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_10(event.target.value)
+                                    }} type="radio" name="section2_10" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_10(event.target.value)
+                                    }} type="radio" name="section2_10" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_10(event.target.value)
+                                    }} type="radio" name="section2_10" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_10_comment(event.target.value)
+                                    }}
+                                    name='section2_10_comment'
+                                    placeholder='ข้อเสนอแนะที่ 10'
+                                    value={section2_10_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+
+                                <p>11.อาจารย์เข้าสอนและเลิกสอนตรงเวลา</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_11(event.target.value)
+                                    }} type="radio" name="section2_11" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_11(event.target.value)
+                                    }} type="radio" name="section2_11" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_11(event.target.value)
+                                    }} type="radio" name="section2_11" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_11(event.target.value)
+                                    }} type="radio" name="section2_11" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_11(event.target.value)
+                                    }} type="radio" name="section2_11" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_11_comment(event.target.value)
+                                    }}
+                                    name='section2_11_comment'
+                                    placeholder='ข้อเสนอแนะที่ 11'
+                                    value={section2_11_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>12.อาจารย์เปิดโอกาสและกระตุ้นให้ผู้เรียนได้แสดง ความคิดเห็นและซักถาม</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_12(event.target.value)
+                                    }} type="radio" name="section2_12" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_12(event.target.value)
+                                    }} type="radio" name="section2_12" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_12(event.target.value)
+                                    }} type="radio" name="section2_12" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_12(event.target.value)
+                                    }} type="radio" name="section2_12" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_12(event.target.value)
+                                    }} type="radio" name="section2_12" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_12_comment(event.target.value)
+                                    }}
+                                    name='section2_12_comment'
+                                    placeholder='ข้อเสนอแนะที่ 12'
+                                    value={section2_12_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+
+                                <p>13.อาจารย์สอนครอบคลุมเนื้อหาที่รับผิดชอบ</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_13(event.target.value)
+                                    }} type="radio" name="section2_13" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_13(event.target.value)
+                                    }} type="radio" name="section2_13" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_13(event.target.value)
+                                    }} type="radio" name="section2_13" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_13(event.target.value)
+                                    }} type="radio" name="section2_13" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_13(event.target.value)
+                                    }} type="radio" name="section2_13" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_13_comment(event.target.value)
+                                    }}
+                                    placeholder='ข้อเสนอแนะที่ 13'
+                                    name='section2_13_comment'
+                                    value={section2_13_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>14.อาจารย์แนะนำเอกสารและแหล่งค้นคว้าเพิ่มเติม</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_14(event.target.value)
+                                    }} type="radio" name="section2_14" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_14(event.target.value)
+                                    }} type="radio" name="section2_14" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_14(event.target.value)
+                                    }} type="radio" name="section2_14" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_14(event.target.value)
+                                    }} type="radio" name="section2_14" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_14(event.target.value)
+                                    }} type="radio" name="section2_14" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_14_comment(event.target.value)
+                                    }}
+                                    name='section2_14_comment'
+                                    placeholder='ข้อเสนอแนะที่ 14'
+                                    value={section2_14_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>15.อาจารย์ให้ข้อคิดเห็นที่เป็นประโยชน์</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_15(event.target.value)
+                                    }} type="radio" name="section2_15" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_15(event.target.value)
+                                    }} type="radio" name="section2_15" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_15(event.target.value)
+                                    }} type="radio" name="section2_15" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_15(event.target.value)
+                                    }} type="radio" name="section2_15" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_15(event.target.value)
+                                    }} type="radio" name="section2_15" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_15_comment(event.target.value)
+                                    }}
+                                    name='section2_15_comment'
+                                    placeholder='ข้อเสนอแนะที่ 15'
+                                    value={section2_15_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>16.อาจารย์มีเวลาให้คำปรึกษาแก่ผู้เรียนทั้ง นอกชั้นเรียน</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_16(event.target.value)
+                                    }} type="radio" name="section2_16" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_16(event.target.value)
+                                    }} type="radio" name="section2_16" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_16(event.target.value)
+                                    }} type="radio" name="section2_16" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_16(event.target.value)
+                                    }} type="radio" name="section2_16" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_16(event.target.value)
+                                    }} type="radio" name="section2_16" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_16_comment(event.target.value)
+                                    }}
+                                    name='section2_16_comment'
+                                    placeholder='ข้อเสนอแนะที่ 16'
+                                    value={section2_16_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>17.ท่านได้ความรู้ ความเข้าใจเนื้อหาตามที่อาจารย์สอน</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_17(event.target.value)
+                                    }} type="radio" name="section2_17" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_17(event.target.value)
+                                    }} type="radio" name="section2_17" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_17(event.target.value)
+                                    }} type="radio" name="section2_17" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_17(event.target.value)
+                                    }} type="radio" name="section2_17" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_17(event.target.value)
+                                    }} type="radio" name="section2_17" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_17_comment(event.target.value)
+                                    }}
+                                    name='section2_17_comment'
+                                    placeholder='ข้อเสนอแนะที่ 17'
+                                    value={section2_17_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>18.ท่านเกิดแนวคิดในการประยุกต์ความรู้ไปใช้ใน สถานการณ์จริง</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_18(event.target.value)
+                                    }} type="radio" name="section2_18" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_18(event.target.value)
+                                    }} type="radio" name="section2_18" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_18(event.target.value)
+                                    }} type="radio" name="section2_18" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_18(event.target.value)
+                                    }} type="radio" name="section2_18" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_18(event.target.value)
+                                    }} type="radio" name="section2_18" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_18_comment(event.target.value)
+                                    }}
+                                    name='section2_18_comment'
+                                    placeholder='ข้อเสนอแนะที่ 18'
+                                    value={section2_18_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>19.ท่านพอใจการสอนของอาจารย์</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_19(event.target.value)
+                                    }} type="radio" name="section2_19" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_19(event.target.value)
+                                    }} type="radio" name="section2_19" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_19(event.target.value)
+                                    }} type="radio" name="section2_19" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_19(event.target.value)
+                                    }} type="radio" name="section2_19" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_19(event.target.value)
+                                    }} type="radio" name="section2_19" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_19_comment(event.target.value)
+                                    }}
+                                    name='section2_19_comment'
+                                    placeholder='ข้อเสนอแนะที่ 19'
+                                    value={section2_19_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                                <p>20.ท่านสนใจแสวงหาความรู้ในเรื่องที่อาจารย์สอนต่อไปอีก</p>
+                                <div className="rating">
+                                    <input onChange={(event) => {
+                                        setsection2_20(event.target.value)
+                                    }} type="radio" name="section2_20" value={1} className="mask mask-star-2 bg-orange-300"  />
+                                    <input onChange={(event) => {
+                                        setsection2_20(event.target.value)
+                                    }} type="radio" name="section2_20" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_20(event.target.value)
+                                    }} type="radio" name="section2_20" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_20(event.target.value)
+                                    }} type="radio" name="section2_20" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    <input onChange={(event) => {
+                                        setsection2_20(event.target.value)
+                                    }} type="radio" name="section2_20" value={5} className="mask mask-star-2 bg-orange-300" />
+                                </div>
+                                <textarea
+                                    onChange={(event) => {
+                                        setsection2_20_comment(event.target.value)
+                                    }}
+                                    name='section2_20_comment'
+                                    placeholder='ข้อเสนอแนะที่ 20'
+                                    value={section2_20_comment}
+                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                />
+                            </div>
                         </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_13_comment(event.target.value)
-                            }}
-                            placeholder='ข้อเสนอแนะที่ 13'
-                            name='section2_13_comment'
-                            value={section2_13_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>14.อาจารย์แนะนำเอกสารและแหล่งค้นคว้าเพิ่มเติม</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_14(event.target.value)
-                            }} type="radio" name="section2_14" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_14(event.target.value)
-                            }} type="radio" name="section2_14" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_14(event.target.value)
-                            }} type="radio" name="section2_14" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_14(event.target.value)
-                            }} type="radio" name="section2_14" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_14(event.target.value)
-                            }} type="radio" name="section2_14" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_14_comment(event.target.value)
-                            }}
-                            name='section2_14_comment'
-                            placeholder='ข้อเสนอแนะที่ 14'
-                            value={section2_14_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>15.อาจารย์ให้ข้อคิดเห็นที่เป็นประโยชน์</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_15(event.target.value)
-                            }} type="radio" name="section2_15" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_15(event.target.value)
-                            }} type="radio" name="section2_15" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_15(event.target.value)
-                            }} type="radio" name="section2_15" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_15(event.target.value)
-                            }} type="radio" name="section2_15" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_15(event.target.value)
-                            }} type="radio" name="section2_15" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                 setsection2_15_comment(event.target.value)
-                            }}
-                            name='section2_15_comment'
-                            placeholder='ข้อเสนอแนะที่ 15'
-                             value={section2_15_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>16.อาจารย์มีเวลาให้คำปรึกษาแก่ผู้เรียนทั้ง นอกชั้นเรียน</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                                setsection2_16(event.target.value)
-                            }} type="radio" name="section2_16" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_16(event.target.value)
-                            }} type="radio" name="section2_16" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_16(event.target.value)
-                            }} type="radio" name="section2_16" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_16(event.target.value)
-                            }} type="radio" name="section2_16" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                                setsection2_16(event.target.value)
-                            }} type="radio" name="section2_16" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_16_comment(event.target.value)
-                            }}
-                            name='section2_16_comment'
-                            placeholder='ข้อเสนอแนะที่ 16'
-                            value={section2_16_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>17.ท่านได้ความรู้ ความเข้าใจเนื้อหาตามที่อาจารย์สอน</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                            setsection2_17(event.target.value)
-                        }}type="radio" name="section2_17" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_17(event.target.value)
-                        }}type="radio" name="section2_17" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_17(event.target.value)
-                        }}type="radio" name="section2_17" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_17(event.target.value)
-                        }}type="radio" name="section2_17" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_17(event.target.value)
-                        }}type="radio" name="section2_17" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_17_comment(event.target.value)
-                            }}
-                            name='section2_17_comment'
-                            placeholder='ข้อเสนอแนะที่ 17'
-                            value={section2_17_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>18.ท่านเกิดแนวคิดในการประยุกต์ความรู้ไปใช้ใน สถานการณ์จริง</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                            setsection2_18(event.target.value)
-                        }}type="radio" name="section2_18" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_18(event.target.value)
-                        }}type="radio" name="section2_18" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_18(event.target.value)
-                        }}type="radio" name="section2_18" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_18(event.target.value)
-                        }}type="radio" name="section2_18" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_18(event.target.value)
-                        }}type="radio" name="section2_18" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_18_comment(event.target.value)
-                            }}
-                            name='section2_18_comment'
-                            placeholder='ข้อเสนอแนะที่ 18'
-                            value={section2_18_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>19.ท่านพอใจการสอนของอาจารย์</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                            setsection2_19(event.target.value)
-                        }}type="radio" name="section2_19" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_19(event.target.value)
-                        }}type="radio" name="section2_19" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_19(event.target.value)
-                        }}type="radio" name="section2_19" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_19(event.target.value)
-                        }}type="radio" name="section2_19" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_19(event.target.value)
-                        }}type="radio" name="section2_19" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                 setsection2_19_comment(event.target.value)
-                            }}
-                            name='section2_19_comment'
-                            placeholder='ข้อเสนอแนะที่ 19'
-                            value={section2_19_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                        <p>20.ท่านสนใจแสวงหาความรู้ในเรื่องที่อาจารย์สอนต่อไปอีก</p>
-                        <div className="rating">
-                            <input onChange={(event) => {
-                            setsection2_20(event.target.value)
-                        }}type="radio" name="section2_20" value={1} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_20(event.target.value)
-                        }}type="radio" name="section2_20" value={2} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_20(event.target.value)
-                        }}type="radio" name="section2_20" value={3} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_20(event.target.value)
-                        }}type="radio" name="section2_20" value={4} className="mask mask-star-2 bg-orange-300" />
-                            <input onChange={(event) => {
-                            setsection2_20(event.target.value)
-                        }}type="radio" name="section2_20" value={5} className="mask mask-star-2 bg-orange-300" />
-                        </div>
-                        <textarea
-                            onChange={(event) => {
-                                setsection2_20_comment(event.target.value)
-                            }}
-                            name='section2_20_comment'
-                            placeholder='ข้อเสนอแนะที่ 20'
-                            value={section2_20_comment}
-                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
-                        />
-                    </div>
-                </div>
                     </div>
                 </div>
                 <div>
@@ -899,10 +868,10 @@ function StudentevalCourse() {
                     <div className="mb-5 flex justify-center ">
                         <textarea
                             onChange={(event) => {
-                                 setcomment1(event.target.value)
+                                setcomment1(event.target.value)
                             }}
                             name='comment1'
-                             value={comment1}
+                            value={comment1}
                             className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
                         />
                     </div>
@@ -910,7 +879,7 @@ function StudentevalCourse() {
                     <div className="mb-5 flex justify-center ">
                         <textarea
                             onChange={(event) => {
-                                 setcomment2(event.target.value)
+                                setcomment2(event.target.value)
                             }}
                             name='comment2'
                             value={comment2}

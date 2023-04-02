@@ -248,7 +248,7 @@ const router = [
 
   },
   {
-    path: "/student/eval/course",
+    path: "/student/eval/course/:studyID/*",
     element: <StudentevalCourse />,
     level: "student"
 
