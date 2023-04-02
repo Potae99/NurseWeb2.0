@@ -1,10 +1,13 @@
 import React from 'react'
 import axios from 'axios';
 import { useState } from 'react';
+import {  useParams } from 'react-router-dom';
 
-function Studentevaltheory() {
+function Studentevalpractice() {
     const [data, setData] = useState([]);
-    const [evalTaughID, setevalTaughID] = useState("");
+
+    const { evalTaughID } = useParams();
+
     const [section1_4, setsection1_4] = useState("");
 
     const [section1_5, setsection1_5] = useState("");
@@ -53,7 +56,7 @@ function Studentevaltheory() {
     const addeval = () => {
 
 
-        axios.post(process.env.REACT_APP_API_URL + "/eval/taugh/theory", {
+        axios.post(process.env.REACT_APP_API_URL + "/eval/taugh/practice", {
             evalTaughID: evalTaughID,
             section1_4: section1_4,
             section1_5: section1_5,
@@ -113,6 +116,7 @@ function Studentevaltheory() {
             window.location.href = "/admin/home";
         })
     }
+
     return (
         <div>
             <div className=" text-black min-h-screen  space-y-5 mb-10">
@@ -120,7 +124,7 @@ function Studentevaltheory() {
                     <p>แบประเมินการสอนของอาจาร์ยโดยนิสิต</p>
                     <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล</p>
                     <p>คณะพยาบาลศาสตร์ มหาวิทยาลัยนเรศวร</p>
-                    <p>การสอนแบบเน้นการบรรยาย</p>
+                    <p>การสอนแบบเน้นการปฎิบัติ</p>
                 </div>
                 <div>
                     <p>คำชี้แจง</p>
@@ -204,7 +208,7 @@ function Studentevaltheory() {
                     <div className=" grid grid-cols-1 place-items-center ">
                         <div className=" block bg-gray-100  p-auto rounded-2xl">
                             <div className="  grid grid-cols-2 gap-4 p-4">
-                                <p>1.อาจารย์ได้แจ้งกำหนดการเรียนในส่วนที่อาจารย์ รับผิดชอบอย่างชัดเจน</p>
+                                <p>1.อาจารย์ได้แจ้งกำหนดการเรียนในส่วนที่อาจารย์รับผิดชอบอย่างชัดเจน</p>
                                 <div className="rating">
                                     <input onChange={(event) => {
                                         setsection2_1(event.target.value)
@@ -499,74 +503,74 @@ function Studentevaltheory() {
                                 <p>17.ท่านได้ความรู้ ความเข้าใจเนื้อหาตามที่อาจารย์สอน</p>
                                 <div className="rating">
                                     <input onChange={(event) => {
-                                        setsection2_17(event.target.value)
-                                    }} type="radio" name="section2_17" value={1} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_17(event.target.value)
+                                }}type="radio" name="section2_17" value={1} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_17(event.target.value)
-                                    }} type="radio" name="section2_17" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_17(event.target.value)
+                                }}type="radio" name="section2_17" value={2} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_17(event.target.value)
-                                    }} type="radio" name="section2_17" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_17(event.target.value)
+                                }}type="radio" name="section2_17" value={3} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_17(event.target.value)
-                                    }} type="radio" name="section2_17" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_17(event.target.value)
+                                }}type="radio" name="section2_17" value={4} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_17(event.target.value)
-                                    }} type="radio" name="section2_17" value={5} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_17(event.target.value)
+                                }}type="radio" name="section2_17" value={5} className="mask mask-star-2 bg-orange-300" />
                                 </div>
                                 <p>18.ท่านเกิดแนวคิดในการประยุกต์ความรู้ไปใช้ใน สถานการณ์จริง</p>
                                 <div className="rating">
                                     <input onChange={(event) => {
-                                        setsection2_18(event.target.value)
-                                    }} type="radio" name="section2_18" value={1} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_18(event.target.value)
+                                }}type="radio" name="section2_18" value={1} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_18(event.target.value)
-                                    }} type="radio" name="section2_18" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_18(event.target.value)
+                                }}type="radio" name="section2_18" value={2} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_18(event.target.value)
-                                    }} type="radio" name="section2_18" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_18(event.target.value)
+                                }}type="radio" name="section2_18" value={3} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_18(event.target.value)
-                                    }} type="radio" name="section2_18" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_18(event.target.value)
+                                }}type="radio" name="section2_18" value={4} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_18(event.target.value)
-                                    }} type="radio" name="section2_18" value={5} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_18(event.target.value)
+                                }}type="radio" name="section2_18" value={5} className="mask mask-star-2 bg-orange-300" />
                                 </div>
                                 <p>19.ท่านพอใจการสอนของอาจารย์</p>
                                 <div className="rating">
                                     <input onChange={(event) => {
-                                        setsection2_19(event.target.value)
-                                    }} type="radio" name="section2_19" value={1} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_19(event.target.value)
+                                }}type="radio" name="section2_19" value={1} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_19(event.target.value)
-                                    }} type="radio" name="section2_19" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_19(event.target.value)
+                                }}type="radio" name="section2_19" value={2} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_19(event.target.value)
-                                    }} type="radio" name="section2_19" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_19(event.target.value)
+                                }}type="radio" name="section2_19" value={3} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_19(event.target.value)
-                                    }} type="radio" name="section2_19" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_19(event.target.value)
+                                }}type="radio" name="section2_19" value={4} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_19(event.target.value)
-                                    }} type="radio" name="section2_19" value={5} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_19(event.target.value)
+                                }}type="radio" name="section2_19" value={5} className="mask mask-star-2 bg-orange-300" />
                                 </div>
                                 <p>20.ท่านสนใจแสวงหาความรู้ในเรื่องที่อาจารย์สอนต่อไปอีก</p>
                                 <div className="rating">
                                     <input onChange={(event) => {
-                                        setsection2_20(event.target.value)
-                                    }} type="radio" name="section2_20" value={1} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_20(event.target.value)
+                                }}type="radio" name="section2_20" value={1} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_20(event.target.value)
-                                    }} type="radio" name="section2_20" value={2} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_20(event.target.value)
+                                }}type="radio" name="section2_20" value={2} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_20(event.target.value)
-                                    }} type="radio" name="section2_20" value={3} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_20(event.target.value)
+                                }}type="radio" name="section2_20" value={3} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_20(event.target.value)
-                                    }} type="radio" name="section2_20" value={4} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_20(event.target.value)
+                                }}type="radio" name="section2_20" value={4} className="mask mask-star-2 bg-orange-300" />
                                     <input onChange={(event) => {
-                                        setsection2_20(event.target.value)
-                                    }} type="radio" name="section2_20" value={5} className="mask mask-star-2 bg-orange-300" />
+                                    setsection2_20(event.target.value)
+                                }}type="radio" name="section2_20" value={5} className="mask mask-star-2 bg-orange-300" />
                                 </div>
                             </div>
                         </div>
@@ -576,13 +580,13 @@ function Studentevaltheory() {
                     <p>ส่วนที่ 3 ความคิดเห็นอื่นๆ</p>
                     <p className=' text-center'>ความคิดเห็นเกี่ยวกับการสอนของอาจารย์ และ/หรือ ปัญหาที่ต้องการให้มีการแก้ไขปรับปรุง</p>
                     <div className="mb-5 flex justify-center ">
-                        <input
-                            onChange={(event) => {
-                                setcomment(event.target.value)
-                            }}
-                            name='comment'
-                            value={comment}
-                            className='w-full h-40 rounded-md border border-black bg-slate-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                        <input 
+                        onChange={(event) => {
+                            setcomment(event.target.value)
+                        }}
+                        name='comment'
+                        value={comment}
+                        className='w-full h-40 rounded-md border border-black bg-slate-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
                         />
                     </div>
                 </div>
@@ -609,8 +613,9 @@ function Studentevaltheory() {
                     </button>
                 </div>
             </div>
+            
         </div>
     )
 }
 
-export default Studentevaltheory
+export default Studentevalpractice
