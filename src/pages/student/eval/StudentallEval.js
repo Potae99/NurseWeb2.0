@@ -138,7 +138,7 @@ function StudentallEval() {
               >
                 <td className="py-4 px-6" >{index + 1}</td>
                 <td className="py-4 px-6">{_.nameTH}</td>
-                <td className="py-4 px-6">{_.nameTH}</td>
+                <td className="py-4 px-6">{_.taughtType}</td>
                 <td className="py-4 px-6">
                   {
                     _.isEval == 1 ?
