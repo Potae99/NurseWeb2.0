@@ -48,8 +48,10 @@ function SideNavbar({ session }) {
       { id: 6, label: "ทุนการศึกษา", icon: ArticleIcon, link: "/admin/scholarship/add" }
     ],
     "teacher": [
-      { id: 1, label: "ผลการประเมินของฉัน", icon: HomeIcon, link: "/user/teacher/estimateMyself" },
-      { id: 2, label: "ผลการประเมินรายวิชา", icon: ArticleIcon, link: "/user/teacher/estimateMySubject" },
+      { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/teacher/home" },
+      { id: 2, label: "จัดการรายวิชาของฉัน", icon: ArticleIcon, link: "/teacher/subject" },
+      { id: 3, label: "ผลการประเมินของฉัน", icon: HomeIcon, link: "/user/teacher/estimateMyself" },
+      { id: 4, label: "ผลการประเมินรายวิชา", icon: ArticleIcon, link: "/user/teacher/estimateMySubject" },
     ],
     "student": [
       { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/student/home" },

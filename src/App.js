@@ -45,6 +45,7 @@ import StudentallEval from './pages/student/eval/StudentallEval';
 
 //teacher
 import Teacherhome from './pages/teacher/Teacherhome';
+import SubjectManagement from './pages/teacher/SubjectManagement';
 
 // test
 import Apitest from './Test.js/Apitest';
@@ -257,6 +258,12 @@ const router = [
     path: "/student/eval/all",
     element: <StudentallEval />,
     level: "student"
+
+  },
+  {
+    path: "/teacher/subject",
+    element: <SubjectManagement />,
+    level: "teacher"
 
   }
 
