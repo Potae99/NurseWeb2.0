@@ -5,6 +5,7 @@ import { Route, Routes, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import WorkHistoryDetail from './WorkHistoryDetail';
 import LoadingPage from '../../LoadingPage';
+import WorkHistorytable from '../../../components/Table/WorkHistorytable';
 
 function WorkHistoryList() {
 
@@ -103,7 +104,7 @@ function WorkHistoryList() {
                         </div>
                     </div>
                     <div>
-                        <table className=" w-full text-sm text-left text-black ">
+                        {/* <table className=" w-full text-sm text-left text-black ">
                             <thead className="text-xs text-black uppercase bg-orange-300">
                                 <tr  >
                                     <th scope="col" className="py-3 px-6" >ลำดับ</th>
@@ -138,7 +139,8 @@ function WorkHistoryList() {
                                     </tr>
                                 </tbody>
                             ))}
-                        </table>
+                        </table> */}
+                        <WorkHistorytable></WorkHistorytable>
                     </div>
                 </div>
             )}

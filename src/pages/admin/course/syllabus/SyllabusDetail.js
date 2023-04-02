@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import format from 'date-fns/format';
 import LoadingPage from '../../../LoadingPage';
+import Course_in_syllabus from '../../../../components/Table/Course_in_syllabus';
 
 
 
@@ -314,7 +315,7 @@ function SyllabusDetail() {
               ) : null}
             </>
           </div>
-          <div className='relative mt-3 overflow-x-auto shadow-md sm:rounded-lg'>
+          {/* <div className='relative mt-3 overflow-x-auto shadow-md sm:rounded-lg'>
             <table className=" w-full text-sm text-left text-black ">
               <thead className="text-sm text-black uppercase bg-orange-300">
                 <tr  >
@@ -355,7 +356,8 @@ function SyllabusDetail() {
                 </tbody>
               ))}
             </table>
-          </div>
+          </div> */}
+          <Course_in_syllabus></Course_in_syllabus>
           <>
             <div className=' mt-5'>
               <div className=''>

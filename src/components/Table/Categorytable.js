@@ -3,38 +3,39 @@ import axios from "axios";
 
 function Categorytable() {
     const [category, setCategory] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [completed, setCompleted] = useState(false);
+
+    const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
     const totalPages = category ? Math.ceil(category.length / itemsPerPage) : 0;
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         const fetchData = () => {
-          axios.get(process.env.REACT_APP_API_URL + "/course/category")
-            .then(res => {
-              console.log(res.data);
-      
-              if (res.data.error === true) {
-                console.log(res.data);
-                console.log("ERROR FOUND WHEN GET DATA FROM API");
-                return;
-              }
-              setCategory(res.data.data);
-              setLoading(true);
-      
-              setTimeout(() => {
-                setCompleted(true);
-              }, 1000);
-            })
-            .catch(error => {
-              console.log(error.res)
-            })
+            axios.get(process.env.REACT_APP_API_URL + "/course/category")
+                .then(res => {
+                    //   console.log(res.data);
+
+                    if (res.data.error === true) {
+                        // console.log(res.data);
+                        console.log("ERROR FOUND WHEN GET DATA FROM API");
+                        return;
+                    }
+                    setCategory(res.data.data);
+                    setLoading(true);
+
+                    setTimeout(() => {
+                        setCompleted(true);
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.log(error.res)
+                })
         }
-      
+
         fetchData();
-      }, [searchTerm]);
+    }, [searchTerm]);
 
     const handleClick = (e, page) => {
         e.preventDefault();
@@ -49,12 +50,12 @@ function Categorytable() {
         const end = start + itemsPerPage;
         return filterCategory.slice(start, end).map((_, index) => (
             <tbody key={start + index}>
-              <tr className="hover:bg-gray-200 bg-white border-b">
-                <td className="py-4 px-6">{start + index + 1}</td>
-                <td className="py-4 px-6">{_.categoryName}</td>
-              </tr>
+                <tr className="hover:bg-gray-200 bg-white border-b">
+                    <td className="py-4 px-6">{start + index + 1}</td>
+                    <td className="py-4 px-6">{_.categoryName}</td>
+                </tr>
             </tbody>
-          ));
+        ));
     };
 
     const renderPageNumbers = () => {
@@ -66,8 +67,9 @@ function Categorytable() {
             pageNumbers.push(
                 <li
                     key={i}
-                    className={`${currentPage === i ? "bg-blue-500 text-white" : "bg-white text-blue-500"
-                        } hover:bg-blue-200 inline-block mx-1 px-3 py-1 rounded-full cursor-pointer`}
+                    className={`${currentPage === i ? "bg-orange-500 text-white" : "bg-white text-black"
+                        } hover:bg-orange-200 inline-block mx-1 px-3 py-1 rounded-lg cursor-pointer`
+                    }
                 >
                     <a href="#!" onClick={(e) => handleClick(e, i)}>
                         {i}
@@ -105,7 +107,7 @@ function Categorytable() {
     return (
         <>
             <input
-                className=" mb-5 w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                 placeholder="ค้นหาหมวดวิชา..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
