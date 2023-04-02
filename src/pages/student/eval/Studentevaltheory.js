@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 import { useState } from 'react';
-import {  useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function Studentevaltheory() {
     const [data, setData] = useState([]);
@@ -10,7 +10,7 @@ function Studentevaltheory() {
 
     const [section1_4, setsection1_4] = useState("");
 
-    const [section1_5, setsection1_5] = useState("");
+
 
     const [section2_1, setsection2_1] = useState("");
 
@@ -59,7 +59,7 @@ function Studentevaltheory() {
         axios.post(process.env.REACT_APP_API_URL + "/eval/taugh/theory", {
             evalTaughID: evalTaughID,
             section1_4: section1_4,
-            section1_5: section1_5,
+
             section2_1: section2_1,
             section2_2: section2_2,
             section2_3: section2_3,
@@ -88,7 +88,7 @@ function Studentevaltheory() {
                 {
                     evalTaughID: evalTaughID,
                     section1_4: section1_4,
-                    section1_5: section1_5,
+
                     section2_1: section2_1,
                     section2_2: section2_2,
                     section2_3: section2_3,
@@ -113,9 +113,13 @@ function Studentevaltheory() {
 
                 }
             ])
-            window.location.href = "/admin/home";
+            window.location.href = "/student/eval/all";
         })
     }
+    const Back = () => {
+        window.location.href = "/student/eval/all";
+    }
+
     return (
         <div>
             <div className=" text-black min-h-screen  space-y-5 mb-10">
@@ -134,71 +138,16 @@ function Studentevaltheory() {
                 </div>
                 <div>
                     <b>ส่วนที่ 1 ข้อมูลพื้นฐาน</b>
-                    <p>1.รหัสรายวิชาที่เรียน{ }  ชื่อรายวิชา{ }</p>
-                    <p>หมู่เรียนปฎิบัตการ{ }</p>
-                    <p>2.ชื่ออาจาร์ยผู้สอน{ }</p>
-                    <p>3.ภาคเรียน{ }</p>
-                    <div className=' flex '>
-                        <p>4.ท่านได้รับประมวลรายวิชา</p>
-                        <div className=' flex space-x-3'>
-                            <div className="form-control ml-3">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_4(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_4"
-                                        value={1}
-                                        className="radio checked:bg-green-500"
-                                        checked />
-                                </label>
-                            </div>
-                            <div className="form-control">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ไม่ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_4(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_4"
-                                        value={0}
-                                        className="radio checked:bg-red-500"
-                                        checked />
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div className=' flex'>
-                        <p>5.ท่านได้รับคู่มือการฝึกปฎิบัติ</p>
-                        <div className=' flex space-x-3'>
-                            <div className="form-control ml-3">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_5(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_5"
-                                        value={1}
-                                        className="radio checked:bg-green-500"
-                                        checked />
-                                </label>
-                            </div>
-                            <div className="form-control">
-                                <label className=" cursor-pointer">
-                                    <span className="label-text">ไม่ใช่</span>
-                                    <input onChange={(event) => {
-                                        setsection1_5(event.target.value)
-                                    }}
-                                        type="radio"
-                                        name="section1_5"
-                                        value={0}
-                                        className="radio checked:bg-red-500"
-                                        checked />
-                                </label>
-                            </div>
-                        </div>
+                    <p>4.ท่านได้รับประมวลรายวิชา</p>
+                    <div className=' flex space-x-3'>
+                        <p>ใช่</p>
+                        <input onChange={(event) => {
+                            setsection1_4(event.target.value)
+                        }} type="radio" name="section1_4" value={1} className=" bg-orange-300" />
+                        <p>ไม่ใช่</p>
+                        <input onChange={(event) => {
+                            setsection1_4(event.target.value)
+                        }} type="radio" name="section1_4" value={0} className=" bg-orange-300" />
                     </div>
                 </div>
                 <div>
@@ -592,7 +541,7 @@ function Studentevaltheory() {
             </div>
             <div className='grid grid-cols-2'>
                 <div className=' ml-3'>
-                    <button className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                    <button onClick={Back} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
                             <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </span>

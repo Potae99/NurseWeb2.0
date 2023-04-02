@@ -212,15 +212,15 @@ const router = [
 
   },
   {
-    path: "/student/eval/practice",
+    path: "/student/eval/practice/:evalTaughID/*",
     element: <Studentevalpractice />,
     level: "student"
 
   },
   {
-    path: "/student/eval/theory",
+    path: "/student/eval/theory/:evalTaughID/*",
     element: <Studentevaltheory />,
-    level: "admin"
+    level: "student"
 
   },
   {
