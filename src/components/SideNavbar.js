@@ -44,12 +44,13 @@ function SideNavbar({ session }) {
       { id: 2, label: "จัดการหลักสูตร", icon: ArticleIcon, link: "/admin/course/syllabus/adminsyllabus" },
       { id: 3, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/admin/course/all" },
       { id: 4, label: "จัดการคาบเรียน", icon: ArticleIcon, link: "/admin/add/class" },
-      { id: 5, label: "ผลการประเมิน", icon: VideosIcon, link: "/user/admin/semesterManagement" },
-      { id: 6, label: "ทุนการศึกษา", icon: ArticleIcon, link: "/admin/scholarship/add" }
+      { id: 5, label: "ผลการประเมิน", icon: VideosIcon, link: "/admin/eval/search" },
+      { id: 6, label: "ทุนการศึกษา", icon: ArticleIcon, link: "/admin/scholarship/add" },
+      { id: 7, label: "ภาพรวม", icon: ArticleIcon, link: "/admin/overall" }
     ],
     "teacher": [
       { id: 1, label: "ผลการประเมินของฉัน", icon: HomeIcon, link: "/user/teacher/estimateMyself" },
-      { id: 2, label: "ผลการประเมินรายวิชา", icon: ArticleIcon, link: "/user/teacher/estimateMySubject" },
+      { id: 2, label: "ผลการประเมินรายวิชา", icon: ArticleIcon, link: "/teacher/eval/search" },
     ],
     "student": [
       { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/student/home" },

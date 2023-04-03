@@ -33,6 +33,9 @@ import Addcourse_tosyllabus from './pages/admin/course/syllabus/Addcourse_tosyll
 import CategoryDetail from "./pages/admin/course/category/CategoryDetail"
 import Addclass from './pages/admin/course/class/Addclass';
 import Classdetail from './pages/admin/course/class/Classdetail';
+import Evalsum from './pages/admin/eval/Evalsum';
+import Evalsearch from './pages/admin/eval/Evalsearch';
+import Adminoverall from './pages/admin/Adminoverall';
 
 
 
@@ -45,6 +48,7 @@ import StudentallEval from './pages/student/eval/StudentallEval';
 
 //teacher
 import Teacherhome from './pages/teacher/Teacherhome';
+import TeacherEval_search from './pages/teacher/TeacherEval_search';
 
 // test
 import Apitest from './Test.js/Apitest';
@@ -257,6 +261,36 @@ const router = [
     path: "/student/eval/all",
     element: <StudentallEval />,
     level: "student"
+
+  },
+  {
+    path: "/admin/eval/sum/:classID/*",
+    element: <Evalsum />,
+    level: "admin"
+
+  },
+  {
+    path: "/teacher/eval/sum/:classID/*",
+    element: <Evalsum />,
+    level: "teacher"
+
+  },
+  {
+    path: "/admin/eval/search",
+    element: <Evalsearch />,
+    level: "admin"
+
+  },
+  {
+    path: "/teacher/eval/search",
+    element: <TeacherEval_search />,
+    level: "teacher"
+
+  },
+  {
+    path: "/admin/overall",
+    element: <Adminoverall />,
+    level: "admin"
 
   }
 

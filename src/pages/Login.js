@@ -65,7 +65,7 @@ export default function Login({ setToken }) {
         else if (level == "teacher"){
           Toast.fire({
             icon: 'success',
-            title: res.data.message
+            title: res.data.message  
           })
           .then(() => {window.location.href = "/teacher/home"})
           
