@@ -143,7 +143,7 @@ function Course_in_syllabus() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
-
+            <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
             <table className=" w-full text-sm text-left text-black ">
                 <thead className="text-sm text-black uppercase bg-orange-300">
                     <tr  >
@@ -157,6 +157,7 @@ function Course_in_syllabus() {
                 </thead>
                 {renderTable()}
             </table>
+            </div>
             <div className="flex justify-center mt-4">
                 <ul className="flex">
                     {renderPageNumbers()}

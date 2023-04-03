@@ -91,28 +91,29 @@ function Admin_sum_scolar() {
   };
 
   const filterAdmin = adminlist.filter((item) =>
-  item.scholarship_name.toString().toLowerCase().includes(searchTerm.toLowerCase())
-);
+    item.scholarship_name.toString().toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
       <input
         className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-        placeholder="ค้นหาจังหวัด..."
+        placeholder="ค้นหาทุนการศึกษา..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-
-      <table className=" w-full text-sm text-left text-black">
-        <thead className="text-sm text-black uppercase bg-orange-300">
-          <tr  >
-            <th scope="col" className="py-3 px-6" >ลำดับ</th>
-            <th scope="col" className="py-3 px-6">ปีการศึกษา</th>
-            <th scope="col" className="py-3 px-6">จำนวนนิสิต</th>
-          </tr>
-        </thead>
-        {renderTable()}
-      </table>
+      <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
+        <table className=" w-full text-sm text-left text-black">
+          <thead className="text-sm text-black uppercase bg-orange-300">
+            <tr  >
+              <th scope="col" className="py-3 px-6" >ลำดับ</th>
+              <th scope="col" className="py-3 px-6">ทุนการศึกษา</th>
+              <th scope="col" className="py-3 px-6">จำนวนนิสิต</th>
+            </tr>
+          </thead>
+          {renderTable()}
+        </table>
+      </div>
       <div className="flex justify-center mt-4">
         <ul className="flex">
           {renderPageNumbers()}

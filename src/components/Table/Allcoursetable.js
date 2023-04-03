@@ -110,19 +110,20 @@ function Allcoursetable() {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       {/* <div className='relative overflow-x-auto shadow-md sm:rounded-lg'> */}
-      <table className=" w-full text-sm text-left text-black">
-        <thead className="text-sm text-black uppercase bg-orange-300">
-          <tr  >
-            <th scope="col" className="py-3 px-6" >ลำดับ</th>
-            <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
-            <th scope="col" className="py-3 px-6">ชื่อไทย</th>
-            {/* <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th> */}
-            <th scope="col" className="py-3 px-6">หน่วยกิต</th>
-            <th scope="col" className="py-3 px-6">การกระทำ</th>
-          </tr>
-        </thead>
-        {renderTable()}
-        {/* {course.map((_, index) => (
+      <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
+        <table className=" w-full text-sm text-left text-black">
+          <thead className="text-sm text-black uppercase bg-orange-300">
+            <tr  >
+              <th scope="col" className="py-3 px-6" >ลำดับ</th>
+              <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
+              <th scope="col" className="py-3 px-6">ชื่อไทย</th>
+              {/* <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th> */}
+              <th scope="col" className="py-3 px-6">หน่วยกิต</th>
+              <th scope="col" className="py-3 px-6">การกระทำ</th>
+            </tr>
+          </thead>
+          {renderTable()}
+          {/* {course.map((_, index) => (
           <tbody key={index}>
             <tr className="  hover:bg-gray-200 bg-white border-black"
             >
@@ -147,7 +148,8 @@ function Allcoursetable() {
           </tbody>
 
         ))} */}
-      </table>
+        </table>
+      </div>
       <div className=' flex justify-center mt-4'>
         <ul className=' flex'>
           {renderPageNumbers()}
