@@ -189,7 +189,7 @@ function AddCourse() {
                             </div>
                             <div ><p>รายละเอียดวิชา</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
+                                    <textarea
                                         onChange={(event) => {
                                             setdetail(event.target.value)
                                         }}

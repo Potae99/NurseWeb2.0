@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Route, Routes, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import LoadingPage from "../LoadingPage"
 
 function Teacherhome() {
+
+    const [loading, setLoading] = useState(undefined);
+    const [completed, setCompleted] = useState(undefined);
 
     const getToken = () => {
         // NOTE: sessionStorage store session in ONLY tabs in chrome
@@ -42,6 +46,11 @@ function Teacherhome() {
                     return;
                 }
                 setData(res.data.data);
+                setLoading(true);
+
+                setTimeout(() => {
+                    setCompleted(true);
+                }, 1000);
 
             }).catch(error => {
                 console.log(error.res);
@@ -49,56 +58,62 @@ function Teacherhome() {
     }
 
     useEffect(() => {
-        fetchData();
+        setTimeout(() => {
+            fetchData();
+        }, 2000);
     }, [])
 
- 
-
     return (
-        <div className=''>
-            <div className=" min-h-screen  space-y-5">
-                <div className=" text-black font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลอาจารย์</div>
-             
+        <>
+            {!completed ? (
+                <LoadingPage></LoadingPage>
+            ) : (
+                <div className=''>
+                    <div className=" min-h-screen  space-y-5">
+                        <div className=" text-black font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ข้อมูลอาจารย์</div>
 
-                <div>
-                    <div className=' text-black text-3xl text-center mb-5'>อาจารย์ : {data.nameTH}</div>
-                    <div className=" grid grid-cols-1 place-items-center">
-                        <div className=" text-black block bg-gray-200 w-2/3 p-auto rounded-2xl">
-                            <div className=" flex justify-around">
-                                <div className=" ml-7">
-                                    {
-                                        data.nameTH ?
-                                            <>
-                                                <div className=" text-black m-3">ชื่อสกุล : {data.nameTH}</div></> :
-                                            <></>
-                                    }
-                                    {
-                                        data.teacherID ?
-                                            <>
-                                                <div className=" text-black m-3">รหัสประจำตัว : {data.teacherID}</div></> :
-                                            <></>
-                                    }
-                                </div>
-                                <div className=" mr-7">
-                                    {
-                                        data.nameENG ?
-                                            <>
-                                                <div className=" m-3">ชื่ออังกฤษ : {data.nameENG}</div></> :
-                                            <></>
-                                    }
-                                    {
-                                        data.IDnumber ?
-                                            <>
-                                                <div className=" m-3">เลขบัตรประจำตัวประชาชน : {data.IDnumber}</div></> :
-                                            <></>
-                                    }
+
+                        <div>
+                            <div className=' text-black text-3xl text-center mb-5'>อาจารย์ : {data.nameTH}</div>
+                            <div className=" grid grid-cols-1 place-items-center">
+                                <div className=" text-black block bg-gray-200 w-2/3 p-auto rounded-2xl">
+                                    <div className=" flex justify-around">
+                                        <div className=" ml-7">
+                                            {
+                                                data.nameTH ?
+                                                    <>
+                                                        <div className=" text-black m-3">ชื่อสกุล : {data.nameTH}</div></> :
+                                                    <></>
+                                            }
+                                            {
+                                                data.teacherID ?
+                                                    <>
+                                                        <div className=" text-black m-3">รหัสประจำตัว : {data.teacherID}</div></> :
+                                                    <></>
+                                            }
+                                        </div>
+                                        <div className=" mr-7">
+                                            {
+                                                data.nameENG ?
+                                                    <>
+                                                        <div className=" m-3">ชื่ออังกฤษ : {data.nameENG}</div></> :
+                                                    <></>
+                                            }
+                                            {
+                                                data.IDnumber ?
+                                                    <>
+                                                        <div className=" m-3">เลขบัตรประจำตัวประชาชน : {data.IDnumber}</div></> :
+                                                    <></>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            )}
+        </>
     )
 }
 

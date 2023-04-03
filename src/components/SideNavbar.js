@@ -49,8 +49,10 @@ function SideNavbar({ session }) {
       { id: 7, label: "ภาพรวม", icon: ArticleIcon, link: "/admin/overall" }
     ],
     "teacher": [
-      { id: 1, label: "ผลการประเมินของฉัน", icon: HomeIcon, link: "/user/teacher/estimateMyself" },
-      { id: 2, label: "ผลการประเมินรายวิชา", icon: ArticleIcon, link: "/teacher/eval/search" },
+      { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/teacher/home" },
+      { id: 2, label: "จัดการรายวิชาของฉัน", icon: ArticleIcon, link: "/teacher/subject" },
+      { id: 3, label: "ผลการประเมินของฉัน", icon: HomeIcon, link: "/user/teacher/estimateMyself" },
+      { id: 4, label: "ผลการประเมินรายวิชา", icon: ArticleIcon, link: "/teacher/eval/search" },
     ],
     "student": [
       { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/student/home" },

@@ -49,6 +49,7 @@ import StudentallEval from './pages/student/eval/StudentallEval';
 //teacher
 import Teacherhome from './pages/teacher/Teacherhome';
 import TeacherEval_search from './pages/teacher/TeacherEval_search';
+import SubjectManagement from './pages/teacher/SubjectManagement';
 
 // test
 import Apitest from './Test.js/Apitest';
@@ -291,6 +292,11 @@ const router = [
     path: "/admin/overall",
     element: <Adminoverall />,
     level: "admin"
+  },
+  {
+    path: "/teacher/subject",
+    element: <SubjectManagement />,
+    level: "teacher"
 
   }
 
