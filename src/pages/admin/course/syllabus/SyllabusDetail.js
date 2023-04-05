@@ -86,9 +86,16 @@ function SyllabusDetail() {
 
         }
       ])
-      Toast.fire({
-        icon: 'success',
-        title: 'add course success'
+      // Toast.fire({
+      //   icon: 'success',
+      //   title: 'add course success'
+      // })
+      Swal.fire({
+        // position: "top-end",
+        icon: "success",
+        title: "add course success",
+        showConfirmButton: false,
+        timer: 1000,
       })
         .then(() => { window.location.href = "/admin/course/syllabus/" + syllabusID; })
 
@@ -179,17 +186,19 @@ function SyllabusDetail() {
         <LoadingPage></LoadingPage>
       ) : (
         <div className=' text-black bg-white min-h-screen' >
+          <div className=' flex flex-row-reverse'>
+          <button className=' ml-3' onClick={() => deleteSyllabus(syllabusID)}>
+            <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M19.4258 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M28.2407 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          </div>
           <div className=' grid grid-cols-1 place-items-center'>
             <div className=' flex'>
               <h1 className=' mt-3 ml-3 text-center text-4xl mb-5'>ข้อมูลหลักสูตร</h1>
-              <button className=' ml-3' onClick={() => deleteSyllabus(syllabusID)}>
-                <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M19.4258 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M28.2407 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
             </div>
           </div>
           <div className='flex flex-row-reverse '>
@@ -237,10 +246,11 @@ function SyllabusDetail() {
             }
           </div>
 
-          <p className='mt-3 ml-3 text-left text-2xl'>รายวิชาในหลักสูตร</p>
+          {/* <p className='mt-5 ml-3 text-left text-2xl'>รายวิชาในหลักสูตร</p> */}
+          <h1 className=' mt-7 ml-3 text-center text-4xl mb-5'>รายวิชาในหลักสูตร</h1>
           <div className=' flex flex-row-reverse'>
             <>
-              <div className=" flex items-center justify-center">
+              <div className=" mb-5 flex items-center justify-center">
                 <button onClick={() => setShowModal(true)} type="button" className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
                   <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-orange-300 group-hover:h-full"></span>
                   <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
@@ -287,7 +297,7 @@ function SyllabusDetail() {
                             >
                               <option value={""}>---โปรดระบุ---</option>
                               {
-                                course.map((_, index) => (<option key={index} value={_.courseID}>{_.courseID} {_.courseNameTH}</option>))
+                                course.map((_, index) => (<option key={index} value={_.courseID}>{_.courseID_number} {_.courseNameTH}</option>))
                               }
                             </select>
                             <div className="items-center gap-2 mt-3 sm:flex">
@@ -315,48 +325,6 @@ function SyllabusDetail() {
               ) : null}
             </>
           </div>
-          {/* <div className='relative mt-3 overflow-x-auto shadow-md sm:rounded-lg'>
-            <table className=" w-full text-sm text-left text-black ">
-              <thead className="text-sm text-black uppercase bg-orange-300">
-                <tr  >
-                  <th scope="col" className="py-3 px-6" >ลำดับ</th>
-                  <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
-                  <th scope="col" className="py-3 px-6">ชื่อไทย</th>
-                  <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
-                  <th scope="col" className="py-3 px-6">หน่วยกิต</th>
-                  <th scope="col" className="py-3 px-6">การกระทำ</th>
-                </tr>
-              </thead>
-              {courseInSyllabus.map((_, index) => (
-                <tbody key={index}>
-                  <tr className=" hover:bg-gray-200 bg-white border-b"
-                  >
-                    <td className="py-4 px-6" >{index + 1}</td>
-                    <td className="py-4 px-6" >{_.courseID}</td>
-                    <td className="py-4 px-6">{_.courseNameTH}</td>
-                    <td className="py-4 px-6">{_.courseNameENG}</td>
-                    <td className="py-4 px-6">{_.creditStudy}</td>
-                    <td className="py-4 px-6 flex flex-row">
-                      <div className=' ml-3'
-                        content="View Admin"
-                        color="error"
-                        onClick={() => { deleteCourse(_.courseID) }}
-                      >
-                        <button >
-                          <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M19.4258 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M28.2407 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              ))}
-            </table>
-          </div> */}
           <Course_in_syllabus></Course_in_syllabus>
           <>
             <div className=' mt-5'>

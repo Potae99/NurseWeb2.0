@@ -11,7 +11,8 @@ export default function Login({ setToken }) {
   const [level, setLevel] = useState("student");
 
 
-  const Toast = Swal.mixin({
+  const Toast = 
+  Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
@@ -55,27 +56,54 @@ export default function Login({ setToken }) {
           throw new Error("login fail")
         }
         if (level == "admin"){
-          Toast.fire({
-            icon: 'success',
-            title: res.data.message
-          })
-          .then(() => {window.location.href = "/admin/home"})
+          // Toast.fire({
+          //   icon: 'success',
+          //   title: res.data.message
+          // })
+          // .then(() => {window.location.href = "/admin/home"})
+          Swal.fire({
+          // position: "top-end",
+          icon: "success",
+          title: res.data.message,
+          showConfirmButton: false,
+          timer: 1000,
+        }).then(() => {
+          window.location.href = "/admin/home";
+        });
           
         }
         else if (level == "teacher"){
-          Toast.fire({
-            icon: 'success',
-            title: res.data.message  
-          })
-          .then(() => {window.location.href = "/teacher/home"})
+          // Toast.fire({
+          //   icon: 'success',
+          //   title: res.data.message  
+          // })
+          // .then(() => {window.location.href = "/teacher/home"})
+          Swal.fire({
+          // position: "top-end",
+          icon: "success",
+          title: res.data.message,
+          showConfirmButton: false,
+          timer: 1000,
+        }).then(() => {
+          window.location.href = "/teacher/home";
+        });
           
         }
         else if (level == "student"){
-          Toast.fire({
-            icon: 'success',
-            title: res.data.message
-          })
-          .then(() => {window.location.href = "/student/home";})
+          // Toast.fire({
+          //   icon: 'success',
+          //   title: res.data.message
+          // })
+          // .then(() => {window.location.href = "/student/home";})
+          Swal.fire({
+          // position: "top-end",
+          icon: "success",
+          title: res.data.message,
+          showConfirmButton: false,
+          timer: 1000,
+        }).then(() => {
+          window.location.href = "/student/home";
+        });
         }
         else {
           window.location.href = "/error"
@@ -91,11 +119,18 @@ export default function Login({ setToken }) {
         if (error.response) {
           console.log(error.response.data); // => the response payload 
         }
-        Toast.fire({
-          icon: 'error',
-          title: "login fail"
+        // Toast.fire({
+        //   icon: 'error',
+        //   title: "login fail"
 
-        })
+        // })
+        Swal.fire({
+          // position: "top-end",
+          icon: "error",
+          title: "login fail",
+          showConfirmButton: false,
+          timer: 1000,
+        });
         // console.log(res);
       });
 

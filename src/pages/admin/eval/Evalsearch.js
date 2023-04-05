@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import LoadingPage from '../../LoadingPage';
+import { format } from 'path-browserify';
 
 
 function Evalsearch() {
@@ -74,6 +75,7 @@ function Evalsearch() {
                                 <th scope="col" className="py-3 px-6" >รหัสคาบเรียน</th>
                                 <th scope="col" className="py-3 px-6">ชื่อวิชา</th>
                                 <th scope="col" className="py-3 px-6">ห้องเรียน</th>
+                                <th scope="col" className="py-3 px-6">ปีการศึกษา</th>
                                 <th scope="col" className="py-3 px-6">การกระทำ</th>
                             </tr>
                         </thead>
@@ -84,6 +86,7 @@ function Evalsearch() {
                                     <td className="py-4 px-6" >{_.classID}</td>
                                     <td className="py-4 px-6">{_.courseNameTH}</td>
                                     <td className="py-4 px-6">{_.studyRoom}</td>
+                                    <td className="py-4 px-6">{format(new Date(_.dateYear), "yyyy")}</td>
                                     <td className="py-4 px-6 flex flex-row">
                                         <div className=' ml-3'
                                             content="View Admin"

@@ -65,10 +65,17 @@ function AddCourse() {
 
                 }
             ])
-            Toast.fire({
-                icon: 'success',
-                title: 'add course success'
-            })
+            // Toast.fire({
+            //     icon: 'success',
+            //     title: 'add course success'
+            // })
+            Swal.fire({
+                // position: "top-end",
+                icon: "success",
+                title: "add course success",
+                showConfirmButton: false,
+                timer: 1000,
+              })
                 .then(() => { window.location.href = "/admin/course/all"; })
 
         })
@@ -130,7 +137,7 @@ function AddCourse() {
                                 class="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                             /> */}
                                     <select
-                                        className='w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md'
+                                        className=' border-black w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md'
                                         placeholder='หมวดหมู่วิชา'
                                         name='categoryID'
                                         type="text"
@@ -141,7 +148,7 @@ function AddCourse() {
                                             setcategoryID(filterCategory[0].categoryID)
                                         }}
                                     >
-                                        <option value={""}></option>
+                                        <option value={""}>---โปรดระบุหมวดวิชา---</option>
                                         {
                                             category.map((_, index) => (<option key={index} value={_.categoryID}>{_.categoryName}</option>))
                                         }
@@ -157,46 +164,33 @@ function AddCourse() {
                                         type="text"
                                         name="courseID_number"
                                         placeholder="รหัสวิชา"
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className=" border-black w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                     />
                                 </div>
                             </div>
                             <div ><p>ชื่อไทย</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
+                                    <textarea
                                         onChange={(event) => {
                                             setcourseNameTH(event.target.value)
                                         }}
                                         type="text"
                                         name="courseNameTH"
                                         placeholder="ชื่อไทย"
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className=" border-black w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                     />
                                 </div>
                             </div>
                             <div ><p>ชื่ออังกฤษ</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
+                                    <textarea
                                         onChange={(event) => {
                                             setcourseNameENG(event.target.value)
                                         }}
                                         type="text"
                                         name="courseNameENG"
                                         placeholder="ชื่ออังกฤษ"
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                    />
-                                </div>
-                            </div>
-                            <div ><p>รายละเอียดวิชา</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <textarea
-                                        onChange={(event) => {
-                                            setdetail(event.target.value)
-                                        }}
-                                        type="text"
-                                        name="detail"
-                                        placeholder="รายละเอียดวิชา"
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className=" border-black w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -209,7 +203,7 @@ function AddCourse() {
                                         type="text"
                                         name="creditStudy"
                                         placeholder="หน่วยกิต"
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className=" border-black w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -222,7 +216,7 @@ function AddCourse() {
                                         type="text"
                                         name="studyTimeTheory"
                                         placeholder="เวลา"
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className=" border-black w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -235,7 +229,7 @@ function AddCourse() {
                                         type="text"
                                         name="studyTimePractice"
                                         placeholder="เวลาปฎิบัติ"
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className=" border-black w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -248,12 +242,24 @@ function AddCourse() {
                                         type="text"
                                         name="studyTimeSelf"
                                         placeholder="เวลาศึกษาด้วยตนเอง"
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className=" border-black w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                     />
                                 </div>
                             </div>
-
                         </div>
+                        <div ><p>รายละเอียดวิชา</p>
+                                <div className="mb-5 flex justify-center ">
+                                    <textarea
+                                        onChange={(event) => {
+                                            setdetail(event.target.value)
+                                        }}
+                                        type="text"
+                                        name="detail"
+                                        placeholder="รายละเอียดวิชา"
+                                        className=" border-black w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                    />
+                                </div>
+                            </div>
                     </div>
                     <div className='  grid grid-cols-2 '>
                         <div className=' ml-3'>

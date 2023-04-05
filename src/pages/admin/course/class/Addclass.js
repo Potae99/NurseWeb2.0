@@ -14,6 +14,30 @@ function Addclass() {
     const [loading, setLoading] = useState(undefined);
     const [completed, setCompleted] = useState(undefined);
 
+    const [courseList, setCourseList] = useState([]);
+
+    const fetchData = () => {
+        axios.get(process.env.REACT_APP_API_URL + '/course')
+        .then( res => {
+            console.log(res.data)
+
+            if (res.data.error === true) {
+                console.log(res.data)
+                console.log("ERROR FOUND WHEN GET DATA FROM API")
+                return;
+            }
+            setCourseList(res.data.data);
+            setLoading(true);
+
+            setTimeout(() => {
+                setCompleted(true);
+            }, 1000);
+        })
+        .catch( error => {
+            console.log(error.res)
+        })
+    }
+
 
     const addclass = () => {
 
@@ -38,18 +62,13 @@ function Addclass() {
 
     useEffect(() => {
         setTimeout(() => {
-            setLoading(true);
-
-            setTimeout(() => {
-                setCompleted(true);
-            }, 1000);
+            fetchData();
         }, 2000);
-    })
+    }, [])
 
     const backToAdminHome = () => {
         window.location.href = "/admin/home"
     }
-
 
     return (
         <>
@@ -63,7 +82,7 @@ function Addclass() {
                             <div >
                                 <p>รหัสวิชาเรียน</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
+                                    {/* <input
                                         onChange={(event) => {
                                             setcourseID(event.target.value)
                                         }}
@@ -73,7 +92,23 @@ function Addclass() {
                                         placeholder="รหัสวิชาเรียน"
                                         className="w-full rounded-md border border-while bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
-                                    />
+                                    /> */}
+                                    <select
+                                        onChange={(event) => {
+                                            const filterCourse = courseList.filter( (item => {
+                                                return event.target.value == item.courseID
+                                            }))
+                                            setcourseID(filterCourse[0].courseID)
+                                        }}
+                                        type="text"
+                                        name='courseID'
+                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    >
+                                        <option value={""}>---โปรดระบุรหัสวิชา---</option>
+                                        {
+                                            courseList.map((_, index) => (<option key={index} value={_.courseID}>{_.courseID_number}</option>))
+                                        }
+                                    </select>
                                 </div>
                             </div>
                             <div >

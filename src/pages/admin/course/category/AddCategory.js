@@ -16,17 +16,20 @@ function AddCategory() {
   const [loading, setLoading] = useState(undefined);
   const [completed, setCompleted] = useState(undefined);
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 700,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
+  const [showModal1, setShowModal1] = useState(false);
+
+  const Toast =
+    Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 700,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
 
   const addcategory = () => {
 
@@ -40,9 +43,16 @@ function AddCategory() {
           categoryName: categoryName
         }
       ])
-      Toast.fire({
-        icon: 'success',
-        title: 'Add category success'
+      // Toast.fire({
+      //   icon: 'success',
+      //   title: 'Add category success'
+      // })
+      Swal.fire({
+        // position: "top-end",
+        icon: "success",
+        title: "Add category success",
+        showConfirmButton: false,
+        timer: 1000,
       })
         .then(() => { window.location.href = "/course/category/add"; })
 
@@ -82,38 +92,6 @@ function AddCategory() {
     window.location.href = "/admin/course/all";
   }
 
-  const deleteCategory = (categoryID) => {
-    Swal.fire({
-      title: 'ต้องการลบหลักสูตรหรือไม่?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'ใช่',
-      denyButtonText: `ไม่ใช่`,
-      cancelButtonText: 'ยกเลิก'
-    })
-      .then((results) => {
-        if (results.isConfirmed) {
-          axios.delete(process.env.REACT_APP_API_URL + "/course/category", { data: { categoryID: categoryID } })
-            .then(res => {
-              setCategoryList(
-                categoryList.filter((_) => {
-                  return _.categoryID !== categoryID;
-                })
-              )
-              Swal.fire('Deleted!', '', 'success')
-                .then(() => { window.location.href = "/course/category/add" })
-
-            })
-            .catch(error => {
-              console.log(error.res);
-            })
-        }
-        else if (results.isDenied) {
-          window.location.href = "/course/category/add";
-        }
-      })
-  }
-
   return (
     <>
       {!completed ? (
@@ -122,7 +100,7 @@ function AddCategory() {
         <div className=' text-black bg-white min-h-screen'>
           <h1 className=' text-center text-4xl'>เพิ่มหมวดวิชา</h1>
           <div className='container mx-auto'>
-            <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
+            {/* <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
               <div >
                 <p>ชื่อหมวดวิชา</p>
                 <div className="mb-1 flex justify-center ">
@@ -137,18 +115,69 @@ function AddCategory() {
                   />
                 </div>
               </div>
-            </div>
-            <div className=' flex flex-row-reverse mr-3 mb-5'>
-              <button onClick={addcategory} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-balck transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
-                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
-                  <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-                <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มหมวดวิชา</span>
-                <span className="relative invisible">Button Text</span>
-              </button>
-            </div>
+            </div> */}
+            <>
+              <div className=' flex flex-row-reverse mr-3 mb-5'>
+                <button onClick={() => setShowModal1(true)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-balck transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                  <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
+                    <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มหมวดวิชา</span>
+                  <span className="relative invisible">Button Text</span>
+                </button>
+              </div>
+              {showModal1 ? (
+                <>
+                  <div className="fixed inset-0 z-10 overflow-y-auto">
+                    <div
+                      className="fixed inset-0 w-full h-full bg-black opacity-40"
+                      onClick={() => setShowModal1(false)}
+                    ></div>
+                    <div className="flex items-center min-h-screen px-4 py-8">
+                      <div className=" w-1/3 relative  p-4 mx-auto bg-white rounded-md shadow-lg">
+                        <div className=" mt-3 ">
+                          <div className=" text-center sm:ml-4   sm:text-left">
+                            <h4 className="text-lg font-medium text-gray-800">
+                              ชื่อหมวดวิชา
+                            </h4>
+                            <input
+                              onChange={(event) => {
+                                setcategoryName(event.target.value)
+                              }}
+                              type="text"
+                              name="categoryName"
+                              placeholder="ชื่อหมวดวิชา"
+                              className=" w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                            />
+                            <div className="items-center gap-2 mt-3 sm:flex">
+                              <button
+                                className="w-full mt-2 p-2.5 flex-1 text-white  bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                                onClick={() => {
+                                  addcategory();
+                                  setShowModal1(false);
+                                }}
+                              >
+                                บันทึก
+                              </button>
+                              <button
+                                className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-300 focus:ring-2"
+                                onClick={() =>
+                                  setShowModal1(false)
+                                }
+                              >
+                                ยกเลิก
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : null}
+            </>
           </div>
 
           {/* <div className=" grid grid-cols-1 place-items-center">

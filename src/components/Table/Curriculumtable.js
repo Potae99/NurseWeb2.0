@@ -93,7 +93,7 @@ function Curriculumtable() {
   };
 
   const filterSyllabus = syllabus.filter((item) =>
-    item.syllabusName.toLowerCase().includes(searchTerm.toLowerCase())
+    item.syllabusDate.toString().toLowerCase().includes(searchTerm.toLowerCase())
   );
 
 
@@ -107,7 +107,7 @@ function Curriculumtable() {
     <>
       <input
         className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-        placeholder="ค้นหาหลักสูตร..."
+        placeholder="ค้นหาหลักสูตร...(ปีที่สร้าง)"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

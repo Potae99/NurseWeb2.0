@@ -37,7 +37,6 @@ function Allcourse() {
               <Addcategorybuton />
             </div>
           </div>
-          <p className=' text-black ml-3'>รายวิชา</p>
           <div className='mt-3'>
             {/* <Categorytable></Categorytable> */}
             <Allcoursetable></Allcoursetable>

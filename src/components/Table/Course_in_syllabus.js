@@ -86,7 +86,7 @@ function Course_in_syllabus() {
                     <td className="py-4 px-6" >{index + 1}</td>
                     <td className="py-4 px-6" >{_.courseID_number}</td>
                     <td className="py-4 px-6">{_.courseNameTH}</td>
-                    <td className="py-4 px-6">{_.courseNameENG}</td>
+                    {/* <td className="py-4 px-6">{_.courseNameENG}</td> */}
                     <td className="py-4 px-6">{_.creditStudy}</td>
                     <td className="py-4 px-6 flex flex-row">
                         <div className=' ml-3'
@@ -150,7 +150,7 @@ function Course_in_syllabus() {
                         <th scope="col" className="py-3 px-6" >ลำดับ</th>
                         <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
                         <th scope="col" className="py-3 px-6">ชื่อไทย</th>
-                        <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
+                        {/* <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th> */}
                         <th scope="col" className="py-3 px-6">หน่วยกิต</th>
                         <th scope="col" className="py-3 px-6">การกระทำ</th>
                     </tr>
