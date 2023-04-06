@@ -326,7 +326,7 @@ function CourseDetail() {
                                             <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </span>
-                                    <span className="absolute flex items-center justify-center w-full h-full text-orange-400 transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
+                                    <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
                                     <span className="relative invisible">Button Text</span>
                                 </button>
                             </div>
@@ -342,7 +342,7 @@ function CourseDetail() {
                                             <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </span>
-                                    <span className="absolute flex items-center justify-center w-full h-full text-red-600 transition-all duration-300 transform group-hover:translate-x-full ease">ลบ</span>
+                                    <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">ลบ</span>
                                     <span className="relative invisible">Button Text</span>
                                 </button>
                             </div>
@@ -352,7 +352,7 @@ function CourseDetail() {
                                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
                                     <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </span>
-                                <span className="absolute flex items-center justify-center w-full h-full text-orange-400 transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
+                                <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
                                 <span className="relative invisible">Button Text</span>
                             </button>
                         </div>

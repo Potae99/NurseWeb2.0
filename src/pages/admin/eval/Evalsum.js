@@ -102,8 +102,8 @@ function Evalsum() {
       {!completed ? (
         <LoadingPage></LoadingPage>
       ) : (
-        <div>
-          <div className=' text-center text-xl'>
+        <div className=' text-black'>
+          <div className=' text-center text-xl mb-5'>
             <p>แบบประเมินรายวิชา</p>
             <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา {Dateget}</p>
             <p>รายวิชา{Classdetail.courseID_number} {Classdetail.courseNameTH}</p>

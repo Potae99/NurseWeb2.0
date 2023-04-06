@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Route, Routes, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { format } from 'date-fns';
+import { format, sub } from 'date-fns';
 import LoadingPage from '../../LoadingPage';
 
 function WorkHistoryDetail() {
@@ -48,7 +48,17 @@ function WorkHistoryDetail() {
     })
 
     const deleteWorkHistory = () => {
-        axios.delete(process.env.REACT_APP_API_URL + "/student/workHistory", { data: { workHistoryID: workHistoryID } })
+        Swal.fire({
+            title: 'ต้องการลบประวัติการทำงานหรือไม่?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'ใช่',
+            denyButtonText: `ไม่ใช่`,
+            cancelButtonText: 'ยกเลิก'
+        })
+        .then((results) => {
+            if (results.isConfirmed) {
+                axios.delete(process.env.REACT_APP_API_URL + "/student/workHistory", { data: { workHistoryID: workHistoryID } })
             .then((response) => {
                 setWorkHistoryList(
                     workHistoryList.filter((_) => {
@@ -56,10 +66,17 @@ function WorkHistoryDetail() {
                     })
                 )
 
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Delete data success'
-                })
+                // Toast.fire({
+                //     icon: 'success',
+                //     title: 'Delete data success'
+                // })
+                Swal.fire({
+                    // position: "top-end",
+                    icon: "success",
+                    title: "Delete data success",
+                    showConfirmButton: false,
+                    timer: 1000,
+                  })
                     .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
 
 
@@ -68,6 +85,12 @@ function WorkHistoryDetail() {
                     console.log(error.response);
                 }
             });
+            }
+            else if (results.isDenied){
+                window.location.href = "/admin/student/work/detail/" + workHistoryID;
+            }
+        })
+        
     }
 
     const fetchData = () => {
@@ -238,7 +261,7 @@ function WorkHistoryDetail() {
                 <LoadingPage></LoadingPage>
             ) : (
                 <div>
-                    <div className=" text-black min-h-screen border space-y-5 mb-10">
+                    <div className=" text-black min-h-screen space-y-5 mb-10">
                         <div className=" font-bold text-4xl m-7 grid grid-cols-1 place-items-center">ข้อมูลประวัติการทำงาน</div>
                         <div>
                             <div className='container mx-auto text-black'>
@@ -253,7 +276,7 @@ function WorkHistoryDetail() {
                                                 type="date"
                                                 name="startWork"
                                                 placeholder="เวลาเริ่มทำงาน"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -267,7 +290,7 @@ function WorkHistoryDetail() {
                                                 type="date"
                                                 name="endWork"
                                                 placeholder="สิ้นสุดการทำงาน"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -281,7 +304,7 @@ function WorkHistoryDetail() {
                                                 type="text"
                                                 name="แผนก"
                                                 placeholder="แผนก"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -295,7 +318,7 @@ function WorkHistoryDetail() {
                                                 type="text"
                                                 name="ชื่อสถานที่ทำงาน"
                                                 placeholder="ชื่อสถานที่ทำงาน"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -309,7 +332,7 @@ function WorkHistoryDetail() {
                                                 type="text"
                                                 name="houseNo"
                                                 placeholder="บ้านเลขที่"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -323,7 +346,7 @@ function WorkHistoryDetail() {
                                                 type="text"
                                                 name="village"
                                                 placeholder="หมู่บ้าน"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -337,7 +360,7 @@ function WorkHistoryDetail() {
                                                 type="text"
                                                 name="road"
                                                 placeholder="ถนน"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -351,19 +374,11 @@ function WorkHistoryDetail() {
                                                 type="text"
                                                 name="alley"
                                                 placeholder="ซอย"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
                                     <div ><p>จังหวัด</p>
-                                        <div className=' mb-5 flex justify-center'>
-                                            <input
-                                                defaultValue={province}
-                                                name='province'
-                                                className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
-                                            />
-                                        </div>
-                                        <p>แก้ไขจังหวัด</p>
                                         <div className="mb-5 flex justify-center ">
                                             <select
                                                 onChange={(event) => {
@@ -375,9 +390,9 @@ function WorkHistoryDetail() {
                                                 }}
                                                 type="text"
                                                 name='province'
-                                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             >
-                                                <option value={""}>---โปรดระบุจังหวัด---</option>
+                                                <option value={""}>{province}</option>
                                                 {
                                                     provinceApi.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
                                                 }
@@ -385,14 +400,6 @@ function WorkHistoryDetail() {
                                         </div>
                                     </div>
                                     <div ><p>อำเภอ</p>
-                                        <div className=' mb-5 flex justify-center'>
-                                            <input
-                                                defaultValue={district}
-                                                name='district'
-                                                className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
-                                            />
-                                        </div>
-                                        <p>แก้ไขอำเภอ</p>
                                         <div className="mb-5 flex justify-center ">
                                             <select
                                                 onChange={(event) => {
@@ -404,9 +411,9 @@ function WorkHistoryDetail() {
                                                 }}
                                                 type="text"
                                                 name='district'
-                                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             >
-                                                <option value={""}>---โปรดระบุจังหวัด---</option>
+                                                <option value={""}>{district}</option>
                                                 {
                                                     amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
                                                 }
@@ -414,14 +421,6 @@ function WorkHistoryDetail() {
                                         </div>
                                     </div>
                                     <div ><p>ตำบล</p>
-                                        <div className=' mb-5 flex justify-center'>
-                                            <input
-                                                defaultValue={subDistrict}
-                                                name='subDistrict'
-                                                className=' w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
-                                            />
-                                        </div>
-                                        <p>แก้ไขตำบล</p>
                                         <div className="mb-5 flex justify-center ">
                                             <select
                                                 onChange={(event) => {
@@ -429,9 +428,9 @@ function WorkHistoryDetail() {
                                                 }}
                                                 type="text"
                                                 name='subDistrict'
-                                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             >
-                                                <option value={""}>---โปรดระบุอำเภอ---</option>
+                                                <option value={""}>{subDistrict}</option>
                                                 {
                                                     tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
                                                 }
@@ -448,7 +447,7 @@ function WorkHistoryDetail() {
                                                 type="text"
                                                 name="postalCode"
                                                 placeholder="รหัสไปรษณีย์"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -459,36 +458,39 @@ function WorkHistoryDetail() {
                     <div className=' flex flex-row-reverse justify-around'>
                         <div className=''>
                             <div className=''>
-                                <button onClick={() => checkDataChange(workHistoryID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                                <button onClick={() => checkDataChange(workHistoryID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
                                         <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </span>
-                                    <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
+                                    <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
                                     <span className="relative invisible">Button Text</span>
                                 </button>
                             </div>
                         </div>
                         <div className=''>
                             <div className=''>
-                                <button onClick={() => deleteWorkHistory(workHistoryID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
-                                        <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                <button onClick={() => deleteWorkHistory(workHistoryID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-red-500 rounded-full shadow-md group">
+                                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-red-500 group-hover:translate-x-0 ease">
+                                        <svg width="20" className=' text-white' height="20" viewBox="0 0 47 51" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M19.4258 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M28.2407 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </span>
-                                    <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">ลบ</span>
+                                    <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">ลบ</span>
                                     <span className="relative invisible">Button Text</span>
                                 </button>
                             </div>
                         </div>
                         <div className=' ml-3'>
-                            <button onClick={() => BacktoWorkHistoryList(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                            <button onClick={() => BacktoWorkHistoryList(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
                                     <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </span>
-                                <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
+                                <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
                                 <span className="relative invisible">Button Text</span>
                             </button>
                         </div>

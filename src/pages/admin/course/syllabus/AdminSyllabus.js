@@ -31,7 +31,7 @@ function AdminSyllabus() {
               <Addcuriculumbutton></Addcuriculumbutton>
             </div>
           </div>
-          <p className=' text-black ml-3'>หลักสูตร</p>
+          {/* <p className=' text-black ml-3'>หลักสูตร</p> */}
           <div className=' mt-3'>
             <Curriculumtable></Curriculumtable>
           </div>

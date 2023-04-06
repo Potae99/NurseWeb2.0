@@ -83,10 +83,17 @@ function AddWorkHistory() {
                 }
             ])
 
-            Toast.fire({
-                icon: 'success',
-                title: 'เพิ่มประวัติการทำงาน สำเร็จ'
-            })
+            // Toast.fire({
+            //     icon: 'success',
+            //     title: 'เพิ่มประวัติการทำงาน สำเร็จ'
+            // })
+            Swal.fire({
+                // position: "top-end",
+                icon: "success",
+                title: "Add work History success",
+                showConfirmButton: false,
+                timer: 1000,
+              })
                 .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
         })
     }
@@ -136,7 +143,7 @@ function AddWorkHistory() {
     }, [])
 
     const BacktoStudentDetail = (userID) => {
-        window.location.href = '/admin/student/detail/' + userID;
+        window.location.href = '/admin/student/work/list/' + userID;
     }
 
     const onchangeProvince = (event) => {
@@ -209,7 +216,7 @@ function AddWorkHistory() {
                                         type="date"
                                         name="startWork"
                                         placeholder="เวลาเริ่มทำงาน"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -223,7 +230,7 @@ function AddWorkHistory() {
                                         defaultValue={endWork}
                                         name="endWork"
                                         placeholder="สิ้นสุดการทำงาน"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -237,7 +244,7 @@ function AddWorkHistory() {
                                         defaultValue={department}
                                         name="department"
                                         placeholder="แผนก"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -251,7 +258,7 @@ function AddWorkHistory() {
                                         type="text"
                                         name="workAddressName"
                                         placeholder="ชื่อสถานที่ทำงาน"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -265,7 +272,7 @@ function AddWorkHistory() {
                                         type="text"
                                         name="houseNo"
                                         placeholder="บ้านเลขที่"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -279,7 +286,7 @@ function AddWorkHistory() {
                                         type="text"
                                         name="village"
                                         placeholder="หมู่บ้าน"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -293,7 +300,7 @@ function AddWorkHistory() {
                                         type="text"
                                         name="road"
                                         placeholder="ถนน"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -307,7 +314,7 @@ function AddWorkHistory() {
                                         type="text"
                                         name="alley"
                                         placeholder="ซอย"
-                                        className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
                                 </div>
                             </div>
@@ -335,9 +342,9 @@ function AddWorkHistory() {
                                         }}
 
                                         name='province'
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     >
-                                        <option value={""}></option>
+                                        <option value={""}>---โปรดระบุจังหวัด---</option>
                                         {
                                             provinceApi.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
                                         }
@@ -359,9 +366,9 @@ function AddWorkHistory() {
                                             // console.log(filterAmphures[0].name_th)
                                         }}
                                         name='District'
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     >
-                                        <option value={""}></option>
+                                        <option value={""}>---โปรดระบุอำเภอ---</option>
                                         {
                                             amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
                                         }
@@ -380,8 +387,8 @@ function AddWorkHistory() {
 
                                         }}
                                         name='subDistrict'
-                                        className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                        <option value={""}></option>
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
+                                        <option value={""}>---โปรดระบุตำบล---</option>
                                         {
                                             tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
                                         }
@@ -391,9 +398,10 @@ function AddWorkHistory() {
                             <div ><p>รหัสไปรษณีย์</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
+                                        placeholder='รหัสไปรษณีย์'
                                         defaultValue={zipCode}
                                         name='zipCode'
-                                        className="w-full rounded-md border border-while 
+                                        className="w-full rounded-md border border-black 
                                 bg-white py-3 px-6 text-base font-medium text-black 
                                 outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
@@ -403,22 +411,22 @@ function AddWorkHistory() {
                     </div>
                     <div className='  grid grid-cols-2 '>
                         <div className=' ml-3'>
-                            <button onClick={() => BacktoStudentDetail(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                            <button onClick={() => BacktoStudentDetail(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
                                     <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </span>
-                                <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
+                                <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
                                 <span className="relative invisible">Button Text</span>
                             </button>
                         </div>
                         <div className=' absolute right-0 mr-7'>
-                            <button onClick={() => addWorkHistory(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-                                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+                            <button onClick={() => addWorkHistory(userID)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
                                     <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </span>
-                                <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
+                                <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">บันทึก</span>
                                 <span className="relative invisible">Button Text</span>
                             </button>
                         </div>
