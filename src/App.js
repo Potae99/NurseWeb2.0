@@ -59,6 +59,9 @@ import Apitest from './Test.js/Apitest';
 import Test2 from './Test.js/Test2';
 
 
+///credit
+import Credit from './pages/Credit';
+
 
 
 
@@ -317,6 +320,24 @@ const router = [
   {
     path: "/teacher/sum/practice/:classID/*",
     element: <Taugh_sumprac />,
+    level: "teacher"
+
+  },
+  {
+    path: "/credit",
+    element: <Credit />,
+    level: "admin"
+
+  },
+  {
+    path: "/credit",
+    element: <Credit />,
+    level: "student"
+
+  },
+  {
+    path: "/credit",
+    element: <Credit />,
     level: "teacher"
 
   }
