@@ -2,6 +2,13 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import Swal from 'sweetalert2';
 
+////chart
+import Chart from "chart.js/auto";
+import { Bar } from "react-chartjs-2";
+import { CategoryScale } from "chart.js";
+
+
+
 function Admin_sum_student() {
 
   const [adminlist, setAdminList] = useState([]);
@@ -9,6 +16,8 @@ function Admin_sum_student() {
   const itemsPerPage = 10;
   const totalPages = adminlist ? Math.ceil(adminlist.length / itemsPerPage) : 0;
   const [searchTerm, setSearchTerm] = useState("");
+
+
 
   const Toast = Swal.mixin({
     toast: true,

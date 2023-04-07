@@ -93,24 +93,14 @@ function Taugh_sumprac() {
       ) : (
         <div>
           <div className=' text-center text-xl'>
-            <p>แบบประเมินรายวิชา</p>
+            <p>แบบประเมินรายวิชาภาคปฏิบัติ</p>
             <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา {Dateget}</p>
             <p>รายวิชา{Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
           </div>
-          <div>
-            <p>ระดับคะแนน</p>
-          </div>
-          <div className=' ml-5'>
-            <p>ค่าเฉลี่ย 4.50 ขึ้นไป หมายถึง พึงพอใจในระดับมากที่สุด</p>
-            <p>ค่าเฉลี่ย 3.50-4.49 หมายถึง พึงพอใจในระดับมาก</p>
-            <p>ค่าเฉลี่ย 2.50-3.49 หมายถึง พึงพอใจในระดับปานกลาง</p>
-            <p>ค่าเฉลี่ย 1.50-2.49 หมายถึง พึงพอใจในระดับน้อย</p>
-            <p>ค่าเฉลี่ยน้อยกว่า 1.50 หมายถึง พึงพอใจในระดับน้อยที่สุด</p>
-
-          </div>
+     
           <div className=' flex flex-col space-y-3 mt-3'>
             {/* section2-1 */}
-            <p>1.การชี้แจงวัตถุประสงค์ เนื้อหา วิธีการสอน และการประเมินผลการเรียนมีความชัดเจน</p>
+            <p>1.อาจารย์ได้แจ้งกำหนดการเรียนในส่วนที่อาจารย์ รับผิดชอบอย่างชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -128,7 +118,7 @@ function Taugh_sumprac() {
 
 
             </div>
-            <p>2.วัตถุประสงค์การเรียนรู้สอดคล้องกับลักษณะวิชา</p>
+            <p>2.อาจารย์ได้ชี้แจงจุดมุ่งหมายการเรียนการสอนแต่ละครั้งอย่างชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -147,7 +137,7 @@ function Taugh_sumprac() {
 
             </div>
 
-            <p>3.หัวข้อการสอนมีความสอดคล้องกับวัตถุประสงค์</p>
+            <p>3.อาจารย์มีความพร้อมในการสอนแต่ละครั้ง</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -166,7 +156,7 @@ function Taugh_sumprac() {
 
             </div>
 
-            <p>4.ตารางการจัดการเรียนการสอนมีความชัดเจน</p>
+            <p>4.อาจารย์ได้ชี้แจงหลักเกณฑ์การวัดและประเมินผลในส่วนที่อาจารย์รับผิดชอบอย่างชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -186,7 +176,7 @@ function Taugh_sumprac() {
             </div>
 
 
-            <p>5.การจัดลำดับการสอนมีความเหมาะสม</p>
+            <p>5.อาจารย์อธิบายเนื้อหาวิชาได้อย่างชัดเจนและเข้าใจง่าย</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -206,7 +196,7 @@ function Taugh_sumprac() {
             </div>
 
 
-            <p>6.ระยะเวลาการสอนเหมาะสมกับเนื้อหาในแต่ละหัวข้อ</p>
+            <p>6.อาจารย์ยกตัวอย่างประกอบได้อย่างเหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -227,7 +217,7 @@ function Taugh_sumprac() {
 
 
 
-            <p>7.กิจกรรมการเรียนการสอนสอดคล้องกับลักษณะวิชาและการเรียนรู้</p>
+            <p>7.อาจารย์ตอบคำถามได้ชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -247,7 +237,7 @@ function Taugh_sumprac() {
             </div>
 
 
-            <p>8.เอกสารประกอบการสอนเหมาะสม สนับสนุนเนื้อหาการสอน</p>
+            <p>8.อาจารย์ใช้สื่อการสอนได้เหมาะสมกับเนื้อหาการสอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -268,7 +258,7 @@ function Taugh_sumprac() {
 
 
 
-            <p>9.โดยภาพรวม ผู้เรียนมีความพึงพอใจในการจัดการเรียนการสอน</p>
+            <p>9.อาจารย์ประเมินการเรียนรู้ของผู้เรียน และให้ข้อมูล ย้อนกลับเป็นระยะๆ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -289,7 +279,7 @@ function Taugh_sumprac() {
 
 
 
-            <p>10.โดยภาพรวมผู้สอนมีเวลาและให้คำปรึกษาแก่นักศึกษานอกชั้นเรียน</p>
+            <p>10.อาจารย์มีแนวทางและวิธีการสอนที่ทำให้ผู้เรียน สนใจการเรียนตลอดเวลา</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -310,7 +300,7 @@ function Taugh_sumprac() {
 
 
 
-            <p>11.โดยภาพรวมผู้สอน มีเทคนิคการถ่ายทอดความรู้น่าสนใจง่ายต่อการเข้าใจ</p>
+            <p>11.อาจารย์เข้าสอนและเลิกสอนตรงเวลา</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -331,7 +321,7 @@ function Taugh_sumprac() {
 
 
 
-            <p>12.โดยภาพรวมผู้สอนตรงเวลาในการสอน</p>
+            <p>12.อาจารย์เปิดโอกาสและกระตุ้นให้ผู้เรียนได้แสดง ความคิดเห็นและซักถาม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -352,7 +342,7 @@ function Taugh_sumprac() {
 
 
 
-            <p>13.วิธีการประเมินผลการเรียน เหมาะสมกับวัตถุประสงค์ของวิชา</p>
+            <p>13.อาจารย์สอนครอบคลุมเนื้อหาที่รับผิดชอบ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -373,7 +363,7 @@ function Taugh_sumprac() {
 
 
 
-            <p>14.เกณฑ์การวัดและประเมินผลการเรียนมีความเหมาะสม</p>
+            <p>14.อาจารย์แนะนำเอกสารและแหล่งค้นคว้าเพิ่มเติม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -394,7 +384,7 @@ function Taugh_sumprac() {
 
 
 
-            <p>15.ห้องเรียนสะอาด บรรยากาศเหมาะสม น่าเรียน</p>
+            <p>15.อาจารย์ให้ข้อคิดเห็นที่เป็นประโยชน์</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -414,7 +404,7 @@ function Taugh_sumprac() {
             </div>
 
 
-            <p>16.ห้องเรียนมีแสง สี เสียง เหมาะสม</p>
+            <p>16.อาจารย์มีเวลาให้คำปรึกษาแก่ผู้เรียนทั้ง นอกชั้นเรียน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -435,7 +425,7 @@ function Taugh_sumprac() {
 
 
 
-            <p>17.ห้องเรียนมีการถ่ายเทอากาศเหมาะสม</p>
+            <p>17.ท่านได้ความรู้ ความเข้าใจเนื้อหาตามที่อาจารย์สอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -453,7 +443,7 @@ function Taugh_sumprac() {
             </div>
 
 
-            <p>18เอกสาร ตำรา สื่ออุปกรณ์สำหรับค้นคว้าด้วยตนเองมีความทันสมัย จำนวนเพียงพอ</p>
+            <p>18.ท่านเกิดแนวคิดในการประยุกต์ความรู้ไปใช้ใน สถานการณ์จริง</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -473,7 +463,7 @@ function Taugh_sumprac() {
             </div>
 
 
-            <p>19.ผู้เรียนเกิดพฤติกรรมตามวัตถุประสงค์</p>
+            <p>19.ท่านพอใจการสอนของอาจารย์</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
@@ -493,7 +483,7 @@ function Taugh_sumprac() {
             </div>
 
 
-            <p>20.ผู้เรียนสามารถนำความรู้ไปใช้ในชีวิตประจำวันและเป็นพื้นฐานในการเรียนวิชาอื่นได้</p>
+            <p>20.ท่านสนใจแสวงหาความรู้ในเรื่องที่อาจารย์สอนต่อไปอีก</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
               <div className="stat place-items-center">
