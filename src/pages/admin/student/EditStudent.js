@@ -266,7 +266,7 @@ function EditStudent() {
                     <div className=' text-black bg-white slate-500 min-h-screen '>
                         <h1 className=' text-4xl text-center m-3'>แก้ไขข้อมูลนิสิต</h1>
                         <div className='container mx-auto'>
-                            <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
+                            <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                                 <div ><p>ปีที่เริ่มศึกษา</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
@@ -420,139 +420,6 @@ function EditStudent() {
                                     </select>
                                 </label>
                                 </div>
-                                <div ><p>บ้านเลขที่</p>
-                                    <div className="mb-5 flex justify-center ">
-                                        <input
-                                            defaultValue={houseadd_houseNo}
-                                            onChange={(event) => {
-                                                sethouseadd_houseNo(event.target.value)
-                                            }}
-                                            type="text"
-                                            name="houseadd_houseNo"
-                                            placeholder="บ้านเลขที่"
-                                            className="w-full rounded-md border border-black (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        />
-                                    </div>
-                                </div>
-                                <div ><p>หมู่บ้าน</p>
-                                    <div className="mb-5 flex justify-center ">
-                                        <input
-                                            defaultValue={houseadd_village}
-                                            onChange={(event) => {
-                                                sethouseadd_village(event.target.value)
-                                            }}
-                                            type="text"
-                                            name="houseadd_village"
-                                            placeholder="หมู่บ้าน"
-                                            className="w-full rounded-md border border-black (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        />
-                                    </div>
-                                </div>
-                                <div ><p>ถนน</p>
-                                    <div className="mb-5 flex justify-center ">
-                                        <input
-                                            defaultValue={houseadd_road}
-                                            onChange={(event) => {
-                                                sethouseadd_road(event.target.value)
-                                            }}
-                                            type="text"
-                                            name="houseadd_road"
-                                            placeholder="ถนน"
-                                            className="w-full rounded-md border border-black (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        />
-                                    </div>
-                                </div>
-                                <div ><p>ซอย</p>
-                                    <div className="mb-5 flex justify-center ">
-                                        <input
-                                            defaultValue={houseadd_alley}
-                                            onChange={(event) => {
-                                                sethouseadd_alley(event.target.value)
-                                            }}
-                                            type="text"
-                                            name="houseadd_alley"
-                                            placeholder="ซอย"
-                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                        />
-                                    </div>
-                                </div>
-                                <div ><p>จังหวัด</p>
-                                    <div className="mb-5 flex justify-center ">
-                                        <select
-                                            onChange={(event) => {
-                                                const filterProvince = province.filter(item => {
-                                                    return event.target.value == item.province_id
-                                                })
-                                                sethouseadd_province(filterProvince[0].name_th)
-                                                onchangeProvince(event)
-                                            }}
-                                            type="text"
-                                            name='province'
-                                            className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                        >
-                                            <option value={""}>{houseadd_province}</option>
-                                            {
-                                                province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div ><p>อำเภอ</p>
-                                    <div className="mb-5 flex justify-center ">
-                                        <select
-                                            onChange={(event) => {
-                                                const filterAmphures = amphures.filter(item => {
-                                                    return event.target.value == item.amphure_id
-                                                })
-                                                sethouseadd_district(filterAmphures[0].name_th)
-                                                onchangeAmphures(event)
-                                            }}
-                                            type="text"
-                                            name='houseadd_district'
-                                            className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                        >
-                                            <option value={""}>{houseadd_district}</option>
-                                            {
-                                                amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div ><p>ตำบล</p>
-                                    <div className="mb-5 flex justify-center ">
-                                        <select
-                                            onChange={(event) => {
-                                                onchangeTambons(event)
-                                            }}
-                                            type="text"
-                                            name='houseadd_subdistrict'
-                                            className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                        >
-                                            <option value={""}>{houseadd_subDistrict}</option>
-                                            {
-                                                tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div ><p>รหัสไปรษณีย์</p>
-                                    <div className="mb-5 flex justify-center ">
-                                        <input
-                                            defaultValue={houseadd_postalCode}
-                                            onChange={(event) => {
-                                                sethouseadd_postalCode(event.target.value)
-                                            }}
-                                            type="text"
-                                            name="houseadd_postalCode"
-                                            placeholder="รหัสไปรษณีย์"
-                                            className="w-full rounded-md border border-black (condition) {
-                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        />
-                                    </div>
-                                </div>
                                 <div ><p>สัญชาติ</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
@@ -629,7 +496,144 @@ function EditStudent() {
                                     </div>
                                 </div>
                             </div>
-                            <div ><p>ที่อยู่ปัจจุบัน</p>
+                            <div className=' p-6'>
+                                <p className=' mb-6'>ที่อยู่ตามทะเบียนบ้าน</p>
+                                <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2'>
+                                    <div ><p>บ้านเลขที่</p>
+                                        <div className="mb-5 flex justify-center ">
+                                            <input
+                                                defaultValue={houseadd_houseNo}
+                                                onChange={(event) => {
+                                                    sethouseadd_houseNo(event.target.value)
+                                                }}
+                                                type="text"
+                                                name="houseadd_houseNo"
+                                                placeholder="บ้านเลขที่"
+                                                className="w-full rounded-md border border-black (condition) {
+                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div ><p>หมู่บ้าน</p>
+                                        <div className="mb-5 flex justify-center ">
+                                            <input
+                                                defaultValue={houseadd_village}
+                                                onChange={(event) => {
+                                                    sethouseadd_village(event.target.value)
+                                                }}
+                                                type="text"
+                                                name="houseadd_village"
+                                                placeholder="หมู่บ้าน"
+                                                className="w-full rounded-md border border-black (condition) {
+                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div ><p>ถนน</p>
+                                        <div className="mb-5 flex justify-center ">
+                                            <input
+                                                defaultValue={houseadd_road}
+                                                onChange={(event) => {
+                                                    sethouseadd_road(event.target.value)
+                                                }}
+                                                type="text"
+                                                name="houseadd_road"
+                                                placeholder="ถนน"
+                                                className="w-full rounded-md border border-black (condition) {
+                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div ><p>ซอย</p>
+                                        <div className="mb-5 flex justify-center ">
+                                            <input
+                                                defaultValue={houseadd_alley}
+                                                onChange={(event) => {
+                                                    sethouseadd_alley(event.target.value)
+                                                }}
+                                                type="text"
+                                                name="houseadd_alley"
+                                                placeholder="ซอย"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div ><p>จังหวัด</p>
+                                        <div className="mb-5 flex justify-center ">
+                                            <select
+                                                onChange={(event) => {
+                                                    const filterProvince = province.filter(item => {
+                                                        return event.target.value == item.province_id
+                                                    })
+                                                    sethouseadd_province(filterProvince[0].name_th)
+                                                    onchangeProvince(event)
+                                                }}
+                                                type="text"
+                                                name='province'
+                                                className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                            >
+                                                <option value={""}>{houseadd_province}</option>
+                                                {
+                                                    province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div ><p>อำเภอ</p>
+                                        <div className="mb-5 flex justify-center ">
+                                            <select
+                                                onChange={(event) => {
+                                                    const filterAmphures = amphures.filter(item => {
+                                                        return event.target.value == item.amphure_id
+                                                    })
+                                                    sethouseadd_district(filterAmphures[0].name_th)
+                                                    onchangeAmphures(event)
+                                                }}
+                                                type="text"
+                                                name='houseadd_district'
+                                                className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                            >
+                                                <option value={""}>{houseadd_district}</option>
+                                                {
+                                                    amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div ><p>ตำบล</p>
+                                        <div className="mb-5 flex justify-center ">
+                                            <select
+                                                onChange={(event) => {
+                                                    onchangeTambons(event)
+                                                }}
+                                                type="text"
+                                                name='houseadd_subdistrict'
+                                                className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                            >
+                                                <option value={""}>{houseadd_subDistrict}</option>
+                                                {
+                                                    tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div ><p>รหัสไปรษณีย์</p>
+                                        <div className="mb-5 flex justify-center ">
+                                            <input
+                                                defaultValue={houseadd_postalCode}
+                                                onChange={(event) => {
+                                                    sethouseadd_postalCode(event.target.value)
+                                                }}
+                                                type="text"
+                                                name="houseadd_postalCode"
+                                                placeholder="รหัสไปรษณีย์"
+                                                className="w-full rounded-md border border-black (condition) {
+                    } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className=''><p>ที่อยู่ปัจจุบัน</p>
                                     <div className="mb-5 flex justify-center ">
                                         <textarea
                                             defaultValue={presentAddress}
@@ -644,6 +648,7 @@ function EditStudent() {
                                         />
                                     </div>
                                 </div>
+                            </div>
                         </div>
                         <div className='  grid grid-cols-2 '>
                             <div className=' ml-3'>

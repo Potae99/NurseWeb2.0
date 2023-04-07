@@ -192,7 +192,7 @@ function AddStudent() {
                 title: "Add student success",
                 showConfirmButton: false,
                 timer: 1000,
-              })
+            })
                 .then(() => { window.location.href = "/admin/home"; })
         })
         // console.log(data)
@@ -268,7 +268,7 @@ function AddStudent() {
                     </div>
 
                     <div className='container mx-auto text-black'>
-                        <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
+                        <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                             <div ><p>ปีที่เริ่มศึกษา</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
@@ -452,152 +452,6 @@ function AddStudent() {
                                 </select>
                             </label>
                             </div>
-                            <div ><p>บ้านเลขที่</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <input
-                                        onChange={(event) => {
-                                            sethouseadd_houseNo(event.target.value)
-                                        }}
-                                        type="text"
-                                        name="houseadd_houseNo"
-                                        placeholder="บ้านเลขที่"
-                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div ><p>หมู่บ้าน</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <input
-                                        onChange={(event) => {
-                                            sethouseadd_village(event.target.value)
-                                        }}
-                                        type="text"
-                                        name="houseadd_village"
-                                        placeholder="หมู่บ้าน"
-                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div ><p>ถนน</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <input
-                                        onChange={(event) => {
-                                            sethouseadd_road(event.target.value)
-                                        }}
-                                        type="text"
-                                        name="houseadd_road"
-                                        placeholder="ถนน"
-                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div ><p>ซอย</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <input
-                                        onChange={(event) => {
-                                            sethouseadd_alley(event.target.value)
-                                        }}
-                                        type="text"
-                                        name="houseadd_alley"
-                                        placeholder="ซอย"
-                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div ><p>จังหวัด</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <select
-                                        // disabled={false}
-                                        // value={houseadd_province}
-                                        // onChange={(event => { 
-                                        //     sethouseadd_province(event.target.value);
-
-                                        //     // list select from filter provideID get API
-                                        //     // TODO: setChoiceAmmpher(res.data)
-
-                                        //     // setAmphures();
-                                        //     // setTumbon();
-                                        //  })}
-                                        onChange={(event) => {
-                                            const filterProvince = province.filter(item => {
-                                                return event.target.value == item.province_id
-                                            })
-                                            sethouseadd_province(filterProvince[0].name_th)
-                                            onchangeProvince(event)
-                                            // console.log(filterProvince[0].name_th)
-                                        }}
-
-                                        name='province'
-                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                    >
-                                        <option value={""}>---โปรดระบุจังหวัด---</option>
-                                        {
-                                            province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div ><p>อำเภอ</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <select
-                                        // disabled={false}
-                                        // value={houseadd_district}
-                                        // onChange={(event => { sethouseadd_district(event.target.value) })}
-                                        onChange={(event) => {
-                                            const filterAmphures = amphures.filter(item => {
-                                                return event.target.value == item.amphure_id
-                                            })
-                                            sethouseadd_district(filterAmphures[0].name_th)
-                                            onchangeAmphures(event)
-                                            // console.log(filterAmphures[0].name_th)
-                                        }}
-                                        name='amphures'
-                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                                    >
-                                        <option value={""}>---โปรดระบุอำเภอ---</option>
-                                        {
-                                            amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div ><p>ตำบล</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <select
-                                        // value={houseadd_subDistrict}
-                                        // onChange={(event => { sethouseadd_subDistrict(event.target.value) })}
-                                        onChange={(event) => {
-
-                                            // sethouseadd_subDistrict(event.target.value)
-                                            onchangeTambons(event)
-
-                                        }}
-                                        name='tambons'
-                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
-                                        <option value={""}>---โปรดระบุตำบล---</option>
-                                        {
-                                            tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div ><p>รหัสไปรษณีย์</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <input
-                                        placeholder='รหัสไปรษณีย์'
-                                        defaultValue={zipCode}
-                                        name='zipCode'
-                                        className="w-full rounded-md border border-black 
-                                bg-white py-3 px-6 text-base font-medium text-black 
-                                outline-none focus:border-[#423bce] focus:shadow-md"
-                                    />
-
-                                </div>
-                            </div>
                             <div ><p>สัญชาติ</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
@@ -669,7 +523,157 @@ function AddStudent() {
                                 </div>
                             </div>
                         </div>
-                        <div ><p>ที่อยู่ปัจจุบัน</p>
+                        <div className=' p-6'>
+                            <p className=' mb-6'>ที่อยู่ตามทะเบียนบ้าน</p>
+                            <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 '>
+                                <div ><p>บ้านเลขที่</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            onChange={(event) => {
+                                                sethouseadd_houseNo(event.target.value)
+                                            }}
+                                            type="text"
+                                            name="houseadd_houseNo"
+                                            placeholder="บ้านเลขที่"
+                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div ><p>หมู่บ้าน</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            onChange={(event) => {
+                                                sethouseadd_village(event.target.value)
+                                            }}
+                                            type="text"
+                                            name="houseadd_village"
+                                            placeholder="หมู่บ้าน"
+                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div ><p>ถนน</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            onChange={(event) => {
+                                                sethouseadd_road(event.target.value)
+                                            }}
+                                            type="text"
+                                            name="houseadd_road"
+                                            placeholder="ถนน"
+                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div ><p>ซอย</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            onChange={(event) => {
+                                                sethouseadd_alley(event.target.value)
+                                            }}
+                                            type="text"
+                                            name="houseadd_alley"
+                                            placeholder="ซอย"
+                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div ><p>จังหวัด</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <select
+                                            // disabled={false}
+                                            // value={houseadd_province}
+                                            // onChange={(event => { 
+                                            //     sethouseadd_province(event.target.value);
+
+                                            //     // list select from filter provideID get API
+                                            //     // TODO: setChoiceAmmpher(res.data)
+
+                                            //     // setAmphures();
+                                            //     // setTumbon();
+                                            //  })}
+                                            onChange={(event) => {
+                                                const filterProvince = province.filter(item => {
+                                                    return event.target.value == item.province_id
+                                                })
+                                                sethouseadd_province(filterProvince[0].name_th)
+                                                onchangeProvince(event)
+                                                // console.log(filterProvince[0].name_th)
+                                            }}
+
+                                            name='province'
+                                            className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        >
+                                            <option value={""}>---โปรดระบุจังหวัด---</option>
+                                            {
+                                                province.map((_, index) => (<option key={index} value={_.province_id}>{_.name_th}</option>))
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div ><p>อำเภอ</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <select
+                                            // disabled={false}
+                                            // value={houseadd_district}
+                                            // onChange={(event => { sethouseadd_district(event.target.value) })}
+                                            onChange={(event) => {
+                                                const filterAmphures = amphures.filter(item => {
+                                                    return event.target.value == item.amphure_id
+                                                })
+                                                sethouseadd_district(filterAmphures[0].name_th)
+                                                onchangeAmphures(event)
+                                                // console.log(filterAmphures[0].name_th)
+                                            }}
+                                            name='amphures'
+                                            className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        >
+                                            <option value={""}>---โปรดระบุอำเภอ---</option>
+                                            {
+                                                amphures.map((_, index) => (<option key={index} value={_.amphure_id}>{_.name_th}</option>))
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div ><p>ตำบล</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <select
+                                            // value={houseadd_subDistrict}
+                                            // onChange={(event => { sethouseadd_subDistrict(event.target.value) })}
+                                            onChange={(event) => {
+
+                                                // sethouseadd_subDistrict(event.target.value)
+                                                onchangeTambons(event)
+
+                                            }}
+                                            name='tambons'
+                                            className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md">
+                                            <option value={""}>---โปรดระบุตำบล---</option>
+                                            {
+                                                tambons.map((_, index) => (<option key={index} value={_.tambon_id}>{_.name_th}</option>))
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div ><p>รหัสไปรษณีย์</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            placeholder='รหัสไปรษณีย์'
+                                            defaultValue={zipCode}
+                                            name='zipCode'
+                                            className="w-full rounded-md border border-black 
+                                bg-white py-3 px-6 text-base font-medium text-black 
+                                outline-none focus:border-[#423bce] focus:shadow-md"
+                                        />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div className=''><p>ที่อยู่ปัจจุบัน</p>
                                 <div className="mb-5 flex justify-center ">
                                     <textarea
                                         onChange={(event) => {
@@ -683,6 +687,7 @@ function AddStudent() {
                                     />
                                 </div>
                             </div>
+                        </div>
                     </div>
                     <div className='  grid grid-cols-2 '>
                         <div className=' ml-3'>
