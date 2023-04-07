@@ -26,6 +26,9 @@ import {
   LogoutIcon,
   UsersIcon,
   VideosIcon,
+  Academiccap,
+  Calender,
+  SearchIcon,
 } from "./icons";
 
 function SideNavbar({ session }) {
@@ -41,22 +44,22 @@ function SideNavbar({ session }) {
   const _menuItems = {
     "admin": [
       { id: 1, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/admin/home" },
-      { id: 2, label: "จัดการหลักสูตร", icon: ArticleIcon, link: "/admin/course/syllabus/adminsyllabus" },
+      { id: 2, label: "จัดการหลักสูตร", icon: Academiccap, link: "/admin/course/syllabus/adminsyllabus" },
       { id: 3, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/admin/course/all" },
-      { id: 4, label: "จัดการคาบเรียน", icon: ArticleIcon, link: "/admin/add/class" },
-      { id: 5, label: "ผลการประเมิน", icon: VideosIcon, link: "/admin/eval/search" },
-      { id: 6, label: "ทุนการศึกษา", icon: ArticleIcon, link: "/admin/scholarship/add" },
-      { id: 7, label: "ภาพรวม", icon: ArticleIcon, link: "/admin/overall" }
+      { id: 4, label: "จัดการคาบเรียน", icon: Calender, link: "/admin/add/class" },
+      { id: 5, label: "ผลการประเมิน", icon: SearchIcon, link: "/admin/eval/search" },
+      { id: 6, label: "ทุนการศึกษา", icon: VideosIcon, link: "/admin/scholarship/add" },
+      { id: 7, label: "ภาพรวม", icon: CollapsIcon, link: "/admin/overall" }
     ],
     "teacher": [
       { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/teacher/home" },
       { id: 2, label: "จัดการรายวิชาของฉัน", icon: ArticleIcon, link: "/teacher/subject" },
-      { id: 3, label: "ผลการประเมินของฉัน", icon: HomeIcon, link: "/user/teacher/estimateMyself" },
-      { id: 4, label: "ผลการประเมินรายวิชา", icon: ArticleIcon, link: "/teacher/eval/search" },
+      { id: 3, label: "ผลการประเมินของฉัน", icon: SearchIcon, link: "/teacher/Taughview" },
+      { id: 4, label: "ผลการประเมินรายวิชา", icon: Academiccap, link: "/teacher/eval/search" },
     ],
     "student": [
       { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/student/home" },
-      { id: 2, label: "การประเมิน", icon: VideosIcon, link: "/student/eval/all" },
+      { id: 2, label: "การประเมิน", icon: ArticleIcon, link: "/student/eval/all" },
     ]
   };
 
@@ -167,6 +170,12 @@ function SideNavbar({ session }) {
 
             );
           })}
+          <div className=" text-stone-300 text-xs  ml-20 items-center absolute bottom-1">
+            <a className="  hover:text-yellow-300 " href="/credit">
+              ผู้จัดทำ
+            </a>
+         
+          </div>
 
 
 

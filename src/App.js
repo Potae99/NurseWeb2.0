@@ -50,11 +50,17 @@ import StudentallEval from './pages/student/eval/StudentallEval';
 import Teacherhome from './pages/teacher/Teacherhome';
 import TeacherEval_search from './pages/teacher/TeacherEval_search';
 import SubjectManagement from './pages/teacher/SubjectManagement';
+import View_taugheval from './pages/teacher/View_taugheval';
+import Taugh_sum from './pages/teacher/Taugh_sum';
+import Taugh_sumprac from './pages/teacher/Taugh_sumprac';
 
 // test
 import Apitest from './Test.js/Apitest';
 import Test2 from './Test.js/Test2';
 
+
+///credit
+import Credit from './pages/Credit';
 
 
 
@@ -296,6 +302,42 @@ const router = [
   {
     path: "/teacher/subject",
     element: <SubjectManagement />,
+    level: "teacher"
+
+  },
+  {
+    path: "/teacher/Taughview",
+    element: <View_taugheval />,
+    level: "teacher"
+
+  },
+  {
+    path: "/teacher/sum/theory/:classID/*",
+    element: <Taugh_sum />,
+    level: "teacher"
+
+  },
+  {
+    path: "/teacher/sum/practice/:classID/*",
+    element: <Taugh_sumprac />,
+    level: "teacher"
+
+  },
+  {
+    path: "/credit",
+    element: <Credit />,
+    level: "admin"
+
+  },
+  {
+    path: "/credit",
+    element: <Credit />,
+    level: "student"
+
+  },
+  {
+    path: "/credit",
+    element: <Credit />,
     level: "teacher"
 
   }
