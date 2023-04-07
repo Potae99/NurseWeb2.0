@@ -120,7 +120,7 @@ function SideNavbar({ session }) {
 
   return (
 
-    <Disclosure as="nav" className="z-50 inline-flex items-center justify-center p-2 drop-shadow-md fixed ">
+    <Disclosure as="nav" className=" z-50 inline-flex items-center justify-center p-2 drop-shadow-md fixed ">
       <Disclosure.Button className=" mr-[200px] inline-flex items-center peer rounded-md absolute top-0 right-0 text-gray-800 hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group">
         <GiHamburgerMenu
           className="block md:hidden h-6 w-6 "
@@ -128,7 +128,7 @@ function SideNavbar({ session }) {
         />
       </Disclosure.Button>
 
-      <div className=" p-6 w-1/2 h-screen bg-stone-700 z-20 fixed top-0 -left-96 lg:left-0 lg:w-60  peer-focus:left-0 peer:transition ease-out delay-150 duration-200">
+      <div className="overflow-auto p-6 w-1/2 h-screen bg-stone-700 z-20 fixed top-0 -left-96 md:left-0 md:w-60  peer-focus:left-0 peer:transition ease-out delay-150 duration-200">
         <div className="flex flex-col justify-start item-center">
           <h1 className="text-base text-center cursor-pointer font-bold text-white border-b border-gray-100 pb-4 w-full">
             เมนู
@@ -170,7 +170,7 @@ function SideNavbar({ session }) {
 
             );
           })}
-          <div className=" text-stone-300 text-xs  ml-20 items-center absolute bottom-1">
+          <div className=" text-stone-300 text-xs  ml-20 items-center  bottom-1">
             <a className="  hover:text-yellow-300 " href="/credit">
               ผู้จัดทำ
             </a>
