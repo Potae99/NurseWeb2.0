@@ -1,7 +1,10 @@
 import React from 'react'
-import Admin_sum_student from '../../components/Table/Admin_sum_student'
+
 import Admin_sum_province from '../../components/Table/Admin_sum_province'
 import Admin_sum_scolar from '../../components/Table/Admin_sum_scolar'
+import Chart_bar from '../../components/chart/Chart_bar'
+import Chart_pie from '../../components/chart/Chart_pie'
+import Chart_pie2 from '../../components/chart/Chart_pie2'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import LoadingPage from "../LoadingPage"
@@ -84,14 +87,23 @@ function Adminoverall() {
             <div className=' text-center text-4xl'>
               <p>ภาพรวมนิสิต</p>
             </div>
-            <div className='mt-5'>
-              <Admin_sum_student />
+            <div>
+            <p className=' te'>จำนวนนิสิตในแต่ละปีการศึกษา</p>
             </div>
-            <div className='mt-3'>
-              <Admin_sum_province />
+            <div className='mt-5 grid place-content-center '>
+              <Chart_bar/>
             </div>
-            <div className='mt-3'>
-              <Admin_sum_scolar />
+            <div>
+            <p>จำนวนนิสิตในแต่ละจังหวัด</p>
+            </div>
+            <div className='mt-3 grid place-content-center '>
+              <Chart_pie />
+            </div>
+            <div>
+            <p>จำนวนนิสิตในปีแต่ละทุนการศึกษา</p>
+            </div>
+            <div className='mt-3   grid place-content-center'>
+              <Chart_pie2/>
             </div>
           </div>
         )}

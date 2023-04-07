@@ -10,25 +10,6 @@ function TeacherEval_search() {
 
     const fetchData = () => {
 
-        // const Toast = Swal.mixin({
-        //     toast: true,
-        //     position: 'top-end',
-        //     showConfirmButton: false,
-        //     timer: 3000,
-        //     timerProgressBar: true,
-        //     didOpen: (toast) => {
-        //       toast.addEventListener('mouseenter', Swal.stopTimer)
-        //       toast.addEventListener('mouseleave', Swal.resumeTimer)
-        //     }
-        //   })
-
-        //   Toast.fire({
-        //     icon: 'error',
-        //     title: 'get data from API error!'
-        //   })
-
-
-
         axios.get(process.env.REACT_APP_API_URL + "/class/list")
             .then(res => {
                 // const persons = res.data;

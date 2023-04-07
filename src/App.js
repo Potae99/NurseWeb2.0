@@ -36,6 +36,7 @@ import Classdetail from './pages/admin/course/class/Classdetail';
 import Evalsum from './pages/admin/eval/Evalsum';
 import Evalsearch from './pages/admin/eval/Evalsearch';
 import Adminoverall from './pages/admin/Adminoverall';
+import Chart_bar from './components/chart/Chart_bar';
 
 
 
@@ -339,6 +340,12 @@ const router = [
     path: "/credit",
     element: <Credit />,
     level: "teacher"
+
+  },
+  {
+    path: "/chart",
+    element: <Chart_bar />,
+    level: "admin"
 
   }
 
