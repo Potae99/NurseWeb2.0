@@ -56,7 +56,7 @@ function Chart_pie2() {
         ],
     };
     return (
-        <div className=' w-full h-[500px]'>
+        <div className=''>
             <Pie data={data} />
         </div>
 
