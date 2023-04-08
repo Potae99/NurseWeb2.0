@@ -3,6 +3,10 @@ import { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import LoadingPage from '../../LoadingPage';
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { format } from 'date-fns';
+
 
 function AddStudent() {
 
@@ -252,6 +256,10 @@ function AddStudent() {
         sethouseadd_subDistrict(filterTambons[0].name_th)
 
     }
+    const onchangeBirthday = (date) => {
+        setBirthday(date);
+    }
+    console.log(Birthday)
 
     return (
         <>
@@ -400,17 +408,17 @@ function AddStudent() {
                             <div ><p>วันเกิด</p>
                                 <div className="mb-5 flex justify-center ">
                                     {/* <DatePicker
-                        dateFormat="dd/MM/yyyy"
-                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                        required
-                         selected={Birthday} 
-                         onChange={(date) => {
-                             console.log()
-                            setBirthday(date);
-                        
-                        }}
-                             /> */}
-                                    <input
+                                        dateFormat="dd/MM/yyyy"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        required
+                                        selected={Birthday}
+                                        onChange={(date) => {
+                                            console.log()
+                                            setBirthday(date);
+
+                                        }}
+                                    /> */}
+                                    {/* <input
                                         onChange={(event) => {
                                             setBirthday(event.target.value)
                                         }}
@@ -419,7 +427,18 @@ function AddStudent() {
                                         placeholder="วันเกิด"
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
+                                    /> */}
+                                    <DatePicker
+                                        selected={Birthday}
+                                        // onChange={(date) => setBirthday(date)}
+                                        onChange={onchangeBirthday}
+                                        dateFormat="dd/MM/yyyy"
+                                        name="Birthday"
+                                        placeholderText="dd/MM/yyyy"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        required
                                     />
+
                                 </div>
                             </div>
                             <div ><p>Email</p>

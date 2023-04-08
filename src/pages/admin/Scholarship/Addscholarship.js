@@ -37,36 +37,72 @@ function Addscholarship() {
 
 
     const deletescholarship = (scholarship_id) => {
-        Swal.fire({
-            title: 'ต้องการลบหลักสูตรหรือไม่?',
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: 'ใช่',
-            denyButtonText: `ไม่ใช่`,
-            cancelButtonText: 'ยกเลิก'
-        })
-            .then((results) => {
-                if (results.isConfirmed) {
-                    axios.delete(process.env.REACT_APP_API_URL + "/student/scholarship", { data: { scholarship_id: scholarship_id } })
-                        .then((response) => {
-                            setScholarshipList(
-                                scholarshipList.filter((_) => {
-                                    return _.scholarship_id !== scholarship_id;
-                                })
-                            )
-                            Swal.fire('Deleted!', '', 'success')
-                                .then(() => { window.location.href = "/admin/scholarship/add" })
-
-                        }).catch(function (error) {
-                            if (error.response) {
-                                console.log(error.response);
-                            }
-                        });
-                }
-                else if (results.isDenied) {
-                    window.location.href = "/admin/scholarship/add";
-                }
+        if (scholarship.length == 1) {
+            Swal.fire({
+                title: "ข้อมูลนี้ไม่สามารถลบได้",
+                icon: "warning",
+                showConfirmButton: false,
+                timer: 2000,
             })
+        }
+        else {
+            Swal.fire({
+                title: 'ต้องการลบทุนการศึกษาหรือไม่?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'ใช่',
+                denyButtonText: `ไม่ใช่`,
+                cancelButtonText: 'ยกเลิก',
+                icon: "question"
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'ข้อมูลที่เกี่ยวข้องทั้งหมดจะถูกลบไปด้วย',
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: 'ใช่',
+                            denyButtonText: `ไม่ใช่`,
+                            cancelButtonText: 'ยกเลิก',
+                            icon: "warning"
+                        })
+                            .then((results) => {
+                                if (results.isConfirmed) {
+                                    axios.delete(process.env.REACT_APP_API_URL + "/student/scholarship", { data: { scholarship_id: scholarship_id } })
+                                        .then((response) => {
+                                            setScholarshipList(
+                                                scholarshipList.filter((_) => {
+                                                    return _.scholarship_id !== scholarship_id;
+                                                })
+                                            )
+                                            // Swal.fire('Deleted!', '', 'success')
+                                            Swal.fire({
+                                                // position: "top-end",
+                                                icon: "success",
+                                                title: "Deleted!",
+                                                showConfirmButton: false,
+                                                timer: 1000,
+                                            })
+                                                .then(() => { window.location.href = "/admin/scholarship/add" })
+
+                                        }).catch(function (error) {
+                                            if (error.response) {
+                                                console.log(error.response);
+                                            }
+                                        });
+                                }
+                                else if (results.isDenied) {
+                                    window.location.href = "/admin/scholarship/add";
+                                }
+                            })
+                    }
+                    else if (result.isDenied) {
+                        window.location.href = "/admin/scholarship/add";
+                    }
+                })
+        }
+
+
 
     }
 
