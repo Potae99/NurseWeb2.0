@@ -20,6 +20,7 @@ function CourseDetail() {
     const [studyTimeTheory, setStudyTimeTheory] = useState('');
     const [studyTimePractice, setStudyTimePractice] = useState('');
     const [studyTimeSelf, setStudyTimeSelf] = useState('');
+    const [courseID_number, setCourseID_number] = useState('');
 
     const [category, setCategory] = useState([]);
 
@@ -58,7 +59,14 @@ function CourseDetail() {
                                     return _.courseID !== courseID;
                                 })
                             )
-                            Swal.fire('Deleted!', '', 'success')
+                            // Swal.fire('Deleted!', '', 'success')
+                            Swal.fire({
+                                // position: "top-end",
+                                icon: "success",
+                                title: "Deleted!",
+                                showConfirmButton: false,
+                                timer: 1000,
+                            })
                                 .then(() => { window.location.href = "/admin/course/all"; })
 
 
@@ -93,6 +101,8 @@ function CourseDetail() {
                 setStudyTimeTheory(res.data.data.studyTimeTheory);
                 setStudyTimePractice(res.data.data.studyTimePractice);
                 setStudyTimeSelf(res.data.data.studyTimeSelf);
+                setCourseID_number(res.data.data.courseID_number);
+                setCategoryInfo(res.data.data.categoryID);
                 setLoading(true);
 
                 setTimeout(() => {
@@ -139,6 +149,7 @@ function CourseDetail() {
                     axios.put(process.env.REACT_APP_API_URL + "/course", {
                         courseID: courseID,
                         categoryID: categoryInfo,
+                        courseID_number: courseID_number,
                         courseNameTH: courseNameTH,
                         courseNameENG: courseNameENG,
                         detail: detail,
@@ -146,6 +157,7 @@ function CourseDetail() {
                         studyTimeTheory: studyTimeTheory,
                         studyTimePractice: studyTimePractice,
                         studyTimeSelf: studyTimeSelf
+                        
                     })
                         .then(() => {
                             setData([
@@ -153,6 +165,7 @@ function CourseDetail() {
                                 {
                                     courseID: courseID,
                                     categoryID: categoryInfo,
+                                    courseID_number: courseID_number,
                                     courseNameTH: courseNameTH,
                                     courseNameENG: courseNameENG,
                                     detail: detail,
@@ -162,12 +175,26 @@ function CourseDetail() {
                                     studyTimeSelf: studyTimeSelf
                                 }
                             ])
-                            Swal.fire('Saved!', '', 'success')
+                            // Swal.fire('Saved!', '', 'success')
+                            Swal.fire({
+                                // position: "top-end",
+                                icon: "success",
+                                title: "Saved!",
+                                showConfirmButton: false,
+                                timer: 1000,
+                            })
                                 .then(() => { window.location.href = "/admin/course/all" })
                         })
                 }
                 else if (result.isDenied) {
-                    Swal.fire('Changes are not saved', '', 'info')
+                    // Swal.fire('Changes are not saved', '', 'info')
+                    Swal.fire({
+                        // position: "top-end",
+                        icon: "info",
+                        title: "Changes are not saved",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
                         .then(() => { window.location.href = "/admin/course/all" })
                 }
             });
@@ -185,7 +212,8 @@ function CourseDetail() {
         setCategoryName(filterCategory[0].categoryName);
     }
 
-    console.log(categoryInfo)
+    // console.log(categoryInfo)
+
     return (
         <>
             {!completed ? (
@@ -213,6 +241,20 @@ function CourseDetail() {
                                                     category.map((_, index) => (<option key={index} value={_.categoryID}>{_.categoryName}</option>))
                                                 }
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div ><p>รหัสวิชา</p>
+                                        <div className="mb-5 flex justify-center ">
+                                            <input
+                                                defaultValue={courseID_number}
+                                                onChange={(event) => {
+                                                    setCourseID_number(event.target.value)
+                                                }}
+                                                type="text"
+                                                name="courseID_number"
+                                                placeholder="รหัสวิชา"
+                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                            />
                                         </div>
                                     </div>
                                     <div ><p>ชื่อไทย</p>
