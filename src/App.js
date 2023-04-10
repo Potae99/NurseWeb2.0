@@ -37,7 +37,7 @@ import Evalsum from './pages/admin/eval/Evalsum';
 import Evalsearch from './pages/admin/eval/Evalsearch';
 import Adminoverall from './pages/admin/Adminoverall';
 import Chart_bar from './components/chart/Chart_bar';
-
+import ClassManagement from './pages/admin/course/class/ClassManagement';
 
 
 //student
@@ -345,6 +345,12 @@ const router = [
   {
     path: "/chart",
     element: <Chart_bar />,
+    level: "admin"
+
+  },
+  {
+    path: "/admin/class",
+    element: <ClassManagement />,
     level: "admin"
 
   }
