@@ -38,7 +38,7 @@ function Studenttable() {
   useEffect(() => {
     const fetchData = () => {
 
-      axios.get(process.env.REACT_APP_API_URL + "/student/list")
+      axios.get(process.env.REACT_APP_API_URL + "/student/list", {params:{status: 1}})
         .then(res => {
           // const persons = res.data;
           //this.setState({ persons });

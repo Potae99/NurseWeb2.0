@@ -45,33 +45,33 @@ function Addclass() {
                 console.log(error.res)
             })
         axios.get(process.env.REACT_APP_API_URL + "/teacher/list")
-        .then( res => {
-            console.log(res.data);
-
-            if (res.data.error === true){
+            .then(res => {
                 console.log(res.data);
-                console.log("ERROR FOUND WHEN GET DATA FROM API");
-                return;
-            }
-            setTeacherList(res.data.data);
-        })
-        .catch( error => {
-            console.log(error.res);
-        });
-        axios.get(process.env.REACT_APP_API_URL + "/student/list")
-        .then( res => {
-            console.log(res.data);
 
-            if (res.data.error === true){
+                if (res.data.error === true) {
+                    console.log(res.data);
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setTeacherList(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res);
+            });
+        axios.get(process.env.REACT_APP_API_URL + "/student/list", { params: { status: 1 } })
+            .then(res => {
                 console.log(res.data);
-                console.log("ERROR FOUND WHEN GET DATA FROM API");
-                return;
-            }
-            setStudentList(res.data.data);
-        })
-        .catch( error => {
-            console.log(error.res);
-        });
+
+                if (res.data.error === true) {
+                    console.log(res.data);
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setStudentList(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res);
+            });
     }
 
 
@@ -110,13 +110,102 @@ function Addclass() {
         }, 2000);
     }, [])
 
-    const backToAdminHome = () => {
-        window.location.href = "/admin/home"
-    }
-
     const backToClassManageMent = () => {
         window.location.href = "/admin/class"
     }
+
+    // const getTeacherData = () => {
+    //     // console.log(teacherList)
+    //     // console.log(userID)
+    //     const selectedTeacher = teacherList.find(item => item.userID.toString() === userID);
+    //     const selectedTaughType = taughtType;
+    //     // console.log(selectedTeacher);
+    //     // console.log(selectedTaughType);
+    //     return {
+    //         teacher: selectedTeacher,
+    //         taughtType: selectedTaughType
+    //     };
+    // }
+    // const getTeacherData = () => {
+    //     const selectedTeacher = teacherList.find(item => item.userID.toString() === userID);
+    //     const selectedTaughtType = taughtType;
+    //     if (!selectedTeacher || !selectedTaughtType) {
+    //         return {
+    //             success: false,
+    //             error: "Teacher data not found."
+    //         };
+    //     }
+    //     return {
+    //         success: true,
+    //         teacher: selectedTeacher,
+    //         taughtType: selectedTaughtType
+    //     };
+    // };
+    const [teachersDataArray, setTeachersDataArray] = useState([]);
+    const [studentDataArray, setStudentDataArray] = useState([]);
+
+    const getStudentData = () => {
+        const selectedStudent = studentList.find(
+            (item) => item.userID.toString() === userID
+        );
+        if (!selectedStudent) {
+            return {
+                success: false,
+                error: "Student data not found.",
+            };
+        }
+        // Add the returned object into the state array
+        const newStudentData = {
+            studentID: selectedStudent.studentID,
+            nameTH: selectedStudent.nameTH,
+            nameENG: selectedStudent.nameENG,
+            gender: selectedStudent.gender,
+        };
+        setStudentDataArray((prevStudentDataArray) => [
+            ...prevStudentDataArray,
+            newStudentData,
+        ]);
+
+        return {
+            success: true,
+            student: newStudentData,
+        };
+    };
+
+    const getTeacherData = () => {
+        const selectedTeacher = teacherList.find(
+            (item) => item.userID.toString() === userID
+        );
+        const selectedTaughtType = taughtType;
+        if (!selectedTeacher || !selectedTaughtType) {
+            return {
+                success: false,
+                error: "Teacher data not found.",
+            };
+        }
+        // Add the returned object into the state array
+        const newTeacherData = {
+            teacherID: selectedTeacher.teacherID,
+            nameTH: selectedTeacher.nameTH,
+            nameENG: selectedTeacher.nameENG,
+            taughtType: selectedTaughtType,
+        };
+        setTeachersDataArray((prevTeachersDataArray) => [
+            ...prevTeachersDataArray,
+            newTeacherData,
+        ]);
+
+        return {
+            success: true,
+            teacher: newTeacherData,
+            taughtType: selectedTaughtType,
+        };
+    };
+    // const teacherData = getTeacherData();
+    // const teacherData = getTeacherData();
+
+    // console.log(teachersDataArray)
+
 
     return (
         <>
@@ -261,6 +350,7 @@ function Addclass() {
                                                                     className="w-full mt-2 p-2.5 flex-1 text-white  bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                                                                     onClick={() => {
                                                                         // AddStudent();
+                                                                        getStudentData();
                                                                         setShowModal1(false);
                                                                     }}
                                                                 >
@@ -334,6 +424,8 @@ function Addclass() {
                                                                         return event.target.value == item.userID
                                                                     })
                                                                     setuserID(event.target.value)
+                                                                    // console.log(teacherList)
+                                                                    // console.log(event.target.value)
                                                                 }}
                                                             >
                                                                 <option value={""}>---โปรดระบุ---</option>
@@ -353,7 +445,7 @@ function Addclass() {
                                                                 value={taughtType}
                                                                 onChange={(event => {
                                                                     settaughtType(event.target.value)
-                                                                    console.log(event.target.value)
+                                                                    // console.log(event.target.value)
                                                                 })}
                                                                 name="taughtType"
                                                             >
@@ -369,6 +461,7 @@ function Addclass() {
                                                                     className="w-full mt-2 p-2.5 flex-1 text-white  bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                                                                     onClick={() => {
                                                                         // addTeacher();
+                                                                        getTeacherData();
                                                                         setShowModal2(false);
                                                                     }}
                                                                 >
@@ -390,9 +483,85 @@ function Addclass() {
                                         </div>
                                     </>
                                 ) : null}
-
                             </div>
                         </div>
+                        {/* <div className=' mt-5 mb-5 relative overflow-x-auto shadow-md  sm:rounded-lg'>
+                            <table className="w-full text-sm text-left text-black">
+                                <thead className="text-sm text-black uppercase bg-orange-300">
+                                    <tr>
+                                        <th scope="col" className="py-3 px-6">รหัสอาจารย์</th>
+                                        <th scope="col" className="py-3 px-6">ชื่อไทย</th>
+                                        <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
+                                        <th scope="col" className="py-3 px-6">รูปแบบการสอน</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="py-3 px-6">{teacherData.teacher.teacherID}</td>
+                                        <td className="py-3 px-6">{teacherData.teacher.nameTH}</td>
+                                        <td className="py-3 px-6">{teacherData.teacher.nameENG}</td>
+                                        <td className="py-3 px-6">{teacherData.taughtType}</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div> */}
+                        {
+                            teachersDataArray.length > 0 ?
+                                <>
+                                    <div className=' mt-5 mb-5 relative overflow-x-auto shadow-md  sm:rounded-lg'>
+                                        <table className="w-full text-sm text-left text-black">
+                                            <thead className="text-sm text-black uppercase bg-orange-300">
+                                                <tr>
+                                                    <th scope="col" className="py-3 px-6">รหัสอาจารย์</th>
+                                                    <th scope="col" className="py-3 px-6">ชื่อไทย</th>
+                                                    <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
+                                                    <th scope="col" className="py-3 px-6">รูปแบบการสอน</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {teachersDataArray.map((teacherData, index) => (
+                                                    <tr key={index}>
+                                                        <td className="py-3 px-6">{teacherData.teacherID}</td>
+                                                        <td className="py-3 px-6">{teacherData.nameTH}</td>
+                                                        <td className="py-3 px-6">{teacherData.nameENG}</td>
+                                                        <td className="py-3 px-6">{teacherData.taughtType}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div></> :
+                                <></>
+                        }
+                        {
+                            studentDataArray.length > 0 ?
+                                <>
+                                    <div className=' mt-5 mb-5 relative overflow-x-auto shadow-md  sm:rounded-lg'>
+                                        <table className="w-full text-sm text-left text-black">
+                                            <thead className="text-sm text-black uppercase bg-orange-300">
+                                                <tr>
+                                                    <th scope="col" className="py-3 px-6">รหัสนิสิต</th>
+                                                    <th scope="col" className="py-3 px-6">ชื่อไทย</th>
+                                                    <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
+                                                    <th scope="col" className="py-3 px-6">เพศ</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {studentDataArray.map((studentData, index) => (
+                                                    <tr key={index}>
+                                                        <td className="py-3 px-6">{studentData.studentID}</td>
+                                                        <td className="py-3 px-6">{studentData.nameTH}</td>
+                                                        <td className="py-3 px-6">{studentData.nameENG}</td>
+                                                        <td className="py-3 px-6">{studentData.gender}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div></> :
+                                <></>
+                        }
                     </div>
                     <div className=' mt-3 grid grid-cols-2 '>
                         <div className=' ml-3'>
