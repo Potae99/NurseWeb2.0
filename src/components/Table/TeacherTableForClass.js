@@ -37,39 +37,39 @@ function TeacherTableForClass() {
         setCurrentPage(page);
     };
 
-    const deleteTeacher = (userID) => {
-        Swal.fire({
-            title: 'ต้องการลบอาจารย์หรือไม่?',
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: 'ใช่',
-            denyButtonText: `ไม่ใช่`,
-            cancelButtonText: 'ยกเลิก'
-        })
-            .then((results) => {
-                if (results.isConfirmed) {
-                    axios.delete(process.env.REACT_APP_API_URL + "/class/taugh", { data: { userID, classID } })
-                        .then((response) => {
-                            setTeacherTable(
-                                teacherTable.filter((_) => {
-                                    return _.userID !== userID;
+    // const deleteTeacher = (userID) => {
+    //     Swal.fire({
+    //         title: 'ต้องการลบอาจารย์หรือไม่?',
+    //         showDenyButton: true,
+    //         showCancelButton: true,
+    //         confirmButtonText: 'ใช่',
+    //         denyButtonText: `ไม่ใช่`,
+    //         cancelButtonText: 'ยกเลิก'
+    //     })
+    //         .then((results) => {
+    //             if (results.isConfirmed) {
+    //                 axios.delete(process.env.REACT_APP_API_URL + "/class/taugh", { data: { userID, classID } })
+    //                     .then((response) => {
+    //                         setTeacherTable(
+    //                             teacherTable.filter((_) => {
+    //                                 return _.userID !== userID;
 
-                                })
-                            )
-                            Swal.fire('Deleted!', '', 'success')
+    //                             })
+    //                         )
+    //                         Swal.fire('Deleted!', '', 'success')
 
-                        }).catch(function (error) {
-                            if (error.response) {
-                                console.log(error.response);
-                            }
-                        });
-                }
-                else if (results.isDenied) {
-                    window.location.href = "/admin/class/detail/" + classID;
-                }
-            })
+    //                     }).catch(function (error) {
+    //                         if (error.response) {
+    //                             console.log(error.response);
+    //                         }
+    //                     });
+    //             }
+    //             else if (results.isDenied) {
+    //                 window.location.href = "/admin/class/detail/" + classID;
+    //             }
+    //         })
 
-    }
+    // }
 
     const renderTable = () => {
         if (!teacherTable) {
@@ -84,7 +84,7 @@ function TeacherTableForClass() {
                     <td className="py-4 px-6">{_.nameTH}</td>
                     <td className="py-4 px-6">{_.nameENG}</td>
                     <td className="py-4 px-6">{_.taughtType}</td>
-                    <td className="py-4 px-6 flex flex-row">
+                    {/* <td className="py-4 px-6 flex flex-row">
                         <div className=' ml-3'
                             content="View Admin"
                             color="error"
@@ -99,7 +99,7 @@ function TeacherTableForClass() {
                                 </svg>
                             </button>
                         </div>
-                    </td>
+                    </td> */}
                 </tr>
             </tbody>
         ));
@@ -149,7 +149,7 @@ function TeacherTableForClass() {
                             <th scope="col" className="py-3 px-6">ชื่อไทย</th>
                             <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
                             <th scope="col" className="py-3 px-6">รูปแบบการสอน</th>
-                            <th scope="col" className="py-3 px-6">การกระทำ</th>
+                            {/* <th scope="col" className="py-3 px-6">การกระทำ</th> */}
                         </tr>
                     </thead>
                     {renderTable()}

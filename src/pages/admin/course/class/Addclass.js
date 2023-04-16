@@ -5,12 +5,16 @@ import axios from 'axios';
 import LoadingPage from '../../../LoadingPage';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import { useParams } from 'react-router-dom';
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 function Addclass() {
     const [data, setData] = useState([]);
     const [courseID, setcourseID] = useState("");
     const [studyRoom, setstudyRoom] = useState("");
     const [dateYear, setdateYear] = useState("");
+    const [semester, setSemester] = useState("");
 
     const [loading, setLoading] = useState(undefined);
     const [completed, setCompleted] = useState(undefined);
@@ -80,7 +84,8 @@ function Addclass() {
         axios.post(process.env.REACT_APP_API_URL + "/class", {
             courseID: courseID,
             studyRoom: studyRoom,
-            dateYear, dateYear
+            dateYear: dateYear,
+            semester: semester
 
         }).then(() => {
             setData([
@@ -88,7 +93,8 @@ function Addclass() {
                 {
                     courseID: courseID,
                     studyRoom: studyRoom,
-                    dateYear, dateYear
+                    dateYear: dateYear,
+                    semester: semester
 
                 }
             ])
@@ -99,7 +105,7 @@ function Addclass() {
                 showConfirmButton: false,
                 timer: 1000,
             })
-                .then(() => { window.location.href = "/admin/add/class"; })
+                .then(() => { window.location.href = "/admin/class"; })
 
         })
     }
@@ -156,6 +162,7 @@ function Addclass() {
         }
         // Add the returned object into the state array
         const newStudentData = {
+            userID: selectedStudent.userID,
             studentID: selectedStudent.studentID,
             nameTH: selectedStudent.nameTH,
             nameENG: selectedStudent.nameENG,
@@ -172,6 +179,13 @@ function Addclass() {
         };
     };
 
+    const deleteStudent = (userID) => {
+        setStudentDataArray(prevStudentDataArray =>
+            prevStudentDataArray.filter(student => student.userID !== userID)
+        );
+
+    }
+
     const getTeacherData = () => {
         const selectedTeacher = teacherList.find(
             (item) => item.userID.toString() === userID
@@ -185,6 +199,7 @@ function Addclass() {
         }
         // Add the returned object into the state array
         const newTeacherData = {
+            userID: selectedTeacher.userID,
             teacherID: selectedTeacher.teacherID,
             nameTH: selectedTeacher.nameTH,
             nameENG: selectedTeacher.nameENG,
@@ -201,6 +216,28 @@ function Addclass() {
             taughtType: selectedTaughtType,
         };
     };
+
+    // const addTeacher = () => {
+    //     axios.post(process.env.REACT_APP_API_URL + "/class/taugh", {
+    //         teachersDataArray: teachersDataArray,
+    //         classID: classID,
+    //     })
+    //         .then(() => {
+    //             // Handle the response from the API if needed
+    //             window.location.href = "/admin/class";
+    //         })
+    //         .catch((error) => {
+    //             // Handle the error if the API request fails
+    //             console.error(error);
+    //         });
+    // }
+
+    const deleteTeacher = (userID) => {
+        setTeachersDataArray(prevTeachersDataArray =>
+            prevTeachersDataArray.filter(teacher => teacher.userID !== userID)
+        );
+
+    }
     // const teacherData = getTeacherData();
     // const teacherData = getTeacherData();
 
@@ -262,6 +299,24 @@ function Addclass() {
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                     />
+                                </div>
+                            </div>
+                            <div >
+                                <p>ภาคการศึกษา</p>
+                                <div className=" flex justify-center ">
+                                    <select
+                                        className='w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+                                        value={semester}
+                                        onChange={(event => {
+                                            setSemester(event.target.value)
+                                            // console.log(event.target.value)
+                                        })}
+                                        name="semester"
+                                    >
+                                        <option value={""}>---โปรดระบุภาคการศึกษา---</option>
+                                        <option value={"1"}>ภาคการศึกษาต้น</option>
+                                        <option value={"2"}>ภาคการศึกษาปลาย</option>
+                                    </select>
                                 </div>
                             </div>
                             <div >
@@ -519,6 +574,7 @@ function Addclass() {
                                                     <th scope="col" className="py-3 px-6">ชื่อไทย</th>
                                                     <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
                                                     <th scope="col" className="py-3 px-6">รูปแบบการสอน</th>
+                                                    <th scope="col" className="py-3 px-6">การกระทำ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -528,6 +584,22 @@ function Addclass() {
                                                         <td className="py-3 px-6">{teacherData.nameTH}</td>
                                                         <td className="py-3 px-6">{teacherData.nameENG}</td>
                                                         <td className="py-3 px-6">{teacherData.taughtType}</td>
+                                                        <td className="py-4 px-6 flex flex-row">
+                                                            <div className=' ml-3'
+                                                                content="delete"
+                                                                color="error"
+                                                                onClick={() => { deleteTeacher(teacherData.userID) }}
+                                                            >
+                                                                <button >
+                                                                    <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        <path d="M19.4258 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        <path d="M28.2407 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 ))}
                                             </tbody>
@@ -546,6 +618,7 @@ function Addclass() {
                                                     <th scope="col" className="py-3 px-6">ชื่อไทย</th>
                                                     <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th>
                                                     <th scope="col" className="py-3 px-6">เพศ</th>
+                                                    <th scope="col" className="py-3 px-6">การกระทำ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -555,6 +628,22 @@ function Addclass() {
                                                         <td className="py-3 px-6">{studentData.nameTH}</td>
                                                         <td className="py-3 px-6">{studentData.nameENG}</td>
                                                         <td className="py-3 px-6">{studentData.gender}</td>
+                                                        <td className="py-4 px-6 flex flex-row">
+                                                            <div className=' ml-3'
+                                                                content="delete"
+                                                                color="error"
+                                                                onClick={() => { deleteStudent(studentData.userID) }}
+                                                            >
+                                                                <button >
+                                                                    <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        <path d="M19.4258 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        <path d="M28.2407 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                                                        <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                 ))}
                                             </tbody>
@@ -570,6 +659,17 @@ function Addclass() {
                                     <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </span>
                                 <span className="absolute flex items-center justify-center w-full h-full text-balck transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
+                                <span className="relative invisible">Button Text</span>
+                            </button>
+                        </div>
+                        <div className=' right-0 mr-7'>
+                            <button  className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                                    <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                </span>
+                                <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มอาจารย์</span>
                                 <span className="relative invisible">Button Text</span>
                             </button>
                         </div>

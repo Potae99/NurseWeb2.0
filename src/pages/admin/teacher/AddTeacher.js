@@ -84,14 +84,14 @@ function AddTeacher() {
             ) : (
                 <div className=' bg-white slate-500 min-h-screen '>
                     <h1 className=' text-4xl text-center m-3 text-black'>เพิ่มผู้ใช้งาน</h1>
-                    <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6'>
+                    <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 p-6'>
                         <div className=' flex flex-row'>
                             <p className=' text-2xl ml-3 text-black' >ผู้ใช้งาน :</p>
                             <p className=' text-2xl ml-3 text-black'>อาจารย์</p>
                         </div>
                     </div>
                     <div className='container mx-auto text-black'>
-                        <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
+                        <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                             <div ><p>รหัสประจำตัว</p>
                                 <div className="mb-5 flex justify-center ">
                                     <input
@@ -102,7 +102,7 @@ function AddTeacher() {
                                         value={teacherID}
                                         name="studentID"
                                         placeholder="รหัสประจำตัว"
-                                        className="w-full rounded-md border border-black  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                         maxLength="13"
                                     />
@@ -118,7 +118,7 @@ function AddTeacher() {
                                         value={nameTH}
                                         name="nameTH"
                                         placeholder="ชื่อไทย"
-                                        className="w-full rounded-md border border-black  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                     />
                                 </div>
@@ -133,7 +133,7 @@ function AddTeacher() {
                                         name="nameENG"
                                         value={nameENG}
                                         placeholder="ชื่ออังกฤษ"
-                                        className="w-full rounded-md border border-black  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                     />
                                 </div>
@@ -148,7 +148,7 @@ function AddTeacher() {
                                         name="IDnumber"
                                         value={IDnumber}
                                         placeholder="รหัสประจำตัวประชาชน"
-                                        className="w-full rounded-md border border-black  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                     />
                                 </div>
@@ -163,7 +163,7 @@ function AddTeacher() {
                                         name="Password"
                                         value={password}
                                         placeholder="Password"
-                                        className="w-full rounded-md border border-black  bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                     />
                                 </div>

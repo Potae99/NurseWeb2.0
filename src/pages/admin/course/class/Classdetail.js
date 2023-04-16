@@ -185,33 +185,33 @@ function Classdetail() {
         console.log(error.res);
       });
 
-      axios.get(process.env.REACT_APP_API_URL + "/teacher/list")
-      .then( res => {
+    axios.get(process.env.REACT_APP_API_URL + "/teacher/list")
+      .then(res => {
         console.log(res.data);
 
-        if (res.data.error === true){
+        if (res.data.error === true) {
           console.log(res.data);
           console.log("ERROR FOUND WHEN GET DATA FROM API");
           return;
         }
         setTeacherList(res.data.data);
       })
-      .catch( error => {
+      .catch(error => {
         console.log(error.res);
       });
 
-      axios.get(process.env.REACT_APP_API_URL + "/student/list")
-      .then( res => {
+    axios.get(process.env.REACT_APP_API_URL + "/student/list")
+      .then(res => {
         console.log(res.data);
 
-        if (res.data.error === true){
+        if (res.data.error === true) {
           console.log(res.data);
           console.log("ERROR FOUND WHEN GET DATA FROM API");
           return;
         }
         setStudentList(res.data.data);
       })
-      .catch( error => {
+      .catch(error => {
         console.log(error.res);
       })
   }
@@ -221,11 +221,11 @@ function Classdetail() {
     }, 2000);
   }, [])
 
-  const backToAddClass = () => {
-    window.location.href = "/admin/add/class"
+  const backToClass = () => {
+    window.location.href = "/admin/class"
   }
 
-  const deleteSyllabus = (classID) => {
+  const deleteClass = (classID) => {
     Swal.fire({
       title: 'ต้องการลบคาบเรียนหรือไม่?',
       showDenyButton: true,
@@ -243,12 +243,19 @@ function Classdetail() {
                   return _.classID !== classID;
                 })
               )
-              Swal.fire('Deleted!', '', 'success')
-                .then(() => { window.location.href = "/admin/add/class" })
+              // Swal.fire('Deleted!', '', 'success')
+              Swal.fire({
+                // position: "top-end",
+                icon: "success",
+                title: "Deleted!",
+                showConfirmButton: false,
+                timer: 1000,
+              })
+                .then(() => { window.location.href = "/admin/class" })
             })
         }
         else if (results.isDenied) {
-          window.location.href = "/admin/add/class";
+          window.location.href = "/admin/class";
         }
       })
   }
@@ -260,7 +267,7 @@ function Classdetail() {
       ) : (
         <div className=' text-black bg-white min-h-screen' >
           <div className=' flex flex-row-reverse'>
-            <button className=' ml-3' onClick={() => deleteSyllabus(classID)}>
+            <button className=' ml-3' onClick={() => deleteClass(classID)}>
               <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M19.4258 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
@@ -366,7 +373,7 @@ function Classdetail() {
                               }
                             </select>
                             <>
-                            <p className=' text-red-500 text-center mt-3'>***เพิ่มอาจารย์ให้ครบทุกคนก่อนแล้วจึงเพิ่มนิสิต***</p>
+                              <p className=' text-red-500 text-center mt-3'>***เพิ่มอาจารย์ให้ครบทุกคนก่อนแล้วจึงเพิ่มนิสิต***</p>
                             </>
                             <div className="items-center gap-2 mt-3 sm:flex">
                               <button
@@ -395,7 +402,7 @@ function Classdetail() {
                 </>
               ) : null}
             </div>
-            <div>
+            {/* <div>
               <div className="flex  items-center justify-center">
                 <button type="button" onClick={() => setShowModal2(true)} className="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-black transition-all duration-150 ease-in-out  rounded-2xl hover:pl-10 hover:pr-6 bg-gray-50 group">
                   <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-orange-400 group-hover:h-full"></span>
@@ -426,21 +433,11 @@ function Classdetail() {
                             <h4 className="text-lg font-medium text-gray-800">
                               อาจารย์
                             </h4>
-                            {/* <input className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                              type="text"
-                              placeholder="รหัสประจำตัวอาจารย์"
-                              onChange={(event) => {
-                                setuserID(event.target.value)
-                              }}
-                            ></input> */}
                             <select
                               className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                               type="text"
                               name='userID'
                               placeholder="รหัสประจำตัวอาจารย์"
-                              // onChange={(event) => {
-                              //   setcourseID(event.target.value)
-                              // }}
                               onChange={(event) => {
                                 const filterTeacher = teacherList.filter(item => {
                                   return event.target.value == item.userID
@@ -453,13 +450,6 @@ function Classdetail() {
                                 teacherList.map((_, index) => (<option key={index} value={_.userID}>{_.nameTH}</option>))
                               }
                             </select>
-                            {/* <input className=" bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          type="text"
-                          placeholder="ประเภทการสอน"
-                          onChange={(event) => {
-                            settaughtType(event.target.value)
-                          }}
-                        ></input> */}
                             <select
                               className='w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
                               value={taughtType}
@@ -503,7 +493,7 @@ function Classdetail() {
                 </>
               ) : null}
 
-            </div>
+            </div> */}
           </div>
           <div className=' space-y-3'>
             <p>รายชื่ออาจารย์ผู้สอน</p>
@@ -541,7 +531,7 @@ function Classdetail() {
           </div>
           <div className=' mt-3 grid grid-cols-2 '>
             <div className=' ml-3'>
-              <button onClick={backToAddClass} className=" mt-5 relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+              <button onClick={backToClass} className=" mt-5 relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
                   <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </span>

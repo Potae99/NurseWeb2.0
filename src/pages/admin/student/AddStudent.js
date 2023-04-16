@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 import LoadingPage from '../../LoadingPage';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
+import FormatDate from '../../../components/FormatDate';
 
 
 function AddStudent() {
@@ -256,9 +257,27 @@ function AddStudent() {
         sethouseadd_subDistrict(filterTambons[0].name_th)
 
     }
+
+    // const onchangeBirthday = (date) => {
+    //     console.log(date)
+    //     const formattedDate = FormatDate((date));
+    //     setBirthday(formattedDate);
+    // }
     const onchangeBirthday = (date) => {
-        setBirthday(date);
+        const yourDate = parseISO(date);
+        if (isNaN(yourDate.getTime())) {
+            // วันที่ไม่ถูกต้อง
+            return;
+        }
+
+        const offset = yourDate.getTimezoneOffset()
+        const formattedDate = new Date(yourDate.getTime() - (offset * 60 * 1000))
+            .toISOString()
+            .split('T')[0]
+        setBirthday(formattedDate)
     }
+
+
     console.log(Birthday)
 
     return (
@@ -344,7 +363,7 @@ function AddStudent() {
                                         name="studentID"
                                         placeholder="รหัสนิสิต"
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        maxlength="13"
+                                        maxLength="13"
                                         required
                                     />
                                 </div>
