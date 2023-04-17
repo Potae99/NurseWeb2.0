@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { format, parseISO } from 'date-fns';
 import FormatDate from '../../../components/FormatDate';
+import moment from 'moment';
 
 
 function AddStudent() {
@@ -37,6 +38,7 @@ function AddStudent() {
     const [scholarship_name, setScholarship_name] = useState("");
     const [yearStartEnroll, setyearStartEnroll] = useState("");
     const [status, setStatus] = useState("");
+    const [generation, setGeneration] = useState("");
 
     const [data, setData] = useState([]);
 
@@ -151,9 +153,10 @@ function AddStudent() {
             studentID: studentID,
             scholarship_name: scholarship_name,
             yearStartEnroll: yearStartEnroll,
-            status: status
+            status: status,
+            generation: generation
 
-        }).then(() => {
+        }).then((res) => {
             setData([
                 ...data,
                 {
@@ -182,7 +185,8 @@ function AddStudent() {
                     studentID: studentID,
                     scholarship_name: scholarship_name,
                     yearStartEnroll: yearStartEnroll,
-                    status: status
+                    status: status,
+                    generation: generation
 
                 }
             ])
@@ -200,6 +204,9 @@ function AddStudent() {
             })
                 .then(() => { window.location.href = "/admin/home"; })
         })
+            .catch(error => {
+                console.log(error.request)
+            })
         // console.log(data)
     }
 
@@ -259,26 +266,43 @@ function AddStudent() {
     }
 
     // const onchangeBirthday = (date) => {
-    //     console.log(date)
-    //     const formattedDate = FormatDate((date));
+    //     // console.log(date)
+    //     const formattedDate = FormatDate(date);
+    //     // console.log(typeof(formattedDate))
     //     setBirthday(formattedDate);
+    //     console.log(Birthday)
     // }
-    const onchangeBirthday = (date) => {
-        const yourDate = parseISO(date);
-        if (isNaN(yourDate.getTime())) {
-            // วันที่ไม่ถูกต้อง
-            return;
-        }
+    // const onchangeBirthday = (date) => {
+    //     const inputDateString = date.toString();
+    //     console.log(inputDateString)
+    //     const inputDate = new Date(inputDateString);
 
-        const offset = yourDate.getTimezoneOffset()
-        const formattedDate = new Date(yourDate.getTime() - (offset * 60 * 1000))
-            .toISOString()
-            .split('T')[0]
-        setBirthday(formattedDate)
-    }
+    //     const year = inputDate.getFullYear();
+    //     const month = inputDate.getMonth();
+    //     const day = inputDate.getDate();
+    //     const hours = inputDate.getHours();
+    //     const minutes = inputDate.getMinutes();
+    //     const seconds = inputDate.getSeconds();
+    //     const timezoneOffset = inputDate.getTimezoneOffset();
 
+    //     const utcDate = new Date(Date.UTC(year, month, day, hours, minutes - timezoneOffset, seconds));
+    //     console.log(utcDate);
+    //     const isoDateString = utcDate.toISOString();
+    //     const yourDate = parseISO(isoDateString);
+    //     console.log(yourDate)
+    //     if (isNaN(yourDate.getTime())) {
+    //         // วันที่ไม่ถูกต้อง
+    //         return;
+    //     }
 
-    console.log(Birthday)
+    //     const offset = yourDate.getTimezoneOffset()
+    //     const formattedDate = new Date(yourDate.getTime() - (offset * 60 * 1000))
+    //         .toISOString()
+    //         .split('T')[0]
+    //     setBirthday(formattedDate)
+    // }
+
+    // console.log(Birthday)
 
     return (
         <>
@@ -306,6 +330,20 @@ function AddStudent() {
                                         value={yearStartEnroll}
                                         name="yearStartEnroll"
                                         placeholder="ปีที่เริ่มศึกษา"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    />
+                                </div>
+                            </div>
+                            <div ><p>รุ่น</p>
+                                <div className="mb-5 flex justify-center ">
+                                    <input
+                                        onChange={(event) => {
+                                            setGeneration(event.target.value)
+                                        }}
+                                        type="text"
+                                        value={generation}
+                                        name="generation"
+                                        placeholder="รุ่น"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                     />
                                 </div>
@@ -447,7 +485,7 @@ function AddStudent() {
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                     /> */}
-                                    <DatePicker
+                                    {/* <DatePicker
                                         selected={Birthday}
                                         // onChange={(date) => setBirthday(date)}
                                         onChange={onchangeBirthday}
@@ -456,8 +494,28 @@ function AddStudent() {
                                         placeholderText="dd/MM/yyyy"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
+                                    /> */}
+                                    <DatePicker
+                                        selected={Birthday}
+                                        // onChange={(date) => setBirthday(date)}
+                                        onChange={(date) => {
+                                            if (date != null && moment(date, "MM/DD/YYYY").isValid()) {
+                                                const defaultDate = new Date();
+                                                const selectedDate = moment(date, "MM/DD/YYYY").toDate();
+                                                if (!isNaN(selectedDate.getTime())) {
+                                                    setBirthday(moment(date || defaultDate).format("YYYY-MM-DD"));
+                                                } else {
+                                                    console.error("Invalid date:", date);
+                                                }
+                                            } else {
+                                                console.error("Invalid date:", date);
+                                            }
+                                        }}
+                                        dateFormat="dd/MM/yyyy"
+                                        placeholderText="dd/MM/yyyy"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        required
                                     />
-
                                 </div>
                             </div>
                             <div ><p>Email</p>

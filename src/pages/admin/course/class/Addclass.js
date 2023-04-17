@@ -216,6 +216,8 @@ function Addclass() {
             taughtType: selectedTaughtType,
         };
     };
+    console.log(teachersDataArray)
+    console.log(studentDataArray)
 
     // const addTeacher = () => {
     //     axios.post(process.env.REACT_APP_API_URL + "/class/taugh", {
