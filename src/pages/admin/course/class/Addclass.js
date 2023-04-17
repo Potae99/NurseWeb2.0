@@ -15,6 +15,7 @@ function Addclass() {
     const [studyRoom, setstudyRoom] = useState("");
     const [dateYear, setdateYear] = useState("");
     const [semester, setSemester] = useState("");
+    const [syllabusID, setSyllabusID] = useState("");
 
     const [loading, setLoading] = useState(undefined);
     const [completed, setCompleted] = useState(undefined);
@@ -24,6 +25,7 @@ function Addclass() {
     const [courseList, setCourseList] = useState([]);
     const [studentList, setStudentList] = useState([]);
     const [teacherList, setTeacherList] = useState([]);
+    const [syllabusList, setSyllabusList] = useState([]);
     const [userID, setuserID] = useState("");
     const [taughtType, settaughtType] = useState("");
 
@@ -78,36 +80,93 @@ function Addclass() {
             });
     }
 
+    const onchangeCourse = (event) => {
+        axios.get(process.env.REACT_APP_API_URL + "/course/allCourseInSyllabus", { params: { courseID: event.target.value } })
+            .then(res => {
+                console.log(res.data);
+
+                if (res.data.error === true) {
+                    console.log(res.data);
+                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    return;
+                }
+                setSyllabusList(res.data.data);
+            })
+            .catch(error => {
+                console.log(error.res);
+            })
+    }
+
 
     const addclass = () => {
 
-        axios.post(process.env.REACT_APP_API_URL + "/class", {
-            courseID: courseID,
-            studyRoom: studyRoom,
-            dateYear: dateYear,
-            semester: semester
-
-        }).then(() => {
-            setData([
-                ...data,
-                {
+        axios.post(process.env.REACT_APP_API_URL + "/class",
+            {
+                class: {
                     courseID: courseID,
                     studyRoom: studyRoom,
                     dateYear: dateYear,
-                    semester: semester
+                    semester: semester,
+                    syllabusID: syllabusID
+                },
+                teacher: [
+                    {
+                        teacher: teachersDataArray.map(teacherData => ({
+                            userID: teacherData.userID,
+                            taughtType: teacherData.taughtType
+                        }))
+                    }
+                ],
+                student: [
+                    {
+                        student: studentDataArray.map(studentData => ({
+                            userID: studentData.userID
+                        }))
+                    }
+                ]
 
-                }
-            ])
-            Swal.fire({
-                // position: "top-end",
-                icon: "success",
-                title: "Add Class success",
-                showConfirmButton: false,
-                timer: 1000,
+            }).then(() => {
+                setData([
+                    ...data,
+                    {
+                        class: {
+                            courseID: courseID,
+                            studyRoom: studyRoom,
+                            dateYear: dateYear,
+                            semester: semester,
+                            syllabusID: syllabusID
+                        },
+                        teacher: [
+                            {
+                                teacher: teachersDataArray.map(teacherData => ({
+                                    userID: teacherData.userID,
+                                    taughtType: teacherData.taughtType
+                                }))
+                            }
+                        ],
+                        student: [
+                            {
+                                student: studentDataArray.map(studentData => ({
+                                    userID: studentData.userID
+                                }))
+                            }
+                        ]
+
+                    }
+                ])
+                Swal.fire({
+                    // position: "top-end",
+                    icon: "success",
+                    title: "Add Class success",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+                    .then(() => { window.location.href = "/admin/class"; })
+
             })
-                .then(() => { window.location.href = "/admin/class"; })
-
-        })
+            .catch(error => {
+                console.log(error.request)
+            })
     }
 
     useEffect(() => {
@@ -216,8 +275,8 @@ function Addclass() {
             taughtType: selectedTaughtType,
         };
     };
-    console.log(teachersDataArray)
-    console.log(studentDataArray)
+    // console.log(teachersDataArray)
+    // console.log(studentDataArray)
 
     // const addTeacher = () => {
     //     axios.post(process.env.REACT_APP_API_URL + "/class/taugh", {
@@ -245,6 +304,8 @@ function Addclass() {
 
     // console.log(teachersDataArray)
 
+    // console.log(courseID)
+
 
     return (
         <>
@@ -258,23 +319,13 @@ function Addclass() {
                             <div >
                                 <p>รหัสวิชาเรียน</p>
                                 <div className=" flex justify-center ">
-                                    {/* <input
-                                        onChange={(event) => {
-                                            setcourseID(event.target.value)
-                                        }}
-                                        type="text"
-                                        name="courseID"
-                                        value={courseID}
-                                        placeholder="รหัสวิชาเรียน"
-                                        className="w-full rounded-md border border-black bg-gray-100 py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        required
-                                    /> */}
                                     <select
                                         onChange={(event) => {
                                             const filterCourse = courseList.filter((item => {
                                                 return event.target.value == item.courseID
                                             }))
                                             setcourseID(filterCourse[0].courseID)
+                                            onchangeCourse(event)
                                         }}
                                         type="text"
                                         name='courseID'
@@ -283,6 +334,27 @@ function Addclass() {
                                         <option value={""}>---โปรดระบุรหัสวิชา---</option>
                                         {
                                             courseList.map((_, index) => (<option key={index} value={_.courseID}>{_.courseID_number} {_.courseNameTH}</option>))
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div >
+                                <p>หลักสูตร</p>
+                                <div className=" flex justify-center ">
+                                    <select
+                                        onChange={(event) => {
+                                            const filterSyllabus = syllabusList.filter((item => {
+                                                return event.target.value == item.syllabusID
+                                            }))
+                                            setSyllabusID(filterSyllabus[0].syllabusID)
+                                        }}
+                                        type="text"
+                                        name='syllabusID'
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    >
+                                        <option value={""}>---โปรดระบุหลักสูตร---</option>
+                                        {
+                                            syllabusList.map((_, index) => (<option key={index} value={_.syllabusID}>{_.syllabusName}</option>))
                                         }
                                     </select>
                                 </div>
@@ -665,7 +737,7 @@ function Addclass() {
                             </button>
                         </div>
                         <div className=' right-0 mr-7'>
-                            <button  className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                            <button className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
                                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
                                     <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
