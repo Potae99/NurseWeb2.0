@@ -97,78 +97,6 @@ function Addclass() {
             })
     }
 
-
-    const addclass = () => {
-
-        axios.post(process.env.REACT_APP_API_URL + "/class",
-            {
-                class: {
-                    courseID: courseID,
-                    studyRoom: studyRoom,
-                    dateYear: dateYear,
-                    semester: semester,
-                    syllabusID: syllabusID
-                },
-                teacher: [
-                    {
-                        teacher: teachersDataArray.map(teacherData => ({
-                            userID: teacherData.userID,
-                            taughtType: teacherData.taughtType
-                        }))
-                    }
-                ],
-                student: [
-                    {
-                        student: studentDataArray.map(studentData => ({
-                            userID: studentData.userID
-                        }))
-                    }
-                ]
-
-            }).then(() => {
-                setData([
-                    ...data,
-                    {
-                        class: {
-                            courseID: courseID,
-                            studyRoom: studyRoom,
-                            dateYear: dateYear,
-                            semester: semester,
-                            syllabusID: syllabusID
-                        },
-                        teacher: [
-                            {
-                                teacher: teachersDataArray.map(teacherData => ({
-                                    userID: teacherData.userID,
-                                    taughtType: teacherData.taughtType
-                                }))
-                            }
-                        ],
-                        student: [
-                            {
-                                student: studentDataArray.map(studentData => ({
-                                    userID: studentData.userID
-                                }))
-                            }
-                        ]
-
-                    }
-                ])
-                Swal.fire({
-                    // position: "top-end",
-                    icon: "success",
-                    title: "Add Class success",
-                    showConfirmButton: false,
-                    timer: 1000,
-                })
-                    .then(() => { window.location.href = "/admin/class"; })
-
-            })
-            .catch(error => {
-                console.log(error.request)
-            })
-    }
-
     useEffect(() => {
         setTimeout(() => {
             fetchData();
@@ -178,34 +106,7 @@ function Addclass() {
     const backToClassManageMent = () => {
         window.location.href = "/admin/class"
     }
-
-    // const getTeacherData = () => {
-    //     // console.log(teacherList)
-    //     // console.log(userID)
-    //     const selectedTeacher = teacherList.find(item => item.userID.toString() === userID);
-    //     const selectedTaughType = taughtType;
-    //     // console.log(selectedTeacher);
-    //     // console.log(selectedTaughType);
-    //     return {
-    //         teacher: selectedTeacher,
-    //         taughtType: selectedTaughType
-    //     };
-    // }
-    // const getTeacherData = () => {
-    //     const selectedTeacher = teacherList.find(item => item.userID.toString() === userID);
-    //     const selectedTaughtType = taughtType;
-    //     if (!selectedTeacher || !selectedTaughtType) {
-    //         return {
-    //             success: false,
-    //             error: "Teacher data not found."
-    //         };
-    //     }
-    //     return {
-    //         success: true,
-    //         teacher: selectedTeacher,
-    //         taughtType: selectedTaughtType
-    //     };
-    // };
+    
     const [teachersDataArray, setTeachersDataArray] = useState([]);
     const [studentDataArray, setStudentDataArray] = useState([]);
 
@@ -275,29 +176,83 @@ function Addclass() {
             taughtType: selectedTaughtType,
         };
     };
-    // console.log(teachersDataArray)
-    // console.log(studentDataArray)
-
-    // const addTeacher = () => {
-    //     axios.post(process.env.REACT_APP_API_URL + "/class/taugh", {
-    //         teachersDataArray: teachersDataArray,
-    //         classID: classID,
-    //     })
-    //         .then(() => {
-    //             // Handle the response from the API if needed
-    //             window.location.href = "/admin/class";
-    //         })
-    //         .catch((error) => {
-    //             // Handle the error if the API request fails
-    //             console.error(error);
-    //         });
-    // }
 
     const deleteTeacher = (userID) => {
         setTeachersDataArray(prevTeachersDataArray =>
             prevTeachersDataArray.filter(teacher => teacher.userID !== userID)
         );
 
+    }
+
+    const addclass = () => {
+
+        axios.post(process.env.REACT_APP_API_URL + "/class",
+            {
+                class: {
+                    courseID: courseID,
+                    studyRoom: studyRoom,
+                    dateYear: dateYear,
+                    semester: semester,
+                    syllabusID: syllabusID
+                },
+                // teacher: [
+                //     {
+                //         teacher: teachersDataArray
+                //             .filter(teacherData => teacherData.userID)
+                //             .map(teacherData => ({
+                //                 userID: teacherData.userID,
+                //                 taughtType: teacherData.taughtType
+                //             }))
+                //     }
+                // ],
+                teacher: teachersDataArray
+                    .filter(teacherData => teacherData.userID)
+                    .map(teacherData => ({
+                        userID: teacherData.userID,
+                        taughtType: teacherData.taughtType
+                    })),
+                student: studentDataArray
+                    .filter(studentData => studentData.userID)
+                    .map(studentData => ({
+                        userID: studentData.userID
+                    })),
+            }).then(() => {
+                setData([
+                    ...data,
+                    {
+                        class: {
+                            courseID: courseID,
+                            studyRoom: studyRoom,
+                            dateYear: dateYear,
+                            semester: semester,
+                            syllabusID: syllabusID
+                        },
+                        teacher: teachersDataArray
+                            .filter(teacherData => teacherData.userID)
+                            .map(teacherData => ({
+                                userID: teacherData.userID,
+                                taughtType: teacherData.taughtType
+                            })),
+                        student: studentDataArray
+                            .filter(studentData => studentData.userID)
+                            .map(studentData => ({
+                                userID: studentData.userID
+                            })),
+                    }
+                ])
+                Swal.fire({
+                    // position: "top-end",
+                    icon: "success",
+                    title: "Add Class success",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+                    .then(() => { window.location.href = "/admin/class"; })
+
+            })
+            .catch(error => {
+                console.log(error.request)
+            })
     }
     // const teacherData = getTeacherData();
     // const teacherData = getTeacherData();
@@ -736,7 +691,7 @@ function Addclass() {
                                 <span className="relative invisible">Button Text</span>
                             </button>
                         </div>
-                        <div className=' right-0 mr-7'>
+                        {/* <div className=' right-0 mr-7'>
                             <button className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
                                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
                                     <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -746,7 +701,7 @@ function Addclass() {
                                 <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มอาจารย์</span>
                                 <span className="relative invisible">Button Text</span>
                             </button>
-                        </div>
+                        </div> */}
                         <div className=' absolute right-0 mr-7'>
                             <button onClick={addclass} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
                                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">

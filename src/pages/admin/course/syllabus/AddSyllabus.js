@@ -10,6 +10,7 @@ function AddSyllabus() {
     const [startUse, setstartUse] = useState("");
     const [endUse, setendUse] = useState("");
     const [detail, setdetail] = useState("");
+    const [syllabus_Path, setSyllabus_Path] = useState(null);
 
     const [data, setData] = useState([]);
 
@@ -35,7 +36,8 @@ function AddSyllabus() {
             syllabusDate: syllabusDate,
             startUse: startUse,
             endUse: endUse,
-            detail: detail
+            detail: detail,
+            syllabus_Path: syllabus_Path
 
         }).then(() => {
             setData([
@@ -45,7 +47,8 @@ function AddSyllabus() {
                     syllabusDate: syllabusDate,
                     startUse: startUse,
                     endUse: endUse,
-                    detail: detail
+                    detail: detail,
+                    syllabus_Path: syllabus_Path
                 }
             ])
             // Toast.fire({
@@ -58,7 +61,7 @@ function AddSyllabus() {
                 title: "Add Syllabus success",
                 showConfirmButton: false,
                 timer: 1000,
-              })
+            })
                 .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus"; })
 
         })
@@ -77,6 +80,10 @@ function AddSyllabus() {
             }, 1000);
         }, 2000);
     }, [])
+
+    const handleFileSelect = (e) => {
+        setSyllabus_Path(e.target.files[0]);
+    }
 
 
     return (
@@ -146,19 +153,31 @@ function AddSyllabus() {
                             </div>
                         </div>
                         <div ><p>รายละเอียด</p>
-                                <div className="mb-5 flex justify-center ">
-                                    <textarea
-                                        onChange={(event) => {
-                                            setdetail(event.target.value)
-                                        }}
-                                        type="text"
-                                        name="detail"
-                                        placeholder="รายละเอียด"
-                                        className="w-full rounded-md border border-while  bg-white border-black py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        required
-                                    />
-                                </div>
+                            <div className="mb-5 flex justify-center ">
+                                <textarea
+                                    onChange={(event) => {
+                                        setdetail(event.target.value)
+                                    }}
+                                    type="text"
+                                    name="detail"
+                                    placeholder="รายละเอียด"
+                                    className="w-full rounded-md border border-while  bg-white border-black py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                    required
+                                />
                             </div>
+                        </div>
+                        <div ><p>เพิ่มไฟล์หลักสูตร</p>
+                            <div className="mb-5 flex justify-center ">
+                                <input
+                                    onChange={handleFileSelect}
+                                    type="file"
+                                    name="detail"
+                                    placeholder="รายละเอียด"
+                                    className="w-full rounded-md border border-while  bg-white border-black py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                    required
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div className=' mt-3 grid grid-cols-2 '>
                         <div className=' ml-3'>

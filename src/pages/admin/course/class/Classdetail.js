@@ -200,7 +200,7 @@ function Classdetail() {
         console.log(error.res);
       });
 
-    axios.get(process.env.REACT_APP_API_URL + "/student/list")
+    axios.get(process.env.REACT_APP_API_URL + "/student/list", { params: { status: 1 } })
       .then(res => {
         console.log(res.data);
 
