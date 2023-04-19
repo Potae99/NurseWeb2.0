@@ -37,6 +37,12 @@ import Evalsum from './pages/admin/eval/Evalsum';
 import Evalsearch from './pages/admin/eval/Evalsearch';
 import Adminoverall from './pages/admin/Adminoverall';
 import Chart_bar from './components/chart/Chart_bar';
+//// import excell
+
+import { Import_excel } from './pages/admin/excel/Import_excel';
+import Chatgpt_import_excel from './pages/admin/excel/Chatgpt_import_excel';
+import Data from './pages/admin/excel/Data';
+
 
 
 
@@ -347,9 +353,25 @@ const router = [
     element: <Chart_bar />,
     level: "admin"
 
-  }
+  },
+  ///////excel/////
+  {
+    path: "/admin/import_excel",
+    element: <Import_excel />,
+    level: "admin"
+  },                                                                                                            
+  {
+    path: "/admin/Gptimport_excel",
+    element: <Chatgpt_import_excel />,
+    level: "admin"
+  },
+  {
+    path: "/admin/Dataimport_excel",
+    element: <Data />,
+    level: "admin"
+  },
 
-];
+]; 
 
 function App() {
   // const [token, setToken] = useState();

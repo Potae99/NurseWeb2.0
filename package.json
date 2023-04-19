@@ -6,6 +6,8 @@
     "@emotion/react": "^11.10.6",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
+    "@mantine/core": "^6.0.6",
+    "@mantine/hooks": "^6.0.6",
     "@nextui-org/react": "^1.0.0-beta.12",
     "@react-aria/button": "^3.7.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -32,7 +34,8 @@
     "react-spinners": "^0.13.8",
     "sweetalert2": "^11.7.3",
     "tw-elements": "^1.0.0-beta1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",
