@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import LoadingPage from '../../../LoadingPage';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 function AddSyllabus() {
     const [syllabusName, setsyllabusName] = useState("");
@@ -31,11 +34,15 @@ function AddSyllabus() {
 
     const addSyllabus = () => {
 
+        const formattedSyllabusDate = moment(syllabusDate).format('YYYY-MM-DD');
+        const formattedStartUse = moment(startUse).format('YYYY-MM-DD');
+        const formattedEndUse = moment(endUse).format('YYYY-MM-DD');
+
         axios.post(process.env.REACT_APP_API_URL + "/course/syllabus", {
             syllabusName: syllabusName,
-            syllabusDate: syllabusDate,
-            startUse: startUse,
-            endUse: endUse,
+            syllabusDate: formattedSyllabusDate,
+            startUse: formattedStartUse,
+            endUse: formattedEndUse,
             detail: detail,
             syllabus_Path: syllabus_Path
 
@@ -44,28 +51,61 @@ function AddSyllabus() {
                 ...data,
                 {
                     syllabusName: syllabusName,
-                    syllabusDate: syllabusDate,
-                    startUse: startUse,
-                    endUse: endUse,
+                    syllabusDate: formattedSyllabusDate,
+                    startUse: formattedStartUse,
+                    endUse: formattedEndUse,
                     detail: detail,
                     syllabus_Path: syllabus_Path
                 }
             ])
-            // Toast.fire({
-            //     icon: 'success',
-            //     title: 'Add Syllabus success'
-            // })
             Swal.fire({
-                // position: "top-end",
                 icon: "success",
                 title: "Add Syllabus success",
                 showConfirmButton: false,
                 timer: 1000,
             })
                 .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus"; })
-
         })
+            .catch(error => {
+                console.log(error.request)
+            })
     }
+
+    // const addSyllabus = async () => {
+    //     const formData = new FormData();
+    //     formData.append('syllabusName', syllabusName);
+    //     formData.append('syllabusDate', syllabusDate);
+    //     formData.append('startUse', startUse);
+    //     formData.append('endUse', endUse);
+    //     formData.append('detail', detail);
+    //     formData.append('syllabus_Path', syllabus_Path);
+
+    //     try {
+    //         const response = await axios.post(
+    //             `${process.env.REACT_APP_API_URL}/course/syllabus`,
+    //             formData,
+    //             {
+    //                 headers: {
+    //                     'Content-Type': 'multipart/form-data',
+    //                 },
+    //             }
+    //         );
+
+    //         setData([...data, response.data]);
+
+    //         Swal.fire({
+    //             icon: 'success',
+    //             title: 'Add Syllabus success',
+    //             showConfirmButton: false,
+    //             timer: 1000,
+    //         }).then(() => {
+    //             window.location.href = '/admin/course/syllabus/adminsyllabus';
+    //         });
+    //     } catch (error) {
+    //         console.log(error.request)
+    //     }
+    // };
+
 
     const backToAdminSyllabus = () => {
         window.location.href = "/admin/course/syllabus/adminsyllabus"
@@ -81,9 +121,69 @@ function AddSyllabus() {
         }, 2000);
     }, [])
 
-    const handleFileSelect = (e) => {
-        setSyllabus_Path(e.target.files[0]);
-    }
+    // const handleFileChange = (event) => {
+    //     const selectedFile = event.target.files[0];
+    //     const fileUrl = URL.createObjectURL(selectedFile);
+    //     setSyllabus_Path(fileUrl);
+    // };
+
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+        const filePath = selectedFile.path;
+        setSyllabus_Path(filePath);
+    };
+
+    // const handleFileChange = (event) => {
+    //     const selectedFile = event.target.files[0];
+    //     const currentDate = new Date();
+    //     const formattedDate = `${currentDate.getFullYear()}_${(currentDate.getMonth() + 1)
+    //         .toString()
+    //         .padStart(2, '0')}_${currentDate
+    //             .getDate()
+    //             .toString()
+    //             .padStart(2, '0')}_${currentDate
+    //                 .getHours()
+    //                 .toString()
+    //                 .padStart(2, '0')}_${currentDate
+    //                     .getMinutes()
+    //                     .toString()
+    //                     .padStart(2, '0')}_${currentDate
+    //                         .getSeconds()
+    //                         .toString()
+    //                         .padStart(2, '0')}`;
+    //     const fileExtension = selectedFile.name.split('.').pop();
+    //     const fileName = `[${formattedDate}]${fileExtension}`;
+    //     setSyllabus_Path(fileName);
+    // };
+
+    const handleSyllabusDateChange = (date) => {
+        setsyllabusDate(date);
+        if (startUse && moment(date).isAfter(startUse)) {
+            setstartUse(date);
+        }
+    };
+
+    const handleStartUseChange = (date) => {
+        if (moment(date).isBefore(syllabusDate)) {
+            setstartUse(syllabusDate);
+        } else {
+            setstartUse(date);
+        }
+        if (endUse && moment(date).isAfter(endUse)) {
+            setendUse(date);
+        }
+    };
+
+    const handleEndUseChange = (date) => {
+        if (moment(date).isBefore(startUse)) {
+            setendUse(startUse);
+        } else {
+            setendUse(date);
+        }
+    };
+
+
+    console.log(syllabus_Path)
 
 
     return (
@@ -111,42 +211,38 @@ function AddSyllabus() {
                             </div>
                             <div ><p>ปีที่สร้าง</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
-                                        onChange={(event) => {
-                                            setsyllabusDate(event.target.value)
-                                        }}
-                                        type="date"
-                                        name="syllabusDate"
-                                        placeholder="ระยะเวลาหลักสูตร"
-                                        className="w-full rounded-md border border-while bg-white border-black py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                    <DatePicker
+                                        selected={syllabusDate}
+                                        onChange={handleSyllabusDateChange}
+                                        dateFormat="dd/MM/yyyy"
+                                        placeholderText="dd/MM/yyyy"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                     />
                                 </div>
                             </div>
                             <div ><p>ระยะเวลาเริ่มหลักสูตร</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
-                                        onChange={(event) => {
-                                            setstartUse(event.target.value)
-                                        }}
-                                        type="date"
-                                        name="startUse"
-                                        placeholder="ระยะเวลาเริ่มหลักสูตร"
-                                        className="w-full rounded-md border border-while bg-white border-black py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                    <DatePicker
+                                        selected={startUse}
+                                        onChange={handleStartUseChange}
+                                        dateFormat="dd/MM/yyyy"
+                                        placeholderText="dd/MM/yyyy"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        minDate={syllabusDate}
                                         required
                                     />
                                 </div>
                             </div>
                             <div ><p>ระยะเวลาสิ้นสุดหลักสูตร</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
-                                        onChange={(event) => {
-                                            setendUse(event.target.value)
-                                        }}
-                                        type="date"
-                                        name="endUse"
-                                        placeholder="ระยะเวลาสิ้นสุดหลักสูตร"
-                                        className="w-full rounded-md border border-while bg-white border-black py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                    <DatePicker
+                                        selected={endUse}
+                                        onChange={handleEndUseChange}
+                                        dateFormat="dd/MM/yyyy"
+                                        placeholderText="dd/MM/yyyy"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        minDate={startUse}
                                         required
                                     />
                                 </div>
@@ -166,11 +262,12 @@ function AddSyllabus() {
                                 />
                             </div>
                         </div>
-                        <div ><p>เพิ่มไฟล์หลักสูตร</p>
+                        <div ><label htmlFor="file-input">Choose a file:</label>
                             <div className="mb-5 flex justify-center ">
                                 <input
-                                    onChange={handleFileSelect}
+                                    onChange={handleFileChange}
                                     type="file"
+                                    id="file-input"
                                     name="detail"
                                     placeholder="รายละเอียด"
                                     className="w-full rounded-md border border-while  bg-white border-black py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"

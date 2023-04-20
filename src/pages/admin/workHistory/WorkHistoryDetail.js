@@ -4,6 +4,9 @@ import { Route, Routes, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { format, sub } from 'date-fns';
 import LoadingPage from '../../LoadingPage';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 function WorkHistoryDetail() {
 
@@ -56,47 +59,50 @@ function WorkHistoryDetail() {
             denyButtonText: `ไม่ใช่`,
             cancelButtonText: 'ยกเลิก'
         })
-        .then((results) => {
-            if (results.isConfirmed) {
-                axios.delete(process.env.REACT_APP_API_URL + "/student/workHistory", { data: { workHistoryID: workHistoryID } })
-            .then((response) => {
-                setWorkHistoryList(
-                    workHistoryList.filter((_) => {
-                        return _.workHistoryID !== workHistoryID;
-                    })
-                )
+            .then((results) => {
+                if (results.isConfirmed) {
+                    axios.delete(process.env.REACT_APP_API_URL + "/student/workHistory", { data: { workHistoryID: workHistoryID } })
+                        .then((response) => {
+                            setWorkHistoryList(
+                                workHistoryList.filter((_) => {
+                                    return _.workHistoryID !== workHistoryID;
+                                })
+                            )
 
-                // Toast.fire({
-                //     icon: 'success',
-                //     title: 'Delete data success'
-                // })
-                Swal.fire({
-                    // position: "top-end",
-                    icon: "success",
-                    title: "Delete data success",
-                    showConfirmButton: false,
-                    timer: 1000,
-                  })
-                    .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
+                            // Toast.fire({
+                            //     icon: 'success',
+                            //     title: 'Delete data success'
+                            // })
+                            Swal.fire({
+                                // position: "top-end",
+                                icon: "success",
+                                title: "Delete data success",
+                                showConfirmButton: false,
+                                timer: 1000,
+                            })
+                                .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
 
 
-            }).catch(function (error) {
-                if (error.response) {
-                    console.log(error.response);
+                        }).catch(function (error) {
+                            if (error.response) {
+                                console.log(error.response);
+                            }
+                        });
                 }
-            });
-            }
-            else if (results.isDenied){
-                window.location.href = "/admin/student/work/detail/" + workHistoryID;
-            }
-        })
-        
+                else if (results.isDenied) {
+                    window.location.href = "/admin/student/work/detail/" + workHistoryID;
+                }
+            })
+
     }
 
     const fetchData = () => {
 
         axios.get(process.env.REACT_APP_API_URL + "/student/workHistory", { params: { workHistoryID: workHistoryID } })
             .then(res => {
+
+                const defaultStartWork = moment(res.data.data.startWork).toDate();
+                const defaultEndWork = moment(res.data.data.endWork).toDate();
                 console.log(res.data);
 
                 if (res.data.error === true) {
@@ -104,8 +110,8 @@ function WorkHistoryDetail() {
                     console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
-                setStartWork((format(new Date(res.data.data.startWork), 'yyyy-MM-dd')));
-                setEndWork((format(new Date(res.data.data.endWork), 'yyyy-MM-dd')));
+                setStartWork(defaultStartWork);
+                setEndWork(defaultEndWork);
                 setDepartment(res.data.data.department);
                 setWorkAddressName(res.data.data.workAddressName);
                 setHouseNo(res.data.data.houseNo);
@@ -161,10 +167,13 @@ function WorkHistoryDetail() {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
 
+                const formattedStartWork = moment(startWork).format('YYYY-MM-DD');
+                const formattedEndWork = moment(endWork).format('YYYY-MM-DD');
+
                 axios.put(process.env.REACT_APP_API_URL + "/student/workHistory", {
                     workHistoryID: workHistoryID,
-                    startWork: startWork,
-                    endWork: endWork,
+                    startWork: formattedStartWork,
+                    endWork: formattedEndWork,
                     department: department,
                     workAddressName: workAddressName,
                     houseNo: houseNo,
@@ -182,8 +191,8 @@ function WorkHistoryDetail() {
                         ...data,
                         {
                             workHistoryID: workHistoryID,
-                            startWork: startWork,
-                            endWork: endWork,
+                            startWork: formattedStartWork,
+                            endWork: formattedEndWork,
                             department: department,
                             workAddressName: workAddressName,
                             houseNo: houseNo,
@@ -197,12 +206,24 @@ function WorkHistoryDetail() {
                             userID: userID
                         }
                     ])
-                    Swal.fire('Saved!', '', 'success')
+                    // Swal.fire('Saved!', '', 'success')
+                    Swal.fire({
+                        icon: "success",
+                        title: "Saved!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
                         .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
 
                 })
             } else if (result.isDenied) {
-                Swal.fire('Changes are not saved', '', 'info')
+                // Swal.fire('Changes are not saved', '', 'info')
+                Swal.fire({
+                    icon: "info",
+                    title: "Changes are not saved",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
                     .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
 
             }
@@ -255,6 +276,23 @@ function WorkHistoryDetail() {
 
         setSubDistrict(filterTambons[0].name_th)
     }
+
+    const handleStartWorkChange = (date) => {
+        setStartWork(date);
+        if (endWork && moment(date).isAfter(endWork)) {
+            setEndWork(date);
+        }
+    };
+
+    const handleEndWorkChange = (date) => {
+        if (moment(date).isBefore(startWork)) {
+            setEndWork(startWork);
+        } else {
+            setEndWork(date);
+        }
+    };
+
+
     return (
         <>
             {!completed ? (
@@ -268,7 +306,7 @@ function WorkHistoryDetail() {
                                 <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                                     <div ><p>เริ่ม</p>
                                         <div className="mb-5 flex justify-center ">
-                                            <input
+                                            {/* <input
                                                 defaultValue={startWork}
                                                 onChange={(event) => {
                                                     setStartWork(event.target.value)
@@ -277,20 +315,27 @@ function WorkHistoryDetail() {
                                                 name="startWork"
                                                 placeholder="เวลาเริ่มทำงาน"
                                                 className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                            /> */}
+                                            <DatePicker
+                                                selected={startWork}
+                                                onChange={handleStartWorkChange}
+                                                dateFormat="dd/MM/yyyy"
+                                                placeholderText="dd/MM/yyyy"
+                                                className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                                required
                                             />
                                         </div>
                                     </div>
                                     <div ><p>สิ้นสุด</p>
                                         <div className="mb-5 flex justify-center ">
-                                            <input
-                                                defaultValue={endWork}
-                                                onChange={(event) => {
-                                                    setEndWork(event.target.value)
-                                                }}
-                                                type="date"
-                                                name="endWork"
-                                                placeholder="สิ้นสุดการทำงาน"
-                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                            <DatePicker
+                                                selected={endWork}
+                                                onChange={handleEndWorkChange}
+                                                dateFormat="dd/MM/yyyy"
+                                                placeholderText="dd/MM/yyyy"
+                                                className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                                minDate={startWork}
+                                                required
                                             />
                                         </div>
                                     </div>

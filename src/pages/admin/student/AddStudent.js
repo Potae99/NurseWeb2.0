@@ -3,10 +3,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import LoadingPage from '../../LoadingPage';
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import { format, parseISO } from 'date-fns';
-import FormatDate from '../../../components/FormatDate';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 
 
@@ -18,7 +16,7 @@ function AddStudent() {
     const [houseadd_houseNo, sethouseadd_houseNo] = useState("");
     const [IDnumber_Path] = useState("");
     const [password, setpassword] = useState("");
-    const [Birthday, setBirthday] = useState("");
+    const [Birthday, setBirthday] = useState(null);
     const [IDline, setIDline] = useState("");
     const [IDnumber, setIDnumber] = useState("");
     const [email, setemail] = useState("");
@@ -127,6 +125,8 @@ function AddStudent() {
 
     const addStudent = () => {
 
+        const formattedBirthday = moment(Birthday).format('YYYY-MM-DD');
+
         axios.post(process.env.REACT_APP_API_URL + "/student", {
             houseadd_province: houseadd_province,
             houseadd_subDistrict: houseadd_subDistrict,
@@ -134,7 +134,7 @@ function AddStudent() {
             houseadd_houseNo: houseadd_houseNo,
             IDnumber_Path: IDnumber_Path,
             password: password,
-            Birthday: Birthday,
+            Birthday: formattedBirthday,
             IDline: IDline,
             IDnumber: IDnumber,
             email: email,
@@ -166,7 +166,7 @@ function AddStudent() {
                     houseadd_houseNo: houseadd_houseNo,
                     IDnumber_Path: IDnumber_Path,
                     password: password,
-                    Birthday: Birthday,
+                    Birthday: formattedBirthday,
                     IDline: IDline,
                     IDnumber: IDnumber,
                     email: email,
@@ -265,44 +265,11 @@ function AddStudent() {
 
     }
 
-    // const onchangeBirthday = (date) => {
-    //     // console.log(date)
-    //     const formattedDate = FormatDate(date);
-    //     // console.log(typeof(formattedDate))
-    //     setBirthday(formattedDate);
-    //     console.log(Birthday)
+    // const onchangeBirthday = (event) => {
+    //     event.preventDefault();
+    //     const formattedBirthday = moment(Birthday).format('YYYY-MM-DD');
+    //     setBirthday(formattedBirthday);
     // }
-    // const onchangeBirthday = (date) => {
-    //     const inputDateString = date.toString();
-    //     console.log(inputDateString)
-    //     const inputDate = new Date(inputDateString);
-
-    //     const year = inputDate.getFullYear();
-    //     const month = inputDate.getMonth();
-    //     const day = inputDate.getDate();
-    //     const hours = inputDate.getHours();
-    //     const minutes = inputDate.getMinutes();
-    //     const seconds = inputDate.getSeconds();
-    //     const timezoneOffset = inputDate.getTimezoneOffset();
-
-    //     const utcDate = new Date(Date.UTC(year, month, day, hours, minutes - timezoneOffset, seconds));
-    //     console.log(utcDate);
-    //     const isoDateString = utcDate.toISOString();
-    //     const yourDate = parseISO(isoDateString);
-    //     console.log(yourDate)
-    //     if (isNaN(yourDate.getTime())) {
-    //         // วันที่ไม่ถูกต้อง
-    //         return;
-    //     }
-
-    //     const offset = yourDate.getTimezoneOffset()
-    //     const formattedDate = new Date(yourDate.getTime() - (offset * 60 * 1000))
-    //         .toISOString()
-    //         .split('T')[0]
-    //     setBirthday(formattedDate)
-    // }
-
-    // console.log(Birthday)
 
     return (
         <>
@@ -497,20 +464,7 @@ function AddStudent() {
                                     /> */}
                                     <DatePicker
                                         selected={Birthday}
-                                        // onChange={(date) => setBirthday(date)}
-                                        onChange={(date) => {
-                                            if (date != null && moment(date, "MM/DD/YYYY").isValid()) {
-                                                const defaultDate = new Date();
-                                                const selectedDate = moment(date, "MM/DD/YYYY").toDate();
-                                                if (!isNaN(selectedDate.getTime())) {
-                                                    setBirthday(moment(date || defaultDate).format("YYYY-MM-DD"));
-                                                } else {
-                                                    console.error("Invalid date:", date);
-                                                }
-                                            } else {
-                                                console.error("Invalid date:", date);
-                                            }
-                                        }}
+                                        onChange={date => setBirthday(date)}
                                         dateFormat="dd/MM/yyyy"
                                         placeholderText="dd/MM/yyyy"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"

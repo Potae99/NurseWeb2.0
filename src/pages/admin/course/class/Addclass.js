@@ -6,8 +6,9 @@ import LoadingPage from '../../../LoadingPage';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 function Addclass() {
     const [data, setData] = useState([]);
@@ -106,7 +107,7 @@ function Addclass() {
     const backToClassManageMent = () => {
         window.location.href = "/admin/class"
     }
-    
+
     const [teachersDataArray, setTeachersDataArray] = useState([]);
     const [studentDataArray, setStudentDataArray] = useState([]);
 
@@ -186,12 +187,14 @@ function Addclass() {
 
     const addclass = () => {
 
+        const formattedDateYear = moment(dateYear).format("YYYY-MM-DD");
+
         axios.post(process.env.REACT_APP_API_URL + "/class",
             {
                 class: {
                     courseID: courseID,
                     studyRoom: studyRoom,
-                    dateYear: dateYear,
+                    dateYear: formattedDateYear,
                     semester: semester,
                     syllabusID: syllabusID
                 },
@@ -223,7 +226,7 @@ function Addclass() {
                         class: {
                             courseID: courseID,
                             studyRoom: studyRoom,
-                            dateYear: dateYear,
+                            dateYear: formattedDateYear,
                             semester: semester,
                             syllabusID: syllabusID
                         },
@@ -351,15 +354,11 @@ function Addclass() {
                             <div >
                                 <p>ปีที่สร้าง</p>
                                 <div className=" flex justify-center ">
-                                    <input
-                                        onChange={(event) => {
-                                            setdateYear(event.target.value)
-
-                                        }}
-                                        type="date"
-                                        name="dateYear"
-                                        value={dateYear}
-                                        placeholder="ปีที่สร้าง"
+                                    <DatePicker
+                                        selected={dateYear}
+                                        onChange={date => setdateYear(date)}
+                                        dateFormat="dd/MM/yyyy"
+                                        placeholderText="dd/MM/yyyy"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                     />

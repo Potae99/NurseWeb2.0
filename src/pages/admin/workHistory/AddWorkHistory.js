@@ -4,6 +4,9 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import LoadingPage from '../../LoadingPage';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 function AddWorkHistory() {
 
@@ -48,11 +51,14 @@ function AddWorkHistory() {
 
     const addWorkHistory = () => {
 
+        const formattedStartWork = moment(startWork).format('YYYY-MM-DD');
+        const formattedEndWork = moment(endWork).format('YYYY-MM-DD');
+
         axios.post(process.env.REACT_APP_API_URL + "/student/workHistory", {
             userID: userID,
             workAddressName: workAddressName,
-            startWork: startWork,
-            endWork: endWork,
+            startWork: formattedStartWork,
+            endWork: formattedEndWork,
             department: department,
             houseNo: houseNo,
             postalCode: postalCode,
@@ -69,8 +75,8 @@ function AddWorkHistory() {
                 {
                     userID: userID,
                     workAddressName: workAddressName,
-                    startWork: startWork,
-                    endWork: endWork,
+                    startWork: formattedStartWork,
+                    endWork: formattedEndWork,
                     department: department,
                     houseNo: houseNo,
                     postalCode: postalCode,
@@ -93,7 +99,7 @@ function AddWorkHistory() {
                 title: "Add work History success",
                 showConfirmButton: false,
                 timer: 1000,
-              })
+            })
                 .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
         })
     }
@@ -192,6 +198,21 @@ function AddWorkHistory() {
         setSubDistrict(filterTambons[0].name_th)
     }
 
+    const handleStartWorkChange = (date) => {
+        setStartWork(date);
+        if (endWork && moment(date).isAfter(endWork)) {
+            setEndWork(date);
+        }
+    };
+
+    const handleEndWorkChange = (date) => {
+        if (moment(date).isBefore(startWork)) {
+            setEndWork(startWork);
+        } else {
+            setEndWork(date);
+        }
+    };
+
     return (
         <>
             {!completed ? (
@@ -208,29 +229,26 @@ function AddWorkHistory() {
                         <div className=' grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                             <div ><p>เริ่ม</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
-                                        defaultValue={startWork}
-                                        onChange={(event) => {
-                                            setStartWork(event.target.value)
-                                        }}
-                                        type="date"
-                                        name="startWork"
-                                        placeholder="เวลาเริ่มทำงาน"
-                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    <DatePicker
+                                        selected={startWork}
+                                        onChange={handleStartWorkChange}
+                                        dateFormat="dd/MM/yyyy"
+                                        placeholderText="dd/MM/yyyy"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        required
                                     />
                                 </div>
                             </div>
                             <div ><p>สิ้นสุด</p>
                                 <div className="mb-5 flex justify-center ">
-                                    <input
-                                        onChange={(event) => {
-                                            setEndWork(event.target.value)
-                                        }}
-                                        type="date"
-                                        defaultValue={endWork}
-                                        name="endWork"
-                                        placeholder="สิ้นสุดการทำงาน"
-                                        className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                    <DatePicker
+                                        selected={endWork}
+                                        onChange={handleEndWorkChange}
+                                        dateFormat="dd/MM/yyyy"
+                                        placeholderText="dd/MM/yyyy"
+                                        className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        minDate={startWork}
+                                        required
                                     />
                                 </div>
                             </div>

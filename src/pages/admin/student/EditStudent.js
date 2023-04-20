@@ -5,6 +5,9 @@ import StudentDetail from './StudentDetail';
 import { format } from 'date-fns';
 import Swal from 'sweetalert2';
 import LoadingPage from '../../LoadingPage';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
 function EditStudent() {
 
@@ -32,6 +35,8 @@ function EditStudent() {
     const [scholarship_name, setScholarship_name] = useState("");
     const [yearStartEnroll, setyearStartEnroll] = useState("");
     const [status, setStatus] = useState("");
+    const [defaultBirthday, setDefaultBirthday] = useState(null);
+    const [generation, setGeneration] = useState("");
 
     const [data, setData] = useState("");
 
@@ -57,13 +62,16 @@ function EditStudent() {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
+
+                const formattedBirthday = moment(Birthday).format('YYYY-MM-DD');
+
                 axios.put(process.env.REACT_APP_API_URL + "/student", {
                     userID: userID,
                     houseadd_province: houseadd_province,
                     houseadd_subDistrict: houseadd_subDistrict,
                     houseadd_road: houseadd_road,
                     houseadd_houseNo: houseadd_houseNo,
-                    Birthday: Birthday,
+                    Birthday: formattedBirthday,
                     IDline: IDline,
                     IDnumber: IDnumber,
                     email: email,
@@ -82,7 +90,8 @@ function EditStudent() {
                     studentID: studentID,
                     scholarship_name: scholarship_name,
                     yearStartEnroll: yearStartEnroll,
-                    status: status
+                    status: status,
+                    generation: generation
 
                 }).then(() => {
                     setData([
@@ -93,7 +102,7 @@ function EditStudent() {
                             houseadd_subDistrict: tambons,
                             houseadd_road: houseadd_road,
                             houseadd_houseNo: houseadd_houseNo,
-                            Birthday: Birthday,
+                            Birthday: formattedBirthday,
                             IDline: IDline,
                             IDnumber: IDnumber,
                             email: email,
@@ -112,15 +121,32 @@ function EditStudent() {
                             studentID: studentID,
                             scholarship_name: scholarship_name,
                             yearStartEnroll: yearStartEnroll,
-                            status: status
+                            status: status,
+                            generation: generation
                         }
                     ])
-                    Swal.fire('Saved!', '', 'success')
+                    // Swal.fire('Saved!', '', 'success')
+                    Swal.fire({
+                        icon: "success",
+                        title: "Saved!",
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
                         .then(() => { window.location.href = "/admin/student/detail/" + userID; })
 
                 })
+                    .catch(error => {
+                        console.log(error.request)
+                    })
+
             } else if (result.isDenied) {
-                Swal.fire('Changes are not saved', '', 'info')
+                // Swal.fire('Changes are not saved', '', 'info')
+                Swal.fire({
+                    icon: "info",
+                    title: "Changes are not saved",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
                     .then(() => { window.location.href = "/admin/student/detail/" + userID; })
 
             }
@@ -130,6 +156,10 @@ function EditStudent() {
     const fetchData = () => {
         axios.post(process.env.REACT_APP_API_URL + "/student/detail", { userID: userID })
             .then(res => {
+
+                // console.log(res.data.data.Birthday);
+
+                const defaultBirthday = moment(res.data.data.Birthday).toDate();
                 console.log(res.data);
 
                 if (res.data.error === true) {
@@ -143,7 +173,9 @@ function EditStudent() {
                 sethouseadd_subDistrict(res.data.data.houseadd_subDistrict);
                 sethouseadd_road(res.data.data.houseadd_road);
                 sethouseadd_houseNo(res.data.data.houseadd_houseNo);
-                setBirthday((format(new Date(res.data.data.Birthday), 'yyyy-MM-dd')));
+                // setBirthday((format(new Date(res.data.data.Birthday), 'yyyy-MM-dd')));
+                // setDefaultBirthday(defaultBirthday);
+                setBirthday(defaultBirthday);
                 setIDline(res.data.data.IDline);
                 setIDnumber(res.data.data.IDnumber);
                 setemail(res.data.data.email);
@@ -161,6 +193,7 @@ function EditStudent() {
                 setScholarship_name(res.data.data.scholarship_name);
                 setStatus(res.data.data.status);
                 setyearStartEnroll(res.data.data.yearStartEnroll);
+                setGeneration(res.data.data.generation);
                 setLoading(true);
 
                 setTimeout(() => {
@@ -282,6 +315,20 @@ function EditStudent() {
                                         />
                                     </div>
                                 </div>
+                                <div ><p>รุ่น</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            onChange={(event) => {
+                                                setGeneration(event.target.value)
+                                            }}
+                                            type="text"
+                                            defaultValue={generation}
+                                            name="generation"
+                                            placeholder="รุ่น"
+                                            className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        />
+                                    </div>
+                                </div>
                                 <div ><p>สถานะ</p>
                                     <div className="mb-5 flex justify-center ">
                                         <select
@@ -383,7 +430,7 @@ function EditStudent() {
                                 </div>
                                 <div ><p>วันเกิด</p>
                                     <div className="mb-5 flex justify-center ">
-                                        <input
+                                        {/* <input
                                             defaultValue={Birthday}
                                             onChange={(event) => {
                                                 setBirthday(event.target.value)
@@ -393,6 +440,14 @@ function EditStudent() {
                                             placeholder="วันเกิด"
                                             className="w-full rounded-md border border-black (condition) {
                     } bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                        /> */}
+                                        <DatePicker
+                                            selected={Birthday ? Birthday : defaultBirthday}
+                                            onChange={date => setBirthday(date)}
+                                            dateFormat="dd/MM/yyyy"
+                                            placeholderText="dd/MM/yyyy"
+                                            className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            required
                                         />
                                     </div>
                                 </div>
