@@ -11,24 +11,6 @@ function Chatgpt_import_excel() {
 
 
 
-
-
-  const list_allow_header = [
-    { name: "IDnumber", colNum: 0 },
-    { name: "username", colNum: 1 },
-    { name: "Name", colNum: 2 },
-    { name: "userPassword", colNum: 3 },
-    { name: "roleIDs", colNum: 4 },
-    { name: "phone", colNum: 5 },
-    { name: "gender", colNum: 6 },
-    // { name: "Test", colNum: 1 },
-  ];
-
-
-
-
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -39,48 +21,57 @@ function Chatgpt_import_excel() {
       const data = XLSX.utils.sheet_to_json(worksheet);
 
       const students = [];
+      // console.log(students)
+
       for (let row of data) {
         const student = {
-          yearStartEnroll: String(row[1]),
-          generation: String(row[2]),
-          Idnumber: (row[3]),
-          studentID: String(row[4]),
-          nameTH: String(row[5]),
-          nameENG: String(row[6]),
-          password: String(row[7]),
-          gender: String(row[8]),
-          Birthday: String(row[9]),
-          ethnicity: String(row[10]),
-          nationality: String(row[11]),
-          religion: String(row[12]),
-          houseadd_houseNo: String(row[13]),
-          houseadd_village: String(row[14]),
-          houseadd_road: String(row[15]),
-          houseadd_alley: String(row[16]),
-          houseadd_subDistrict: String(row[17]),
-          houseadd_district: String(row[18]),
-          houseadd_province: String(row[19]),
-          houseadd_postalCode: String(row[20]),
-          presentAddress: String(row[21]),
-          IDline: String(row[22]),
-          email: String(row[23]),
-          status: String(row[24]),
+          yearStartEnroll: row["ปีเข้าศึกษา"] ? row["ปีเข้าศึกษา"].toString() : "",
+          generation: row["รุ่น"] ? row["รุ่น"].toString() : "",
+          IDnumber: row["เลขประจำตัวประชาชน"] ? row["เลขประจำตัวประชาชน"].toString() : "",
+          studentID: row["รหัสนิสิต"] ? row["รหัสนิสิต"].toString() : "",
+          nameTH: row["ชื่อไทย"] ? row["ชื่อไทย"].toString() : "",
+          nameENG: row["ชื่ออังกฤษ"] ? row["ชื่ออังกฤษ"].toString() : "",
+          password: row["รหัสผ่าน"] ? row["รหัสผ่าน"].toString() : "",
+          gender: row["เพศ"] ? row["เพศ"].toString() : "",
+          Birthday: row["วันเกิด"] ? row["วันเกิด"].toString() : "",
+          ethnicity: row["เชื้อชาติ"] ? row["เชื้อชาติ"].toString() : "",
+          nationality: row["สัญชาติ"] ? row["สัญชาติ"].toString() : "",
+          religion: row["ศาสนา"] ? row["ศาสนา"].toString() : "",
+          houseadd_houseNo: row["บ้านเลขที่"] ? row["บ้านเลขที่"].toString() : "",
+          houseadd_village: row["หมู่"] ? row["หมู่"].toString() : "",
+          houseadd_road: row["ถนน"] ? row["ถนน"].toString() : "",
+          houseadd_alley: row["ตรอก"] ? row["ตรอก"].toString() : "",
+          houseadd_subDistrict: row["ตำบล/แขวง"] ? row["ตำบล/แขวง"].toString() : "",
+          houseadd_district: row["อำเภอ/เขต"] ? row["อำเภอ/เขต"].toString() : "",
+          houseadd_province: row["จังหวัด"] ? row["จังหวัด"].toString() : "",
+          houseadd_postalCode: row["ไปรษณีย์"] ? row["ไปรษณีย์"].toString() : "",
+          presentAddress: row["ที่อยู่ปัจจุบัน"] ? row["ที่อยู่ปัจจุบัน"].toString() : "",
+          IDline: row["Idline"] ? row["Idline"].toString() : "",
+          email: row["email"] ? row["email"].toString() : "",
+          status: row["สถานะ"] ? row["สถานะ"].toString() : "",
+          status: row["สถานะ"] ? row["สถานะ"].toString() : "",
+          scholarship_name: row["ทุน"] ? row["ทุน"].toString() : "",
+          phone: row["เบอร์"] ? row["เบอร์"].toString() : "",
+
         };
+        axios.post(process.env.REACT_APP_API_URL + "/student", student)
+          .then(response => {
+            console.log(response.data);
+            console.log(student);
+          })
+          .catch(error => {
+            console.error(error.response.data);
+
+            console.log(data);
+            console.log(student);
+          });
+
         console.log(student);
         students.push(student);
 
       }
 
-      axios.post(process.env.REACT_APP_API_URL + "/student", students)
-        .then(response => {
-          console.log(response.data);
-          console.log(students);
-        })
-        .catch(error => {
-          console.error(error.response.data);
 
-          console.log(data);
-        });
 
     };
     reader.readAsBinaryString(file);

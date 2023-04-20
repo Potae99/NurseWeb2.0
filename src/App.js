@@ -41,6 +41,7 @@ import Chart_bar from './components/chart/Chart_bar';
 
 import { Import_excel } from './pages/admin/excel/Import_excel';
 import Chatgpt_import_excel from './pages/admin/excel/Chatgpt_import_excel';
+import Chatgpt_import_excel2 from './pages/admin/excel/Chatgpt_import_excel2';
 import Data from './pages/admin/excel/Data';
 
 
@@ -74,6 +75,7 @@ import Credit from './pages/Credit';
 
 // user Token for authn
 import useToken from '../src/components/useToken';
+
 
 
 const router = [
@@ -368,6 +370,11 @@ const router = [
   {
     path: "/admin/Dataimport_excel",
     element: <Data />,
+    level: "admin"
+  },
+  {
+    path: "/admin/Gptimport_excel2",
+    element: <Chatgpt_import_excel2 />,
     level: "admin"
   },
 
