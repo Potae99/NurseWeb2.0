@@ -1,11 +1,21 @@
 import { useState } from 'react';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
+import { useEffect } from 'react';
+import LoadingPage from '../../LoadingPage';
+import Swal from 'sweetalert2';
 
 
 function Chatgpt_import_excel() {
   const [file, setFile] = useState(null);
- 
+  const [completed, setCompleted] = useState(undefined);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCompleted(true);
+    }, 2000);
+  })
+
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
@@ -56,6 +66,16 @@ function Chatgpt_import_excel() {
           .then(response => {
             console.log(response.data);
             console.log(student);
+
+            Swal.fire({
+              icon: "success",
+              title: "Import file success",
+              showConfirmButton: false,
+              timer: 1000,
+            })
+              .then(() => {
+                window.location.href = "/admin/home"; 
+              })
           })
           .catch(error => {
             console.error(error.response.data);
@@ -67,88 +87,96 @@ function Chatgpt_import_excel() {
         console.log(student);
         students.push(student);
         // window.location.href="/admin/home"
+
       }
     };
     reader.readAsBinaryString(file);
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex justify-center items-center">
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
-        <h1 className="text-2xl font-bold mb-4">Upload Excel File</h1>
-        <div className="mb-4">
-          <label htmlFor="file" className="block font-medium">Select an Excel file:</label>
-          <input type="file" id="file" name="file" className="mt-2" onChange={handleFileChange} />
-        </div>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload</button>
-      </form>
-      {/* <table>
-  <thead>
-    <tr>
-      <th>Year Start Enroll</th>
-      <th>Generation</th>
-      <th>ID Number</th>
-      <th>Student ID</th>
-      <th>Name TH</th>
-      <th>Name ENG</th>
-      <th>Password</th>
-      <th>Gender</th>
-      <th>Birthday</th>
-      <th>Ethnicity</th>
-      <th>Nationality</th>
-      <th>Religion</th>
-      <th>House/Building No.</th>
-      <th>Village</th>
-      <th>Road</th>
-      <th>Alley</th>
-      <th>Sub-district</th>
-      <th>District</th>
-      <th>Province</th>
-      <th>Postal Code</th>
-      <th>Present Address</th>
-      <th>ID Line</th>
-      <th>Email</th>
-      <th>Status</th>
-      <th>Scholarship Name</th>
-      <th>Phone</th>
-    </tr>
-  </thead>
-  <tbody>
-    {file.map((student) => (
-      <tr key={student}>
-        <td>{student.yearStartEnroll}</td>
-        <td>{student.generation}</td>
-        <td>{student.IDnumber}</td>
-        <td>{student.studentID}</td>
-        <td>{student.nameTH}</td>
-        <td>{student.nameENG}</td>
-        <td>{student.password}</td>
-        <td>{student.gender}</td>
-        <td>{student.Birthday}</td>
-        <td>{student.ethnicity}</td>
-        <td>{student.nationality}</td>
-        <td>{student.religion}</td>
-        <td>{student.houseadd_houseNo}</td>
-        <td>{student.houseadd_village}</td>
-        <td>{student.houseadd_road}</td>
-        <td>{student.houseadd_alley}</td>
-        <td>{student.houseadd_subDistrict}</td>
-        <td>{student.houseadd_district}</td>
-        <td>{student.houseadd_province}</td>
-        <td>{student.houseadd_postalCode}</td>
-        <td>{student.presentAddress}</td>
-        <td>{student.IDline}</td>
-        <td>{student.email}</td>
-        <td>{student.status}</td>
-        <td>{student.scholarship_name}</td>
-        <td>{student.phone}</td>
+    <>
+      {!completed ? (
+        <LoadingPage></LoadingPage>
+      ) : (
+        <div className="bg-gray-100 min-h-screen flex justify-center items-center">
+          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
+            <h1 className="text-2xl font-bold mb-4">Upload Excel File</h1>
+            <div className="mb-4">
+              <label htmlFor="file" className="block font-medium">Select an Excel file:</label>
+              <input type="file" id="file" name="file" className="mt-2" onChange={handleFileChange} />
+            </div>
+            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload</button>
+          </form>
+          {/* <table>
+    <thead>
+      <tr>
+        <th>Year Start Enroll</th>
+        <th>Generation</th>
+        <th>ID Number</th>
+        <th>Student ID</th>
+        <th>Name TH</th>
+        <th>Name ENG</th>
+        <th>Password</th>
+        <th>Gender</th>
+        <th>Birthday</th>
+        <th>Ethnicity</th>
+        <th>Nationality</th>
+        <th>Religion</th>
+        <th>House/Building No.</th>
+        <th>Village</th>
+        <th>Road</th>
+        <th>Alley</th>
+        <th>Sub-district</th>
+        <th>District</th>
+        <th>Province</th>
+        <th>Postal Code</th>
+        <th>Present Address</th>
+        <th>ID Line</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Scholarship Name</th>
+        <th>Phone</th>
       </tr>
-    ))}
-  </tbody>
-</table> */}
+    </thead>
+    <tbody>
+      {file.map((student) => (
+        <tr key={student}>
+          <td>{student.yearStartEnroll}</td>
+          <td>{student.generation}</td>
+          <td>{student.IDnumber}</td>
+          <td>{student.studentID}</td>
+          <td>{student.nameTH}</td>
+          <td>{student.nameENG}</td>
+          <td>{student.password}</td>
+          <td>{student.gender}</td>
+          <td>{student.Birthday}</td>
+          <td>{student.ethnicity}</td>
+          <td>{student.nationality}</td>
+          <td>{student.religion}</td>
+          <td>{student.houseadd_houseNo}</td>
+          <td>{student.houseadd_village}</td>
+          <td>{student.houseadd_road}</td>
+          <td>{student.houseadd_alley}</td>
+          <td>{student.houseadd_subDistrict}</td>
+          <td>{student.houseadd_district}</td>
+          <td>{student.houseadd_province}</td>
+          <td>{student.houseadd_postalCode}</td>
+          <td>{student.presentAddress}</td>
+          <td>{student.IDline}</td>
+          <td>{student.email}</td>
+          <td>{student.status}</td>
+          <td>{student.scholarship_name}</td>
+          <td>{student.phone}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table> */}
 
 
-    </div>
+        </div>
+      )}
+    </>
+
   );
 }
 

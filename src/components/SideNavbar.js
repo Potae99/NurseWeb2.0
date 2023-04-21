@@ -170,7 +170,7 @@ function SideNavbar({ session }) {
 
             );
           })}
-          <div className=" text-stone-300 text-xs  ml-20 items-center  bottom-1">
+          <div className=" text-stone-300 text-xs  ml-20 items-center  bottom-1 mt-16 ">
             <a className="  hover:text-yellow-300 " href="/credit">
               ผู้จัดทำ
             </a>

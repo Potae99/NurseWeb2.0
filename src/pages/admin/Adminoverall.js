@@ -3,6 +3,8 @@ import React from 'react'
 import Chart_bar from '../../components/chart/Chart_bar'
 import Chart_pie from '../../components/chart/Chart_pie'
 import Chart_pie2 from '../../components/chart/Chart_pie2'
+import Chart_pie3 from '../../components/chart/Chart_pie3'
+import Chart_pie4 from '../../components/chart/Chart_pie4'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import LoadingPage from "../LoadingPage"
@@ -78,6 +80,14 @@ function Adminoverall() {
         <div className='w-1/2 h-1/2 m-auto'>
         <Chart_pie2/>
         </div>
+        <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละรุ่น</p>
+        <div className='w-1/2 h-1/2 m-auto'>
+        <Chart_pie3/>
+        </div>
+        {/* <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในการมีงานทำ</p>
+        <div className='w-1/2 h-1/2 m-auto'>
+        <Chart_pie4/>
+        </div> */}
       </div>
         )}
 

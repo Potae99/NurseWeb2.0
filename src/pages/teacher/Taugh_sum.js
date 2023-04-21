@@ -92,11 +92,11 @@ function Taugh_sum() {
       {!completed ? (
         <LoadingPage></LoadingPage>
       ) : (
-        <div>
+        <div className=' text-black'>
           <div className=' text-center text-xl'>
             <p>แบบประเมินรายวิชาภาคทฤษฎี</p>
             <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา {Dateget}</p>
-            <p>รายวิชา{Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
+            <p>รายวิชา {Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
           </div>
       
           <div className=' flex flex-col space-y-3 mt-3'>

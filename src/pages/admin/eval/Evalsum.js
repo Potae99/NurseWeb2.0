@@ -59,10 +59,10 @@ function Evalsum() {
 
 
 
-    axios.get(process.env.REACT_APP_API_URL + "/eval/class/average", { params: { classID: classID } })
+    axios.get(process.env.REACT_APP_API_URL + "/eval/class/stat", { params: { classID: classID } })
       .then(res => {
         // const persons = res.data;
-        //this.setState({ persons });
+        //this.setState({ persons });//
         console.log(res.data);
 
         if (res.data.error === true) {
@@ -72,23 +72,24 @@ function Evalsum() {
 
           return;
         }
-        setevalsum(res.data.data[0]);
+        setevalsum(res.data.data.average[0]);
+        seteval_sd(res.data.data.sd[0]);
       });
-    axios.get(process.env.REACT_APP_API_URL + "/eval/class/sd", { params: { classID: classID } })
-      .then(res => {
-        // const persons = res.data;
-        //this.setState({ persons });
-        console.log(res.data);
+  //   axios.get(process.env.REACT_APP_API_URL + "/eval/class/sd", { params: { classID: classID } })
+  //     .then(res => {
+  //       // const persons = res.data;
+  //       //this.setState({ persons });
+  //       console.log(res.data);
 
-        if (res.data.error === true) {
-          console.log(res.data)
-          console.log("ERROR FOUND WHEN GET DATA FROM API ");
+  //       if (res.data.error === true) {
+  //         console.log(res.data)
+  //         console.log("ERROR FOUND WHEN GET DATA FROM API ");
 
 
-          return;
-        }
-        seteval_sd(res.data.data[0]);
-      });
+  //         return;
+  //       }
+  //       seteval_sd(res.data.data[0]);
+  //     });
   }
   useEffect(() => {
     setTimeout(() => {
