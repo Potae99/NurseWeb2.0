@@ -55,7 +55,7 @@ function Chart_bar() {
         ],
     };
     return (
-        <div className=' w-full h-[500px]'>
+        <div className='' >
             <Bar data={data} />
         </div>
 

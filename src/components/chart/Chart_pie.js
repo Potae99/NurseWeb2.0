@@ -57,7 +57,7 @@ function Chart_pie() {
         ],
     };
     return (
-        <div className=' w-full h-[500px]'>
+        <div className=''>
             <Doughnut data={data} />
         </div>
 

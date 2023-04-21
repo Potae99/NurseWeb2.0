@@ -1,7 +1,5 @@
 import React from 'react'
 
-import Admin_sum_province from '../../components/Table/Admin_sum_province'
-import Admin_sum_scolar from '../../components/Table/Admin_sum_scolar'
 import Chart_bar from '../../components/chart/Chart_bar'
 import Chart_pie from '../../components/chart/Chart_pie'
 import Chart_pie2 from '../../components/chart/Chart_pie2'
@@ -9,12 +7,12 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import LoadingPage from "../LoadingPage"
 /////chart
-import Chart from "chart.js/auto";
-import { Bar } from "react-chartjs-2";
-import { CategoryScale } from "chart.js";
+// import Chart from "chart.js/auto";
+// import { Bar } from "react-chartjs-2";
+// import { CategoryScale } from "chart.js";
 // import { Data } from "./Data";
 
-Chart.register(CategoryScale);
+// Chart.register(CategoryScale);
 
 function Adminoverall() {
 
@@ -22,10 +20,10 @@ function Adminoverall() {
   // data: Data.map((data) => data.userGain),
 
   const [chartData, setChartData] = useState({
-    labels: [2023,2024,2025],
+    labels: [2023, 2024, 2025],
     datasets: [{
       label: 'My First Dataset',
-      data: [10,30,50],
+      data: [10, 30, 50],
       backgroundColor: [
         // 'rgba(255, 99, 132, 0.2)',
         'rgba(255, 159, 64, 0.2)',
@@ -66,46 +64,21 @@ function Adminoverall() {
         <LoadingPage></LoadingPage>
       ) :
         (
-          <div>
-            {/* <div className="w-[500px] h-[500px]">
-              <h2 style={{ textAlign: "center" }}>Line Chart</h2>
-              <Bar
-                data={chartData}
-                options={{
-                  plugins: {
-                    title: {
-                      display: true,
-                      text: "Users Gained between 2016-2020"
-                    },
-                    legend: {
-                      display: false
-                    }
-                  }
-                }}
-              />
-            </div> */}
-            <div className=' text-center text-4xl'>
-              <p>ภาพรวมนิสิต</p>
-            </div>
-            <div>
-            <p className=' te'>จำนวนนิสิตในแต่ละปีการศึกษา</p>
-            </div>
-            <div className='mt-5 grid place-content-center '>
-              <Chart_bar/>
-            </div>
-            <div>
-            <p>จำนวนนิสิตในแต่ละจังหวัด</p>
-            </div>
-            <div className='mt-3 grid place-content-center '>
-              <Chart_pie />
-            </div>
-            <div>
-            <p>จำนวนนิสิตในปีแต่ละทุนการศึกษา</p>
-            </div>
-            <div className='mt-3   grid place-content-center'>
-              <Chart_pie2/>
-            </div>
-          </div>
+          <div className=' flex flex-col h-full'>
+        <h1 className=' text-black text-4xl text-center mt-10'>จัดการผู้ใช้</h1>
+        <p className=' mt-3 m-auto mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละปีการศึกษา</p>
+        <div className='w-1/2 h-1/2 m-auto'>
+        <Chart_bar />
+        </div>
+        <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละจังหวัด</p>
+        <div className='w-1/2 h-1/2 m-auto'>
+        <Chart_pie />
+        </div>
+        <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละทุนการศึกษา</p>
+        <div className='w-1/2 h-1/2 m-auto'>
+        <Chart_pie2/>
+        </div>
+      </div>
         )}
 
     </>
