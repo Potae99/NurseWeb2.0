@@ -34,11 +34,11 @@ function Addclass() {
     const fetchData = () => {
         axios.get(process.env.REACT_APP_API_URL + '/course')
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
 
                 if (res.data.error === true) {
-                    console.log(res.data)
-                    console.log("ERROR FOUND WHEN GET DATA FROM API")
+                    // console.log(res.data)
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API")
                     return;
                 }
                 setCourseList(res.data.data);
@@ -49,52 +49,52 @@ function Addclass() {
                 }, 1000);
             })
             .catch(error => {
-                console.log(error.res)
+                // console.log(error.res)
             })
         axios.get(process.env.REACT_APP_API_URL + "/teacher/list")
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data);
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setTeacherList(res.data.data);
             })
             .catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             });
         axios.get(process.env.REACT_APP_API_URL + "/student/list", { params: { status: 1 } })
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data);
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setStudentList(res.data.data);
             })
             .catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             });
     }
 
     const onchangeCourse = (event) => {
         axios.get(process.env.REACT_APP_API_URL + "/course/allCourseInSyllabus", { params: { courseID: event.target.value } })
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data);
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setSyllabusList(res.data.data);
             })
             .catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             })
     }
 
@@ -254,7 +254,7 @@ function Addclass() {
 
             })
             .catch(error => {
-                console.log(error.request)
+                // console.log(error.request)
             })
     }
     // const teacherData = getTeacherData();

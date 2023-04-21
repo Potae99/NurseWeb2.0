@@ -136,7 +136,7 @@ function EditStudent() {
 
                 })
                     .catch(error => {
-                        console.log(error.request)
+                        // console.log(error.request)
                     })
 
             } else if (result.isDenied) {
@@ -160,11 +160,11 @@ function EditStudent() {
                 // console.log(res.data.data.Birthday);
 
                 const defaultBirthday = moment(res.data.data.Birthday).toDate();
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data)
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data)
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setnameTH(res.data.data.nameTH);
@@ -201,16 +201,16 @@ function EditStudent() {
                 }, 1000);
 
             }).catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             });
 
         axios.get(process.env.REACT_APP_API_URL + "/location")
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
 
                 if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data);
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setProvince(res.data.data);
@@ -221,16 +221,16 @@ function EditStudent() {
 
         axios.get(process.env.REACT_APP_API_URL + "/student/scholarship")
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
 
                 if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data);
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                 }
                 setScholarship(res.data.data);
             })
             .catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             })
     }
 
@@ -248,33 +248,33 @@ function EditStudent() {
     const onchangeProvince = (event) => {
         axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: event.target.value } })
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data);
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setAmphures(res.data.data);
             })
             .catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             });
     }
 
     const onchangeAmphures = (event) => {
         axios.get(process.env.REACT_APP_API_URL + "/location/tambons", { params: { amphure_id: event.target.value } })
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
 
                 if (res.data.error === true) {
-                    console(res.data);
-                    console("ERROR FOUND WHEN GET DATA FROM API");
+                    // console(res.data);
+                    // console("ERROR FOUND WHEN GET DATA FROM API");
                 }
                 setTambons(res.data.data);
             })
             .catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             });
     }
 

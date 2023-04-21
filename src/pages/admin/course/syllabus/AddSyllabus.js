@@ -67,7 +67,7 @@ function AddSyllabus() {
                 .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus"; })
         })
             .catch(error => {
-                console.log(error.request)
+                // console.log(error.request)
             })
     }
 

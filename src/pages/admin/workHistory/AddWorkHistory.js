@@ -108,11 +108,11 @@ function AddWorkHistory() {
 
         axios.post(process.env.REACT_APP_API_URL + "/student/detail", { userID: userID })
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data)
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data)
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setnameTH(res.data.data.nameTH);
@@ -123,22 +123,22 @@ function AddWorkHistory() {
                 }, 1000);
 
             }).catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             });
 
         axios.get(process.env.REACT_APP_API_URL + "/location")
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data);
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setProvinceApi(res.data.data);
             })
             .catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             })
     }
 
@@ -155,34 +155,34 @@ function AddWorkHistory() {
     const onchangeProvince = (event) => {
         axios.get(process.env.REACT_APP_API_URL + "/location/amphures", { params: { province_id: event.target.value } })
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data);
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setAmphures(res.data.data);
             })
             .catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             })
     }
 
     const onchangeAmphures = (event) => {
         axios.get(process.env.REACT_APP_API_URL + "/location/tambons", { params: { amphure_id: event.target.value } })
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data);
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data);
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setTambons(res.data.data);
             })
             .catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             })
     }
 

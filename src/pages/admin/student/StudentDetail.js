@@ -65,7 +65,7 @@ function StudentDetail() {
 
                         }).catch(function (error) {
                             if (error.response) {
-                                console.log(error.response);
+                                // console.log(error.response);
                             }
                         });
                 }
@@ -79,11 +79,11 @@ function StudentDetail() {
 
         axios.post(process.env.REACT_APP_API_URL + "/student/detail", { userID: userID })
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data)
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data)
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setData(res.data.data);
@@ -94,22 +94,22 @@ function StudentDetail() {
                 }, 1000);
 
             }).catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             });
 
         axios.get(process.env.REACT_APP_API_URL + "/student/scholarship")
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
 
                 if (res.data.error === true) {
-                    console.log(res.data)
-                    console.log("ERROR FOUND WHEN GET DATA FROM API");
+                    // console.log(res.data)
+                    // console.log("ERROR FOUND WHEN GET DATA FROM API");
                     return;
                 }
                 setScholarship(res.data.data);
 
             }).catch(error => {
-                console.log(error.res);
+                // console.log(error.res);
             });
     }
 
@@ -132,7 +132,7 @@ function StudentDetail() {
 
     }, [])
 
-    console.log(data)
+    // console.log(data)
 
     return (
         <>

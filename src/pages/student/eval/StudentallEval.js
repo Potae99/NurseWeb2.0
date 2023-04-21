@@ -25,11 +25,11 @@ function StudentallEval() {
   const fetchData = () => {
     axios.get(process.env.REACT_APP_API_URL + "/eval/class/info", { params: { userID: token.userID } })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
 
         if (res.data.error === true) {
-          console.log(res.data)
-          console.log("ERROR FOUND WHEN GET DATA FROM API");
+          // console.log(res.data)
+          // console.log("ERROR FOUND WHEN GET DATA FROM API");
           return;
         }
         setData(res.data.data);
@@ -38,22 +38,22 @@ function StudentallEval() {
         }, 1000);
 
       }).catch(error => {
-        console.log(error.res);
+        // console.log(error.res);
       });
 
     axios.get(process.env.REACT_APP_API_URL + "/eval/taugh/info", { params: { userID: token.userID } })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
 
         if (res.data.error === true) {
-          console.log(res.data)
-          console.log("ERROR FOUND WHEN GET DATA FROM API");
+          // console.log(res.data)
+          // console.log("ERROR FOUND WHEN GET DATA FROM API");
           return;
         }
         setTaugh(res.data.data);
 
       }).catch(error => {
-        console.log(error.res);
+        // console.log(error.res);
       });
   }
 
@@ -90,7 +90,7 @@ function StudentallEval() {
     }, 2000);
   }, []);
 
-  console.log(token.userID)
+  // console.log(token.userID)
   return (
     <>
       {!completed ? (

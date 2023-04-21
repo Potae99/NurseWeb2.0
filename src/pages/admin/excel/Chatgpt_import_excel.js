@@ -16,6 +16,10 @@ function Chatgpt_import_excel() {
     }, 2000);
   })
 
+  const google_sheet =() =>{
+    window.location.href="https://docs.google.com/spreadsheets/d/172IqEqIGXSyNj9NzriwOdKPxKQy_9q4sNgwZYl2v_R0/edit?usp=sharing"
+  }
+
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
@@ -64,9 +68,8 @@ function Chatgpt_import_excel() {
         };
         axios.post(process.env.REACT_APP_API_URL + "/student", student)
           .then(response => {
-            console.log(response.data);
-            console.log(student);
-
+            // console.log(response.data);
+            // console.log(student);
             Swal.fire({
               icon: "success",
               title: "Import file success",
@@ -78,13 +81,18 @@ function Chatgpt_import_excel() {
               })
           })
           .catch(error => {
-            console.error(error.response.data);
-
-            console.log(data);
-            console.log(student);
+            Swal.fire({
+              icon: "error",
+              title: "ข้อมูลไม่ถูกต้อง โปรดตรวจสอบข้อมูล",
+              showConfirmButton: false,
+              timer: 1000,
+            })
+            // console.error(error.response.data);
+            // console.log(data);
+            // console.log(student);
           });
 
-        console.log(student);
+        // console.log(student);
         students.push(student);
         // window.location.href="/admin/home"
 
@@ -98,15 +106,21 @@ function Chatgpt_import_excel() {
       {!completed ? (
         <LoadingPage></LoadingPage>
       ) : (
-        <div className="bg-gray-100 min-h-screen flex justify-center items-center">
+        <div className="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
           <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
-            <h1 className="text-2xl font-bold mb-4">Upload Excel File</h1>
+            <h1 className="text-2xl font-bold mb-4">อัปโหลดฟอร์มข้อมูลนิสิต</h1>
             <div className="mb-4">
-              <label htmlFor="file" className="block font-medium">Select an Excel file:</label>
+              <label htmlFor="file" className="block font-medium">เลือกไฟล์ excel:</label>
               <input type="file" id="file" name="file" className="mt-2" onChange={handleFileChange} />
             </div>
             <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload</button>
+            <button onClick={google_sheet}  className=" ml-3 bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">ดาวน์โหลดฟอร์ม</button>
           </form>
+          <div className=' mt-3 text-red-600'>
+            <p>1.ห้ามใส่ข้อมูลนักเรียนซ้ำกัน(นักเรียน 1 คน เพิ่มได้ 1 ครั้ง)</p>
+            <p>2.ช่องวันเกิด****ตัวอย่างข้อมูล เช่นเกิดวันที่ 9 เดือน 9 ปี 2002 ให้กรอก 2002-09-09   *****</p>
+            <p>3.ช่องสถานะ *** ให้ใส่ 1 คือ กำลังศึกษา / ใส่ 0 คือ จบแล้ว  ****</p>
+          </div>
           {/* <table>
     <thead>
       <tr>

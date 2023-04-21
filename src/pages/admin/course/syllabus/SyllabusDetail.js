@@ -65,7 +65,7 @@ function SyllabusDetail() {
 
             }).catch(function (error) {
               if (error.response) {
-                console.log(error.response);
+                // console.log(error.response);
               }
             });
         }
@@ -111,11 +111,11 @@ function SyllabusDetail() {
 
     axios.get(process.env.REACT_APP_API_URL + "/course/syllabus", { params: { syllabusID: syllabusID } })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
 
         if (res.data.error === true) {
-          console.log(res.data)
-          console.log("ERROR FOUND WHEN GET DATA FROM API");
+          // console.log(res.data)
+          // console.log("ERROR FOUND WHEN GET DATA FROM API");
           return;
         }
         setData(res.data.data.results);
@@ -128,22 +128,22 @@ function SyllabusDetail() {
 
 
       }).catch(error => {
-        console.log(error.res);
+        // console.log(error.res);
       });
 
     axios.get(process.env.REACT_APP_API_URL + "/course")
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
 
         if (res.data.error === true) {
-          console.log(res.data);
-          console.log("ERROR FOUND WHEN GET DATA FROM API");
+          // console.log(res.data);
+          // console.log("ERROR FOUND WHEN GET DATA FROM API");
           return;
         }
         setCourse(res.data.data);
       })
       .catch(error => {
-        console.log(error.res);
+        // console.log(error.res);
       });
   }
   useEffect(() => {

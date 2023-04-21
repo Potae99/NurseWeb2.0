@@ -9,17 +9,17 @@ function CategoryDetail() {
   const fetchData = () => {
     axios.get(process.env.REACT_APP_API_URL + "/course/category")
     .then( res => {
-      console.log(res.data);
+      // console.log(res.data);
 
       if (res.data.error === true){
-        console.log(res.data);
-        console.log("ERROR FOUND WHEN GET DATA FROM API");
+        // console.log(res.data);
+        // console.log("ERROR FOUND WHEN GET DATA FROM API");
         return;
       }
       setData(res.data.data)
     })
     .catch( error => {
-      console.log(error.res);
+      // console.log(error.res);
     });
   }
 
@@ -27,7 +27,7 @@ function CategoryDetail() {
     fetchData();
   },[])
 
-  console.log(data)
+  // console.log(data)
 
   return (
     <div className=' text-black bg-white min-h-screen'>

@@ -114,7 +114,7 @@ function Classdetail() {
 
             }).catch(function (error) {
               if (error.response) {
-                console.log(error.response);
+                // console.log(error.response);
               }
             });
         }
@@ -149,7 +149,7 @@ function Classdetail() {
 
             }).catch(function (error) {
               if (error.response) {
-                console.log(error.response);
+                // console.log(error.response);
               }
             });
         }
@@ -163,11 +163,11 @@ function Classdetail() {
 
     axios.get(process.env.REACT_APP_API_URL + "/class", { params: { classID: classID } })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
 
         if (res.data.error === true) {
-          console.log(res.data)
-          console.log("ERROR FOUND WHEN GET DATA FROM API");
+          // console.log(res.data)
+          // console.log("ERROR FOUND WHEN GET DATA FROM API");
           return;
         }
         setData(res.data.data.class);
@@ -182,37 +182,37 @@ function Classdetail() {
 
 
       }).catch(error => {
-        console.log(error.res);
+        // console.log(error.res);
       });
 
     axios.get(process.env.REACT_APP_API_URL + "/teacher/list")
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
 
         if (res.data.error === true) {
-          console.log(res.data);
-          console.log("ERROR FOUND WHEN GET DATA FROM API");
+          // console.log(res.data);
+          // console.log("ERROR FOUND WHEN GET DATA FROM API");
           return;
         }
         setTeacherList(res.data.data);
       })
       .catch(error => {
-        console.log(error.res);
+        // console.log(error.res);
       });
 
     axios.get(process.env.REACT_APP_API_URL + "/student/list", { params: { status: 1 } })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
 
         if (res.data.error === true) {
-          console.log(res.data);
-          console.log("ERROR FOUND WHEN GET DATA FROM API");
+          // console.log(res.data);
+          // console.log("ERROR FOUND WHEN GET DATA FROM API");
           return;
         }
         setStudentList(res.data.data);
       })
       .catch(error => {
-        console.log(error.res);
+        // console.log(error.res);
       })
   }
   useEffect(() => {

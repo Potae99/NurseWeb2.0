@@ -223,7 +223,7 @@ function StudentevalCourse() {
 
         })
         .catch( error => {
-            console.log(error.request);
+            // console.log(error.request);
         })
     }
 

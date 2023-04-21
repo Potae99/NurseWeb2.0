@@ -84,10 +84,10 @@ function Adminoverall() {
         <div className='w-1/2 h-1/2 m-auto'>
         <Chart_pie3/>
         </div>
-        {/* <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในการมีงานทำ</p>
-        <div className='w-1/2 h-1/2 m-auto'>
+        <p className=' m-auto mt-5 mb-1 ml-2 text-black'>ภาพรวมนิสิตในการมีงานทำ</p>
+        <div className='mt-5'>
         <Chart_pie4/>
-        </div> */}
+        </div>
       </div>
         )}
 

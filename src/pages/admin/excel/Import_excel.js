@@ -23,7 +23,7 @@ export const Import_excel = () => {
         const jsonData = XLSX.utils.sheet_to_json(workSheet);
 
 
-        console.log(jsonData);
+        // console.log(jsonData);
     };
 
 

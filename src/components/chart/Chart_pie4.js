@@ -4,11 +4,7 @@ import React, { useState, useEffect } from 'react'
 
 
 ////chart
-import Chart from "chart.js/auto";
-import { Pie } from "react-chartjs-2";
-import { CategoryScale } from "chart.js";
 
-Chart.register(CategoryScale);
 
 
 
@@ -37,27 +33,28 @@ function Chart_pie4() {
         }
         fetchData();
     }, [])
-    const labels = adminlist.map((item) => item.all);
-    const data = {
-        labels: labels,
-        datasets: [
-            {
-                label: "จำนวนนิสิตในจังหวัด",
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
-                    'rgba(255, 205, 86, 0.5)',
-                    'rgba(75, 213, 22, 0.46)'
-                ],
 
-                borderColor: "rgb(255, 99, 132,0.2)",
-                data: adminlist.map((item) => item.count),
-            },
-        ],
-    };
+
     return (
         <div className=''>
-            <Pie data={data} />
+            <div className="stats shadow w-full   bg-gray-100 hover:bg-gray-300 ">
+
+                <div className="stat place-items-center">
+                    <div className="stat-title text-black ">เปอร์เซนการมีงานทำ</div>
+                    <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (adminlist.percent)  }}>{adminlist.percent}</div>
+                </div>
+
+                <div className="stat place-items-center">
+                    <div className="stat-title text-black">จำนวนนิสิตทั้งหมด</div>
+                    <div className="stat-value text-secondary">{adminlist.all}</div>
+                </div>
+
+                <div className="stat place-items-center">
+                    <div className="stat-title text-black">จำนวนนิสิตที่มีงานทำ</div>
+                    <div className="stat-value">{adminlist.count}</div>
+
+                </div>
+            </div>
         </div>
 
     )
