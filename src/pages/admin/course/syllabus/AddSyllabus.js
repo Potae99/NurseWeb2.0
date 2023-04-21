@@ -14,6 +14,7 @@ function AddSyllabus() {
     const [endUse, setendUse] = useState("");
     const [detail, setdetail] = useState("");
     const [syllabus_Path, setSyllabus_Path] = useState(null);
+    const [file, setFile] = useState(null);
 
     const [data, setData] = useState([]);
 
@@ -142,36 +143,56 @@ function AddSyllabus() {
 
     // }
 
+    // const handleFileChange = (event) => {
+    //     const file = event.target.files[0];
+    //     const fileType = file.type.split('/')[1];
+    //     const date = new Date();
+    //     const dateString = `${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`;
+    //     const newName = `${dateString}_${fileType}`;
+    //     const syllabusFolder = 'Syllabus';
+    //     const uploadFolder = event.target.value.split('\\').pop().split('/').pop();
+
+    //     // แก้ไขชื่อไฟล์เดิมเพื่อเปลี่ยนเป็นชื่อใหม่
+    //     file.name = newName;
+    //     // setSyllabus_Path(newName);
+
+    //     // ย้ายไฟล์ไปยัง folder Syllabus
+    //     const syllabusPath = `${syllabusFolder}/${newName}`;
+    //     const uploadPath = `${uploadFolder}/${newName}`;
+    //     const fileReader = new FileReader();
+    //     fileReader.readAsArrayBuffer(file);
+    //     fileReader.onloadend = function () {
+    //         const arrayBuffer = fileReader.result;
+    //         const blob = new Blob([arrayBuffer], { type: fileType });
+    //         const formData = new FormData();
+    //         formData.append('file', blob, newName);
+    //         // ส่งไฟล์ไปยัง backend หรือ API สำหรับบันทึกไฟล์ลง server
+    //         // และเรียกฟังก์ชั่นสำหรับสร้างไฟล์ใน folder Syllabus
+    //         // uploadFile(formData, syllabusPath);
+    //         // และเรียกฟังก์ชั่นสำหรับลบไฟล์ใน folder uploads
+    //         // deleteFile(uploadPath);
+    //     }
+    // }
+
     const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        const fileType = file.type.split('/')[1];
-        const date = new Date();
-        const dateString = `${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`;
-        const newName = `${dateString}_${fileType}`;
-        const syllabusFolder = 'Syllabus';
-        const uploadFolder = event.target.value.split('\\').pop().split('/').pop();
+        setFile(event.target.files[0]);
+    };
 
-        // แก้ไขชื่อไฟล์เดิมเพื่อเปลี่ยนเป็นชื่อใหม่
-        file.name = newName;
-        // setSyllabus_Path(newName);
+    const onSubmit = (event) => {
+        event.preventDefault();
 
-        // ย้ายไฟล์ไปยัง folder Syllabus
-        const syllabusPath = `${syllabusFolder}/${newName}`;
-        const uploadPath = `${uploadFolder}/${newName}`;
-        const fileReader = new FileReader();
-        fileReader.readAsArrayBuffer(file);
-        fileReader.onloadend = function () {
-            const arrayBuffer = fileReader.result;
-            const blob = new Blob([arrayBuffer], { type: fileType });
-            const formData = new FormData();
-            formData.append('file', blob, newName);
-            // ส่งไฟล์ไปยัง backend หรือ API สำหรับบันทึกไฟล์ลง server
-            // และเรียกฟังก์ชั่นสำหรับสร้างไฟล์ใน folder Syllabus
-            // uploadFile(formData, syllabusPath);
-            // และเรียกฟังก์ชั่นสำหรับลบไฟล์ใน folder uploads
-            // deleteFile(uploadPath);
-        }
-    }
+        const data = new FormData();
+
+        data.append('file', file);
+
+        axios.post("//localhost:8000/upload", data)
+        .then((e) => {
+            console.log("Success");
+        })
+        .catch((e) => {
+            console.error("Error", e);
+        })
+    };
 
     // console.log(syllabus_Path)
 
@@ -293,6 +314,17 @@ function AddSyllabus() {
                                     className="w-full rounded-md border border-while  bg-white border-black py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                     required
                                 />
+                            </div>
+                            <div className=' grid place-items-center'>
+                                <button onClick={onSubmit} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                                        <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">Submit File</span>
+                                    <span className="relative invisible">Button Text</span>
+                                </button>
                             </div>
                         </div>
                     </div>
