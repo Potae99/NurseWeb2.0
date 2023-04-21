@@ -421,7 +421,7 @@ function AddStudent() {
                                         onChange={(event) => {
                                             setpassword(event.target.value)
                                         }}
-                                        type="text"
+                                        type="password"
                                         name="Password"
                                         placeholder="Password"
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
@@ -478,7 +478,7 @@ function AddStudent() {
                                         onChange={(event) => {
                                             setemail(event.target.value)
                                         }}
-                                        type="text"
+                                        type="email"
                                         name="Email"
                                         placeholder="Email"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"

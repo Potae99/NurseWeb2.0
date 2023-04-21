@@ -222,6 +222,9 @@ function StudentevalCourse() {
             window.location.href = "/student/eval/all"
 
         })
+        .catch( error => {
+            console.log(error.request);
+        })
     }
 
     // console.log(section1_1)

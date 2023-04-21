@@ -18,7 +18,7 @@ function Chart_pie2() {
     useEffect(() => {
         const fetchData = () => {
 
-            axios.get(process.env.REACT_APP_API_URL + "/summary/student/scholarship/count")
+            axios.get(process.env.REACT_APP_API_URL + "/summary/student/scholarship")
                 .then(res => {
                     // const persons = res.data;
                     //this.setState({ persons });

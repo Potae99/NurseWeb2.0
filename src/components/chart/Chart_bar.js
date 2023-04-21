@@ -18,7 +18,7 @@ function Chart_bar() {
     useEffect(() => {
         const fetchData = () => {
 
-            axios.get(process.env.REACT_APP_API_URL + "/summary/student/year/count")
+            axios.get(process.env.REACT_APP_API_URL + "/summary/student/year")
                 .then(res => {
                     // const persons = res.data;
                     //this.setState({ persons });
