@@ -20,14 +20,14 @@ function Curriculumtable() {
 
           if (res.data.error === true) {
             // console.log(res.data)
-            console.log("ERROR FOUND WHEN GET DATA FROM API ");
+            // console.log("ERROR FOUND WHEN GET DATA FROM API ");
             return;
           }
           setSyllabus(res.data.data);
 
         })
         .catch(error => {
-          console.log(error.res)
+          // console.log(error.res)
         })
     }
     fetchData();
@@ -55,8 +55,8 @@ function Curriculumtable() {
             <div className=' ml-3'
               content="View Admin"
               color="error"
-              onClick={() => console.log("View Admin", _.syllabusID
-              )}>
+              /*onClick={() => console.log("View Admin", _.syllabusID
+              )}*/>
               <button onClick={() => GotoAdminDetail(_.syllabusID
               )}>
                 <svg width="20" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg">

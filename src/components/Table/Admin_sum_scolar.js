@@ -30,11 +30,11 @@ function Admin_sum_scolar() {
         .then(res => {
           // const persons = res.data;
           //this.setState({ persons });
-          console.log(res.data);
+          // console.log(res.data);
 
           if (res.data.error === true) {
-            console.log(res.data)
-            console.log("ERROR FOUND WHEN GET DATA FROM API ");
+            // console.log(res.data)
+            // console.log("ERROR FOUND WHEN GET DATA FROM API ");
 
 
             return;

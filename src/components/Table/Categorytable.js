@@ -20,8 +20,8 @@ function Categorytable() {
                     //   console.log(res.data);
 
                     if (res.data.error === true) {
-                        // console.log(res.data);
-                        console.log("ERROR FOUND WHEN GET DATA FROM API");
+                        // // console.log(res.data);
+                        // console.log("ERROR FOUND WHEN GET DATA FROM API");
                         return;
                     }
                     setCategory(res.data.data);
@@ -32,7 +32,7 @@ function Categorytable() {
                     }, 1000);
                 })
                 .catch(error => {
-                    console.log(error.res)
+                    // console.log(error.res)
                 })
         }
 
@@ -170,7 +170,7 @@ function Categorytable() {
 
                                         })
                                         .catch(error => {
-                                            console.log(error.res);
+                                            // console.log(error.res);
                                         })
                                 }
                                 else if (results.isDenied) {

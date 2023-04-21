@@ -67,7 +67,7 @@ function Adminoverall() {
       ) :
         (
           <div className=' flex flex-col h-full'>
-        <h1 className=' text-black text-4xl text-center mt-10'>จัดการผู้ใช้</h1>
+        <h1 className=' text-black text-4xl text-center mt-10'>ภาพรวมข้อมูล</h1>
         <p className=' mt-3 m-auto mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละปีการศึกษา</p>
         <div className='w-1/2 h-1/2 m-auto'>
         <Chart_bar />

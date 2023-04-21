@@ -23,7 +23,7 @@ function CourseStudenttable() {
             <div className=''
                             content="Delete student"
                             color="error"
-                            onClick={() => console.log("Delete student",)}>
+                            /*onClick={() => console.log("Delete student",)}*/>
               <DeleteIcon></DeleteIcon>
             </div>
           </td>

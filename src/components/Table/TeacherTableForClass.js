@@ -16,17 +16,17 @@ function TeacherTableForClass() {
         const fetchData = () => {
             axios.get(process.env.REACT_APP_API_URL + "/class", { params: { classID: classID } })
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
 
                     if (res.data.error === true) {
-                        console.log(res.data);
-                        console.log("ERROR FOUND WHEN GET DATA FROM API");
+                        // console.log(res.data);
+                        // console.log("ERROR FOUND WHEN GET DATA FROM API");
                         return;
                     }
                     setTeacherTable(res.data.data.teachers)
                 })
                 .catch(error => {
-                    console.log(error.res);
+                    // console.log(error.res);
                 });
         }
         fetchData();
