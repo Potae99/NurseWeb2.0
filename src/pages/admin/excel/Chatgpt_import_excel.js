@@ -2,15 +2,13 @@ import { useState } from 'react';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 
+
 function Chatgpt_import_excel() {
   const [file, setFile] = useState(null);
-
+ 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
-
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -68,18 +66,10 @@ function Chatgpt_import_excel() {
 
         console.log(student);
         students.push(student);
-
+        window.location.href="/admin/home"
       }
-
-
-
     };
     reader.readAsBinaryString(file);
-
-
-
-
-
   };
 
   return (
@@ -92,6 +82,72 @@ function Chatgpt_import_excel() {
         </div>
         <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload</button>
       </form>
+      {/* <table>
+  <thead>
+    <tr>
+      <th>Year Start Enroll</th>
+      <th>Generation</th>
+      <th>ID Number</th>
+      <th>Student ID</th>
+      <th>Name TH</th>
+      <th>Name ENG</th>
+      <th>Password</th>
+      <th>Gender</th>
+      <th>Birthday</th>
+      <th>Ethnicity</th>
+      <th>Nationality</th>
+      <th>Religion</th>
+      <th>House/Building No.</th>
+      <th>Village</th>
+      <th>Road</th>
+      <th>Alley</th>
+      <th>Sub-district</th>
+      <th>District</th>
+      <th>Province</th>
+      <th>Postal Code</th>
+      <th>Present Address</th>
+      <th>ID Line</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Scholarship Name</th>
+      <th>Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    {file.map((student) => (
+      <tr key={student}>
+        <td>{student.yearStartEnroll}</td>
+        <td>{student.generation}</td>
+        <td>{student.IDnumber}</td>
+        <td>{student.studentID}</td>
+        <td>{student.nameTH}</td>
+        <td>{student.nameENG}</td>
+        <td>{student.password}</td>
+        <td>{student.gender}</td>
+        <td>{student.Birthday}</td>
+        <td>{student.ethnicity}</td>
+        <td>{student.nationality}</td>
+        <td>{student.religion}</td>
+        <td>{student.houseadd_houseNo}</td>
+        <td>{student.houseadd_village}</td>
+        <td>{student.houseadd_road}</td>
+        <td>{student.houseadd_alley}</td>
+        <td>{student.houseadd_subDistrict}</td>
+        <td>{student.houseadd_district}</td>
+        <td>{student.houseadd_province}</td>
+        <td>{student.houseadd_postalCode}</td>
+        <td>{student.presentAddress}</td>
+        <td>{student.IDline}</td>
+        <td>{student.email}</td>
+        <td>{student.status}</td>
+        <td>{student.scholarship_name}</td>
+        <td>{student.phone}</td>
+      </tr>
+    ))}
+  </tbody>
+</table> */}
+
+
     </div>
   );
 }
