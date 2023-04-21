@@ -41,8 +41,6 @@ import Chart_bar from './components/chart/Chart_bar';
 
 import { Import_excel } from './pages/admin/excel/Import_excel';
 import Chatgpt_import_excel from './pages/admin/excel/Chatgpt_import_excel';
-import Chatgpt_import_excel2 from './pages/admin/excel/Chatgpt_import_excel2';
-import Data from './pages/admin/excel/Data';
 
 
 
@@ -367,16 +365,7 @@ const router = [
     element: <Chatgpt_import_excel />,
     level: "admin"
   },
-  {
-    path: "/admin/Dataimport_excel",
-    element: <Data />,
-    level: "admin"
-  },
-  {
-    path: "/admin/Gptimport_excel2",
-    element: <Chatgpt_import_excel2 />,
-    level: "admin"
-  },
+ 
 
 ]; 
 

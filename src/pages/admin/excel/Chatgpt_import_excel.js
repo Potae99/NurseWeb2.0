@@ -66,7 +66,7 @@ function Chatgpt_import_excel() {
 
         console.log(student);
         students.push(student);
-        window.location.href="/admin/home"
+        // window.location.href="/admin/home"
       }
     };
     reader.readAsBinaryString(file);
