@@ -71,42 +71,6 @@ function AddSyllabus() {
             })
     }
 
-    // const addSyllabus = async () => {
-    //     const formData = new FormData();
-    //     formData.append('syllabusName', syllabusName);
-    //     formData.append('syllabusDate', syllabusDate);
-    //     formData.append('startUse', startUse);
-    //     formData.append('endUse', endUse);
-    //     formData.append('detail', detail);
-    //     formData.append('syllabus_Path', syllabus_Path);
-
-    //     try {
-    //         const response = await axios.post(
-    //             `${process.env.REACT_APP_API_URL}/course/syllabus`,
-    //             formData,
-    //             {
-    //                 headers: {
-    //                     'Content-Type': 'multipart/form-data',
-    //                 },
-    //             }
-    //         );
-
-    //         setData([...data, response.data]);
-
-    //         Swal.fire({
-    //             icon: 'success',
-    //             title: 'Add Syllabus success',
-    //             showConfirmButton: false,
-    //             timer: 1000,
-    //         }).then(() => {
-    //             window.location.href = '/admin/course/syllabus/adminsyllabus';
-    //         });
-    //     } catch (error) {
-    //         console.log(error.request)
-    //     }
-    // };
-
-
     const backToAdminSyllabus = () => {
         window.location.href = "/admin/course/syllabus/adminsyllabus"
     }
@@ -127,11 +91,11 @@ function AddSyllabus() {
     //     setSyllabus_Path(fileUrl);
     // };
 
-    const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        const filePath = selectedFile.path;
-        setSyllabus_Path(filePath);
-    };
+    // const handleFileChange = (event) => {
+    //     const selectedFile = event.target.files[0];
+    //     const filePath = selectedFile.path;
+    //     setSyllabus_Path(filePath);
+    // };
 
     // const handleFileChange = (event) => {
     //     const selectedFile = event.target.files[0];
@@ -155,6 +119,62 @@ function AddSyllabus() {
     //     const fileName = `[${formattedDate}]${fileExtension}`;
     //     setSyllabus_Path(fileName);
     // };
+
+
+
+    // const handleFileChange = (event) => {
+    //     const fs = require('fs');
+    //     const path = require('path')
+
+    //     const selectedFile = event.target.files[0];
+    //     const currentDate = new Date().toISOString().replace(/[-T:\.Z]/g, "_");
+    //     const fileType = path.extname(selectedFile.name);
+    //     const newFileName = `${currentDate}${fileType}`;
+    //     const newFilePath = `../../../../components/File/Syllabus/${newFileName}`;
+
+    //     fs.mkdirSync('../../../../components/File/Syllabus', { recursive: true });
+    //     fs.writeFileSync(newFilePath, selectedFile.data);
+
+    //     setSyllabus_Path(`D:\\ReactJS\\NurseWeb2.0\\src\\components\\File\\Syllabus\\${newFileName}`);
+
+    //     // const apiPath = `D:\\ReactJS\\NurseWeb2.0\\src\\components\\File\\Syllabus\\${newFileName}`;
+    //     // return apiPath;
+
+    // }
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        const fileType = file.type.split('/')[1];
+        const date = new Date();
+        const dateString = `${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`;
+        const newName = `${dateString}_${fileType}`;
+        const syllabusFolder = 'Syllabus';
+        const uploadFolder = event.target.value.split('\\').pop().split('/').pop();
+
+        // แก้ไขชื่อไฟล์เดิมเพื่อเปลี่ยนเป็นชื่อใหม่
+        file.name = newName;
+        // setSyllabus_Path(newName);
+
+        // ย้ายไฟล์ไปยัง folder Syllabus
+        const syllabusPath = `${syllabusFolder}/${newName}`;
+        const uploadPath = `${uploadFolder}/${newName}`;
+        const fileReader = new FileReader();
+        fileReader.readAsArrayBuffer(file);
+        fileReader.onloadend = function () {
+            const arrayBuffer = fileReader.result;
+            const blob = new Blob([arrayBuffer], { type: fileType });
+            const formData = new FormData();
+            formData.append('file', blob, newName);
+            // ส่งไฟล์ไปยัง backend หรือ API สำหรับบันทึกไฟล์ลง server
+            // และเรียกฟังก์ชั่นสำหรับสร้างไฟล์ใน folder Syllabus
+            // uploadFile(formData, syllabusPath);
+            // และเรียกฟังก์ชั่นสำหรับลบไฟล์ใน folder uploads
+            // deleteFile(uploadPath);
+        }
+    }
+
+    // console.log(syllabus_Path)
+
 
     const handleSyllabusDateChange = (date) => {
         setsyllabusDate(date);
@@ -183,7 +203,7 @@ function AddSyllabus() {
     };
 
 
-    console.log(syllabus_Path)
+    // console.log(syllabus_Path)
 
 
     return (
