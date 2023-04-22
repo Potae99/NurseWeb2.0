@@ -188,6 +188,7 @@ function AddSyllabus() {
         axios.post("//localhost:8000/upload", data)
         .then((e) => {
             console.log("Success");
+            setSyllabus_Path(`/server/public/syllabus/${e.data.filename}`);
         })
         .catch((e) => {
             console.error("Error", e);
