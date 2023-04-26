@@ -16,8 +16,8 @@ function Chatgpt_import_excel() {
     }, 2000);
   })
 
-  const google_sheet =() =>{
-    window.location.href="https://docs.google.com/spreadsheets/d/172IqEqIGXSyNj9NzriwOdKPxKQy_9q4sNgwZYl2v_R0/edit?usp=sharing"
+  const google_sheet = () => {
+    window.location.href = "https://docs.google.com/spreadsheets/d/172IqEqIGXSyNj9NzriwOdKPxKQy_9q4sNgwZYl2v_R0/edit?usp=sharing"
   }
 
   const handleFileChange = (event) => {
@@ -66,40 +66,65 @@ function Chatgpt_import_excel() {
           phone: row["เบอร์"] ? row["เบอร์"].toString() : "",
 
         };
-        axios.post(process.env.REACT_APP_API_URL + "/student", student)
-          .then(response => {
-            // console.log(response.data);
-            // console.log(student);
-            Swal.fire({
-              icon: "success",
-              title: "Import file success",
-              showConfirmButton: false,
-              timer: 1000,
-            })
-              .then(() => {
-                window.location.href = "/admin/home"; 
-              })
-          })
-          .catch(error => {
-            Swal.fire({
-              icon: "error",
-              title: "ข้อมูลไม่ถูกต้อง โปรดตรวจสอบข้อมูล",
-              showConfirmButton: false,
-              timer: 1000,
-            })
-            // console.error(error.response.data);
-            // console.log(data);
-            // console.log(student);
-          });
-
-        // console.log(student);
         students.push(student);
-        // window.location.href="/admin/home"
 
-      }
-    };
+      };
+      axios.post(process.env.REACT_APP_API_URL + "/student/studentFromExcel", students)
+        .then(response => {
+          console.log(response.data);
+          console.log(students);
+
+          // let timerInterval
+          // Swal.fire({
+          //   title: 'อัปโหลดสมบูรณ์',
+          //   html: 'กำลังปิดใน <b></b> ',
+          //   timer: 10000,
+          //   timerProgressBar: true,
+          //   didOpen: () => {
+          //     Swal.showLoading()
+          //     const b = Swal.getHtmlContainer().querySelector('b')
+          //     timerInterval = setInterval(() => {
+          //       b.textContent = Swal.getTimerLeft()
+          //     }, 100)
+          //   },
+          //   willClose: () => {
+          //     clearInterval(timerInterval)
+          //   }
+          // }).then((result) => {
+          //   /* Read more about handling dismissals below */
+          //   if (result.dismiss === Swal.DismissReason.timer) {
+          //     window.location.href = "/admin/home";
+          //   }
+          // })
+          Swal.fire({
+            icon: "success",
+            title: "Import file success",
+            showConfirmButton: false,
+            timer: 1000,
+          })
+            .then(() => {
+              window.location.href = "/admin/home"; 
+            })
+        })
+        .catch(error => {
+          Swal.fire({
+            icon: "error",
+            title: "ข้อมูลไม่ถูกต้อง โปรดตรวจสอบข้อมูล",
+            showConfirmButton: false,
+            timer: 1000,
+          })
+          console.error(error.response.data);
+          console.log(data);
+        });
+
+      // console.log(student);
+
+      // window.location.href="/admin/home"
+
+    }
     reader.readAsBinaryString(file);
   };
+
 
   return (
     <>
@@ -114,79 +139,13 @@ function Chatgpt_import_excel() {
               <input type="file" id="file" name="file" className="mt-2" onChange={handleFileChange} />
             </div>
             <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload</button>
-            <button onClick={google_sheet}  className=" ml-3 bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">ดาวน์โหลดฟอร์ม</button>
+            <button onClick={google_sheet} className=" ml-3 bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">ดาวน์โหลดฟอร์ม</button>
           </form>
           <div className=' mt-3 text-red-600'>
             <p>1.ห้ามใส่ข้อมูลนักเรียนซ้ำกัน(นักเรียน 1 คน เพิ่มได้ 1 ครั้ง)</p>
-            <p>2.ช่องวันเกิด****ตัวอย่างข้อมูล เช่นเกิดวันที่ 9 เดือน 9 ปี 2002 ให้กรอก 2002-09-09   *****</p>
+            <p>2.ช่องวันเกิด****ตัวอย่างข้อมูล เช่นเกิดวันที่ 9 เดือน 11 ปี 2002 ให้กรอก 2002-11-09   *****</p>
             <p>3.ช่องสถานะ *** ให้ใส่ 1 คือ กำลังศึกษา / ใส่ 0 คือ จบแล้ว  ****</p>
           </div>
-          {/* <table>
-    <thead>
-      <tr>
-        <th>Year Start Enroll</th>
-        <th>Generation</th>
-        <th>ID Number</th>
-        <th>Student ID</th>
-        <th>Name TH</th>
-        <th>Name ENG</th>
-        <th>Password</th>
-        <th>Gender</th>
-        <th>Birthday</th>
-        <th>Ethnicity</th>
-        <th>Nationality</th>
-        <th>Religion</th>
-        <th>House/Building No.</th>
-        <th>Village</th>
-        <th>Road</th>
-        <th>Alley</th>
-        <th>Sub-district</th>
-        <th>District</th>
-        <th>Province</th>
-        <th>Postal Code</th>
-        <th>Present Address</th>
-        <th>ID Line</th>
-        <th>Email</th>
-        <th>Status</th>
-        <th>Scholarship Name</th>
-        <th>Phone</th>
-      </tr>
-    </thead>
-    <tbody>
-      {file.map((student) => (
-        <tr key={student}>
-          <td>{student.yearStartEnroll}</td>
-          <td>{student.generation}</td>
-          <td>{student.IDnumber}</td>
-          <td>{student.studentID}</td>
-          <td>{student.nameTH}</td>
-          <td>{student.nameENG}</td>
-          <td>{student.password}</td>
-          <td>{student.gender}</td>
-          <td>{student.Birthday}</td>
-          <td>{student.ethnicity}</td>
-          <td>{student.nationality}</td>
-          <td>{student.religion}</td>
-          <td>{student.houseadd_houseNo}</td>
-          <td>{student.houseadd_village}</td>
-          <td>{student.houseadd_road}</td>
-          <td>{student.houseadd_alley}</td>
-          <td>{student.houseadd_subDistrict}</td>
-          <td>{student.houseadd_district}</td>
-          <td>{student.houseadd_province}</td>
-          <td>{student.houseadd_postalCode}</td>
-          <td>{student.presentAddress}</td>
-          <td>{student.IDline}</td>
-          <td>{student.email}</td>
-          <td>{student.status}</td>
-          <td>{student.scholarship_name}</td>
-          <td>{student.phone}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table> */}
-
-
         </div>
       )}
     </>
