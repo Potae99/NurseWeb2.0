@@ -66,9 +66,9 @@ function View_taugheval() {
     // };
 
     function onchangeCourse(taughtType, classID) {
-        if (taughtType === "ภาคทฤษฎี") {
+        if (taughtType === "Theory") {
             window.location.href = "/teacher/sum/theory/" + classID; // redirect to /teacher/sum/{classID}
-        } else if (taughtType === "ภาคปฏิบัติ") {
+        } else if (taughtType === "Practice") {
             window.location.href = "/teacher/sum/practice/" + classID; // redirect to /teacher/sum/{classID}
         }
 
