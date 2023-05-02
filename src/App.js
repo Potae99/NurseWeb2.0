@@ -60,6 +60,11 @@ import View_taugheval from './pages/teacher/View_taugheval';
 import Taugh_sum from './pages/teacher/Taugh_sum';
 import Taugh_sumprac from './pages/teacher/Taugh_sumprac';
 
+///comment
+import Theory_comment from './pages/admin/eval_comment/Theory_comment';
+import Practic_comment from './pages/admin/eval_comment/Practic_comment';
+import Evalsum_comment from './pages/admin/eval_comment/Evalsum_comment';
+
 // test
 import Apitest from './Test.js/Apitest';
 import Test2 from './Test.js/Test2';
@@ -365,13 +370,34 @@ const router = [
     element: <Chatgpt_import_excel />,
     level: "admin"
   },
-
   {
     path: "/admin/class",
     element: <ClassManagement />,
     level: "admin"
 
-  }
+  },
+  {
+    path: "/Practice_comment",
+    element: <Practic_comment />,
+    level: "admin"
+
+  },
+  {
+    path: "/Theorycomment",
+    element: <Theory_comment />,
+    level: "admin"
+
+  },
+  {
+    path: "/Evalsumcomment",
+    element: <Evalsum_comment />,
+    level: "teacher"
+  },
+  {
+    path: "/Evalsumcomment",
+    element: <Evalsum_comment />,
+    level: "admin"
+  },
  
 
 ]; 

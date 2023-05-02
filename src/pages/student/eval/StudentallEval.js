@@ -68,9 +68,9 @@ function StudentallEval() {
 
   // }
   function GotaTaugheval(taughtType, evalTaughID) {
-    if (taughtType === "ภาคทฤษฎี") {
+    if (taughtType === "Theory") {
       window.location.href = "/student/eval/theory/" + evalTaughID;
-    } else if (taughtType === "ภาคปฏิบัติ") {
+    } else if (taughtType === "Practice") {
       window.location.href = "/student/eval/practice/" + evalTaughID;
     }
   }
