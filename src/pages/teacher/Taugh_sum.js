@@ -6,8 +6,7 @@ import LoadingPage from '../LoadingPage';
 
 
 function Taugh_sum() {
-
-
+  const [comment, setComment] = useState([]);
   const [evalsum, setevalsum] = useState([]);
   const [eval_sd, seteval_sd] = useState([]);
   const [Classdetail, setClassdetail] = useState([]);
@@ -16,6 +15,27 @@ function Taugh_sum() {
   const [loading, setLoading] = useState(undefined);
   const [completed, setCompleted] = useState(undefined);
 
+
+  const Getcomment = () => {
+    axios.get(process.env.REACT_APP_API_URL + "/eval/taugh/theory/stat", { params: { classID: classID } })
+      .then(res => {
+        // const persons = res.data;
+        //this.setState({ persons });
+        console.log(res.data);
+
+        if (res.data.error === true) {
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+          return;
+        }
+        setComment(res.data.data.comment);
+      });
+
+  }
+
+  // console.log(comment)
 
 
 
@@ -42,11 +62,11 @@ function Taugh_sum() {
       .then(res => {
         // const persons = res.data;
         //this.setState({ persons });
-        // console.log(res.data);
+        console.log(res.data);
 
         if (res.data.error === true) {
-          // console.log(res.data)
-          // console.log("ERROR FOUND WHEN GET DATA FROM API ");
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API ");
 
 
           return;
@@ -66,11 +86,11 @@ function Taugh_sum() {
       .then(res => {
         // const persons = res.data;
         //this.setState({ persons });
-        // console.log(res.data);
+        console.log(res.data);
 
         if (res.data.error === true) {
-          // console.log(res.data)
-          // console.log("ERROR FOUND WHEN GET DATA FROM API ");
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API ");
 
 
           return;
@@ -98,7 +118,7 @@ function Taugh_sum() {
             <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา {Dateget}</p>
             <p>รายวิชา {Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
           </div>
-      
+
           <div className=' flex flex-col space-y-3 mt-3'>
             {/* section2-1 */}
             <p>1.อาจารย์ได้แจ้งกำหนดการเรียนในส่วนที่อาจารย์ รับผิดชอบอย่างชัดเจน</p>
@@ -125,7 +145,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_2) * 20 }}>{evalsum.section2_2}</div>
               </div>
 
-        
+
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
                 <div className="stat-value ">{eval_sd.section2_2}</div>
@@ -143,7 +163,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_3) * 20 }}>{evalsum.section2_3}</div>
               </div>
 
-            
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -162,7 +182,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_4) * 20 }}>{evalsum.section2_4}</div>
               </div>
 
-           
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -182,7 +202,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_5) * 20 }}>{evalsum.section2_5}</div>
               </div>
 
-              
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -202,7 +222,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_6) * 20 }}>{evalsum.section2_6}</div>
               </div>
 
-           
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -242,7 +262,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_8) * 20 }}>{evalsum.section2_8}</div>
               </div>
 
-             
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -263,7 +283,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": ((evalsum.section2_9) * 20) }}>{evalsum.section2_9}</div>
               </div>
 
-             
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -284,7 +304,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_10) * 20 }}>{evalsum.section2_10}</div>
               </div>
 
-              
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -305,7 +325,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_11) * 20 }}>{evalsum.section2_11}</div>
               </div>
 
-              
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -326,7 +346,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_12) * 20 }}>{evalsum.section2_12}</div>
               </div>
 
-             
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -347,7 +367,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_13) * 20 }}>{evalsum.section2_13}</div>
               </div>
 
-              
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -368,7 +388,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_14) * 20 }}>{evalsum.section2_14}</div>
               </div>
 
-           
+
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
                 <div className="stat-value ">{eval_sd.section2_14}</div>
@@ -388,7 +408,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_15) * 20 }}>{evalsum.section2_15}</div>
               </div>
 
-          
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -408,7 +428,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_16) * 20 }}>{evalsum.section2_16}</div>
               </div>
 
-            
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -429,7 +449,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_17) * 20 }}>{evalsum.section2_17}</div>
               </div>
 
-             
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -449,7 +469,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_18) * 20 }}>{evalsum.section2_18}</div>
               </div>
 
-          
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -469,7 +489,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_19) * 20 }}>{evalsum.section2_19}</div>
               </div>
 
-              
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -489,7 +509,7 @@ function Taugh_sum() {
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_20) * 20 }}>{evalsum.section2_20}</div>
               </div>
 
-            
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -501,6 +521,21 @@ function Taugh_sum() {
             </div>
 
 
+          </div>
+          <div className=' mt-3'>
+            <button onClick={Getcomment} className=' btn btn-primary' >ความคิดเห็น</button>
+
+            {comment.map((val, i) => {
+              return (
+                <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6  mt-3 '>
+                  <div className="card   bg-base-200 hover:bg-gray-300 shadow-xl">
+                    <div className="card-body">
+                      <p className=' text-black'>{val.comment}</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
         </div>

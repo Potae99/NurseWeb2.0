@@ -7,7 +7,7 @@ import LoadingPage from '../LoadingPage';
 
 function Taugh_sumprac() {
 
-
+  const [comment, setComment] = useState([]);
   const [evalsum, setevalsum] = useState([]);
   const [eval_sd, seteval_sd] = useState([]);
   const [Classdetail, setClassdetail] = useState([]);
@@ -15,6 +15,26 @@ function Taugh_sumprac() {
   const { classID } = useParams();
   const [loading, setLoading] = useState(undefined);
   const [completed, setCompleted] = useState(undefined);
+
+
+  const Getcomment = () => {
+    axios.get(process.env.REACT_APP_API_URL + "/eval/taugh/practice/stat", { params: { classID: classID } })
+      .then(res => {
+        // const persons = res.data;
+        //this.setState({ persons });
+        console.log(res.data);
+
+        if (res.data.error === true) {
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+          return;
+        }
+        setComment(res.data.data.comment);
+      });
+
+  }
   
 
 
@@ -503,6 +523,21 @@ function Taugh_sumprac() {
             </div>
 
 
+          </div>
+          <div className=' mt-3'>
+            <button onClick={Getcomment} className=' btn btn-primary' >ความคิดเห็น</button>
+
+            {comment.map((val, i) => {
+              return (
+                <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6  mt-3 '>
+                  <div className="card   bg-base-200 hover:bg-gray-300 shadow-xl">
+                    <div className="card-body">
+                      <p className=' text-black'>{val.comment}</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
         </div>

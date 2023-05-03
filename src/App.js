@@ -379,13 +379,13 @@ const router = [
   {
     path: "/Practice_comment",
     element: <Practic_comment />,
-    level: "admin"
+    level: "teacher"
 
   },
   {
-    path: "/Theorycomment",
+    path: "/Theorycomment/:classID/*",
     element: <Theory_comment />,
-    level: "admin"
+    level: "teacher"
 
   },
   {
