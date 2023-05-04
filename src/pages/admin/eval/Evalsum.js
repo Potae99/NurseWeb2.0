@@ -4,9 +4,440 @@ import { useParams } from 'react-router-dom';
 import format from 'date-fns/format';
 import LoadingPage from '../../LoadingPage';
 
+
+function ExampleComponent() {
+  const { classID } = useParams();
+  const [comments, setComments] = useState([]);
+
+  const Getcomment = () => {
+    axios.get(process.env.REACT_APP_API_URL + "/eval/class/stat", { params: { classID: classID } })
+      .then(res => {
+        // const persons = res.data;
+        //this.setState({ persons });
+        console.log(res.data);
+
+        if (res.data.error === true) {
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+          return;
+        }
+        setComments(res.data.data.comment);
+      });
+
+  }
+
+  return (
+    <div className='mt-3'>
+      <button onClick={Getcomment} className='btn btn-primary'>ความคิดเห็น</button>
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">1.การชี้แจงวัตถุประสงค์ เนื้อหา วิธีการสอน และการประเมินผลการเรียนมีความชัดเจน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_1_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_1_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">2.วัตถุประสงค์การเรียนรู้สอดคล้องกับลักษณะวิชา </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_2_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_2_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">3.หัวข้อการสอนมีความสอดคล้องกับวัตถุประสงค์ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_3_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_3_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">4.ตารางการจัดการเรียนการสอนมีความชัดเจน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_4_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_4_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">5.การจัดลำดับการสอนมีความเหมาะสม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_5_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_5_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">6.ระยะเวลาการสอนเหมาะสมกับเนื้อหาในแต่ละหัวข้อ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_6_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_6_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">7.กิจกรรมการเรียนการสอนสอดคล้องกับลักษณะวิชาและการเรียนรู้ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_7_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_7_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">8.เอกสารประกอบการสอนเหมาะสม สนับสนุนเนื้อหาการสอน</div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_8_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_8_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">9.โดยภาพรวม ผู้เรียนมีความพึงพอใจในการจัดการเรียนการสอน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_9_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_9_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">10.โดยภาพรวมผู้สอนมีเวลาและให้คำปรึกษาแก่นักศึกษานอกชั้นเรียน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_10_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_10_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">11.โดยภาพรวมผู้สอน มีเทคนิคการถ่ายทอดความรู้น่าสนใจง่ายต่อการเข้าใจ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_11_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_11_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">12.โดยภาพรวมผู้สอนตรงเวลาในการสอน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_12_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_12_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">13.วิธีการประเมินผลการเรียน เหมาะสมกับวัตถุประสงค์ของวิชา </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_13_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_13_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">14.เกณฑ์การวัดและประเมินผลการเรียนมีความเหมาะสม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_14_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_14_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">15.ห้องเรียนสะอาด บรรยากาศเหมาะสม น่าเรียน</div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_15_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_15_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">16.ห้องเรียนมีแสง สี เสียง เหมาะสม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_16_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_16_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">17.ห้องเรียนมีการถ่ายเทอากาศเหมาะสม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_17_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_17_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">18.เอกสาร ตำรา สื่ออุปกรณ์สำหรับค้นคว้าด้วยตนเองมีความทันสมัย จำนวนเพียงพอ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_18_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_18_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">19.ผู้เรียนเกิดพฤติกรรมตามวัตถุประสงค์ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_19_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_19_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">20.ผู้เรียนสามารถนำความรู้ไปใช้ในชีวิตประจำวันและเป็นพื้นฐานในการเรียนวิชาอื่นได้ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_20_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_20_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">1.วิธีการสอนของอาจารย์โดยภาพรวม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment1 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment1}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">2.รูปแบบของเอกสารประกอบการสอนโดยภาพรวม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment2 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment2}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">3.วิธีการที่จะช่วยให้นิสิตเข้าใจเนื้อหามากขึ้นโดยภาพรวม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment3 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment3}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">4.การประเมินผลการเรียนโดยภาพรวม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment4 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment4}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">5.สิ่งอื่นๆที่ต้องการให้ปรับปรุง </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment5 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment5}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
+}
 function Evalsum() {
-
-
   const [evalsum, setevalsum] = useState([]);
   const [eval_sd, seteval_sd] = useState([]);
   const [Classdetail, setClassdetail] = useState([]);
@@ -14,6 +445,12 @@ function Evalsum() {
   const { classID } = useParams();
   const [loading, setLoading] = useState(undefined);
   const [completed, setCompleted] = useState(undefined);
+
+
+
+
+
+
 
 
 
@@ -63,7 +500,7 @@ function Evalsum() {
       .then(res => {
         // const persons = res.data;
         //this.setState({ persons });//
-        // console.log(res.data);
+        console.log(res.data);
 
         if (res.data.error === true) {
           // console.log(res.data)
@@ -75,21 +512,21 @@ function Evalsum() {
         setevalsum(res.data.data.average[0]);
         seteval_sd(res.data.data.sd[0]);
       });
-  //   axios.get(process.env.REACT_APP_API_URL + "/eval/class/sd", { params: { classID: classID } })
-  //     .then(res => {
-  //       // const persons = res.data;
-  //       //this.setState({ persons });
-  //       console.log(res.data);
+    //   axios.get(process.env.REACT_APP_API_URL + "/eval/class/sd", { params: { classID: classID } })
+    //     .then(res => {
+    //       // const persons = res.data;
+    //       //this.setState({ persons });
+    //       console.log(res.data);
 
-  //       if (res.data.error === true) {
-  //         console.log(res.data)
-  //         console.log("ERROR FOUND WHEN GET DATA FROM API ");
+    //       if (res.data.error === true) {
+    //         console.log(res.data)
+    //         console.log("ERROR FOUND WHEN GET DATA FROM API ");
 
 
-  //         return;
-  //       }
-  //       seteval_sd(res.data.data[0]);
-  //     });
+    //         return;
+    //       }
+    //       seteval_sd(res.data.data[0]);
+    //     });
   }
   useEffect(() => {
     setTimeout(() => {
@@ -587,6 +1024,9 @@ function Evalsum() {
             </div>
 
 
+          </div>
+          <div>
+          <ExampleComponent />
           </div>
 
         </div>

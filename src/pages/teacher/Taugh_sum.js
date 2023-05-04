@@ -4,6 +4,52 @@ import { useParams } from 'react-router-dom';
 import format from 'date-fns/format';
 import LoadingPage from '../LoadingPage';
 
+function ExampleComponent() {
+  const { classID } = useParams();
+  const [comments, setComments] = useState([]);
+
+  const Getcomment = () => {
+    axios.get(process.env.REACT_APP_API_URL + "/eval/taugh/theory/stat", { params: { classID: classID } })
+      .then(res => {
+        // const persons = res.data;
+        //this.setState({ persons });
+        console.log(res.data);
+
+        if (res.data.error === true) {
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+          return;
+        }
+        setComments(res.data.data.comment);
+      });
+
+  }
+
+  return (
+    <div className='mt-3'>
+      <button onClick={Getcomment} className='btn btn-primary'>ความคิดเห็น</button>
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">ความคิดเห็นเกี่ยวกับการสอนของอาจารย์ และ/หรือ ปัญหาที่ต้องการให้มีการแก้ไขปรับปรุง </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
+}
+
 
 function Taugh_sum() {
   const [comment, setComment] = useState([]);
@@ -522,21 +568,10 @@ function Taugh_sum() {
 
 
           </div>
-          <div className=' mt-3'>
-            <button onClick={Getcomment} className=' btn btn-primary' >ความคิดเห็น</button>
-
-            {comment.map((val, i) => {
-              return (
-                <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6  mt-3 '>
-                  <div className="card   bg-base-200 hover:bg-gray-300 shadow-xl">
-                    <div className="card-body">
-                      <p className=' text-black'>{val.comment}</p>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
+          <div>
+          <ExampleComponent />
           </div>
+   
 
         </div>
       )}
