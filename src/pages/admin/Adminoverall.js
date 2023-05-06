@@ -67,7 +67,7 @@ function Adminoverall() {
       ) :
         (
           <div className=' flex flex-col h-full'>
-            <h1 className=' text-black text-4xl text-center mt-10'>จัดการผู้ใช้</h1>
+            <h1 className=' text-black text-4xl text-center mt-10'>ภาพรวม</h1>
             <div className='container mx-auto text-black'>
               <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 p-6 '>
                 <div>

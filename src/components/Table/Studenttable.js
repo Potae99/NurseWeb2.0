@@ -102,6 +102,7 @@ function Studenttable() {
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(
         <li
+          href="#!" onClick={(e) => handleClick(e, i)}
           key={i}
           className={`${currentPage === i ? "bg-orange-500 text-white" : "bg-white text-black"
             } hover:bg-orange-200 inline-block mx-1 px-3 py-1 rounded-lg cursor-pointer`
