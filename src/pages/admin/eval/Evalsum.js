@@ -4,9 +4,441 @@ import { useParams } from 'react-router-dom';
 import format from 'date-fns/format';
 import LoadingPage from '../../LoadingPage';
 
+
+
+function ExampleComponent() {
+  const { classID } = useParams();
+  const [comments, setComments] = useState([]);
+
+  const Getcomment = () => {
+    axios.get(process.env.REACT_APP_API_URL + "/eval/class/stat", { params: { classID: classID } })
+      .then(res => {
+        // const persons = res.data;
+        //this.setState({ persons });
+        console.log(res.data);
+
+        if (res.data.error === true) {
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+          return;
+        }
+        setComments(res.data.data.comment);
+      });
+
+  }
+
+  return (
+    <div className='mt-3'>
+      <button onClick={Getcomment} className='btn btn-primary'>ความคิดเห็น</button>
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">1.การชี้แจงวัตถุประสงค์ เนื้อหา วิธีการสอน และการประเมินผลการเรียนมีความชัดเจน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_1_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_1_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">2.วัตถุประสงค์การเรียนรู้สอดคล้องกับลักษณะวิชา </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_2_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_2_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">3.หัวข้อการสอนมีความสอดคล้องกับวัตถุประสงค์ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_3_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_3_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">4.ตารางการจัดการเรียนการสอนมีความชัดเจน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_4_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_4_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">5.การจัดลำดับการสอนมีความเหมาะสม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_5_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_5_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">6.ระยะเวลาการสอนเหมาะสมกับเนื้อหาในแต่ละหัวข้อ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_6_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_6_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">7.กิจกรรมการเรียนการสอนสอดคล้องกับลักษณะวิชาและการเรียนรู้ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_7_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_7_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">8.เอกสารประกอบการสอนเหมาะสม สนับสนุนเนื้อหาการสอน</div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_8_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_8_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">9.โดยภาพรวม ผู้เรียนมีความพึงพอใจในการจัดการเรียนการสอน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_9_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_9_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">10.โดยภาพรวมผู้สอนมีเวลาและให้คำปรึกษาแก่นักศึกษานอกชั้นเรียน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_10_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_10_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">11.โดยภาพรวมผู้สอน มีเทคนิคการถ่ายทอดความรู้น่าสนใจง่ายต่อการเข้าใจ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_11_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_11_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">12.โดยภาพรวมผู้สอนตรงเวลาในการสอน </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_12_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_12_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">13.วิธีการประเมินผลการเรียน เหมาะสมกับวัตถุประสงค์ของวิชา </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_13_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_13_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">14.เกณฑ์การวัดและประเมินผลการเรียนมีความเหมาะสม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_14_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_14_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">15.ห้องเรียนสะอาด บรรยากาศเหมาะสม น่าเรียน</div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_15_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_15_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">16.ห้องเรียนมีแสง สี เสียง เหมาะสม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_16_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_16_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">17.ห้องเรียนมีการถ่ายเทอากาศเหมาะสม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_17_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_17_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">18.เอกสาร ตำรา สื่ออุปกรณ์สำหรับค้นคว้าด้วยตนเองมีความทันสมัย จำนวนเพียงพอ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_18_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_18_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">19.ผู้เรียนเกิดพฤติกรรมตามวัตถุประสงค์ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_19_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_19_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">20.ผู้เรียนสามารถนำความรู้ไปใช้ในชีวิตประจำวันและเป็นพื้นฐานในการเรียนวิชาอื่นได้ </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.section2_20_comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.section2_20_comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">1.วิธีการสอนของอาจารย์โดยภาพรวม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment1 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment1}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">2.รูปแบบของเอกสารประกอบการสอนโดยภาพรวม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment2 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment2}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">3.วิธีการที่จะช่วยให้นิสิตเข้าใจเนื้อหามากขึ้นโดยภาพรวม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment3 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment3}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">4.การประเมินผลการเรียนโดยภาพรวม </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment4 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment4}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">5.สิ่งอื่นๆที่ต้องการให้ปรับปรุง </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment5 !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment5}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
+}
 function Evalsum() {
-
-
   const [evalsum, setevalsum] = useState([]);
   const [eval_sd, seteval_sd] = useState([]);
   const [Classdetail, setClassdetail] = useState([]);
@@ -14,6 +446,21 @@ function Evalsum() {
   const { classID } = useParams();
   const [loading, setLoading] = useState(undefined);
   const [completed, setCompleted] = useState(undefined);
+
+  const Print = () => {
+    //console.log('print');  
+    let printContents = document.getElementById('printablediv').innerHTML;
+    let originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
+
+
+
+
+
+
 
 
 
@@ -63,7 +510,7 @@ function Evalsum() {
       .then(res => {
         // const persons = res.data;
         //this.setState({ persons });//
-        // console.log(res.data);
+        console.log(res.data);
 
         if (res.data.error === true) {
           // console.log(res.data)
@@ -75,21 +522,21 @@ function Evalsum() {
         setevalsum(res.data.data.average[0]);
         seteval_sd(res.data.data.sd[0]);
       });
-  //   axios.get(process.env.REACT_APP_API_URL + "/eval/class/sd", { params: { classID: classID } })
-  //     .then(res => {
-  //       // const persons = res.data;
-  //       //this.setState({ persons });
-  //       console.log(res.data);
+    //   axios.get(process.env.REACT_APP_API_URL + "/eval/class/sd", { params: { classID: classID } })
+    //     .then(res => {
+    //       // const persons = res.data;
+    //       //this.setState({ persons });
+    //       console.log(res.data);
 
-  //       if (res.data.error === true) {
-  //         console.log(res.data)
-  //         console.log("ERROR FOUND WHEN GET DATA FROM API ");
+    //       if (res.data.error === true) {
+    //         console.log(res.data)
+    //         console.log("ERROR FOUND WHEN GET DATA FROM API ");
 
 
-  //         return;
-  //       }
-  //       seteval_sd(res.data.data[0]);
-  //     });
+    //         return;
+    //       }
+    //       seteval_sd(res.data.data[0]);
+    //     });
   }
   useEffect(() => {
     setTimeout(() => {
@@ -103,11 +550,15 @@ function Evalsum() {
       {!completed ? (
         <LoadingPage></LoadingPage>
       ) : (
-        <div className=' text-black'>
+        <div id='printablediv' className=' text-black'>
+
           <div className=' text-center text-xl mb-5'>
             <p>แบบประเมินรายวิชา</p>
             <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา {Dateget}</p>
             <p>รายวิชา{Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
+          </div>
+          <div className='d-flex m-3 '>
+            <button type="button" onClick={Print} className='float-right  btn  bg-orange-400'>พิมพ์</button>
           </div>
           <div>
             <p>ระดับคะแนน</p>
@@ -125,11 +576,15 @@ function Evalsum() {
             <p>1.การชี้แจงวัตถุประสงค์ เนื้อหา วิธีการสอน และการประเมินผลการเรียนมีความชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black ">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_1) * 20 }}>{evalsum.section2_1}</div>
-              </div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_1}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_1}</div>
@@ -146,11 +601,15 @@ function Evalsum() {
             <p>2.วัตถุประสงค์การเรียนรู้สอดคล้องกับลักษณะวิชา</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_2) * 20 }}>{evalsum.section2_2}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_2) * 20 }}>{evalsum.section2_2}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_2}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_2}</div>
@@ -168,11 +627,15 @@ function Evalsum() {
             <p>3.หัวข้อการสอนมีความสอดคล้องกับวัตถุประสงค์</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_3) * 20 }}>{evalsum.section2_3}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_3) * 20 }}>{evalsum.section2_3}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_3}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_3}</div>
@@ -189,12 +652,16 @@ function Evalsum() {
 
             <p>4.ตารางการจัดการเรียนการสอนมีความชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
-
+{/* 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_4) * 20 }}>{evalsum.section2_4}</div>
-              </div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_4) * 20 }}>{evalsum.section2_4}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_4}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_4}</div>
@@ -213,11 +680,15 @@ function Evalsum() {
             <p>5.การจัดลำดับการสอนมีความเหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_5) * 20 }}>{evalsum.section2_5}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_5) * 20 }}>{evalsum.section2_5}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_5}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_5}</div>
@@ -236,11 +707,15 @@ function Evalsum() {
             <p>6.ระยะเวลาการสอนเหมาะสมกับเนื้อหาในแต่ละหัวข้อ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_6) * 20 }}>{evalsum.section2_6}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_6) * 20 }}>{evalsum.section2_6}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_6}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_6}</div>
@@ -260,11 +735,15 @@ function Evalsum() {
             <p>7.กิจกรรมการเรียนการสอนสอดคล้องกับลักษณะวิชาและการเรียนรู้</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_7) * 20 }}>{evalsum.section2_7}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_7) * 20 }}>{evalsum.section2_7}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_7}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_7}</div>
@@ -283,11 +762,15 @@ function Evalsum() {
             <p>8.เอกสารประกอบการสอนเหมาะสม สนับสนุนเนื้อหาการสอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_8) * 20 }}>{evalsum.section2_8}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_8) * 20 }}>{evalsum.section2_8}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_8}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_8}</div>
@@ -307,11 +790,15 @@ function Evalsum() {
             <p>9.โดยภาพรวม ผู้เรียนมีความพึงพอใจในการจัดการเรียนการสอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": ((evalsum.section2_9) * 20) }}>{evalsum.section2_9}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": ((evalsum.section2_9) * 20) }}>{evalsum.section2_9}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_9}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_9}</div>
@@ -331,11 +818,15 @@ function Evalsum() {
             <p>10.โดยภาพรวมผู้สอนมีเวลาและให้คำปรึกษาแก่นักศึกษานอกชั้นเรียน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_10) * 20 }}>{evalsum.section2_10}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_10) * 20 }}>{evalsum.section2_10}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_10}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_10}</div>
@@ -355,11 +846,15 @@ function Evalsum() {
             <p>11.โดยภาพรวมผู้สอน มีเทคนิคการถ่ายทอดความรู้น่าสนใจง่ายต่อการเข้าใจ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_11) * 20 }}>{evalsum.section2_11}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_11) * 20 }}>{evalsum.section2_11}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_11}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_11}</div>
@@ -379,11 +874,15 @@ function Evalsum() {
             <p>12.โดยภาพรวมผู้สอนตรงเวลาในการสอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_12) * 20 }}>{evalsum.section2_12}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_12) * 20 }}>{evalsum.section2_12}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_12}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_12}</div>
@@ -403,11 +902,15 @@ function Evalsum() {
             <p>13.วิธีการประเมินผลการเรียน เหมาะสมกับวัตถุประสงค์ของวิชา</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_13) * 20 }}>{evalsum.section2_13}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_13) * 20 }}>{evalsum.section2_13}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_13}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_13}</div>
@@ -427,11 +930,15 @@ function Evalsum() {
             <p>14.เกณฑ์การวัดและประเมินผลการเรียนมีความเหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_14) * 20 }}>{evalsum.section2_14}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_14) * 20 }}>{evalsum.section2_14}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_14}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_14}</div>
@@ -451,11 +958,15 @@ function Evalsum() {
             <p>15.ห้องเรียนสะอาด บรรยากาศเหมาะสม น่าเรียน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_15) * 20 }}>{evalsum.section2_15}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_15) * 20 }}>{evalsum.section2_15}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_15}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_15}</div>
@@ -474,11 +985,15 @@ function Evalsum() {
             <p>16.ห้องเรียนมีแสง สี เสียง เหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_16) * 20 }}>{evalsum.section2_16}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_16) * 20 }}>{evalsum.section2_16}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_16}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_16}</div>
@@ -498,11 +1013,15 @@ function Evalsum() {
             <p>17.ห้องเรียนมีการถ่ายเทอากาศเหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_17) * 20 }}>{evalsum.section2_17}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_17) * 20 }}>{evalsum.section2_17}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_17}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_17}</div>
@@ -520,12 +1039,16 @@ function Evalsum() {
 
             <p>18เอกสาร ตำรา สื่ออุปกรณ์สำหรับค้นคว้าด้วยตนเองมีความทันสมัย จำนวนเพียงพอ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
-
+{/* 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_18) * 20 }}>{evalsum.section2_18}</div>
-              </div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_18) * 20 }}>{evalsum.section2_18}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_18}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_18}</div>
@@ -544,11 +1067,15 @@ function Evalsum() {
             <p>19.ผู้เรียนเกิดพฤติกรรมตามวัตถุประสงค์</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_19) * 20 }}>{evalsum.section2_19}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_19) * 20 }}>{evalsum.section2_19}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_19}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_19}</div>
@@ -567,11 +1094,15 @@ function Evalsum() {
             <p>20.ผู้เรียนสามารถนำความรู้ไปใช้ในชีวิตประจำวันและเป็นพื้นฐานในการเรียนวิชาอื่นได้</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_20) * 20 }}>{evalsum.section2_20}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_20) * 20 }}>{evalsum.section2_20}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_20}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_20}</div>
@@ -587,6 +1118,9 @@ function Evalsum() {
             </div>
 
 
+          </div>
+          <div>
+            <ExampleComponent />
           </div>
 
         </div>

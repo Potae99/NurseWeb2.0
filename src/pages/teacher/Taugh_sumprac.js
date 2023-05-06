@@ -4,10 +4,56 @@ import { useParams } from 'react-router-dom';
 import format from 'date-fns/format';
 import LoadingPage from '../LoadingPage';
 
+function ExampleComponent() {
+  const { classID } = useParams();
+  const [comments, setComments] = useState([]);
+
+  const Getcomment = () => {
+    axios.get(process.env.REACT_APP_API_URL + "/eval/taugh/theory/stat", { params: { classID: classID } })
+      .then(res => {
+        // const persons = res.data;
+        //this.setState({ persons });
+        console.log(res.data);
+
+        if (res.data.error === true) {
+          console.log(res.data)
+          console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+          return;
+        }
+        setComments(res.data.data.comment);
+      });
+
+  }
+
+  return (
+    <div className='mt-3'>
+      <button onClick={Getcomment} className='btn btn-primary'>ความคิดเห็น</button>
+      {
+        comments.length > 0 ?
+          <>
+            <div className=" m-3">ความคิดเห็นเกี่ยวกับการสอนของอาจารย์ และ/หรือ ปัญหาที่ต้องการให้มีการแก้ไขปรับปรุง </div></> :
+          <></>
+      }
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 p-6 mt-3'>
+        {comments.filter(comment => comment.comment !== null).map((comment, index) => (
+          <div key={index} className='card bg-base-200 hover:bg-gray-300 shadow-xl'>
+            <div className='card-body'>
+              <p className='text-black'>{comment.comment}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
+}
+
 
 function Taugh_sumprac() {
 
-
+  const [comment, setComment] = useState([]);
   const [evalsum, setevalsum] = useState([]);
   const [eval_sd, seteval_sd] = useState([]);
   const [Classdetail, setClassdetail] = useState([]);
@@ -15,7 +61,35 @@ function Taugh_sumprac() {
   const { classID } = useParams();
   const [loading, setLoading] = useState(undefined);
   const [completed, setCompleted] = useState(undefined);
-  
+  const Print = () => {
+    //console.log('print');  
+    let printContents = document.getElementById('printablediv').innerHTML;
+    let originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
+
+
+  // const Getcomment = () => {
+  //   axios.get(process.env.REACT_APP_API_URL + "/eval/taugh/practice/stat", { params: { classID: classID } })
+  //     .then(res => {
+  //       // const persons = res.data;
+  //       //this.setState({ persons });
+  //       console.log(res.data);
+
+  //       if (res.data.error === true) {
+  //         console.log(res.data)
+  //         console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+  //         return;
+  //       }
+  //       setComment(res.data.data.comment);
+  //     });
+
+  // }
+
 
 
 
@@ -91,24 +165,32 @@ function Taugh_sumprac() {
       {!completed ? (
         <LoadingPage></LoadingPage>
       ) : (
-        <div>
+        <div id='printablediv'>
           <div className=' text-center text-xl'>
             <p>แบบประเมินรายวิชาภาคปฏิบัติ</p>
             <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา {Dateget}</p>
             <p>รายวิชา{Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
           </div>
-     
+          <div className='d-flex m-3 '>
+            <button type="button" onClick={Print} className='float-right  btn  bg-orange-400'>พิมพ์</button>
+          </div>
+
           <div className=' flex flex-col space-y-3 mt-3'>
             {/* section2-1 */}
             <p>1.อาจารย์ได้แจ้งกำหนดการเรียนในส่วนที่อาจารย์ รับผิดชอบอย่างชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black ">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_1) * 20 }}>{evalsum.section2_1}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_1}/5</div>
+
               </div>
 
-           
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -121,12 +203,17 @@ function Taugh_sumprac() {
             <p>2.อาจารย์ได้ชี้แจงจุดมุ่งหมายการเรียนการสอนแต่ละครั้งอย่างชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_2) * 20 }}>{evalsum.section2_2}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_2}/5</div>
+
               </div>
 
-         
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -139,13 +226,18 @@ function Taugh_sumprac() {
 
             <p>3.อาจารย์มีความพร้อมในการสอนแต่ละครั้ง</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
-
+              {/* 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_3) * 20 }}>{evalsum.section2_3}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_3}/5</div>
+
               </div>
 
-           
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -159,12 +251,17 @@ function Taugh_sumprac() {
             <p>4.อาจารย์ได้ชี้แจงหลักเกณฑ์การวัดและประเมินผลในส่วนที่อาจารย์รับผิดชอบอย่างชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_4) * 20 }}>{evalsum.section2_4}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_4}/5</div>
+
               </div>
 
-            
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -179,12 +276,17 @@ function Taugh_sumprac() {
             <p>5.อาจารย์อธิบายเนื้อหาวิชาได้อย่างชัดเจนและเข้าใจง่าย</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_5) * 20 }}>{evalsum.section2_5}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_5}/5</div>
+
               </div>
 
-           
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -199,12 +301,17 @@ function Taugh_sumprac() {
             <p>6.อาจารย์ยกตัวอย่างประกอบได้อย่างเหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_6) * 20 }}>{evalsum.section2_6}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_6}/5</div>
+
               </div>
 
-           
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -220,12 +327,17 @@ function Taugh_sumprac() {
             <p>7.อาจารย์ตอบคำถามได้ชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_7) * 20 }}>{evalsum.section2_7}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_7}/5</div>
+
               </div>
 
-         
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -239,13 +351,18 @@ function Taugh_sumprac() {
 
             <p>8.อาจารย์ใช้สื่อการสอนได้เหมาะสมกับเนื้อหาการสอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
-
+              {/* 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_8) * 20 }}>{evalsum.section2_8}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_8}/5</div>
+
               </div>
 
-          
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -261,12 +378,17 @@ function Taugh_sumprac() {
             <p>9.อาจารย์ประเมินการเรียนรู้ของผู้เรียน และให้ข้อมูล ย้อนกลับเป็นระยะๆ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": ((evalsum.section2_9) * 20) }}>{evalsum.section2_9}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_9}/5</div>
+
               </div>
 
-            
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -282,12 +404,17 @@ function Taugh_sumprac() {
             <p>10.อาจารย์มีแนวทางและวิธีการสอนที่ทำให้ผู้เรียน สนใจการเรียนตลอดเวลา</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_10) * 20 }}>{evalsum.section2_10}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_10}/5</div>
+
               </div>
 
-              
+
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
                 <div className="stat-value ">{eval_sd.section2_10}</div>
@@ -296,19 +423,24 @@ function Taugh_sumprac() {
 
 
             </div>
-            
+
 
 
 
             <p>11.อาจารย์เข้าสอนและเลิกสอนตรงเวลา</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_11) * 20 }}>{evalsum.section2_11}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_11}/5</div>
+
               </div>
 
-            
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -324,12 +456,17 @@ function Taugh_sumprac() {
             <p>12.อาจารย์เปิดโอกาสและกระตุ้นให้ผู้เรียนได้แสดง ความคิดเห็นและซักถาม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_12) * 20 }}>{evalsum.section2_12}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_12}/5</div>
+
               </div>
 
-             
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -345,12 +482,17 @@ function Taugh_sumprac() {
             <p>13.อาจารย์สอนครอบคลุมเนื้อหาที่รับผิดชอบ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_13) * 20 }}>{evalsum.section2_13}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_13}/5</div>
+
               </div>
 
-        
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -366,12 +508,17 @@ function Taugh_sumprac() {
             <p>14.อาจารย์แนะนำเอกสารและแหล่งค้นคว้าเพิ่มเติม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_14) * 20 }}>{evalsum.section2_14}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_14}/5</div>
+
               </div>
 
-           
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -387,12 +534,17 @@ function Taugh_sumprac() {
             <p>15.อาจารย์ให้ข้อคิดเห็นที่เป็นประโยชน์</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_15) * 20 }}>{evalsum.section2_15}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_15}/5</div>
+
               </div>
 
-         
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -407,12 +559,17 @@ function Taugh_sumprac() {
             <p>16.อาจารย์มีเวลาให้คำปรึกษาแก่ผู้เรียนทั้ง นอกชั้นเรียน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_16) * 20 }}>{evalsum.section2_16}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_16}/5</div>
+
               </div>
 
-         
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -428,9 +585,14 @@ function Taugh_sumprac() {
             <p>17.ท่านได้ความรู้ ความเข้าใจเนื้อหาตามที่อาจารย์สอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_17) * 20 }}>{evalsum.section2_17}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_17}/5</div>
+
               </div>
 
               <div className="stat place-items-center">
@@ -446,12 +608,17 @@ function Taugh_sumprac() {
             <p>18.ท่านเกิดแนวคิดในการประยุกต์ความรู้ไปใช้ใน สถานการณ์จริง</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_18) * 20 }}>{evalsum.section2_18}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_18}/5</div>
+
               </div>
 
-       
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -466,12 +633,17 @@ function Taugh_sumprac() {
             <p>19.ท่านพอใจการสอนของอาจารย์</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_19) * 20 }}>{evalsum.section2_19}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_19}/5</div>
+
               </div>
 
-         
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -486,12 +658,17 @@ function Taugh_sumprac() {
             <p>20.ท่านสนใจแสวงหาความรู้ในเรื่องที่อาจารย์สอนต่อไปอีก</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_20) * 20 }}>{evalsum.section2_20}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_20}/5</div>
+
               </div>
 
-          
+
 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">SD</div>
@@ -504,6 +681,10 @@ function Taugh_sumprac() {
 
 
           </div>
+          <div>
+            <ExampleComponent />
+          </div>
+
 
         </div>
       )}

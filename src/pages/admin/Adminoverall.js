@@ -67,28 +67,41 @@ function Adminoverall() {
       ) :
         (
           <div className=' flex flex-col h-full'>
-        <h1 className=' text-black text-4xl text-center mt-10'>ภาพรวมข้อมูล</h1>
-        <p className=' mt-3 m-auto mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละปีการศึกษา</p>
-        <div className='w-1/2 h-1/2 m-auto'>
-        <Chart_bar />
-        </div>
-        <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละจังหวัด</p>
-        <div className='w-1/2 h-1/2 m-auto'>
-        <Chart_pie />
-        </div>
-        <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละทุนการศึกษา</p>
-        <div className='w-1/2 h-1/2 m-auto'>
-        <Chart_pie2/>
-        </div>
-        <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละรุ่น</p>
-        <div className='w-1/2 h-1/2 m-auto'>
-        <Chart_pie3/>
-        </div>
-        <p className=' m-auto mt-5 mb-1 ml-2 text-black'>ภาพรวมนิสิตในการมีงานทำ</p>
-        <div className='mt-5'>
-        <Chart_pie4/>
-        </div>
-      </div>
+            <h1 className=' text-black text-4xl text-center mt-10'>จัดการผู้ใช้</h1>
+            <div className='container mx-auto text-black'>
+              <div className=' grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-2 p-6 '>
+                <div>
+                  <p className=' mt-3 m-auto mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละปีการศึกษา</p>
+                  <div className=' '>
+                    <Chart_bar />
+                  </div>
+                </div>
+                <div>
+                  <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละจังหวัด</p>
+                  <div className=''>
+                    <Chart_pie />
+                  </div>
+                </div>
+                <div>
+                  <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละทุนการศึกษา</p>
+                  <div className=''>
+                    <Chart_pie2 />
+                  </div>
+                </div>
+                <div>
+                  <p className=' m-auto mt-3 mb-1 ml-2 text-black'>ภาพรวมนิสิตในแต่ละรุ่น</p>
+                  <div className=''>
+                    <Chart_pie3 />
+                  </div>
+                </div>
+              </div>
+
+              <p className=' m-auto mt-5 mb-1 ml-2 text-black'>ภาพรวมนิสิตในการมีงานทำ</p>
+              <div className='mt-5'>
+                <Chart_pie4 />
+              </div>
+            </div>
+          </div>
         )}
 
     </>
