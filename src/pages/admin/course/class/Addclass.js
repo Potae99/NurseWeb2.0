@@ -397,22 +397,11 @@ function Addclass() {
                                                             <h4 className="text-lg font-medium text-gray-800">
                                                                 นิสิต
                                                             </h4>
-                                                            {/* <input className=" bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                              type="text"
-                              placeholder="รหัสนิสิต"
-                              onChange={(event) => {
-                                setuserID(event.target.value)
-                              }}
-                            >
-                            </input> */}
                                                             <select
                                                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                                                 type="text"
                                                                 name='userID'
                                                                 placeholder="รหัสนิสิต"
-                                                                // onChange={(event) => {
-                                                                //   setcourseID(event.target.value)
-                                                                // }}
                                                                 onChange={(event) => {
                                                                     const filterStudent = studentList.filter(item => {
                                                                         return event.target.value == item.userID

@@ -182,17 +182,23 @@ function AddSyllabus() {
         event.preventDefault();
 
         const data = new FormData();
-
         data.append('file', file);
 
-        axios.post("//localhost:8000/upload", data)
-        .then((e) => {
-            console.log("Success");
-            setSyllabus_Path(`/server/public/syllabus/${e.data.filename}`);
-        })
-        .catch((e) => {
-            console.error("Error", e);
-        })
+        axios.post("//localhost:8000/upload/syllabus", data)
+            .then((response) => {
+                console.log("Success");
+                response.data.filename = file.name;
+                setSyllabus_Path(response.data.path);
+                Swal.fire({
+                    icon: "success",
+                    title: "Submit file success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+            })
+            .catch((error) => {
+                console.error("Error", error);
+            });
     };
 
     // console.log(syllabus_Path)

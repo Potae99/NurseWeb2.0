@@ -14,7 +14,7 @@ function AddStudent() {
     const [houseadd_subDistrict, sethouseadd_subDistrict] = useState("");
     const [houseadd_road, sethouseadd_road] = useState("");
     const [houseadd_houseNo, sethouseadd_houseNo] = useState("");
-    const [IDnumber_Path] = useState("");
+    const [IDnumber_Path, setIDnumber_Path] = useState(null);
     const [password, setpassword] = useState("");
     const [Birthday, setBirthday] = useState(null);
     const [IDline, setIDline] = useState("");
@@ -37,6 +37,12 @@ function AddStudent() {
     const [yearStartEnroll, setyearStartEnroll] = useState("");
     const [status, setStatus] = useState("");
     const [generation, setGeneration] = useState("");
+    const [transcript_Path, setTranscript_Path] = useState(null);
+    const [profile_Path, setProfile_Path] = useState(null);
+
+    const [fileTranscript, setFileTranscript] = useState(null);
+    const [fileProfile, setFileProfile] = useState(null);
+    const [fileIDnumber, setFileIDnumber] = useState(null);
 
     const [data, setData] = useState([]);
 
@@ -154,7 +160,9 @@ function AddStudent() {
             scholarship_name: scholarship_name,
             yearStartEnroll: yearStartEnroll,
             status: status,
-            generation: generation
+            generation: generation,
+            profile_Path: profile_Path,
+            transcript_Path: transcript_Path
 
         }).then((res) => {
             setData([
@@ -186,7 +194,9 @@ function AddStudent() {
                     scholarship_name: scholarship_name,
                     yearStartEnroll: yearStartEnroll,
                     status: status,
-                    generation: generation
+                    generation: generation,
+                    profile_Path: profile_Path,
+                    transcript_Path: transcript_Path
 
                 }
             ])
@@ -265,11 +275,89 @@ function AddStudent() {
 
     }
 
-    // const onchangeBirthday = (event) => {
-    //     event.preventDefault();
-    //     const formattedBirthday = moment(Birthday).format('YYYY-MM-DD');
-    //     setBirthday(formattedBirthday);
-    // }
+    const handleTranscriptChange = (event) => {
+        setFileTranscript(event.target.files[0]);
+    }
+
+    const handleProfileChange = (event) => {
+        setFileProfile(event.target.files[0]);
+    }
+
+    const handleIDnumberChange = (event) => {
+        setFileIDnumber(event.target.files[0]);
+    }
+
+    const SubmitTranscript = (event) => {
+        event.preventDefault();
+
+        const data = new FormData();
+
+        data.append("file", fileTranscript);
+
+        axios.post("//localhost:8000/upload/transcript", data)
+            .then((e) => {
+                console.log("Success");
+                e.data.filename = fileTranscript.name;
+                setTranscript_Path(e.data.path);
+                Swal.fire({
+                    icon: "success",
+                    title: "Submit file success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+            })
+            .catch((e) => {
+                console.error("Error", e);
+            })
+    };
+
+    const SubmitProfile = (event) => {
+        event.preventDefault();
+
+        const data = new FormData();
+
+        data.append("file", fileProfile);
+
+        axios.post("//localhost:8000/upload/profile", data)
+            .then((e) => {
+                console.log("Success");
+                e.data.filename = fileProfile.name;
+                setProfile_Path(e.data.path);
+                Swal.fire({
+                    icon: "success",
+                    title: "Submit file success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+            })
+            .catch((e) => {
+                console.error("Error", e);
+            })
+    };
+
+    const SubmitIDnumber = (event) => {
+        event.preventDefault();
+
+        const data = new FormData();
+
+        data.append("file", fileIDnumber);
+
+        axios.post("//localhost:8000/upload/IDnumber", data)
+            .then((e) => {
+                console.log("Success");
+                e.data.filename = fileIDnumber.name;
+                setIDnumber_Path(e.data.path);
+                Swal.fire({
+                    icon: "success",
+                    title: "Submit file success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+            })
+            .catch((e) => {
+                console.error("Error", e);
+            })
+    };
 
     return (
         <>
@@ -735,6 +823,81 @@ function AddStudent() {
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         required
                                     />
+                                </div>
+                            </div>
+                            <div className=' grid grid-cols-2'>
+                                <div className=''><p>ไฟล์ผลการเรียน</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            onChange={handleTranscriptChange}
+                                            type="file"
+                                            name="transcript_Path"
+                                            placeholder="transcript_Path"
+                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className=' grid place-items-center'>
+                                    <button onClick={SubmitTranscript} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                                            <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </span>
+                                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มผลการเรียน</span>
+                                        <span className="relative invisible">Button Text</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className=' grid grid-cols-2'>
+                                <div className=''><p>รูปนิสิต</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            onChange={handleProfileChange}
+                                            type="file"
+                                            name="profile_Path"
+                                            placeholder="profile_Path"
+                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className=' grid place-items-center'>
+                                    <button onClick={SubmitProfile} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                                            <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </span>
+                                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มรูปนิสิต</span>
+                                        <span className="relative invisible">Button Text</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className=' grid grid-cols-2'>
+                                <div className=''><p>ไฟล์บัตรประจำตัวประชาชน</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            onChange={handleIDnumberChange}
+                                            type="file"
+                                            name="IDnumber_Path"
+                                            placeholder="IDnumber_Path"
+                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className=' grid place-items-center'>
+                                    <button onClick={SubmitIDnumber} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                                            <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </span>
+                                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มบัตรประจำตัวประชาชน</span>
+                                        <span className="relative invisible">Button Text</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>

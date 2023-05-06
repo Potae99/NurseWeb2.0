@@ -12,6 +12,8 @@ function Studenttable() {
   const totalPages = studentlist ? Math.ceil(studentlist.length / itemsPerPage) : 0;
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [status, setStatus] = useState(1);
+
   // console.log(process.env.REACT_APP_API_URL + "/student/list");
 
   const Toast = Swal.mixin({
@@ -38,7 +40,7 @@ function Studenttable() {
   useEffect(() => {
     const fetchData = () => {
 
-      axios.get(process.env.REACT_APP_API_URL + "/student/list", {params:{status: 1}})
+      axios.get(process.env.REACT_APP_API_URL + "/student/list", { params: { status: status } })
         .then(res => {
           // const persons = res.data;
           //this.setState({ persons });
@@ -56,7 +58,7 @@ function Studenttable() {
         });
     }
     fetchData();
-  }, [searchTerm]);
+  }, [searchTerm, status]);
 
   const handleClick = (e, page) => {
     e.preventDefault();
@@ -120,6 +122,22 @@ function Studenttable() {
 
   return (
     <>
+      <div className='  mt-3 mb-3 ml-2 text-black'>
+        <select
+          className=' rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
+          type="text"
+          value={status}
+          name='status'
+          placeholder='สถานะ'
+          onChange={(event) => {
+            setStatus(event.target.value);
+          }}
+        >
+          <option value={""} >---โปรดระบุสถานะ---</option>
+          <option value={1}>กำลังศึกษา</option>
+          <option value={0}>จบการศึกษา</option>
+        </select>
+      </div>
       <input
         className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
         placeholder="ค้นหานิสิต...(รหัสนิสิต)"
@@ -132,17 +150,17 @@ function Studenttable() {
         </Routes>
 
         <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
-        <table className=" w-full text-sm text-left text-black ">
-          <thead className=" text-sm text-black uppercase bg-orange-300">
-            <tr  >
-              <th scope="col" className="py-3 px-6" >ลำดับ</th>
-              <th scope="col" className="py-3 px-6">รหัสนิสิต</th>
-              <th scope="col" className="py-3 px-6">ชื่อไทย</th>
-              <th scope="col" className="py-3 px-6">การกระทำ</th>
-            </tr>
-          </thead>
-          {renderTable()}
-        </table>
+          <table className=" w-full text-sm text-left text-black ">
+            <thead className=" text-sm text-black uppercase bg-orange-300">
+              <tr  >
+                <th scope="col" className="py-3 px-6" >ลำดับ</th>
+                <th scope="col" className="py-3 px-6">รหัสนิสิต</th>
+                <th scope="col" className="py-3 px-6">ชื่อไทย</th>
+                <th scope="col" className="py-3 px-6">การกระทำ</th>
+              </tr>
+            </thead>
+            {renderTable()}
+          </table>
         </div>
       </div>
       <div className="flex justify-center mt-4">

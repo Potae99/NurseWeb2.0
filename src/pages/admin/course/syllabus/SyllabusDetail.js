@@ -16,6 +16,8 @@ function SyllabusDetail() {
   const [courseID, setcourseID] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const [showModalEdit, setShowModalEdit] = useState(false);
+
   const [syllabusList, setSyllabusList] = useState([]);
 
   const [courseInSyllabus, setCourseInSyllabus] = useState([]);
@@ -23,6 +25,12 @@ function SyllabusDetail() {
 
   const [loading, setLoading] = useState(undefined);
   const [completed, setCompleted] = useState(undefined);
+
+  const [file, setFile] = useState(null);
+
+  const [newsyllabus_Path, setNewSyllabus_Path] = useState("");
+  const [Path, setPath] = useState("");
+
 
   const Toast = Swal.mixin({
     toast: true,
@@ -92,12 +100,7 @@ function SyllabusDetail() {
 
         }
       ])
-      // Toast.fire({
-      //   icon: 'success',
-      //   title: 'add course success'
-      // })
       Swal.fire({
-        // position: "top-end",
         icon: "success",
         title: "add course success",
         showConfirmButton: false,
@@ -107,50 +110,51 @@ function SyllabusDetail() {
 
     })
   }
-  const fetchData = () => {
 
-    axios.get(process.env.REACT_APP_API_URL + "/course/syllabus", { params: { syllabusID: syllabusID } })
-      .then(res => {
-        // console.log(res.data);
-
-        if (res.data.error === true) {
-          // console.log(res.data)
-          // console.log("ERROR FOUND WHEN GET DATA FROM API");
-          return;
-        }
-        setData(res.data.data.results);
-        setCourseInSyllabus(res.data.data.courses);
-        setLoading(true);
-
-        setTimeout(() => {
-          setCompleted(true);
-        }, 1000);
-
-
-      }).catch(error => {
-        // console.log(error.res);
-      });
-
-    axios.get(process.env.REACT_APP_API_URL + "/course")
-      .then(res => {
-        // console.log(res.data);
-
-        if (res.data.error === true) {
-          // console.log(res.data);
-          // console.log("ERROR FOUND WHEN GET DATA FROM API");
-          return;
-        }
-        setCourse(res.data.data);
-      })
-      .catch(error => {
-        // console.log(error.res);
-      });
-  }
   useEffect(() => {
-    setTimeout(() => {
-      fetchData();
-    }, 2000);
-  }, [])
+
+    const fetchData = () => {
+
+      axios.get(process.env.REACT_APP_API_URL + "/course/syllabus", { params: { syllabusID: syllabusID } })
+        .then(res => {
+          // console.log(res.data);
+
+          if (res.data.error === true) {
+            // console.log(res.data)
+            // console.log("ERROR FOUND WHEN GET DATA FROM API");
+            return;
+          }
+          setData(res.data.data.results);
+          setCourseInSyllabus(res.data.data.courses);
+          setLoading(true);
+
+          setTimeout(() => {
+            setCompleted(true);
+          }, 1000);
+
+
+        }).catch(error => {
+          // console.log(error.res);
+        });
+
+      axios.get(process.env.REACT_APP_API_URL + "/course")
+        .then(res => {
+          // console.log(res.data);
+
+          if (res.data.error === true) {
+            // console.log(res.data);
+            // console.log("ERROR FOUND WHEN GET DATA FROM API");
+            return;
+          }
+          setCourse(res.data.data);
+        })
+        .catch(error => {
+          // console.log(error.res);
+        });
+    }
+    fetchData();
+
+  }, [Path]);
 
   const backToAdminSyllabus = () => {
     window.location.href = "/admin/course/syllabus/adminsyllabus"
@@ -167,6 +171,17 @@ function SyllabusDetail() {
     })
       .then((results) => {
         if (results.isConfirmed) {
+
+          const filename = data.syllabus_Path.split("\\").pop();
+
+          axios.delete(`//localhost:8000/delete/syllabus/${filename}`)
+            .then(response => {
+              console.log("success");
+            })
+            .catch(error => {
+              console.log(error.response);
+            })
+
           axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", { data: { syllabusID: syllabusID } })
             .then(res => {
               setSyllabusList(
@@ -175,7 +190,6 @@ function SyllabusDetail() {
                 })
               )
               Swal.fire({
-                // position: "top-end",
                 icon: "success",
                 title: "Deleted!",
                 showConfirmButton: false,
@@ -191,6 +205,160 @@ function SyllabusDetail() {
 
   }
 
+  const handleDownload = () => {
+    if (data.syllabus_Path === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "ไม่พบไฟล์",
+        showConfirmButton: false,
+        timer: 1000,
+      })
+    }
+    else {
+      const filename = data.syllabus_Path.split("\\").pop(); // อ่านชื่อไฟล์จาก syllabus_Path
+      axios({
+        url: `//localhost:8000/download/syllabus/${filename}`, // ใช้ชื่อไฟล์ในการเรียก endpoint download
+        method: "GET",
+        responseType: "blob"
+      }).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', filename); // ใช้ชื่อไฟล์เดียวกับที่ส่งไปเรียก endpoint
+        document.body.appendChild(link);
+        link.click();
+      });
+    }
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (data.syllabus_Path === null) {
+      const form = new FormData();
+      form.append("file", file);
+
+      const filename = null;
+
+      axios.post(`//localhost:8000/edit/syllabus/${filename}`, form)
+        .then((response) => {
+          console.log("Success");
+          setNewSyllabus_Path(response.data.path);
+
+          axios.put(process.env.REACT_APP_API_URL + "/course/syllabus/path", {
+            syllabusID: syllabusID,
+            syllabus_Path: response.data.path
+          })
+            .then(() => {
+              setPath([
+                ...Path,
+                {
+                  syllabusID: syllabusID,
+                  syllabus_Path: response.data.path
+                }
+              ])
+              setShowModalEdit(false);
+              Swal.fire({
+                icon: "success",
+                title: "Saved!",
+                showConfirmButton: false,
+                timer: 1000,
+              })
+                .then(() => {
+                  // window.location.href = "/admin/course/syllabus/" + syllabusID;
+                })
+            })
+            .catch(error => {
+              console.log(error.request)
+            })
+        })
+        .catch((error) => {
+          console.error("Error", error);
+        });
+    }
+    else {
+      const form = new FormData();
+      form.append("file", file);
+
+      const filename = data.syllabus_Path.split("\\").pop();
+
+      axios.post(`//localhost:8000/edit/syllabus/${filename}`, form)
+        .then((response) => {
+          console.log("Success");
+          setNewSyllabus_Path(response.data.path);
+
+          axios.put(process.env.REACT_APP_API_URL + "/course/syllabus/path", {
+            syllabusID: syllabusID,
+            syllabus_Path: response.data.path
+          })
+            .then(() => {
+              setPath([
+                ...Path,
+                {
+                  syllabusID: syllabusID,
+                  syllabus_Path: response.data.path
+                }
+              ])
+              setShowModalEdit(false);
+              Swal.fire({
+                icon: "success",
+                title: "Saved!",
+                showConfirmButton: false,
+                timer: 1000,
+              })
+                .then(() => {
+                  // window.location.href = "/admin/course/syllabus/" + syllabusID;
+                })
+            })
+            .catch(error => {
+              console.log(error.request)
+            })
+        })
+        .catch((error) => {
+          console.error("Error", error);
+        });
+    }
+
+
+  };
+
+  // console.log(data.syllabus_Path)
+  // console.log(newsyllabus_Path)
+
+  // const editSyllabus_Path = () => {
+  //   console.log(newsyllabus_Path);
+
+  //   axios.put(process.env.REACT_APP_API_URL + "/course/syllabus/path", {
+  //     syllabusID: syllabusID,
+  //     syllabus_Path: newsyllabus_Path
+  //   })
+  //     .then(() => {
+  //       setPath([
+  //         ...Path,
+  //         {
+  //           syllabusID: syllabusID,
+  //           syllabus_Path: newsyllabus_Path
+  //         }
+  //       ])
+  //       setShowModalConfirmEdit(false);
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: "Saved!",
+  //         showConfirmButton: false,
+  //         timer: 1000,
+  //       })
+  //         .then(() => {
+  //           window.location.href = "/admin/course/syllabus/" + syllabusID;
+  //         })
+  //     })
+  //     .catch(error => {
+  //       console.log(error.request)
+  //     })
+  // }
 
   return (
     <>
@@ -207,6 +375,55 @@ function SyllabusDetail() {
                 <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
+            {/* <button onClick={() => setShowModalEdit(true)} className=' ml-3'>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+              </svg>
+            </button> */}
+            {showModalEdit ? (
+              <>
+                <div className=" fixed inset-0 z-10 overflow-y-auto">
+                  <div
+                    className="fixed inset-0 w-full h-full bg-black opacity-40"
+                    onClick={() => setShowModalEdit(false)}
+                  ></div>
+                  <div className="flex items-center min-h-screen px-4 py-8">
+                    <div className=" w-auto relative  p-4 mx-auto bg-white rounded-md shadow-lg">
+                      <div className="">
+                        <div className=" text-center sm:ml-4   ">
+                          <h4 className="text-lg font-medium text-gray-800">
+                            แก้ไขไฟล์หลักสูตร
+                          </h4>
+                          <input
+                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                            type="file"
+                            name='syllabus_Path'
+                            placeholder="syllabus_Path"
+                            onChange={handleFileChange}
+                          />
+                          <div className="items-center gap-2 mt-3 sm:flex">
+                            <button
+                              className="w-full mt-2 p-2.5 flex-1 text-white bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                              onClick={handleSubmit}
+                            >
+                              เพิ่ม
+                            </button>
+                            <button
+                              className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-300 focus:ring-2"
+                              onClick={() =>
+                                setShowModalEdit(false)
+                              }
+                            >
+                              ยกเลิก
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : null}
           </div>
           <div className=' grid grid-cols-1 place-items-center'>
             <div className=' flex'>
@@ -256,6 +473,32 @@ function SyllabusDetail() {
                   <div className=" m-3">รายละเอียด : {data.detail}</div></> :
                 <></>
             }
+            <>
+              <div className=' mt-5 flex'>
+                <div className=' mr-5'>
+                  <button onClick={handleDownload} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                    <span className=" absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                      </svg>
+                    </span>
+                    <span className="absolute flex items-center justify-center w-full h-full text-balck transition-all duration-300 transform group-hover:translate-x-full ease">ดาวน์โหลดไฟล์หลักสูตร</span>
+                    <span className="relative invisible">Button Text</span>
+                  </button>
+                </div>
+                <div className=''>
+                  <button onClick={() => setShowModalEdit(true)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                    <span className=" absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                      </svg>
+                    </span>
+                    <span className="absolute flex items-center justify-center w-full h-full text-balck transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มไฟล์หลักสูตร</span>
+                    <span className="relative invisible">Button Text</span>
+                  </button>
+                </div>
+              </div>
+            </>
           </div>
 
           {/* <p className='mt-5 ml-3 text-left text-2xl'>รายวิชาในหลักสูตร</p> */}
