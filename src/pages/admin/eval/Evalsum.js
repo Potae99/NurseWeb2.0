@@ -5,6 +5,7 @@ import format from 'date-fns/format';
 import LoadingPage from '../../LoadingPage';
 
 
+
 function ExampleComponent() {
   const { classID } = useParams();
   const [comments, setComments] = useState([]);
@@ -446,6 +447,15 @@ function Evalsum() {
   const [loading, setLoading] = useState(undefined);
   const [completed, setCompleted] = useState(undefined);
 
+  const Print = () => {
+    //console.log('print');  
+    let printContents = document.getElementById('printablediv').innerHTML;
+    let originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
+
 
 
 
@@ -540,11 +550,15 @@ function Evalsum() {
       {!completed ? (
         <LoadingPage></LoadingPage>
       ) : (
-        <div className=' text-black'>
+        <div id='printablediv' className=' text-black'>
+
           <div className=' text-center text-xl mb-5'>
             <p>แบบประเมินรายวิชา</p>
             <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา {Dateget}</p>
             <p>รายวิชา{Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
+          </div>
+          <div className='d-flex m-3 '>
+            <button type="button" onClick={Print} className='float-right  btn  bg-orange-400'>พิมพ์</button>
           </div>
           <div>
             <p>ระดับคะแนน</p>
@@ -562,11 +576,15 @@ function Evalsum() {
             <p>1.การชี้แจงวัตถุประสงค์ เนื้อหา วิธีการสอน และการประเมินผลการเรียนมีความชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
-              <div className="stat place-items-center">
+              {/* <div className="stat place-items-center">
                 <div className="stat-title text-black ">คะแนนเฉลี่ย</div>
                 <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_1) * 20 }}>{evalsum.section2_1}</div>
-              </div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_1}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_1}</div>
@@ -583,11 +601,15 @@ function Evalsum() {
             <p>2.วัตถุประสงค์การเรียนรู้สอดคล้องกับลักษณะวิชา</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_2) * 20 }}>{evalsum.section2_2}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_2) * 20 }}>{evalsum.section2_2}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_2}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_2}</div>
@@ -605,11 +627,15 @@ function Evalsum() {
             <p>3.หัวข้อการสอนมีความสอดคล้องกับวัตถุประสงค์</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_3) * 20 }}>{evalsum.section2_3}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_3) * 20 }}>{evalsum.section2_3}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_3}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_3}</div>
@@ -626,12 +652,16 @@ function Evalsum() {
 
             <p>4.ตารางการจัดการเรียนการสอนมีความชัดเจน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
-
+{/* 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_4) * 20 }}>{evalsum.section2_4}</div>
-              </div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_4) * 20 }}>{evalsum.section2_4}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_4}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_4}</div>
@@ -650,11 +680,15 @@ function Evalsum() {
             <p>5.การจัดลำดับการสอนมีความเหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_5) * 20 }}>{evalsum.section2_5}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_5) * 20 }}>{evalsum.section2_5}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_5}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_5}</div>
@@ -673,11 +707,15 @@ function Evalsum() {
             <p>6.ระยะเวลาการสอนเหมาะสมกับเนื้อหาในแต่ละหัวข้อ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_6) * 20 }}>{evalsum.section2_6}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_6) * 20 }}>{evalsum.section2_6}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_6}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_6}</div>
@@ -697,11 +735,15 @@ function Evalsum() {
             <p>7.กิจกรรมการเรียนการสอนสอดคล้องกับลักษณะวิชาและการเรียนรู้</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_7) * 20 }}>{evalsum.section2_7}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_7) * 20 }}>{evalsum.section2_7}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_7}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_7}</div>
@@ -720,11 +762,15 @@ function Evalsum() {
             <p>8.เอกสารประกอบการสอนเหมาะสม สนับสนุนเนื้อหาการสอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_8) * 20 }}>{evalsum.section2_8}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_8) * 20 }}>{evalsum.section2_8}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_8}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_8}</div>
@@ -744,11 +790,15 @@ function Evalsum() {
             <p>9.โดยภาพรวม ผู้เรียนมีความพึงพอใจในการจัดการเรียนการสอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": ((evalsum.section2_9) * 20) }}>{evalsum.section2_9}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": ((evalsum.section2_9) * 20) }}>{evalsum.section2_9}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_9}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_9}</div>
@@ -768,11 +818,15 @@ function Evalsum() {
             <p>10.โดยภาพรวมผู้สอนมีเวลาและให้คำปรึกษาแก่นักศึกษานอกชั้นเรียน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_10) * 20 }}>{evalsum.section2_10}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_10) * 20 }}>{evalsum.section2_10}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_10}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_10}</div>
@@ -792,11 +846,15 @@ function Evalsum() {
             <p>11.โดยภาพรวมผู้สอน มีเทคนิคการถ่ายทอดความรู้น่าสนใจง่ายต่อการเข้าใจ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_11) * 20 }}>{evalsum.section2_11}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_11) * 20 }}>{evalsum.section2_11}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_11}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_11}</div>
@@ -816,11 +874,15 @@ function Evalsum() {
             <p>12.โดยภาพรวมผู้สอนตรงเวลาในการสอน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_12) * 20 }}>{evalsum.section2_12}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_12) * 20 }}>{evalsum.section2_12}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_12}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_12}</div>
@@ -840,11 +902,15 @@ function Evalsum() {
             <p>13.วิธีการประเมินผลการเรียน เหมาะสมกับวัตถุประสงค์ของวิชา</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_13) * 20 }}>{evalsum.section2_13}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_13) * 20 }}>{evalsum.section2_13}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_13}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_13}</div>
@@ -864,11 +930,15 @@ function Evalsum() {
             <p>14.เกณฑ์การวัดและประเมินผลการเรียนมีความเหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_14) * 20 }}>{evalsum.section2_14}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_14) * 20 }}>{evalsum.section2_14}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_14}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_14}</div>
@@ -888,11 +958,15 @@ function Evalsum() {
             <p>15.ห้องเรียนสะอาด บรรยากาศเหมาะสม น่าเรียน</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_15) * 20 }}>{evalsum.section2_15}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_15) * 20 }}>{evalsum.section2_15}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_15}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_15}</div>
@@ -911,11 +985,15 @@ function Evalsum() {
             <p>16.ห้องเรียนมีแสง สี เสียง เหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_16) * 20 }}>{evalsum.section2_16}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_16) * 20 }}>{evalsum.section2_16}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_16}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_16}</div>
@@ -935,11 +1013,15 @@ function Evalsum() {
             <p>17.ห้องเรียนมีการถ่ายเทอากาศเหมาะสม</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_17) * 20 }}>{evalsum.section2_17}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_17) * 20 }}>{evalsum.section2_17}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_17}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_17}</div>
@@ -957,12 +1039,16 @@ function Evalsum() {
 
             <p>18เอกสาร ตำรา สื่ออุปกรณ์สำหรับค้นคว้าด้วยตนเองมีความทันสมัย จำนวนเพียงพอ</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
-
+{/* 
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_18) * 20 }}>{evalsum.section2_18}</div>
-              </div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_18) * 20 }}>{evalsum.section2_18}</div>
+              </div> */}
+              <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="stat-value text-primary">{evalsum.section2_18}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_18}</div>
@@ -981,11 +1067,15 @@ function Evalsum() {
             <p>19.ผู้เรียนเกิดพฤติกรรมตามวัตถุประสงค์</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_19) * 20 }}>{evalsum.section2_19}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_19) * 20 }}>{evalsum.section2_19}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_19}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_19}</div>
@@ -1004,11 +1094,15 @@ function Evalsum() {
             <p>20.ผู้เรียนสามารถนำความรู้ไปใช้ในชีวิตประจำวันและเป็นพื้นฐานในการเรียนวิชาอื่นได้</p>
             <div className="stats shadow  bg-gray-100 hover:bg-gray-300">
 
+              {/* <div className="stat place-items-center">
+                <div className="stat-title text-black">คะแนนเฉลี่ย</div>
+                <div className="radial-pro text-primarygress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_20) * 20 }}>{evalsum.section2_20}</div>
+              </div> */}
               <div className="stat place-items-center">
                 <div className="stat-title text-black">คะแนนเฉลี่ย</div>
-                <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (evalsum.section2_20) * 20 }}>{evalsum.section2_20}</div>
-              </div>
+                <div className="stat-value text-primary">{evalsum.section2_20}/5</div>
 
+              </div>
               <div className="stat place-items-center">
                 <div className="stat-title text-black">ระดับ</div>
                 <div className="stat-value text-secondary">{evalsum.level2_20}</div>
@@ -1026,7 +1120,7 @@ function Evalsum() {
 
           </div>
           <div>
-          <ExampleComponent />
+            <ExampleComponent />
           </div>
 
         </div>
