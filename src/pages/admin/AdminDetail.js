@@ -150,7 +150,7 @@ function AdminDetail() {
                         <div>
                             <div className=' text-3xl text-center mb-5'>ผู้ดูแลระบบ : {data.nameTH}</div>
                             <div className=" grid grid-cols-1 place-items-center">
-                                <div className=" block bg-gray-200 w-2/3 p-auto rounded-2xl ring ring-black">
+                                <div className=" block bg-gray-200 w-2/3 p-auto rounded-2xl ring ring-black text-xl">
                                     <div className=" flex justify-around">
                                         <div className=" ml-7">
                                             {

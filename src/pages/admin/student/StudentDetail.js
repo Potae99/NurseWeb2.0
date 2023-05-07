@@ -58,62 +58,363 @@ function StudentDetail() {
             .then((results) => {
                 if (results.isConfirmed) {
 
-                    const fileProfileName = data.profile_Path.split("\\").pop();
-                    const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
-                    const fileTranscriptName = data.transcript_Path.split("\\").pop();
+                    if (data.profile_Path === null) {
+                        if (data.IDnumber_Path === null) {
+                            if (data.transcript_Path === null) {
+                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                                    .then((response) => {
+                                        setStudentList(
+                                            studentlist.filter((_) => {
+                                                return _.userID !== userID;
+                                            })
+                                        )
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Delete data success",
+                                            showConfirmButton: false,
+                                            timer: 1000,
+                                        })
+                                            .then(() => { window.location.href = "/admin/home"; })
 
-                    axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
-                        .then(response => {
-                            console.log("success");
-                        })
-                        .catch(error => {
-                            console.log(error.response);
-                        })
-                    axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
-                        .then(response => {
-                            console.log("success");
-                        })
-                        .catch(error => {
-                            console.log(error.response);
-                        })
-                    axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
-                        .then(response => {
-                            console.log("success");
-                        })
-                        .catch(error => {
-                            console.log(error.response);
-                        })
-
-                    axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                        .then((response) => {
-                            setStudentList(
-                                studentlist.filter((_) => {
-                                    return _.userID !== userID;
-                                })
-                            )
-
-                            // Toast.fire({
-                            //     icon: 'success',
-                            //     title: 'Delete data success'
-                            // })
-                            Swal.fire({
-                                // position: "top-end",
-                                icon: "success",
-                                title: "Delete data success",
-                                showConfirmButton: false,
-                                timer: 1000,
-                            })
-                                .then(() => { window.location.href = "/admin/home"; })
-
-
-                        }).catch(function (error) {
-                            if (error.response) {
-                                // console.log(error.response);
+                                    }).catch(function (error) {
+                                        if (error.response) {
+                                            // console.log(error.response);
+                                        }
+                                    });
                             }
-                        });
+                            else {
+                                const fileTranscriptName = data.transcript_Path.split("\\").pop();
+
+                                axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                                    .then((response) => {
+                                        setStudentList(
+                                            studentlist.filter((_) => {
+                                                return _.userID !== userID;
+                                            })
+                                        )
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Delete data success",
+                                            showConfirmButton: false,
+                                            timer: 1000,
+                                        })
+                                            .then(() => { window.location.href = "/admin/home"; })
+
+                                    }).catch(function (error) {
+                                        if (error.response) {
+                                            // console.log(error.response);
+                                        }
+                                    });
+                            }
+                        }
+                        else {
+                            if (data.transcript_Path === null) {
+
+                                const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
+
+                                axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                                    .then((response) => {
+                                        setStudentList(
+                                            studentlist.filter((_) => {
+                                                return _.userID !== userID;
+                                            })
+                                        )
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Delete data success",
+                                            showConfirmButton: false,
+                                            timer: 1000,
+                                        })
+                                            .then(() => { window.location.href = "/admin/home"; })
+
+                                    }).catch(function (error) {
+                                        if (error.response) {
+                                            // console.log(error.response);
+                                        }
+                                    });
+                            }
+                            else {
+                                const fileTranscriptName = data.transcript_Path.split("\\").pop();
+                                const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
+
+                                axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                                    .then((response) => {
+                                        setStudentList(
+                                            studentlist.filter((_) => {
+                                                return _.userID !== userID;
+                                            })
+                                        )
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Delete data success",
+                                            showConfirmButton: false,
+                                            timer: 1000,
+                                        })
+                                            .then(() => { window.location.href = "/admin/home"; })
+
+                                    }).catch(function (error) {
+                                        if (error.response) {
+                                            // console.log(error.response);
+                                        }
+                                    });
+                            }
+                        }
+                    }
+                    else {
+                        if (data.IDnumber_Path === null) {
+                            if (data.transcript_Path === null) {
+
+                                const fileProfileName = data.profile_Path.split("\\").pop();
+
+                                axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                                    .then((response) => {
+                                        setStudentList(
+                                            studentlist.filter((_) => {
+                                                return _.userID !== userID;
+                                            })
+                                        )
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Delete data success",
+                                            showConfirmButton: false,
+                                            timer: 1000,
+                                        })
+                                            .then(() => { window.location.href = "/admin/home"; })
+
+                                    }).catch(function (error) {
+                                        if (error.response) {
+                                            // console.log(error.response);
+                                        }
+                                    });
+                            }
+                            else {
+                                const fileTranscriptName = data.transcript_Path.split("\\").pop();
+                                const fileProfileName = data.profile_Path.split("\\").pop();
+
+                                axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                                    .then((response) => {
+                                        setStudentList(
+                                            studentlist.filter((_) => {
+                                                return _.userID !== userID;
+                                            })
+                                        )
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Delete data success",
+                                            showConfirmButton: false,
+                                            timer: 1000,
+                                        })
+                                            .then(() => { window.location.href = "/admin/home"; })
+
+                                    }).catch(function (error) {
+                                        if (error.response) {
+                                            // console.log(error.response);
+                                        }
+                                    });
+                            }
+                        }
+                        else {
+                            if (data.transcript_Path === null) {
+
+                                const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
+                                const fileProfileName = data.profile_Path.split("\\").pop();
+
+                                axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                                    .then((response) => {
+                                        setStudentList(
+                                            studentlist.filter((_) => {
+                                                return _.userID !== userID;
+                                            })
+                                        )
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Delete data success",
+                                            showConfirmButton: false,
+                                            timer: 1000,
+                                        })
+                                            .then(() => { window.location.href = "/admin/home"; })
+
+                                    }).catch(function (error) {
+                                        if (error.response) {
+                                            // console.log(error.response);
+                                        }
+                                    });
+                            }
+                            else {
+                                const fileTranscriptName = data.transcript_Path.split("\\").pop();
+                                const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
+                                const fileProfileName = data.profile_Path.split("\\").pop();
+
+                                axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
+                                    .then(response => {
+                                        console.log("success");
+                                    })
+                                    .catch(error => {
+                                        console.log(error.response);
+                                    });
+
+                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                                    .then((response) => {
+                                        setStudentList(
+                                            studentlist.filter((_) => {
+                                                return _.userID !== userID;
+                                            })
+                                        )
+                                        Swal.fire({
+                                            icon: "success",
+                                            title: "Delete data success",
+                                            showConfirmButton: false,
+                                            timer: 1000,
+                                        })
+                                            .then(() => { window.location.href = "/admin/home"; })
+
+                                    }).catch(function (error) {
+                                        if (error.response) {
+                                            // console.log(error.response);
+                                        }
+                                    });
+                            }
+                        }
+                    }
+
+                    // const fileProfileName = data.profile_Path.split("\\").pop();
+                    // const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
+                    // const fileTranscriptName = data.transcript_Path.split("\\").pop();
+
+                    // axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
+                    //     .then(response => {
+                    //         console.log("success");
+                    //     })
+                    //     .catch(error => {
+                    //         console.log(error.response);
+                    //     })
+                    // axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
+                    //     .then(response => {
+                    //         console.log("success");
+                    //     })
+                    //     .catch(error => {
+                    //         console.log(error.response);
+                    //     })
+                    // axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
+                    //     .then(response => {
+                    //         console.log("success");
+                    //     })
+                    //     .catch(error => {
+                    //         console.log(error.response);
+                    //     })
+
+                    // axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                    //     .then((response) => {
+                    //         setStudentList(
+                    //             studentlist.filter((_) => {
+                    //                 return _.userID !== userID;
+                    //             })
+                    //         )
+                    //         Swal.fire({
+                    //             icon: "success",
+                    //             title: "Delete data success",
+                    //             showConfirmButton: false,
+                    //             timer: 1000,
+                    //         })
+                    //             .then(() => { window.location.href = "/admin/home"; })
+
+
+                    //     }).catch(function (error) {
+                    //         if (error.response) {
+                    //             // console.log(error.response);
+                    //         }
+                    //     });
                 }
                 else if (results.isDenied) {
-                    window.location.href = "/admin/student/detail/" + userID;
+                    // window.location.href = "/admin/student/detail/" + userID;
                 }
             })
     }
@@ -593,10 +894,16 @@ function StudentDetail() {
                                     <>
                                         <div className=' grid place-items-center'>
                                             <div className=' flex'>
-                                                <p className=' text-xl text-center mb-5'>สถานะ : </p>
-                                                <p className=' text-green-500 text-xl text-center mb-5 ml-5'>กำลังศึกษา</p>
+                                                <p className=' text-xl text-center mb-3'>สถานะ : </p>
+                                                <p className=' text-yellow-500 text-xl text-center mb-3 ml-5'>กำลังศึกษา</p>
                                             </div>
+                                            {data.yearStartEnroll ?
+                                                <>
+                                                    <div className=" mb-3 text-xl">ปีที่เริ่มศึกษา : {data.yearStartEnroll}</div>
+                                                </> : <></>
+                                            }
                                         </div>
+
                                     </> : <></>
                             }
                             {
@@ -612,7 +919,7 @@ function StudentDetail() {
                             }
                             <div className=" grid grid-cols-1 place-items-center">
                                 <div className=" block bg-gray-200 w-11/12 p-auto rounded-2xl ring ring-black">
-                                    <div className=" flex justify-around">
+                                    <div className=" flex justify-around text-xl">
                                         <div className=" ml-7">
 
                                             {data.nameTH ?
@@ -665,14 +972,9 @@ function StudentDetail() {
                                                     <div className=" m-3">จังหวัด : {data.houseadd_province}</div>
                                                 </> : <></>
                                             }
-                                            {data.presentAddress ?
+                                            {data.houseadd_postalCode ?
                                                 <>
-                                                    <div className=" m-3">ที่อยู่ปัจจุบัน : {data.presentAddress}</div>
-                                                </> : <></>
-                                            }
-                                            {data.scholarship_name ?
-                                                <>
-                                                    <div className=" m-3">ประเภททุน : {data.scholarship_name}</div>
+                                                    <div className=" m-3">รหัสไปรษณีย์ : {data.houseadd_postalCode}</div>
                                                 </> : <></>
                                             }
                                         </div>
@@ -698,9 +1000,9 @@ function StudentDetail() {
                                                     <div className=" m-3">ศาสนา : {data.religion}</div>
                                                 </> : <></>
                                             }
-                                            {data.IDline ?
+                                            {data.scholarship_name ?
                                                 <>
-                                                    <div className=" m-3">IDline : {data.IDline}</div>
+                                                    <div className=" m-3">ประเภททุน : {data.scholarship_name}</div>
                                                 </> : <></>
                                             }
                                             {data.Birthday ?
@@ -723,18 +1025,19 @@ function StudentDetail() {
                                                     <div className=" m-3">อำเภอ : {data.houseadd_district}</div>
                                                 </> : <></>
                                             }
-                                            {data.houseadd_postalCode ?
+                                            {data.IDline ?
                                                 <>
-                                                    <div className=" m-3">รหัสไปรษณีย์ : {data.houseadd_postalCode}</div>
-                                                </> : <></>
-                                            }
-
-                                            {data.yearStartEnroll ?
-                                                <>
-                                                    <div className=" m-3">ปีที่เริ่มศึกษา : {data.yearStartEnroll}</div>
+                                                    <div className=" m-3">IDline : {data.IDline}</div>
                                                 </> : <></>
                                             }
                                         </div>
+                                    </div>
+                                    <div className=' ml-28 text-xl'>
+                                        {data.presentAddress ?
+                                            <>
+                                                <div className=" ml-4 mb-3">ที่อยู่ปัจจุบัน : {data.presentAddress}</div>
+                                            </> : <></>
+                                        }
                                     </div>
                                 </div>
                                 <>

@@ -327,7 +327,7 @@ function SyllabusDetail() {
         showConfirmButton: false,
         timer: 1000,
       })
-        // .then(() => { window.location.href = "/admin/course/syllabus/" + syllabusID; })
+      // .then(() => { window.location.href = "/admin/course/syllabus/" + syllabusID; })
 
     })
   }
@@ -393,31 +393,76 @@ function SyllabusDetail() {
       .then((results) => {
         if (results.isConfirmed) {
 
-          const filename = data.syllabus_Path.split("\\").pop();
-
-          axios.delete(`//localhost:8000/delete/syllabus/${filename}`)
-            .then(response => {
-              console.log("success");
-            })
-            .catch(error => {
-              console.log(error.response);
-            })
-
-          axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", { data: { syllabusID: syllabusID } })
-            .then(res => {
-              setSyllabusList(
-                syllabusList.filter((_) => {
-                  return _.syllabusID !== syllabusID;
+          if (data.syllabus_Path === null) {
+            axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", { data: { syllabusID: syllabusID } })
+              .then(res => {
+                setSyllabusList(
+                  syllabusList.filter((_) => {
+                    return _.syllabusID !== syllabusID;
+                  })
+                )
+                Swal.fire({
+                  icon: "success",
+                  title: "Deleted!",
+                  showConfirmButton: false,
+                  timer: 1000,
                 })
-              )
-              Swal.fire({
-                icon: "success",
-                title: "Deleted!",
-                showConfirmButton: false,
-                timer: 1000,
+                  .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus" })
+              });
+          }
+          else {
+            const filename = data.syllabus_Path.split("\\").pop();
+
+            axios.delete(`//localhost:8000/delete/syllabus/${filename}`)
+              .then(response => {
+                console.log("success");
               })
-                .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus" })
-            })
+              .catch(error => {
+                console.log(error.response);
+              })
+
+            axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", { data: { syllabusID: syllabusID } })
+              .then(res => {
+                setSyllabusList(
+                  syllabusList.filter((_) => {
+                    return _.syllabusID !== syllabusID;
+                  })
+                )
+                Swal.fire({
+                  icon: "success",
+                  title: "Deleted!",
+                  showConfirmButton: false,
+                  timer: 1000,
+                })
+                  .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus" })
+              });
+          }
+
+          // const filename = data.syllabus_Path.split("\\").pop();
+
+          // axios.delete(`//localhost:8000/delete/syllabus/${filename}`)
+          //   .then(response => {
+          //     console.log("success");
+          //   })
+          //   .catch(error => {
+          //     console.log(error.response);
+          //   })
+
+          // axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", { data: { syllabusID: syllabusID } })
+          //   .then(res => {
+          //     setSyllabusList(
+          //       syllabusList.filter((_) => {
+          //         return _.syllabusID !== syllabusID;
+          //       })
+          //     )
+          //     Swal.fire({
+          //       icon: "success",
+          //       title: "Deleted!",
+          //       showConfirmButton: false,
+          //       timer: 1000,
+          //     })
+          //       .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus" })
+          //   });
         }
         else if (results.isDenied) {
           window.location.href = "/admin/course/syllabus/" + syllabusID;

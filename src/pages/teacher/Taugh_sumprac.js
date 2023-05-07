@@ -165,11 +165,11 @@ function Taugh_sumprac() {
       {!completed ? (
         <LoadingPage></LoadingPage>
       ) : (
-        <div id='printablediv'>
+        <div id='printablediv' className=' text-black'>
           <div className=' text-center text-xl'>
             <p>แบบประเมินรายวิชาภาคปฏิบัติ</p>
             <p>หลักสูตรประกาศนียบัตรผู้ช่วยพยาบาล ปีการศึกษา {Dateget}</p>
-            <p>รายวิชา{Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
+            <p>รายวิชา {Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
           </div>
           <div className='d-flex m-3 '>
             <button type="button" onClick={Print} className='float-right  btn  bg-orange-400'>พิมพ์</button>

@@ -476,13 +476,6 @@ function Addclass() {
                                                             <h4 className="text-lg font-medium text-gray-800">
                                                                 อาจารย์
                                                             </h4>
-                                                            {/* <input className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
-                              type="text"
-                              placeholder="รหัสประจำตัวอาจารย์"
-                              onChange={(event) => {
-                                setuserID(event.target.value)
-                              }}
-                            ></input> */}
                                                             <select
                                                                 className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                                                 type="text"
@@ -505,13 +498,6 @@ function Addclass() {
                                                                     teacherList.map((_, index) => (<option key={index} value={_.userID}>{_.nameTH}</option>))
                                                                 }
                                                             </select>
-                                                            {/* <input className=" bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          type="text"
-                          placeholder="ประเภทการสอน"
-                          onChange={(event) => {
-                            settaughtType(event.target.value)
-                          }}
-                        ></input> */}
                                                             <select
                                                                 className='w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
                                                                 value={taughtType}
@@ -522,8 +508,8 @@ function Addclass() {
                                                                 name="taughtType"
                                                             >
                                                                 <option value={""}>---โปรดระบุประเภทการสอน---</option>
-                                                                <option value={"ภาคทฤษฎี"}>ภาคทฤษฎี</option>
-                                                                <option value={"ภาคปฏิบัติ"}>ภาคปฏิบัติ</option>
+                                                                <option value={"Theory"}>ภาคทฤษฎี</option>
+                                                                <option value={"Practice"}>ภาคปฏิบัติ</option>
                                                             </select>
                                                             <>
                                                                 <p className=' text-red-500 text-center mt-3'>***เพิ่มอาจารย์ให้ครบทุกคนก่อนแล้วจึงเพิ่มนิสิต***</p>

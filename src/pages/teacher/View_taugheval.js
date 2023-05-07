@@ -27,17 +27,27 @@ function View_taugheval() {
     const itemsPerPage = 5;
     const totalPages = classDetail ? Math.ceil(classDetail.length / itemsPerPage) : 0;
 
+    const [yearList, setYearList] = useState([]);
+
 
 
     useEffect(() => {
-        setTimeout(() => {
-            // fetchData();
-            setLoading(true);
 
-            setTimeout(() => {
-                setCompleted(true);
-            }, 1000);
-        }, 2000);
+        const fetchData = () => {
+            axios.get(process.env.REACT_APP_API_URL + "/class/yearClass")
+                .then((res) => {
+                    setYearList(res.data.data);
+                    setTimeout(() => {
+                        setCompleted(true);
+                    }, 1000);
+                })
+                .catch((error) => {
+                    console.error("Error", error);
+                });
+        }
+
+        fetchData();
+
     }, [])
 
 
@@ -85,7 +95,7 @@ function View_taugheval() {
                     <div className=" text-black font-bold text-4xl m-10 grid grid-cols-1 place-items-center">ผลการประเมิน</div>
                     <div className=' mb-5 flex justify-center'>
 
-                        <input
+                        <select
                             className=' border-black w-1/3 rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md'
                             type='text'
                             name='dateYear'
@@ -93,7 +103,12 @@ function View_taugheval() {
                             onChange={(event) => {
                                 setDateyear(event.target.value)
                             }}
-                        />
+                        >
+                            <option value={""}>---ระบุปีการศึกษา---</option>
+                            {
+                                yearList.map((_, index) => (<option key={index} value={_.dateYear}>{_.dateYear}</option>))
+                            }
+                        </select>
                         <div className=' ml-3'>
                             <button onClick={() => onchangeDateYear(dateYear)} type="submit" className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
                                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">

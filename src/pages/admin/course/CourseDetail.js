@@ -43,7 +43,7 @@ function CourseDetail() {
 
     const deleteCourse = () => {
         Swal.fire({
-            title: 'ต้องการลบหลักสูตรหรือไม่?',
+            title: 'ต้องการลบรายวิชาหรือไม่?',
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: 'ใช่',
@@ -234,7 +234,7 @@ function CourseDetail() {
                                                 defaultValue={categoryName}
                                                 type="text"
                                                 name='categoryName'
-                                                className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             >
                                                 <option value={""}>{categoryName}</option>
                                                 {
@@ -253,7 +253,7 @@ function CourseDetail() {
                                                 type="text"
                                                 name="courseID_number"
                                                 placeholder="รหัสวิชา"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -267,7 +267,7 @@ function CourseDetail() {
                                                 type="text"
                                                 name="courseNameTH"
                                                 placeholder="ชื่อไทย"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -281,7 +281,7 @@ function CourseDetail() {
                                                 type="text"
                                                 name="courseNameENG"
                                                 placeholder="ชื่ออังกฤษ"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -295,7 +295,7 @@ function CourseDetail() {
                                                 type="text"
                                                 name="creditStudy"
                                                 placeholder="หน่วยกิต"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -309,7 +309,7 @@ function CourseDetail() {
                                                 type="text"
                                                 name="studyTimeTheory"
                                                 placeholder="ชั่วโมงทฤษฎี"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -323,7 +323,7 @@ function CourseDetail() {
                                                 type="text"
                                                 name="studyTimePractice"
                                                 placeholder="ชั่วโมงปฏิบัติ"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -337,7 +337,7 @@ function CourseDetail() {
                                                 type="text"
                                                 name="studyTimeSelf"
                                                 placeholder="ชั่วโมงศึกษาด้วยตัวเอง"
-                                                className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                                className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                             />
                                         </div>
                                     </div>
@@ -352,7 +352,7 @@ function CourseDetail() {
                                             type="text"
                                             name="detail"
                                             placeholder="รายละเอียดวิชา"
-                                            className="w-full rounded-md border border-while  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
                                         />
                                     </div>
                                 </div>

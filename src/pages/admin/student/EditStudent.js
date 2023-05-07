@@ -37,6 +37,9 @@ function EditStudent() {
     const [status, setStatus] = useState("");
     const [defaultBirthday, setDefaultBirthday] = useState(null);
     const [generation, setGeneration] = useState("");
+    const [IDnumber_Path, setIDnumber_Path] = useState("");
+    const [profile_Path, setProfile_Path] = useState("");
+    const [transcript_Path, setTranscript_Path] = useState("");
 
     const [data, setData] = useState("");
 
@@ -50,6 +53,7 @@ function EditStudent() {
 
     const [loading, setLoading] = useState(undefined);
     const [completed, setCompleted] = useState(undefined);
+
 
     const editStudent = () => {
         Swal.fire({
@@ -91,7 +95,10 @@ function EditStudent() {
                     scholarship_name: scholarship_name,
                     yearStartEnroll: yearStartEnroll,
                     status: status,
-                    generation: generation
+                    generation: generation,
+                    profile_Path: profile_Path,
+                    IDnumber_Path: IDnumber_Path,
+                    transcript_Path: transcript_Path
 
                 }).then(() => {
                     setData([
@@ -122,7 +129,10 @@ function EditStudent() {
                             scholarship_name: scholarship_name,
                             yearStartEnroll: yearStartEnroll,
                             status: status,
-                            generation: generation
+                            generation: generation,
+                            profile_Path: profile_Path,
+                            IDnumber_Path: IDnumber_Path,
+                            transcript_Path: transcript_Path
                         }
                     ])
                     // Swal.fire('Saved!', '', 'success')
@@ -194,6 +204,9 @@ function EditStudent() {
                 setStatus(res.data.data.status);
                 setyearStartEnroll(res.data.data.yearStartEnroll);
                 setGeneration(res.data.data.generation);
+                setProfile_Path(res.data.data.profile_Path);
+                setIDnumber_Path(res.data.data.IDnumber_Path);
+                setTranscript_Path(res.data.data.transcript_Path);
                 setLoading(true);
 
                 setTimeout(() => {

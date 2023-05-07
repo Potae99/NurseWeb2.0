@@ -237,7 +237,7 @@ function Classdetail() {
     }
     fetchData();
     renderTable();
-  }, [searchTerm, generationAdd, studentAdd]);
+  }, [searchTerm, studentAdd, generationAdd]);
 
   const handleClick = (e, page) => {
     e.preventDefault();

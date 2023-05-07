@@ -2,7 +2,7 @@ import React from 'react'
 
 function Credit() {
   return (
-    <div className='flex flex-col  '>
+    <div className='flex flex-col text-black  '>
       <b className=' text-4xl text-center'>Credit</b>
       <b className=' text-lg'>Nawapon Thongmak</b>
       <p>taeteapro@gmail.com</p>

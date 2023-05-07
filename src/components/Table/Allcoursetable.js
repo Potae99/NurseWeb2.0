@@ -54,6 +54,7 @@ function Allcoursetable() {
       <tbody key={start + index}>
         <tr className=' hover:bg-gray-200 bg-white border-b'>
           <td className='py-4 px-6'>{start + index + 1}</td>
+          <td className="py-4 px-6" >{_.categoryName}</td>
           <td className="py-4 px-6" >{_.courseID_number}</td>
           <td className="py-4 px-6">{_.courseNameTH}</td>
           {/* <td className="py-4 px-6">{_.courseNameENG}</td> */}
@@ -215,6 +216,7 @@ function Allcoursetable() {
           <thead className="text-sm text-black uppercase bg-orange-300">
             <tr  >
               <th scope="col" className="py-3 px-6" >ลำดับ</th>
+              <th scope="col" className="py-3 px-6" >หมวดวิชา</th>
               <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
               <th scope="col" className="py-3 px-6">ชื่อไทย</th>
               {/* <th scope="col" className="py-3 px-6">ชื่ออังกฤษ</th> */}

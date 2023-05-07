@@ -82,15 +82,25 @@ function EditTeacher() {
                             teacherID: teacherID
                         }
                     ])
-                    Swal.fire('Saved!', '', 'success')
+                    Swal.fire({
+                        icon: "success",
+                        title: "Saved!",
+                        showConfirmButton: false,
+                        timer: 1000,                        
+                    })
                         .then(() => { window.location.href = "/admin/teacher/detail/" + userID; })
 
                 })
 
 
             } else if (result.isDenied) {
-                Swal.fire('Changes are not saved', '', 'info')
-                    .then(() => { window.location.href = "/admin/teacher/detail/" + userID; })
+                Swal.fire({
+                    icon: "info",
+                    title: "Change are not saved",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+                    // .then(() => { window.location.href = "/admin/teacher/detail/" + userID; })
 
             }
         })

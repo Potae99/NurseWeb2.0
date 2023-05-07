@@ -18,25 +18,6 @@ function Evalsearch() {
     useEffect(() => {
         const fetchData = () => {
 
-            // const Toast = Swal.mixin({
-            //     toast: true,
-            //     position: 'top-end',
-            //     showConfirmButton: false,
-            //     timer: 3000,
-            //     timerProgressBar: true,
-            //     didOpen: (toast) => {
-            //       toast.addEventListener('mouseenter', Swal.stopTimer)
-            //       toast.addEventListener('mouseleave', Swal.resumeTimer)
-            //     }
-            //   })
-
-            //   Toast.fire({
-            //     icon: 'error',
-            //     title: 'get data from API error!'
-            //   })
-
-
-
             axios.get(process.env.REACT_APP_API_URL + "/class/list")
                 .then(res => {
                     // const persons = res.data;
@@ -245,7 +226,7 @@ function Evalsearch() {
                                 <thead className="text-sm text-black uppercase bg-orange-300">
                                     <tr  >
                                         <th scope="col" className="py-3 px-6">ปีการศึกษา</th>
-                                        <th scope="col" className="py-3 px-6" >รหัสคาบเรียน</th>
+                                        <th scope="col" className="py-3 px-6" >รหัสวิชา</th>
                                         <th scope="col" className="py-3 px-6">ชื่อวิชา</th>
                                         <th scope="col" className="py-3 px-6">ห้องเรียน</th>
                                         <th scope="col" className="py-3 px-6">การกระทำ</th>

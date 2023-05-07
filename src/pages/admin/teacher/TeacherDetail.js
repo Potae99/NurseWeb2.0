@@ -49,9 +49,8 @@ function TeacherDetail() {
                             //     title: 'Delete data success'
                             // })
                             Swal.fire({
-                                // position: "top-end",
                                 icon: "success",
-                                title: "Update group success",
+                                title: "Deleted!",
                                 showConfirmButton: false,
                                 timer: 1000,
                             })
@@ -148,7 +147,7 @@ function TeacherDetail() {
                         <div>
                             <div className=' text-black text-3xl text-center mb-5'>อาจารย์ : {data.nameTH}</div>
                             <div className=" grid grid-cols-1 place-items-center">
-                                <div className=" text-black block bg-gray-200 w-2/3 p-auto rounded-2xl ring ring-black">
+                                <div className=" text-black block bg-gray-200 w-2/3 p-auto rounded-2xl ring ring-black text-xl">
                                     <div className=" flex justify-around">
                                         <div className=" ml-7">
                                             {

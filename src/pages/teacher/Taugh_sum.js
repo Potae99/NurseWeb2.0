@@ -174,7 +174,7 @@ function Taugh_sum() {
             <p>รายวิชา {Classdetail.courseID_number} {Classdetail.courseNameTH}</p>
           </div>
           <div className='d-flex m-3 '>
-            <button type="button" onClick={Print} className='float-right  btn  bg-orange-400'>พิมพ์</button>
+            <button type="button" onClick={Print} className=' float-right  btn  bg-orange-400'>พิมพ์</button>
           </div>
 
           <div className=' flex flex-col space-y-3 mt-3'>

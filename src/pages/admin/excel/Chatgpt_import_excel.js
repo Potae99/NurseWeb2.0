@@ -50,7 +50,7 @@ function Chatgpt_import_excel() {
           nationality: row["สัญชาติ"] ? row["สัญชาติ"].toString() : "",
           religion: row["ศาสนา"] ? row["ศาสนา"].toString() : "",
           houseadd_houseNo: row["บ้านเลขที่"] ? row["บ้านเลขที่"].toString() : "",
-          houseadd_village: row["หมู่"] ? row["หมู่"].toString() : "",
+          houseadd_village: row["หมู่บ้าน"] ? row["หมู่บ้าน"].toString() : "",
           houseadd_road: row["ถนน"] ? row["ถนน"].toString() : "",
           houseadd_alley: row["ตรอก"] ? row["ตรอก"].toString() : "",
           houseadd_subDistrict: row["ตำบล/แขวง"] ? row["ตำบล/แขวง"].toString() : "",
@@ -132,10 +132,10 @@ function Chatgpt_import_excel() {
         <LoadingPage></LoadingPage>
       ) : (
         <div className="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
-          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6">
-            <h1 className="text-2xl font-bold mb-4">อัปโหลดฟอร์มข้อมูลนิสิต</h1>
+          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6 border border-black">
+            <h1 className="text-2xl font-bold mb-4 text-black">อัปโหลดฟอร์มข้อมูลนิสิต</h1>
             <div className="mb-4">
-              <label htmlFor="file" className="block font-medium">เลือกไฟล์ excel:</label>
+              <label htmlFor="file" className="block font-medium text-black">เลือกไฟล์ excel:</label>
               <input type="file" id="file" name="file" className="mt-2" onChange={handleFileChange} />
             </div>
             <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload</button>

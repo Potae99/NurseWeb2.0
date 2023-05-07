@@ -846,7 +846,7 @@ function StudentevalCourse() {
                                             name='section2_19_comment'
                                             placeholder='ข้อเสนอแนะที่ 19'
                                             value={section2_19_comment}
-                                            className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                            className=' w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
                                         />
                                         <p>20.ท่านสนใจแสวงหาความรู้ในเรื่องที่อาจารย์สอนต่อไปอีก</p>
                                         <div className="rating">
@@ -889,7 +889,7 @@ function StudentevalCourse() {
                                     }}
                                     name='comment1'
                                     value={comment1}
-                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                    className='w-full bg-white  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
                                 />
                             </div>
                             <p >2.รูปแบบของเอกสารประกอบการสอนโดยภาพรวม</p>
@@ -900,7 +900,7 @@ function StudentevalCourse() {
                                     }}
                                     name='comment2'
                                     value={comment2}
-                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                    className='w-full bg-white  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
                                 />
                             </div>
                             <p >3.วิธีการที่จะช่วยให้นิสิตเข้าใจเนื้อหามากขึ้นโดยภาพรวม</p>
@@ -911,7 +911,7 @@ function StudentevalCourse() {
                                     }}
                                     name='comment3'
                                     value={comment3}
-                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                    className='w-full bg-white  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
                                 />
                             </div>
                             <p >4.การประเมินผลการเรียนโดยภาพรวม</p>
@@ -922,7 +922,7 @@ function StudentevalCourse() {
                                     }}
                                     name='comment4'
                                     value={comment4}
-                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                    className='bg-white w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
                                 />
                             </div>
                             <p >5.สิ่งอื่นๆที่ต้องการให้ปรับปรุง</p>
@@ -933,22 +933,22 @@ function StudentevalCourse() {
                                     }}
                                     name='comment5'
                                     value={comment5}
-                                    className='w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
+                                    className=' bg-white w-full  rounded-md border border-black  bg-w py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus: shadow-sm'
                                 />
                             </div>
                         </div>
                     </div>
-                    <div className='grid grid-cols-2'>
+                    <div className=' flex flex-row-reverse'>
                         <div className=' ml-3'>
-                            <button className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                            {/* <button className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
                                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
                                     <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                 </span>
                                 <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">กลับ</span>
                                 <span className="relative invisible">Button Text</span>
-                            </button>
+                            </button> */}
                         </div>
-                        <div className=' absolute right-0 mr-7'>
+                        <div className=' mr-3'>
                             <button onClick={addeval} type="submit" className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
                                 <span className="absolute inset-0 flex items-center justify-center w-full h-full text-black duration-300 -translate-x-full bg-orange-300 group-hover:translate-x-0 ease">
                                     <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
