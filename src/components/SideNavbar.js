@@ -44,12 +44,12 @@ function SideNavbar({ session }) {
   const _menuItems = {
     "admin": [
       { id: 1, label: "ภาพรวม", icon: CollapsIcon, link: "/admin/overall" },   
-      { id: 2, label: "จัดการหลักสูตร", icon: Academiccap, link: "/admin/course/syllabus/adminsyllabus" },
-      { id: 3, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/admin/course/all" },
-      { id: 4, label: "จัดการคาบเรียน", icon: Calender, link: "/admin/class" },
-      { id: 5, label: "ผลการประเมิน", icon: SearchIcon, link: "/admin/eval/search" },
-      { id: 6, label: "ทุนการศึกษา", icon: VideosIcon, link: "/admin/scholarship/add" },
-      { id: 7, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/admin/home" },
+      { id: 2, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/admin/home" },
+      { id: 3, label: "จัดการหลักสูตร", icon: Academiccap, link: "/admin/course/syllabus/adminsyllabus" },
+      { id: 4, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/admin/course/all" },
+      { id: 5, label: "จัดการคาบเรียน", icon: Calender, link: "/admin/class" },
+      { id: 6, label: "ผลการประเมิน", icon: SearchIcon, link: "/admin/eval/search" },
+      { id: 7, label: "ทุนการศึกษา", icon: VideosIcon, link: "/admin/scholarship/add" },
     ],
     "teacher": [
       { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/teacher/home" },

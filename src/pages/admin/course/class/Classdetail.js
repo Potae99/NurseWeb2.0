@@ -423,6 +423,19 @@ function Classdetail() {
       );
     }
 
+    pageNumbers.push(
+      <li
+        href="#!"
+        onClick={(e) => handleClick(e, totalPages)}
+        key={"last"}
+        className={`bg-white text-black hover:bg-orange-200 inline-block mx-1 px-3 py-1 rounded-lg cursor-pointer`}
+      >
+        <a href="#!" onClick={(e) => handleClick(e, totalPages)}>
+          หน้าสุดท้าย
+        </a>
+      </li>
+    );
+
     return pageNumbers;
   };
 
