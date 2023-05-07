@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 import Chart_bar from '../../components/chart/Chart_bar'
 import Chart_pie from '../../components/chart/Chart_pie'
@@ -15,6 +16,84 @@ import LoadingPage from "../LoadingPage"
 // import { Data } from "./Data";
 
 // Chart.register(CategoryScale);
+function SearchYear() {
+
+  const [adminlist, setAdminList] = useState([]);
+  const [year, setYear] = useState("");
+
+
+    const Getyear = () => {
+
+      axios.get(process.env.REACT_APP_API_URL + "/summary/student/workedEachYear", { params: { year: year } })
+        .then(res => {
+          // const persons = res.data;
+          //this.setState({ persons });
+          // console.log(res.data);
+
+          if (res.data.error === true) {
+            // console.log(res.data)
+            // console.log("ERROR FOUND WHEN GET DATA FROM API ");
+
+
+            return;
+          }
+          setAdminList(res.data.data);
+
+        });
+    }
+
+  return (
+    <div className=' mt-3'>
+      <div className=' flex ' >
+        <div className="mb-5 flex justify-center ">
+          <input
+            onChange={(event) => {
+              setYear(event.target.value)
+            }}
+            type="text"
+            name="year"
+            value={year}
+            placeholder="ปีการศึกษา"
+            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+            required
+          />
+        </div>
+        <div className=' absolute right-0 mr-7'>
+          <button onClick={Getyear} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+            <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+              <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">ค้นหา</span>
+            <span className="relative invisible">Button Text</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="stats shadow w-full   bg-gray-100 hover:bg-gray-300 ">
+
+        <div className="stat place-items-center">
+          <div className="stat-title text-black ">เปอร์เซนการมีงานทำ</div>
+          <div className="radial-progress  bg-orange-400 text-primary-content border-4 border-orange-400" style={{ "--value": (adminlist.percent) }}>{adminlist.percent}</div>
+        </div>
+
+        <div className="stat place-items-center">
+          <div className="stat-title text-black">จำนวนนิสิตทั้งหมด</div>
+          <div className="stat-value text-secondary">{adminlist.all}</div>
+        </div>
+
+        <div className="stat place-items-center">
+          <div className="stat-title text-black">จำนวนนิสิตที่มีงานทำ</div>
+          <div className="stat-value">{adminlist.count}</div>
+
+        </div>
+      </div>
+    </div>
+  )
+};
+
+
 
 function Adminoverall() {
 
@@ -95,10 +174,14 @@ function Adminoverall() {
                   </div>
                 </div>
               </div>
-
-              <p className=' m-auto mt-5 mb-1 ml-2 text-black'>ภาพรวมนิสิตในการมีงานทำ</p>
+              <div>
+                <p className=' m-auto mt-5 mb-1 ml-2 text-black'>ภาพรวมนิสิตในการมีงานทำ</p>
+              </div>
               <div className='mt-5'>
                 <Chart_pie4 />
+              </div>
+              <div>
+                <SearchYear/>
               </div>
             </div>
           </div>
