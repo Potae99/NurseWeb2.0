@@ -68,7 +68,7 @@ export default function Login({ setToken }) {
           showConfirmButton: false,
           timer: 1000,
         }).then(() => {
-          window.location.href = "/admin/home";
+          window.location.href = "/admin/overall";
         });
           
         }
