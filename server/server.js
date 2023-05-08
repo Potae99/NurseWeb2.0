@@ -643,6 +643,6 @@ app.delete("/delete/transcript/:filename", (req, res) => {
 
 app.use('/image', express.static(path.join(__dirname, 'public/profile')));
 
-app.listen(8000, () => {
-    console.log("App is running on port 8000")
+app.listen(3000, () => {
+    console.log("App is running on port 3000")
 });
