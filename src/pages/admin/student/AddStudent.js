@@ -521,7 +521,7 @@ function AddStudent() {
                                         onChange={(event) => {
                                             setpassword(event.target.value)
                                         }}
-                                        type="password"
+                                        type="text"
                                         name="Password"
                                         placeholder="Password"
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
@@ -932,7 +932,7 @@ function AddStudent() {
                                                 <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </span>
-                                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มบัตรประจำตัวประชาชน</span>
+                                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มใบประกาศนียบัตร</span>
                                         <span className="relative invisible">Button Text</span>
                                     </button>
                                 </div>

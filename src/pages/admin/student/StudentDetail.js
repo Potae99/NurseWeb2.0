@@ -298,7 +298,7 @@ function StudentDetail() {
     };
 
     const handleCertificateChange = (event) => {
-        setFileTranscript(event.target.files[0]);
+        setFileCertificate(event.target.files[0]);
     };
 
     const handleProfileSubmit = (event) => {
@@ -1107,9 +1107,9 @@ function StudentDetail() {
                                                                         <input
                                                                             className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                                                             type="file"
-                                                                            name='profile_Path'
-                                                                            placeholder="profile_Path"
-                                                                            onChange={handleCertificateDownload}
+                                                                            name='certificate_Path'
+                                                                            placeholder="certificate_Path"
+                                                                            onChange={handleCertificateChange}
                                                                         />
                                                                         <div className="items-center gap-2 mt-3 sm:flex">
                                                                             <button
