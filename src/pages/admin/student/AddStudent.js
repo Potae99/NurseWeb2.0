@@ -39,10 +39,12 @@ function AddStudent() {
     const [generation, setGeneration] = useState("");
     const [transcript_Path, setTranscript_Path] = useState(null);
     const [profile_Path, setProfile_Path] = useState(null);
+    const [certificate_Path, setCertificate_Path] = useState(null);
 
     const [fileTranscript, setFileTranscript] = useState(null);
     const [fileProfile, setFileProfile] = useState(null);
     const [fileIDnumber, setFileIDnumber] = useState(null);
+    const [fileCertificate, setFileCertificate] = useState(null);
 
     const [data, setData] = useState([]);
 
@@ -54,19 +56,6 @@ function AddStudent() {
 
     const [loading, setLoading] = useState(undefined);
     const [completed, setCompleted] = useState(undefined);
-
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
 
     const fetchData = () => {
         axios.get(process.env.REACT_APP_API_URL + "/location")
@@ -162,7 +151,8 @@ function AddStudent() {
             status: status,
             generation: generation,
             profile_Path: profile_Path,
-            transcript_Path: transcript_Path
+            transcript_Path: transcript_Path,
+            certificate_Path: certificate_Path
 
         }).then((res) => {
             setData([
@@ -196,17 +186,11 @@ function AddStudent() {
                     status: status,
                     generation: generation,
                     profile_Path: profile_Path,
-                    transcript_Path: transcript_Path
-
+                    transcript_Path: transcript_Path,
+                    certificate_Path: certificate_Path
                 }
             ])
-
-            // Toast.fire({
-            //     icon: 'success',
-            //     title: 'Add student success'
-            // })
             Swal.fire({
-                // position: "top-end",
                 icon: "success",
                 title: "Add student success",
                 showConfirmButton: false,
@@ -287,6 +271,10 @@ function AddStudent() {
         setFileIDnumber(event.target.files[0]);
     }
 
+    const handleCertificateChange = (event) => {
+        setFileCertificate(event.target.files[0]);
+    }
+
     const SubmitTranscript = (event) => {
         event.preventDefault();
 
@@ -347,6 +335,30 @@ function AddStudent() {
                 console.log("Success");
                 e.data.filename = fileIDnumber.name;
                 setIDnumber_Path(e.data.path);
+                Swal.fire({
+                    icon: "success",
+                    title: "Submit file success!",
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+            })
+            .catch((e) => {
+                console.error("Error", e);
+            })
+    };
+
+    const SubmitCertificate = (event) => {
+        event.preventDefault();
+
+        const data = new FormData();
+
+        data.append("file", fileCertificate);
+
+        axios.post("//localhost:8000/upload/certificate", data)
+            .then((e) => {
+                console.log("Success");
+                e.data.filename = fileCertificate.name;
+                setCertificate_Path(e.data.path);
                 Swal.fire({
                     icon: "success",
                     title: "Submit file success!",
@@ -890,6 +902,31 @@ function AddStudent() {
                                 </div>
                                 <div className=' grid place-items-center'>
                                     <button onClick={SubmitIDnumber} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
+                                        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                                            <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </span>
+                                        <span className="absolute flex items-center justify-center w-full h-full text-black transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มบัตรประจำตัวประชาชน</span>
+                                        <span className="relative invisible">Button Text</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className=' grid grid-cols-2'>
+                                <div className=''><p>ไฟล์ใบประกาศนียบัตร</p>
+                                    <div className="mb-5 flex justify-center ">
+                                        <input
+                                            onChange={handleCertificateChange}
+                                            type="file"
+                                            name="certificate_Path"
+                                            placeholder="certificate_Path"
+                                            className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className=' grid place-items-center'>
+                                    <button onClick={SubmitCertificate} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-400 rounded-full shadow-md group">
                                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
                                             <svg className=' text-white' width="30" height="15" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M2 15.22H14.72M14.72 15.22H27.44M14.72 15.22V2.5M14.72 15.22V27.94" stroke="currentColor" strokeWidth="3.18" strokeLinecap="round" strokeLinejoin="round" />

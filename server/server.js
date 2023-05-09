@@ -59,10 +59,21 @@ const storageForIDnumber = multer.diskStorage({
     }
 });
 
+const storageForCertificate = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public/Certificate")
+    },
+    filename: (req, file, cb) => {
+        const fileName = getFormattedDate() + "." + file.originalname.split(".").pop();
+        cb(null, fileName);
+    }
+});
+
 const uploadForSyllabus = multer({ storage: storageForSyllabus }).single("file");
 const uploadForTranscript = multer({ storage: storageForTranscript }).single("file");
 const uploadForProfile = multer({ storage: storageForProfile }).single("file");
 const uploadForIDnumber = multer({ storage: storageForIDnumber }).single("file");
+const uploadForCertificate = multer({ storage: storageForCertificate }).single("file");
 
 // app.post("/upload/syllabus", (req, res) => {
 //     uploadForSyllabus(req, res, (err) => {
@@ -158,6 +169,17 @@ app.post("/upload/IDnumber", (req, res) => {
 
 app.post("/upload/profile", (req, res) => {
     uploadForProfile(req, res, (err) => {
+        if (err) {
+            return res.status(500).json(err)
+        }
+        else {
+            return res.status(200).send(req.file);
+        }
+    })
+})
+
+app.post("/upload/certificate", (req, res) => {
+    uploadForCertificate(req, res, (err) => {
         if (err) {
             return res.status(500).json(err)
         }
@@ -419,6 +441,27 @@ app.get('/download/transcript/:filename', (req, res) => {
     fileStream.pipe(res);
 });
 
+app.get('/download/certificate/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'public/Certificate', filename);
+
+    // console.log(filePath)
+
+    // ตรวจสอบว่าไฟล์มีอยู่จริงหรือไม่
+    if (!fs.existsSync(filePath)) {
+        res.status(404).send('File not found');
+        return;
+    }
+
+    // ตั้งค่า HTTP response header
+    res.setHeader('Content-disposition', `attachment; filename=${filename}`);
+    res.setHeader('Content-type', 'application/pdf');
+
+    // อ่านไฟล์จาก disk และส่งไฟล์กลับไปยัง client
+    const fileStream = fs.createReadStream(filePath);
+    fileStream.pipe(res);
+});
+
 // Endpoint for editing syllabus
 // app.post("/edit/syllabus/:filename", uploadForSyllabus, (req, res) => {
 //     const newFileName = req.file.filename;
@@ -589,6 +632,42 @@ app.post("/edit/transcript/:filename", uploadForTranscript, (req, res) => {
     }
 });
 
+app.post("/edit/certificate/:filename", uploadForCertificate, (req, res) => {
+    const newFileName = req.file.filename;
+    const oldFileName = req.params.filename;
+    const oldFilePath = `public/Certificate/${oldFileName}`;
+
+    if (!oldFileName) {
+        const newCertificate_Path = `public\\Certificate\\${newFileName}`;
+        fs.rename(req.file.path, newCertificate_Path, (err) => {
+            if (err) {
+                console.error("Error renaming file:", err);
+                return res.status(500).json({ error: "Unable to upload file" });
+            }
+            return res.status(200).json({ path: newCertificate_Path });
+        });
+    } else {
+        fs.access(oldFilePath, (err) => {
+            if (!err) {
+                fs.unlink(oldFilePath, (err) => {
+                    if (err) {
+                        console.error("Error deleting file:", err);
+                    }
+                });
+            }
+        });
+
+        const newCertificate_Path = `public\\Certificate\\${newFileName}`;
+        fs.rename(req.file.path, newCertificate_Path, (err) => {
+            if (err) {
+                console.error("Error renaming file:", err);
+                return res.status(500).json({ error: "Unable to upload file" });
+            }
+            return res.status(200).json({ path: newCertificate_Path });
+        });
+    }
+});
+
 app.delete("/delete/syllabus/:filename", (req, res) => {
     const fileName = req.params.filename;
     const filePath = `public/syllabus/${fileName}`;
@@ -641,8 +720,21 @@ app.delete("/delete/transcript/:filename", (req, res) => {
     });
 });
 
+app.delete("/delete/certificate/:filename", (req, res) => {
+    const fileName = req.params.filename;
+    const filePath = `public/Certificate/${fileName}`;
+
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            console.error("Error deleting file:", err);
+            return res.status(500).json({ error: "Unable to delete file" });
+        }
+        return res.status(200).json({ message: "File deleted successfully" });
+    });
+});
+
 app.use('/image', express.static(path.join(__dirname, 'public/profile')));
 
-app.listen(3000, () => {
-    console.log("App is running on port 3000")
+app.listen(8000, () => {
+    console.log("App is running on port 8000")
 });

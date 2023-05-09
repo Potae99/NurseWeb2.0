@@ -21,30 +21,22 @@ function StudentDetail() {
     const [fileProfile, setFileProfile] = useState(null);
     const [fileTranscript, setFileTranscript] = useState(null);
     const [fileIDnumber, setFileIDnumber] = useState(null);
+    const [fileCertificate, setFileCertificate] = useState(null);
 
     const [newProfile_Path, setNewProfile_Path] = useState(null);
     const [newIDnumber_Path, setNewIDnumber_Path] = useState(null);
     const [newTranscript_Path, setNewTranscript_Path] = useState(null);
+    const [newCertificate_Path, setNewCertificate_Path] = useState(null);
 
     const [pathForProfile, setPathForProfile] = useState("");
     const [pathForIDnumber, setPathForIDnumber] = useState("");
     const [pathForTranscript, setPathForTranscript] = useState("");
+    const [pathForCertificate, setPathForCertificate] = useState("");
 
     const [showModalProfile, setShowModalProfile] = useState(false);
     const [modalIDnumber, setModalIDnumber] = useState(false);
     const [modalTranscript, setModalTranscript] = useState(false);
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 700,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
+    const [modalCertificate, setModalCertificate] = useState(false);
 
     const deleteStudent = (userID) => {
         Swal.fire({
@@ -58,368 +50,77 @@ function StudentDetail() {
             .then((results) => {
                 if (results.isConfirmed) {
 
-                    if (data.profile_Path === null) {
-                        if (data.IDnumber_Path === null) {
-                            if (data.transcript_Path === null) {
-                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                                    .then((response) => {
-                                        setStudentList(
-                                            studentlist.filter((_) => {
-                                                return _.userID !== userID;
-                                            })
-                                        )
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Delete data success",
-                                            showConfirmButton: false,
-                                            timer: 1000,
-                                        })
-                                            .then(() => { window.location.href = "/admin/home"; })
+                    axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
+                        .then((response) => {
+                            setStudentList(
+                                studentlist.filter((_) => {
+                                    return _.userID !== userID;
+                                })
+                            )
+                            Swal.fire({
+                                icon: "success",
+                                title: "Delete data success",
+                                showConfirmButton: false,
+                                timer: 1000,
+                            })
+                                .then(() => { window.location.href = "/admin/home"; })
 
-                                    }).catch(function (error) {
-                                        if (error.response) {
-                                            // console.log(error.response);
-                                        }
-                                    });
+                        }).catch(function (error) {
+                            if (error.response) {
+                                // console.log(error.response);
                             }
-                            else {
-                                const fileTranscriptName = data.transcript_Path.split("\\").pop();
+                        });
 
-                                axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
+                    if (data.certificate_Path !== null) {
+                        const fileCertificateName = data.certificate_Path.split("\\").pop();
 
-                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                                    .then((response) => {
-                                        setStudentList(
-                                            studentlist.filter((_) => {
-                                                return _.userID !== userID;
-                                            })
-                                        )
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Delete data success",
-                                            showConfirmButton: false,
-                                            timer: 1000,
-                                        })
-                                            .then(() => { window.location.href = "/admin/home"; })
-
-                                    }).catch(function (error) {
-                                        if (error.response) {
-                                            // console.log(error.response);
-                                        }
-                                    });
-                            }
-                        }
-                        else {
-                            if (data.transcript_Path === null) {
-
-                                const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
-
-                                axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                                    .then((response) => {
-                                        setStudentList(
-                                            studentlist.filter((_) => {
-                                                return _.userID !== userID;
-                                            })
-                                        )
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Delete data success",
-                                            showConfirmButton: false,
-                                            timer: 1000,
-                                        })
-                                            .then(() => { window.location.href = "/admin/home"; })
-
-                                    }).catch(function (error) {
-                                        if (error.response) {
-                                            // console.log(error.response);
-                                        }
-                                    });
-                            }
-                            else {
-                                const fileTranscriptName = data.transcript_Path.split("\\").pop();
-                                const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
-
-                                axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                                    .then((response) => {
-                                        setStudentList(
-                                            studentlist.filter((_) => {
-                                                return _.userID !== userID;
-                                            })
-                                        )
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Delete data success",
-                                            showConfirmButton: false,
-                                            timer: 1000,
-                                        })
-                                            .then(() => { window.location.href = "/admin/home"; })
-
-                                    }).catch(function (error) {
-                                        if (error.response) {
-                                            // console.log(error.response);
-                                        }
-                                    });
-                            }
-                        }
+                        axios.delete(`//localhost:8000/delete/certificate/${fileCertificateName}`)
+                            .then(response => {
+                                console.log("success");
+                            })
+                            .catch(error => {
+                                console.log(error.response);
+                            });
                     }
-                    else {
-                        if (data.IDnumber_Path === null) {
-                            if (data.transcript_Path === null) {
+                    if (data.IDnumber_Path !== null) {
+                        const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
 
-                                const fileProfileName = data.profile_Path.split("\\").pop();
-
-                                axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                                    .then((response) => {
-                                        setStudentList(
-                                            studentlist.filter((_) => {
-                                                return _.userID !== userID;
-                                            })
-                                        )
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Delete data success",
-                                            showConfirmButton: false,
-                                            timer: 1000,
-                                        })
-                                            .then(() => { window.location.href = "/admin/home"; })
-
-                                    }).catch(function (error) {
-                                        if (error.response) {
-                                            // console.log(error.response);
-                                        }
-                                    });
-                            }
-                            else {
-                                const fileTranscriptName = data.transcript_Path.split("\\").pop();
-                                const fileProfileName = data.profile_Path.split("\\").pop();
-
-                                axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                                    .then((response) => {
-                                        setStudentList(
-                                            studentlist.filter((_) => {
-                                                return _.userID !== userID;
-                                            })
-                                        )
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Delete data success",
-                                            showConfirmButton: false,
-                                            timer: 1000,
-                                        })
-                                            .then(() => { window.location.href = "/admin/home"; })
-
-                                    }).catch(function (error) {
-                                        if (error.response) {
-                                            // console.log(error.response);
-                                        }
-                                    });
-                            }
-                        }
-                        else {
-                            if (data.transcript_Path === null) {
-
-                                const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
-                                const fileProfileName = data.profile_Path.split("\\").pop();
-
-                                axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                                    .then((response) => {
-                                        setStudentList(
-                                            studentlist.filter((_) => {
-                                                return _.userID !== userID;
-                                            })
-                                        )
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Delete data success",
-                                            showConfirmButton: false,
-                                            timer: 1000,
-                                        })
-                                            .then(() => { window.location.href = "/admin/home"; })
-
-                                    }).catch(function (error) {
-                                        if (error.response) {
-                                            // console.log(error.response);
-                                        }
-                                    });
-                            }
-                            else {
-                                const fileTranscriptName = data.transcript_Path.split("\\").pop();
-                                const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
-                                const fileProfileName = data.profile_Path.split("\\").pop();
-
-                                axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
-                                    .then(response => {
-                                        console.log("success");
-                                    })
-                                    .catch(error => {
-                                        console.log(error.response);
-                                    });
-
-                                axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                                    .then((response) => {
-                                        setStudentList(
-                                            studentlist.filter((_) => {
-                                                return _.userID !== userID;
-                                            })
-                                        )
-                                        Swal.fire({
-                                            icon: "success",
-                                            title: "Delete data success",
-                                            showConfirmButton: false,
-                                            timer: 1000,
-                                        })
-                                            .then(() => { window.location.href = "/admin/home"; })
-
-                                    }).catch(function (error) {
-                                        if (error.response) {
-                                            // console.log(error.response);
-                                        }
-                                    });
-                            }
-                        }
+                        axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
+                            .then(response => {
+                                console.log("success");
+                            })
+                            .catch(error => {
+                                console.log(error.response);
+                            });
                     }
+                    if (data.profile_Path !== null) {
+                        const fileProfileName = data.profile_Path.split("\\").pop();
 
-                    // const fileProfileName = data.profile_Path.split("\\").pop();
-                    // const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
-                    // const fileTranscriptName = data.transcript_Path.split("\\").pop();
+                        axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
+                            .then(response => {
+                                console.log("success");
+                            })
+                            .catch(error => {
+                                console.log(error.response);
+                            });
+                    }
+                    if (data.transcript_Path !== null) {
+                        const fileTranscriptName = data.transcript_Path.split("\\").pop();
 
-                    // axios.delete(`//localhost:8000/delete/profile/${fileProfileName}`)
-                    //     .then(response => {
-                    //         console.log("success");
-                    //     })
-                    //     .catch(error => {
-                    //         console.log(error.response);
-                    //     })
-                    // axios.delete(`//localhost:8000/delete/IDnumber/${fileIDnumberName}`)
-                    //     .then(response => {
-                    //         console.log("success");
-                    //     })
-                    //     .catch(error => {
-                    //         console.log(error.response);
-                    //     })
-                    // axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
-                    //     .then(response => {
-                    //         console.log("success");
-                    //     })
-                    //     .catch(error => {
-                    //         console.log(error.response);
-                    //     })
-
-                    // axios.delete(process.env.REACT_APP_API_URL + "/student", { data: { userID: userID } })
-                    //     .then((response) => {
-                    //         setStudentList(
-                    //             studentlist.filter((_) => {
-                    //                 return _.userID !== userID;
-                    //             })
-                    //         )
-                    //         Swal.fire({
-                    //             icon: "success",
-                    //             title: "Delete data success",
-                    //             showConfirmButton: false,
-                    //             timer: 1000,
-                    //         })
-                    //             .then(() => { window.location.href = "/admin/home"; })
-
-
-                    //     }).catch(function (error) {
-                    //         if (error.response) {
-                    //             // console.log(error.response);
-                    //         }
-                    //     });
+                        axios.delete(`//localhost:8000/delete/transcript/${fileTranscriptName}`)
+                            .then(response => {
+                                console.log("success");
+                            })
+                            .catch(error => {
+                                console.log(error.response);
+                            });
+                    }
                 }
                 else if (results.isDenied) {
                     // window.location.href = "/admin/student/detail/" + userID;
                 }
             })
     }
-
-
 
     const gotoStudentEdit = (userID) => {
         window.location.href = "/admin/student/edit/" + userID;
@@ -474,7 +175,7 @@ function StudentDetail() {
         }
         fetchData();
 
-    }, [pathForProfile, pathForIDnumber, pathForTranscript])
+    }, [pathForProfile, pathForIDnumber, pathForTranscript, pathForCertificate])
 
     const handleTranscriptDownload = () => {
         if (data.transcript_Path === null) {
@@ -557,6 +258,33 @@ function StudentDetail() {
         }
     };
 
+    const handleCertificateDownload = () => {
+        if (data.certificate_Path === null) {
+            Swal.fire({
+                icon: "warning",
+                title: "ไม่พบไฟล์",
+                showConfirmButton: false,
+                timer: 1000,
+            })
+        }
+        else {
+            const filename = data.certificate_Path.split("\\").pop();
+            axios({
+                url: `//localhost:8000/download/certificate/${filename}`,
+                method: "GET",
+                responseType: "blob"
+            })
+                .then((response) => {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.setAttribute("download", filename);
+                    document.body.appendChild(link);
+                    link.click();
+                });
+        }
+    };
+
     const handleProfileChange = (event) => {
         setFileProfile(event.target.files[0]);
     };
@@ -566,6 +294,10 @@ function StudentDetail() {
     };
 
     const handleTranscriptChange = (event) => {
+        setFileTranscript(event.target.files[0]);
+    };
+
+    const handleCertificateChange = (event) => {
         setFileTranscript(event.target.files[0]);
     };
 
@@ -806,6 +538,91 @@ function StudentDetail() {
                                 }
                             ])
                             setModalTranscript(false);
+                            Swal.fire({
+                                icon: "success",
+                                title: "Saved!",
+                                showConfirmButton: false,
+                                timer: 1000,
+                            })
+                                .then(() => { })
+                        })
+                        .catch((error) => {
+                            console.error("Error", error);
+                        })
+                })
+                .catch((error) => {
+                    console.error("Error", error);
+                });
+        }
+    };
+
+    const handleCertificateSubmit = (event) => {
+        event.preventDefault();
+
+        if (data.certificate_Path === null) {
+            const form = new FormData();
+            form.append("file", fileCertificate);
+
+            const filename = null;
+
+            axios.post(`//localhost:8000/edit/certificate/${filename}`, form)
+                .then((response) => {
+                    console.log("Success");
+                    setNewCertificate_Path(response.data.path);
+
+                    axios.put(process.env.REACT_APP_API_URL + "/student/certificate/path", {
+                        userID: userID,
+                        certificate_Path: response.data.path
+                    })
+                        .then(() => {
+                            setPathForCertificate([
+                                ...pathForCertificate,
+                                {
+                                    userID: userID,
+                                    certificate_Path: response.data.path
+                                }
+                            ])
+                            setModalCertificate(false);
+                            Swal.fire({
+                                icon: "success",
+                                title: "Saved!",
+                                showConfirmButton: false,
+                                timer: 1000,
+                            })
+                                .then(() => { })
+                        })
+                        .catch((error) => {
+                            console.error("Error", error);
+                        })
+                })
+                .catch((error) => {
+                    console.error("Error", error);
+                });
+        }
+        else {
+            const form = new FormData();
+            form.append("file", fileCertificate);
+
+            const filename = data.certificate_Path.split("\\").pop();
+
+            axios.post(`//localhost:8000/edit/certificate/${filename}`, form)
+                .then((response) => {
+                    console.log("Success");
+                    setNewCertificate_Path(response.data.path);
+
+                    axios.put(process.env.REACT_APP_API_URL + "/student/certificate/path", {
+                        userID: userID,
+                        certificate_Path: response.data.path
+                    })
+                        .then(() => {
+                            setPathForCertificate([
+                                ...pathForCertificate,
+                                {
+                                    userID: userID,
+                                    certificate_Path: response.data.path
+                                }
+                            ])
+                            setModalCertificate(false);
                             Swal.fire({
                                 icon: "success",
                                 title: "Saved!",
@@ -1235,6 +1052,76 @@ function StudentDetail() {
                                                                                 className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-300 focus:ring-2"
                                                                                 onClick={() =>
                                                                                     setModalIDnumber(false)
+                                                                                }
+                                                                            >
+                                                                                ยกเลิก
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            ) : null}
+                                        </div>
+                                    </div>
+                                </>
+                                <>
+                                    <div className=' mt-5 flex'>
+                                        <div className=' mr-5'>
+                                            <button onClick={handleCertificateDownload} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                                                <span className=" absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                                    </svg>
+                                                </span>
+                                                <span className="absolute flex items-center justify-center w-full h-full text-balck transition-all duration-300 transform group-hover:translate-x-full ease">ดาวน์โหลดใบประกาศนียบัตร</span>
+                                                <span className="relative invisible">Button Text</span>
+                                            </button>
+                                        </div>
+                                        <div className=''>
+                                            <button onClick={() => setModalCertificate(true)} className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-black transition duration-300 ease-out border-2 border-orange-300 rounded-full shadow-md group">
+                                                <span className=" absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-orange-400 group-hover:translate-x-0 ease">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                    </svg>
+                                                </span>
+                                                <span className="absolute flex items-center justify-center w-full h-full text-balck transition-all duration-300 transform group-hover:translate-x-full ease">เพิ่มใบประกาศนียบัตร</span>
+                                                <span className="relative invisible">Button Text</span>
+                                            </button>
+                                            {modalCertificate ? (
+                                                <>
+                                                    <div className=" fixed inset-0 z-10 overflow-y-auto">
+                                                        <div
+                                                            className="fixed inset-0 w-full h-full bg-black opacity-40"
+                                                            onClick={() => setModalCertificate(false)}
+                                                        ></div>
+                                                        <div className="flex items-center min-h-screen px-4 py-8">
+                                                            <div className=" w-auto relative  p-4 mx-auto bg-white rounded-md shadow-lg">
+                                                                <div className="">
+                                                                    <div className=" text-center sm:ml-4   ">
+                                                                        <h4 className="text-lg font-medium text-gray-800">
+                                                                            แก้ไขใบประกาศนียบัตร
+                                                                        </h4>
+                                                                        <input
+                                                                            className="w-full rounded-md border border-while bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                                                                            type="file"
+                                                                            name='profile_Path'
+                                                                            placeholder="profile_Path"
+                                                                            onChange={handleCertificateDownload}
+                                                                        />
+                                                                        <div className="items-center gap-2 mt-3 sm:flex">
+                                                                            <button
+                                                                                className="w-full mt-2 p-2.5 flex-1 text-white bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                                                                                onClick={handleCertificateSubmit}
+                                                                            >
+                                                                                เพิ่ม
+                                                                            </button>
+                                                                            <button
+                                                                                className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-300 focus:ring-2"
+                                                                                onClick={() =>
+                                                                                    setModalCertificate(false)
                                                                                 }
                                                                             >
                                                                                 ยกเลิก
