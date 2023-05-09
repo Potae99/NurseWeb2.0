@@ -184,7 +184,7 @@ function AddSyllabus() {
         const data = new FormData();
         data.append('file', file);
 
-        axios.post("//localhost:8000/upload/syllabus", data)
+        axios.post(process.env.REACT_APP_API_URL + "/upload/syllabus", data)
             .then((response) => {
                 console.log("Success");
                 response.data.filename = file.name;

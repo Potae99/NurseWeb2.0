@@ -282,7 +282,7 @@ function AddStudent() {
 
         data.append("file", fileTranscript);
 
-        axios.post("//localhost:8000/upload/transcript", data)
+        axios.post( process.env.REACT_APP_API_URL + "/upload/transcript", data)
             .then((e) => {
                 console.log("Success");
                 e.data.filename = fileTranscript.name;
@@ -306,7 +306,7 @@ function AddStudent() {
 
         data.append("file", fileProfile);
 
-        axios.post("//localhost:8000/upload/profile", data)
+        axios.post( process.env.REACT_APP_API_URL + "/upload/profile", data)
             .then((e) => {
                 console.log("Success");
                 e.data.filename = fileProfile.name;
@@ -330,7 +330,7 @@ function AddStudent() {
 
         data.append("file", fileIDnumber);
 
-        axios.post("//localhost:8000/upload/IDnumber", data)
+        axios.post( process.env.REACT_APP_API_URL + "/upload/IDnumber", data)
             .then((e) => {
                 console.log("Success");
                 e.data.filename = fileIDnumber.name;
@@ -354,7 +354,7 @@ function AddStudent() {
 
         data.append("file", fileCertificate);
 
-        axios.post("//localhost:8000/upload/certificate", data)
+        axios.post( process.env.REACT_APP_API_URL + "/upload/certificate", data)
             .then((e) => {
                 console.log("Success");
                 e.data.filename = fileCertificate.name;
