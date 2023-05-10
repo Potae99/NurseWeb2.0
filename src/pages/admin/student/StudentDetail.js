@@ -68,6 +68,12 @@ function StudentDetail() {
                         }).catch(function (error) {
                             if (error.response) {
                                 // console.log(error.response);
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "พบข้อผิดพลาด",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                })
                             }
                         });
 
@@ -76,10 +82,10 @@ function StudentDetail() {
 
                         axios.delete( process.env.REACT_APP_API_URL + `/upload/delete/certificate/${fileCertificateName}`)
                             .then(response => {
-                                console.log("success");
+                                // console.log("success");
                             })
                             .catch(error => {
-                                console.log(error.response);
+                                // console.log(error.response);
                             });
                     }
                     if (data.IDnumber_Path !== null) {
@@ -87,10 +93,10 @@ function StudentDetail() {
 
                         axios.delete( process.env.REACT_APP_API_URL + `/upload/delete/IDnumber/${fileIDnumberName}`)
                             .then(response => {
-                                console.log("success");
+                                // console.log("success");
                             })
                             .catch(error => {
-                                console.log(error.response);
+                                // console.log(error.response);
                             });
                     }
                     if (data.profile_Path !== null) {
@@ -98,10 +104,10 @@ function StudentDetail() {
 
                         axios.delete( process.env.REACT_APP_API_URL + `/upload/delete/profile/${fileProfileName}`)
                             .then(response => {
-                                console.log("success");
+                                // console.log("success");
                             })
                             .catch(error => {
-                                console.log(error.response);
+                                // console.log(error.response);
                             });
                     }
                     if (data.transcript_Path !== null) {
@@ -109,10 +115,10 @@ function StudentDetail() {
 
                         axios.delete( process.env.REACT_APP_API_URL + `/upload/delete/transcript/${fileTranscriptName}`)
                             .then(response => {
-                                console.log("success");
+                                // console.log("success");
                             })
                             .catch(error => {
-                                console.log(error.response);
+                                // console.log(error.response);
                             });
                     }
                 }
@@ -156,6 +162,12 @@ function StudentDetail() {
 
                 }).catch(error => {
                     // console.log(error.res);
+                    Swal.fire({
+                        icon: "error",
+                        title: "พบข้อผิดพลาด",
+                        showConfirmButton: false,
+                        timer: 2000,
+                    })
                 });
 
             axios.get(process.env.REACT_APP_API_URL + "/student/scholarship")
@@ -312,7 +324,7 @@ function StudentDetail() {
 
             axios.post( process.env.REACT_APP_API_URL + `/upload/edit/profile/${filename}`, form)
                 .then((response) => {
-                    console.log("Success");
+                    // console.log("Success");
                     setNewProfile_Path(response.data.path);
 
                     axios.put(process.env.REACT_APP_API_URL + "/student/profile/path", {
@@ -337,11 +349,23 @@ function StudentDetail() {
                                 .then(() => { })
                         })
                         .catch((error) => {
-                            console.error("Error", error);
+                            // console.error("Error", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "พบข้อผิดพลาด",
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
                         })
                 })
                 .catch((error) => {
-                    console.error("Error", error);
+                    // console.error("Error", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "โปรดตรวจสอบนามสกุลไฟล์",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 });
         }
         else {
@@ -352,7 +376,7 @@ function StudentDetail() {
 
             axios.post( process.env.REACT_APP_API_URL + `/upload/edit/profile/${filename}`, form)
                 .then((response) => {
-                    console.log("Success");
+                    // console.log("Success");
                     setNewProfile_Path(response.data.path);
 
                     axios.put(process.env.REACT_APP_API_URL + "/student/profile/path", {
@@ -377,11 +401,23 @@ function StudentDetail() {
                                 .then(() => { })
                         })
                         .catch((error) => {
-                            console.error("Error", error);
+                            // console.error("Error", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "พบข้อผิดพลาด",
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
                         })
                 })
                 .catch((error) => {
-                    console.error("Error", error);
+                    // console.error("Error", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "โปรดตรวจสอบนามสกุลไฟล์",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 });
         }
     };
@@ -397,7 +433,7 @@ function StudentDetail() {
 
             axios.post( process.env.REACT_APP_API_URL + `/upload/edit/IDnumber/${filename}`, form)
                 .then((response) => {
-                    console.log("Success");
+                    // console.log("Success");
                     setNewIDnumber_Path(response.data.path);
 
                     axios.put(process.env.REACT_APP_API_URL + "/student/IDnumber/path", {
@@ -422,11 +458,23 @@ function StudentDetail() {
                                 .then(() => { })
                         })
                         .catch((error) => {
-                            console.error("Error", error);
+                            // console.error("Error", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "พบข้อผิดพลาด",
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
                         })
                 })
                 .catch((error) => {
-                    console.error("Error", error);
+                    // console.error("Error", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "โปรดตรวจสอบนามสกุลไฟล์",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 });
         }
         else {
@@ -437,7 +485,7 @@ function StudentDetail() {
 
             axios.post( process.env.REACT_APP_API_URL + `/upload/edit/IDnumber/${filename}`, form)
                 .then((response) => {
-                    console.log("Success");
+                    // console.log("Success");
                     setNewIDnumber_Path(response.data.path);
 
                     axios.put(process.env.REACT_APP_API_URL + "/student/IDnumber/path", {
@@ -462,11 +510,23 @@ function StudentDetail() {
                                 .then(() => { })
                         })
                         .catch((error) => {
-                            console.error("Error", error);
+                            // console.error("Error", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "พบข้อผิดพลาด",
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
                         })
                 })
                 .catch((error) => {
-                    console.error("Error", error);
+                    // console.error("Error", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "โปรดตรวจสอบนามสกุลไฟล์",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 });
         }
     };
@@ -482,7 +542,7 @@ function StudentDetail() {
 
             axios.post( process.env.REACT_APP_API_URL + `/upload/edit/transcript/${filename}`, form)
                 .then((response) => {
-                    console.log("Success");
+                    // console.log("Success");
                     setNewTranscript_Path(response.data.path);
 
                     axios.put(process.env.REACT_APP_API_URL + "/student/transcript/path", {
@@ -507,11 +567,23 @@ function StudentDetail() {
                                 .then(() => { })
                         })
                         .catch((error) => {
-                            console.error("Error", error);
+                            // console.error("Error", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "พบข้อผิดพลาด",
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
                         })
                 })
                 .catch((error) => {
-                    console.error("Error", error);
+                    // console.error("Error", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "โปรดตรวจสอบนามสกุลไฟล์",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 });
         }
         else {
@@ -522,7 +594,7 @@ function StudentDetail() {
 
             axios.post( process.env.REACT_APP_API_URL + `/upload/edit/transcript/${filename}`, form)
                 .then((response) => {
-                    console.log("Success");
+                    // console.log("Success");
                     setNewTranscript_Path(response.data.path);
 
                     axios.put(process.env.REACT_APP_API_URL + "/student/transcript/path", {
@@ -547,11 +619,23 @@ function StudentDetail() {
                                 .then(() => { })
                         })
                         .catch((error) => {
-                            console.error("Error", error);
+                            // console.error("Error", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "พบข้อผิดพลาด",
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
                         })
                 })
                 .catch((error) => {
-                    console.error("Error", error);
+                    // console.error("Error", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "โปรดตรวจสอบนามสกุลไฟล์",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 });
         }
     };
@@ -567,7 +651,7 @@ function StudentDetail() {
 
             axios.post( process.env.REACT_APP_API_URL + `/upload/edit/certificate/${filename}`, form)
                 .then((response) => {
-                    console.log("Success");
+                    // console.log("Success");
                     setNewCertificate_Path(response.data.path);
 
                     axios.put(process.env.REACT_APP_API_URL + "/student/certificate/path", {
@@ -592,11 +676,23 @@ function StudentDetail() {
                                 .then(() => { })
                         })
                         .catch((error) => {
-                            console.error("Error", error);
+                            // console.error("Error", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "พบข้อผิดพลาด",
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
                         })
                 })
                 .catch((error) => {
-                    console.error("Error", error);
+                    // console.error("Error", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "โปรดตรวจสอบนามสกุลไฟล์",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 });
         }
         else {
@@ -607,7 +703,7 @@ function StudentDetail() {
 
             axios.post( process.env.REACT_APP_API_URL + `/upload/edit/certificate/${filename}`, form)
                 .then((response) => {
-                    console.log("Success");
+                    // console.log("Success");
                     setNewCertificate_Path(response.data.path);
 
                     axios.put(process.env.REACT_APP_API_URL + "/student/certificate/path", {
@@ -632,11 +728,23 @@ function StudentDetail() {
                                 .then(() => { })
                         })
                         .catch((error) => {
-                            console.error("Error", error);
+                            // console.error("Error", error);
+                            Swal.fire({
+                                icon: "error",
+                                title: "พบข้อผิดพลาด",
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
                         })
                 })
                 .catch((error) => {
-                    console.error("Error", error);
+                    // console.error("Error", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "โปรดตรวจสอบนามสกุลไฟล์",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 });
         }
     };

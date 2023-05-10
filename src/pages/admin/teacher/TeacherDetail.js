@@ -27,7 +27,7 @@ function TeacherDetail() {
 
     const deleteTeacher = (userID) => {
         Swal.fire({
-            title: 'ต้องการลบนิสิตหรือไม่?',
+            title: 'ต้องการลบอาจารย์หรือไม่?',
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: 'ใช่',

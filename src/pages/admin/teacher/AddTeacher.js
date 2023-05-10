@@ -61,6 +61,14 @@ function AddTeacher() {
               })
             .then(() => { window.location.href = "/admin/home"; })
         })
+        .catch((error) => {
+            Swal.fire({
+                icon: "error",
+                title: "โปรดตรวจสอบข้อมูล",
+                showConfirmButton: false,
+                timer: 2000,
+            })
+        })
     }
 
     const BacktoHomeAdmin = () => {

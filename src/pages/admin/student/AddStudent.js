@@ -200,6 +200,12 @@ function AddStudent() {
         })
             .catch(error => {
                 // console.log(error.request)
+                Swal.fire({
+                    icon: "error",
+                    title: "โปรดตรวจสอบข้อมูล",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             })
         // console.log(data)
     }
@@ -282,7 +288,7 @@ function AddStudent() {
 
         data.append("file", fileTranscript);
 
-        axios.post( process.env.REACT_APP_API_URL + "/upload/transcript", data)
+        axios.post(process.env.REACT_APP_API_URL + "/upload/transcript", data)
             .then((e) => {
                 console.log("Success");
                 e.data.filename = fileTranscript.name;
@@ -295,7 +301,13 @@ function AddStudent() {
                 })
             })
             .catch((e) => {
-                console.error("Error", e);
+                // console.error("Error", e);
+                Swal.fire({
+                    icon: "error",
+                    title: "โปรดตรวจสอบนามสกุลไฟล์",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             })
     };
 
@@ -306,7 +318,7 @@ function AddStudent() {
 
         data.append("file", fileProfile);
 
-        axios.post( process.env.REACT_APP_API_URL + "/upload/profile", data)
+        axios.post(process.env.REACT_APP_API_URL + "/upload/profile", data)
             .then((e) => {
                 console.log("Success");
                 e.data.filename = fileProfile.name;
@@ -319,7 +331,13 @@ function AddStudent() {
                 })
             })
             .catch((e) => {
-                console.error("Error", e);
+                // console.error("Error", e);
+                Swal.fire({
+                    icon: "error",
+                    title: "โปรดตรวจสอบนามสกุลไฟล์",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             })
     };
 
@@ -330,7 +348,7 @@ function AddStudent() {
 
         data.append("file", fileIDnumber);
 
-        axios.post( process.env.REACT_APP_API_URL + "/upload/IDnumber", data)
+        axios.post(process.env.REACT_APP_API_URL + "/upload/IDnumber", data)
             .then((e) => {
                 console.log("Success");
                 e.data.filename = fileIDnumber.name;
@@ -343,7 +361,13 @@ function AddStudent() {
                 })
             })
             .catch((e) => {
-                console.error("Error", e);
+                // console.error("Error", e);
+                Swal.fire({
+                    icon: "error",
+                    title: "โปรดตรวจสอบนามสกุลไฟล์",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             })
     };
 
@@ -354,7 +378,7 @@ function AddStudent() {
 
         data.append("file", fileCertificate);
 
-        axios.post( process.env.REACT_APP_API_URL + "/upload/certificate", data)
+        axios.post(process.env.REACT_APP_API_URL + "/upload/certificate", data)
             .then((e) => {
                 console.log("Success");
                 e.data.filename = fileCertificate.name;
@@ -367,7 +391,13 @@ function AddStudent() {
                 })
             })
             .catch((e) => {
-                console.error("Error", e);
+                // console.error("Error", e);
+                Swal.fire({
+                    icon: "error",
+                    title: "โปรดตรวจสอบนามสกุลไฟล์",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             })
     };
 
@@ -398,6 +428,7 @@ function AddStudent() {
                                         name="yearStartEnroll"
                                         placeholder="ปีที่เริ่มศึกษา"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        required
                                     />
                                 </div>
                             </div>
@@ -412,6 +443,7 @@ function AddStudent() {
                                         name="generation"
                                         placeholder="รุ่น"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        required
                                     />
                                 </div>
                             </div>
@@ -427,6 +459,7 @@ function AddStudent() {
                                         name="status"
                                         placeholder="สถานะ"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        required
                                     >
                                         <option value={""} >---โปรดระบุสถานะ---</option>
                                         <option value={1}>กำลังศึกษา</option>
@@ -512,6 +545,7 @@ function AddStudent() {
                                         name="IDnumber"
                                         placeholder="รหัสประจำตัวประชาชน"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        required
                                     />
                                 </div>
                             </div>
@@ -654,7 +688,7 @@ function AddStudent() {
                                         name="IDline"
                                         placeholder="IDline"
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        required
+                                        
                                     />
                                 </div>
                             </div>
@@ -668,7 +702,7 @@ function AddStudent() {
                                         name="phone"
                                         placeholder="มือถือ"
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                                        required
+                                        
                                     />
                                 </div>
                             </div>
@@ -839,6 +873,7 @@ function AddStudent() {
                             </div>
                             <div className=' grid grid-cols-2'>
                                 <div className=''><p>ไฟล์ผลการเรียน</p>
+                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf เท่านั้น***</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
                                             onChange={handleTranscriptChange}
@@ -863,7 +898,8 @@ function AddStudent() {
                                 </div>
                             </div>
                             <div className=' grid grid-cols-2'>
-                                <div className=''><p>รูปนิสิต</p>
+                                <div><p>รูปนิสิต</p>
+                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .jpg .jpeg และ .png เท่านั้น***</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
                                             onChange={handleProfileChange}
@@ -889,6 +925,7 @@ function AddStudent() {
                             </div>
                             <div className=' grid grid-cols-2'>
                                 <div className=''><p>ไฟล์บัตรประจำตัวประชาชน</p>
+                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf .jpg .jpeg และ .png เท่านั้น***</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
                                             onChange={handleIDnumberChange}
@@ -914,6 +951,7 @@ function AddStudent() {
                             </div>
                             <div className=' grid grid-cols-2'>
                                 <div className=''><p>ไฟล์ใบประกาศนียบัตร</p>
+                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf .jpg .jpeg และ .png เท่านั้น***</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
                                             onChange={handleCertificateChange}

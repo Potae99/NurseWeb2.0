@@ -214,7 +214,7 @@ function Admintable() {
     <>
       <input
         className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-        placeholder="ค้นหาผู้ดูแลระบบ..."
+        placeholder="ค้นหาผู้ดูแลระบบ...( ชื่อผู้ดูแลระบบ )"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

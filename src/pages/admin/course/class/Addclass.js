@@ -255,6 +255,13 @@ function Addclass() {
             })
             .catch(error => {
                 // console.log(error.request)
+                Swal.fire({
+                    icon: "error",
+                    title: "โปรดตรวจสอบข้อมูล",
+                    text: "คาบเรียนวิชานี้อาจมีอยู่แล้ว",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             })
     }
     // const teacherData = getTeacherData();

@@ -71,8 +71,8 @@ function Chatgpt_import_excel() {
       };
       axios.post(process.env.REACT_APP_API_URL + "/student/studentFromExcel", students)
         .then(response => {
-          console.log(response.data);
-          console.log(students);
+          // console.log(response.data);
+          // console.log(students);
 
           // let timerInterval
           // Swal.fire({
@@ -113,8 +113,8 @@ function Chatgpt_import_excel() {
             showConfirmButton: false,
             timer: 1000,
           })
-          console.error(error.response.data);
-          console.log(data);
+          // console.error(error.response.data);
+          // console.log(data);
         });
 
       // console.log(student);

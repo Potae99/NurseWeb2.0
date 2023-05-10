@@ -215,7 +215,7 @@ function Professertable() {
     <>
       <input
         className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-        placeholder="ค้นหาอาจารย์..."
+        placeholder="ค้นหาอาจารย์...( ชื่ออาจารย์ )"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

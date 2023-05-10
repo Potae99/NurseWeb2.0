@@ -102,6 +102,14 @@ function AddWorkHistory() {
             })
                 .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
         })
+        .catch((error) => {
+            Swal.fire({
+                icon: "error",
+                title: "โปรดตรวจสอบข้อมูล",
+                showConfirmButton: false,
+                timer: 2000
+            })
+        })
     }
 
     const fetchData = () => {
@@ -124,6 +132,12 @@ function AddWorkHistory() {
 
             }).catch(error => {
                 // console.log(error.res);
+                Swal.fire({
+                    icon: "error",
+                    title: "พบข้อผิดพลาด",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
             });
 
         axios.get(process.env.REACT_APP_API_URL + "/location")
@@ -139,6 +153,12 @@ function AddWorkHistory() {
             })
             .catch(error => {
                 // console.log(error.res);
+                Swal.fire({
+                    icon: "error",
+                    title: "พบข้อผิดพลาด",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
             })
     }
 
@@ -166,6 +186,12 @@ function AddWorkHistory() {
             })
             .catch(error => {
                 // console.log(error.res);
+                Swal.fire({
+                    icon: "error",
+                    title: "พบข้อผิดพลาด",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
             })
     }
 
@@ -183,6 +209,12 @@ function AddWorkHistory() {
             })
             .catch(error => {
                 // console.log(error.res);
+                Swal.fire({
+                    icon: "error",
+                    title: "พบข้อผิดพลาด",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
             })
     }
 
@@ -248,7 +280,6 @@ function AddWorkHistory() {
                                         placeholderText="dd/MM/yyyy"
                                         className="w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
                                         minDate={startWork}
-                                        required
                                     />
                                 </div>
                             </div>
@@ -263,6 +294,7 @@ function AddWorkHistory() {
                                         name="department"
                                         placeholder="แผนก"
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        required
                                     />
                                 </div>
                             </div>
@@ -277,6 +309,7 @@ function AddWorkHistory() {
                                         name="workAddressName"
                                         placeholder="ชื่อสถานที่ทำงาน"
                                         className="w-full rounded-md border border-black  bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#423bce] focus:shadow-md"
+                                        required
                                     />
                                 </div>
                             </div>

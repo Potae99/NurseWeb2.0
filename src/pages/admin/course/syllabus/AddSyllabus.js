@@ -69,6 +69,12 @@ function AddSyllabus() {
         })
             .catch(error => {
                 // console.log(error.request)
+                Swal.fire({
+                    icon: "error",
+                    title: "โปรดตรวจสอบข้อมูล",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             })
     }
 
@@ -186,7 +192,7 @@ function AddSyllabus() {
 
         axios.post(process.env.REACT_APP_API_URL + "/upload/syllabus", data)
             .then((response) => {
-                console.log("Success");
+                // console.log("Success");
                 response.data.filename = file.name;
                 setSyllabus_Path(response.data.path);
                 Swal.fire({
@@ -197,7 +203,13 @@ function AddSyllabus() {
                 })
             })
             .catch((error) => {
-                console.error("Error", error);
+                // console.error("Error", error);
+                Swal.fire({
+                    icon: "error",
+                    title: "โปรดตรวจสอบนามสกุลไฟล์",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             });
     };
 
@@ -310,7 +322,8 @@ function AddSyllabus() {
                                 />
                             </div>
                         </div>
-                        <div ><label htmlFor="file-input">Choose a file:</label>
+                        <div ><label htmlFor="file-input">เพิ่มไฟล์หลักสูตร</label>
+                        <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf, .xlsx, .docx และ .doc เท่านั้น***</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={handleFileChange}

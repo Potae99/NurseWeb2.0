@@ -79,6 +79,14 @@ function AddCourse() {
                 .then(() => { window.location.href = "/admin/course/all"; })
 
         })
+        .catch((error) => {
+            Swal.fire({
+                icon: "error",
+                title: "โปรดตรวจสอบข้อมูล",
+                showConfirmButton: false,
+                timer: 2000,
+            })
+        })
     }
 
     const BacktoCourse = () => {
@@ -104,6 +112,12 @@ function AddCourse() {
             })
             .catch(error => {
                 // console.log(error.res)
+                Swal.fire({
+                    icon: "error",
+                    title: "พบข้อผิดหลาด",
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
             })
     }
 

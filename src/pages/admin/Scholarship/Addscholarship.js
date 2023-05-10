@@ -87,7 +87,13 @@ function Addscholarship() {
                             timer: 1000,
                         });
                     } catch (error) {
-                        console.log(error.response);
+                        // console.log(error.response);
+                        Swal.fire({
+                            icon: "error",
+                            title: "พบข้อผิดพลาด",
+                            showConfirmButton: false,
+                            timer: 1000,
+                        })
                     }
                 }
             }
@@ -105,6 +111,12 @@ function Addscholarship() {
                     if (res.data.error === true) {
                         // console.log(res.data)
                         // console.log("ERROR FOUND WHEN GET DATA FROM API ");
+                        Swal.fire({
+                            icon: "error",
+                            title: "พบข้อผิดพลาดในการรับข้อมูล",
+                            showConfirmButton: false,
+                            timer:1000, 
+                        })
 
                         return;
                     }
@@ -286,6 +298,17 @@ function Addscholarship() {
     const handleAddScholarshipClick = async (event) => {
         event.preventDefault();
 
+        if (!scholarship_name) {
+            Swal.fire({
+              icon: "error",
+              title: "โปรดระบุชื่อทุน",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            return;
+          }
+          
+
         try {
             const response = await axios.post(process.env.REACT_APP_API_URL + "/student/scholarship", {
                 scholarship_name: scholarship_name
@@ -302,12 +325,13 @@ function Addscholarship() {
                 { scholarship_id: response.data.id, scholarship_name }
             ]);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             Swal.fire({
                 icon: "error",
-                title: "Add scholarship failed",
-                text: "Please try again later.",
-                confirmButtonText: "OK",
+                title: "โปรดตรวจสอบข้อมูล",
+                text: "ชื่อทุนนี้อาจมีอยู่แล้ว",
+                showConfirmButton: false,
+                timer: 2000,
             });
         }
     };
@@ -361,7 +385,7 @@ function Addscholarship() {
                                                         />
                                                         <div className="items-center gap-2 mt-3 sm:flex">
                                                             <button
-                                                                className="w-full mt-2 p-2.5 flex-1 text-white  bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                                                                className="w-full mt-2 p-2.5 flex-1 text-white  bg-orange-400 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                                                                 onClick={handleAddScholarshipClick}
                                                             >
                                                                 บันทึก
@@ -387,7 +411,7 @@ function Addscholarship() {
                     <>
                         <input
                             className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-                            placeholder="ค้นหาทุนการศึกษา..."
+                            placeholder="ค้นหาทุนการศึกษา...( ชื่อทุน )"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />

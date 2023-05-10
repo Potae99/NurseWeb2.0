@@ -415,10 +415,10 @@ function SyllabusDetail() {
 
             axios.delete(process.env.REACT_APP_API_URL + `/upload/delete/syllabus/${filename}`)
               .then(response => {
-                console.log("success");
+                // console.log("success");
               })
               .catch(error => {
-                console.log(error.response);
+                // console.log(error.response);
               })
 
             axios.delete(process.env.REACT_APP_API_URL + "/course/syllabus", { data: { syllabusID: syllabusID } })
@@ -512,7 +512,7 @@ function SyllabusDetail() {
 
       axios.post(process.env.REACT_APP_API_URL + `/upload/edit/syllabus/${filename}`, form)
         .then((response) => {
-          console.log("Success");
+          // console.log("Success");
           setNewSyllabus_Path(response.data.path);
 
           axios.put(process.env.REACT_APP_API_URL + "/course/syllabus/path", {
@@ -539,11 +539,23 @@ function SyllabusDetail() {
                 })
             })
             .catch(error => {
-              console.log(error.request)
+              // console.log(error.request)
+              Swal.fire({
+                icon: "error",
+                title: "พบข้อผิดพลาด",
+                showConfirmButton: false,
+                timer: 2000,
+              })
             })
         })
         .catch((error) => {
-          console.error("Error", error);
+          // console.error("Error", error);
+          Swal.fire({
+            icon: "error",
+            title: "โปรดตรวจสอบนามสกุลไฟล์",
+            showConfirmButton: false,
+            timer: 2000,
+          })
         });
     }
     else {
@@ -554,7 +566,7 @@ function SyllabusDetail() {
 
       axios.post( process.env.REACT_APP_API_URL + `/upload/edit/syllabus/${filename}`, form)
         .then((response) => {
-          console.log("Success");
+          // console.log("Success");
           setNewSyllabus_Path(response.data.path);
 
           axios.put(process.env.REACT_APP_API_URL + "/course/syllabus/path", {
@@ -581,11 +593,23 @@ function SyllabusDetail() {
                 })
             })
             .catch(error => {
-              console.log(error.request)
+              // console.log(error.request)
+              Swal.fire({
+                icon: "error",
+                title: "พบข้อผิดพลาด",
+                showConfirmButton: false,
+                timer: 2000,
+              })
             })
         })
         .catch((error) => {
-          console.error("Error", error);
+          // console.error("Error", error);
+          Swal.fire({
+            icon: "error",
+            title: "โปรดตรวจสอบนามสกุลไฟล์",
+            showConfirmButton: false,
+            timer: 2000,
+          })
         });
     }
 

@@ -96,9 +96,9 @@ export default function MyNavbar({ session, setToken }) {
                 {!session ? "" : session.nameTH}
               </Text>
             </Dropdown.Item>
-            <Dropdown.Item key="settings" withDivider>
+            {/* <Dropdown.Item key="settings" withDivider>
               การตั้งค่า
-            </Dropdown.Item>
+            </Dropdown.Item> */}
             <Dropdown.Item key="logout" withDivider color="error">
               <div onClick={()=> handleSignOut()}>
                 ออกจากระบบ

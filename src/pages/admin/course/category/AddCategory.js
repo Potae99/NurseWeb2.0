@@ -39,6 +39,16 @@ function AddCategory() {
   const handleAddCategoryClick = async (event) => {
     event.preventDefault();
 
+    if (!categoryName) {
+      Swal.fire({
+        icon: "error",
+        title: "โปรดระบุชื่อหมวดวิชา",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      return;
+    }
+
     try {
       const response = await axios.post(process.env.REACT_APP_API_URL + "/course/category", {
         categoryName: categoryName
@@ -55,12 +65,13 @@ function AddCategory() {
         { categoryID: response.data.id, categoryName }
       ]);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       Swal.fire({
         icon: "error",
-        title: "Add category failed",
-        text: "Please try again later.",
-        confirmButtonText: "OK",
+        title: "โปรดตรวจสอบข้อมูล",
+        text: "ชื่อหมวดวิชานี้อาจมีอยู่แล้ว",
+        showConfirmButton: false,
+        timer: 2000,
       });
     }
   };
@@ -404,7 +415,7 @@ function AddCategory() {
               timer: 1000,
             });
           } catch (error) {
-            console.log(error.response);
+            // console.log(error.response);
           }
         }
       }
@@ -461,7 +472,7 @@ function AddCategory() {
                             />
                             <div className="items-center gap-2 mt-3 sm:flex">
                               <button
-                                className="w-full mt-2 p-2.5 flex-1 text-white  bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                                className="w-full mt-2 p-2.5 flex-1 text-white  bg-orange-400 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                                 onClick={handleAddCategoryClick}
                               >
                                 บันทึก
@@ -488,7 +499,7 @@ function AddCategory() {
           <>
             <input
               className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-              placeholder="ค้นหาหมวดวิชา..."
+              placeholder="ค้นหาหมวดวิชา...( ชื่อหมวดวิชา )"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />

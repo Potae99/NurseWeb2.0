@@ -29,7 +29,7 @@ function AdminDetail() {
 
     const deleteAdmin = (userID) => {
         Swal.fire({
-            title: 'ต้องการลบนิสิตหรือไม่?',
+            title: 'ต้องการลบผู้ดูแลระบบหรือไม่?',
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: 'ใช่',
