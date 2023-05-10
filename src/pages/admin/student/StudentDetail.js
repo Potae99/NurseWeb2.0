@@ -74,7 +74,7 @@ function StudentDetail() {
                     if (data.certificate_Path !== null) {
                         const fileCertificateName = data.certificate_Path.split("\\").pop();
 
-                        axios.delete( process.env.REACT_APP_API_URL + `/delete/certificate/${fileCertificateName}`)
+                        axios.delete( process.env.REACT_APP_API_URL + `/upload/delete/certificate/${fileCertificateName}`)
                             .then(response => {
                                 console.log("success");
                             })
@@ -85,7 +85,7 @@ function StudentDetail() {
                     if (data.IDnumber_Path !== null) {
                         const fileIDnumberName = data.IDnumber_Path.split("\\").pop();
 
-                        axios.delete( process.env.REACT_APP_API_URL + `/delete/IDnumber/${fileIDnumberName}`)
+                        axios.delete( process.env.REACT_APP_API_URL + `/upload/delete/IDnumber/${fileIDnumberName}`)
                             .then(response => {
                                 console.log("success");
                             })
@@ -96,7 +96,7 @@ function StudentDetail() {
                     if (data.profile_Path !== null) {
                         const fileProfileName = data.profile_Path.split("\\").pop();
 
-                        axios.delete( process.env.REACT_APP_API_URL + `/delete/profile/${fileProfileName}`)
+                        axios.delete( process.env.REACT_APP_API_URL + `/upload/delete/profile/${fileProfileName}`)
                             .then(response => {
                                 console.log("success");
                             })
@@ -107,7 +107,7 @@ function StudentDetail() {
                     if (data.transcript_Path !== null) {
                         const fileTranscriptName = data.transcript_Path.split("\\").pop();
 
-                        axios.delete( process.env.REACT_APP_API_URL + `/delete/transcript/${fileTranscriptName}`)
+                        axios.delete( process.env.REACT_APP_API_URL + `/upload/delete/transcript/${fileTranscriptName}`)
                             .then(response => {
                                 console.log("success");
                             })
@@ -189,7 +189,7 @@ function StudentDetail() {
         else {
             const filename = data.transcript_Path.split("\\").pop();
             axios({
-                url:  process.env.REACT_APP_API_URL + `/download/transcript/${filename}`,
+                url:  process.env.REACT_APP_API_URL + `/upload/download/transcript/${filename}`,
                 method: "GET",
                 responseType: "blob"
             })
@@ -216,7 +216,7 @@ function StudentDetail() {
         else {
             const filename = data.IDnumber_Path.split("\\").pop();
             axios({
-                url:  process.env.REACT_APP_API_URL + `/download/IDnumber/${filename}`,
+                url:  process.env.REACT_APP_API_URL + `/upload/download/IDnumber/${filename}`,
                 method: "GET",
                 responseType: "blob"
             })
@@ -243,7 +243,7 @@ function StudentDetail() {
         else {
             const filename = data.profile_Path.split("\\").pop();
             axios({
-                url:  process.env.REACT_APP_API_URL + `/download/profile/${filename}`,
+                url:  process.env.REACT_APP_API_URL + `/upload/download/profile/${filename}`,
                 method: "GET",
                 responseType: "blob"
             })
@@ -270,7 +270,7 @@ function StudentDetail() {
         else {
             const filename = data.certificate_Path.split("\\").pop();
             axios({
-                url:  process.env.REACT_APP_API_URL + `/download/certificate/${filename}`,
+                url:  process.env.REACT_APP_API_URL + `/upload/download/certificate/${filename}`,
                 method: "GET",
                 responseType: "blob"
             })
@@ -310,7 +310,7 @@ function StudentDetail() {
 
             const filename = null;
 
-            axios.post( process.env.REACT_APP_API_URL + `/edit/profile/${filename}`, form)
+            axios.post( process.env.REACT_APP_API_URL + `/upload/edit/profile/${filename}`, form)
                 .then((response) => {
                     console.log("Success");
                     setNewProfile_Path(response.data.path);
@@ -350,7 +350,7 @@ function StudentDetail() {
 
             const filename = data.profile_Path.split("\\").pop();
 
-            axios.post( process.env.REACT_APP_API_URL + `/edit/profile/${filename}`, form)
+            axios.post( process.env.REACT_APP_API_URL + `/upload/edit/profile/${filename}`, form)
                 .then((response) => {
                     console.log("Success");
                     setNewProfile_Path(response.data.path);
@@ -395,7 +395,7 @@ function StudentDetail() {
 
             const filename = null;
 
-            axios.post( process.env.REACT_APP_API_URL + `/edit/IDnumber/${filename}`, form)
+            axios.post( process.env.REACT_APP_API_URL + `/upload/edit/IDnumber/${filename}`, form)
                 .then((response) => {
                     console.log("Success");
                     setNewIDnumber_Path(response.data.path);
@@ -435,7 +435,7 @@ function StudentDetail() {
 
             const filename = data.IDnumber_Path.split("\\").pop();
 
-            axios.post( process.env.REACT_APP_API_URL + `/edit/IDnumber/${filename}`, form)
+            axios.post( process.env.REACT_APP_API_URL + `/upload/edit/IDnumber/${filename}`, form)
                 .then((response) => {
                     console.log("Success");
                     setNewIDnumber_Path(response.data.path);
@@ -480,7 +480,7 @@ function StudentDetail() {
 
             const filename = null;
 
-            axios.post( process.env.REACT_APP_API_URL + `/edit/transcript/${filename}`, form)
+            axios.post( process.env.REACT_APP_API_URL + `/upload/edit/transcript/${filename}`, form)
                 .then((response) => {
                     console.log("Success");
                     setNewTranscript_Path(response.data.path);
@@ -520,7 +520,7 @@ function StudentDetail() {
 
             const filename = data.transcript_Path.split("\\").pop();
 
-            axios.post( process.env.REACT_APP_API_URL + `/edit/transcript/${filename}`, form)
+            axios.post( process.env.REACT_APP_API_URL + `/upload/edit/transcript/${filename}`, form)
                 .then((response) => {
                     console.log("Success");
                     setNewTranscript_Path(response.data.path);
@@ -565,7 +565,7 @@ function StudentDetail() {
 
             const filename = null;
 
-            axios.post( process.env.REACT_APP_API_URL + `/edit/certificate/${filename}`, form)
+            axios.post( process.env.REACT_APP_API_URL + `/upload/edit/certificate/${filename}`, form)
                 .then((response) => {
                     console.log("Success");
                     setNewCertificate_Path(response.data.path);
@@ -605,7 +605,7 @@ function StudentDetail() {
 
             const filename = data.certificate_Path.split("\\").pop();
 
-            axios.post( process.env.REACT_APP_API_URL + `/edit/certificate/${filename}`, form)
+            axios.post( process.env.REACT_APP_API_URL + `/upload/edit/certificate/${filename}`, form)
                 .then((response) => {
                     console.log("Success");
                     setNewCertificate_Path(response.data.path);
@@ -702,7 +702,7 @@ function StudentDetail() {
                             <div className=' grid place-items-center m-5'>
                                 {data.profile_Path ?
                                     <>
-                                        <img src={ process.env.REACT_APP_API_URL + `/image/${data.profile_Path.split("\\").pop()}`} width="100" height="100"></img>
+                                        <img src={ process.env.REACT_APP_API_URL + `/upload/image/${data.profile_Path.split("\\").pop()}`} width="100" height="100"></img>
                                     </> : <></>}
                             </div>
                             <div className=' text-3xl text-center mb-5'>นิสิต : {data.nameTH}</div>

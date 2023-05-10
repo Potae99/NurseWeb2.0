@@ -413,7 +413,7 @@ function SyllabusDetail() {
           else {
             const filename = data.syllabus_Path.split("\\").pop();
 
-            axios.delete(process.env.REACT_APP_API_URL + `/delete/syllabus/${filename}`)
+            axios.delete(process.env.REACT_APP_API_URL + `/upload/delete/syllabus/${filename}`)
               .then(response => {
                 console.log("success");
               })
@@ -483,7 +483,7 @@ function SyllabusDetail() {
     else {
       const filename = data.syllabus_Path.split("\\").pop(); // อ่านชื่อไฟล์จาก syllabus_Path
       axios({
-        url: process.env.REACT_APP_API_URL + `/download/syllabus/${filename}`, // ใช้ชื่อไฟล์ในการเรียก endpoint download
+        url: process.env.REACT_APP_API_URL + `/upload/download/syllabus/${filename}`, // ใช้ชื่อไฟล์ในการเรียก endpoint download
         method: "GET",
         responseType: "blob"
       }).then((response) => {
@@ -510,7 +510,7 @@ function SyllabusDetail() {
 
       const filename = null;
 
-      axios.post(process.env.REACT_APP_API_URL + `/edit/syllabus/${filename}`, form)
+      axios.post(process.env.REACT_APP_API_URL + `/upload/edit/syllabus/${filename}`, form)
         .then((response) => {
           console.log("Success");
           setNewSyllabus_Path(response.data.path);
@@ -552,7 +552,7 @@ function SyllabusDetail() {
 
       const filename = data.syllabus_Path.split("\\").pop();
 
-      axios.post( process.env.REACT_APP_API_URL + `/edit/syllabus/${filename}`, form)
+      axios.post( process.env.REACT_APP_API_URL + `/upload/edit/syllabus/${filename}`, form)
         .then((response) => {
           console.log("Success");
           setNewSyllabus_Path(response.data.path);
