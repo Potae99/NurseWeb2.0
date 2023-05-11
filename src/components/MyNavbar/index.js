@@ -40,7 +40,7 @@ export default function MyNavbar({ session, setToken }) {
   const handleSignOut = () => {
     localStorage.clear();
     setToken(null);
-    window.location.href = "/";
+    window.location.href = "/NA";
   };
 
   return (

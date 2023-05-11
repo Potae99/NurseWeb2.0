@@ -383,9 +383,9 @@ function App() {
   const { token, setToken } = useToken();
 
   // check if user is login if not return login page
-  console.log("--------------");
-  console.log(token);
-  console.log("--------------");
+  // console.log("--------------");
+  // console.log(token);
+  // console.log("--------------");
   if (!token) {
     return <Login setToken={setToken} />
   }

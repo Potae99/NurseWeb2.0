@@ -957,7 +957,7 @@ function StudentDetail() {
                                             }
                                         </div>
                                     </div>
-                                    <div className=' ml-28 text-xl'>
+                                    <div className=' text-center text-xl'>
                                         {data.presentAddress ?
                                             <>
                                                 <div className=" ml-4 mb-3">ที่อยู่ปัจจุบัน : {data.presentAddress}</div>

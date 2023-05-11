@@ -41,7 +41,7 @@ function Chart_pie2() {
         labels: labels,
         datasets: [
             {
-                label: "จำนวนนิสิตในจังหวัด",
+                label: "จำนวนนิสิตในทุนการศึกษา",
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
                     'rgba(255, 159, 64, 0.5)',

@@ -42,7 +42,7 @@ function Chart_pie3() {
         labels: labels,
         datasets: [
             {
-                label: "จำนวนนิสิตในรุ่นที่",
+                label: "จำนวนนิสิตในรุ่น",
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
                     'rgba(255, 159, 64, 0.5)',
