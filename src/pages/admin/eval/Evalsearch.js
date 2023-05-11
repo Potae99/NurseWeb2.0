@@ -204,7 +204,7 @@ function Evalsearch() {
     );
 
     const gotoClassdetail = (classID) => {
-        window.location.href = "/admin/eval/sum/" + classID;
+        window.location.href = "/NA/admin/eval/sum/" + classID;
     }
 
     return (

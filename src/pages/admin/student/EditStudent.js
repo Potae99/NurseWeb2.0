@@ -142,7 +142,7 @@ function EditStudent() {
                         showConfirmButton: false,
                         timer: 1000,
                     })
-                        .then(() => { window.location.href = "/admin/student/detail/" + userID; })
+                        .then(() => { window.location.href = "/NA/admin/student/detail/" + userID; })
 
                 })
                     .catch(error => {
@@ -157,7 +157,7 @@ function EditStudent() {
                     showConfirmButton: false,
                     timer: 1000,
                 })
-                    .then(() => { window.location.href = "/admin/student/detail/" + userID; })
+                    .then(() => { window.location.href = "/NA/admin/student/detail/" + userID; })
 
             }
         })
@@ -248,7 +248,7 @@ function EditStudent() {
     }
 
     const backToStudentDetail = (userID) => {
-        window.location.href = "/admin/student/detail/" + userID;
+        window.location.href = "/NA/admin/student/detail/" + userID;
     }
 
     useEffect(() => {

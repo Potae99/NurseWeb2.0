@@ -65,7 +65,7 @@ function AddSyllabus() {
                 showConfirmButton: false,
                 timer: 1000,
             })
-                .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus"; })
+                .then(() => { window.location.href = "/NA/admin/course/syllabus/adminsyllabus"; })
         })
             .catch(error => {
                 // console.log(error.request)
@@ -79,7 +79,7 @@ function AddSyllabus() {
     }
 
     const backToAdminSyllabus = () => {
-        window.location.href = "/admin/course/syllabus/adminsyllabus"
+        window.location.href = "/NA/admin/course/syllabus/adminsyllabus"
     }
 
     useEffect(() => {

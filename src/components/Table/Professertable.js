@@ -26,7 +26,7 @@ function Professertable() {
   })
 
   const GotoTeacherDetail = (userID) => {
-    window.location.href = "/admin/teacher/detail/" + userID;
+    window.location.href = "/NA/admin/teacher/detail/" + userID;
   }
 
   useEffect(() => {

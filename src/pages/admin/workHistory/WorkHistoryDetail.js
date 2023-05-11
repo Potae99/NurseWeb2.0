@@ -80,7 +80,7 @@ function WorkHistoryDetail() {
                                 showConfirmButton: false,
                                 timer: 1000,
                             })
-                                .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
+                                .then(() => { window.location.href = "/NA/admin/student/work/list/" + userID; })
 
 
                         }).catch(function (error) {
@@ -90,7 +90,7 @@ function WorkHistoryDetail() {
                         });
                 }
                 else if (results.isDenied) {
-                    window.location.href = "/admin/student/work/detail/" + workHistoryID;
+                    window.location.href = "/NA/admin/student/work/detail/" + workHistoryID;
                 }
             })
 
@@ -213,7 +213,7 @@ function WorkHistoryDetail() {
                         showConfirmButton: false,
                         timer: 1000,
                     })
-                        .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
+                        .then(() => { window.location.href = "/NA/admin/student/work/list/" + userID; })
 
                 })
             } else if (result.isDenied) {
@@ -224,7 +224,7 @@ function WorkHistoryDetail() {
                     showConfirmButton: false,
                     timer: 1000,
                 })
-                    .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
+                    .then(() => { window.location.href = "/NA/admin/student/work/list/" + userID; })
 
             }
         })

@@ -207,7 +207,7 @@ function TeacherEval_search() {
     );
 
     const gotoClassdetail = (classID) => {
-        window.location.href = "/teacher/eval/sum/" + classID;
+        window.location.href = "/NA/teacher/eval/sum/" + classID;
     }
 
     return (

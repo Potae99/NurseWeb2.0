@@ -43,23 +43,23 @@ function SideNavbar({ session }) {
 
   const _menuItems = {
     "admin": [
-      { id: 1, label: "ภาพรวม", icon: CollapsIcon, link: "/admin/overall" },   
-      { id: 2, label: "ทุนการศึกษา", icon: VideosIcon, link: "/admin/scholarship/add" },
-      { id: 3, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/admin/home" },
-      { id: 4, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/admin/course/all" },
-      { id: 5, label: "จัดการหลักสูตร", icon: Academiccap, link: "/admin/course/syllabus/adminsyllabus" },
-      { id: 6, label: "จัดการคาบเรียน", icon: Calender, link: "/admin/class" },
-      { id: 7, label: "ผลการประเมิน", icon: SearchIcon, link: "/admin/eval/search" },
+      { id: 1, label: "ภาพรวม", icon: CollapsIcon, link: "/NA/admin/overall" },   
+      { id: 2, label: "ทุนการศึกษา", icon: VideosIcon, link: "/NA/admin/scholarship/add" },
+      { id: 3, label: "จัดการผู้ใช้", icon: HomeIcon, link: "/NA/admin/home" },
+      { id: 4, label: "จัดการรายวิชา", icon: ArticleIcon, link: "/NA/admin/course/all" },
+      { id: 5, label: "จัดการหลักสูตร", icon: Academiccap, link: "/NA/admin/course/syllabus/adminsyllabus" },
+      { id: 6, label: "จัดการคาบเรียน", icon: Calender, link: "/NA/admin/class" },
+      { id: 7, label: "ผลการประเมิน", icon: SearchIcon, link: "/NA/admin/eval/search" },
     ],
     "teacher": [
-      { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/teacher/home" },
-      { id: 2, label: "จัดการรายวิชาของฉัน", icon: ArticleIcon, link: "/teacher/subject" },
-      { id: 3, label: "ผลการประเมินของฉัน", icon: SearchIcon, link: "/teacher/Taughview" },
-      { id: 4, label: "ผลการประเมินรายวิชา", icon: Academiccap, link: "/teacher/eval/search" },
+      { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/NA/teacher/home" },
+      { id: 2, label: "จัดการรายวิชาของฉัน", icon: ArticleIcon, link: "/NA/teacher/subject" },
+      { id: 3, label: "ผลการประเมินของฉัน", icon: SearchIcon, link: "/NA/teacher/Taughview" },
+      { id: 4, label: "ผลการประเมินรายวิชา", icon: Academiccap, link: "/NA/teacher/eval/search" },
     ],
     "student": [
-      { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/student/home" },
-      { id: 2, label: "การประเมิน", icon: ArticleIcon, link: "/student/eval/all" },
+      { id: 1, label: "หน้าหลัก", icon: HomeIcon, link: "/NA/student/home" },
+      { id: 2, label: "การประเมิน", icon: ArticleIcon, link: "/NA/student/eval/all" },
     ]
   };
 
@@ -171,7 +171,7 @@ function SideNavbar({ session }) {
             );
           })}
           <div className=" text-stone-300 text-xs  ml-20 items-center  bottom-1 mt-16 ">
-            <a className="  hover:text-yellow-300 " href="/credit">
+            <a className="  hover:text-yellow-300 " href="/NA/credit">
               ผู้จัดทำ
             </a>
          

@@ -47,7 +47,7 @@ function Admintable() {
   }, [searchTerm])
 
   const GotoAdminDetail = (userID) => {
-    window.location.href = "/admin/detail/" + userID;
+    window.location.href = "/NA/admin/detail/" + userID;
   }
 
   const handleClick = (e, page) => {

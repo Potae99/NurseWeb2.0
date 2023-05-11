@@ -54,7 +54,7 @@ function TeacherDetail() {
                                 showConfirmButton: false,
                                 timer: 1000,
                             })
-                                .then(() => { window.location.href = "/admin/home"; })
+                                .then(() => { window.location.href = "/NA/admin/home"; })
 
 
                         }).catch(function (error) {
@@ -64,7 +64,7 @@ function TeacherDetail() {
                         });
                 }
                 else if (results.isDenied){
-                    window.location.href = "/admin/teacher/detail/" + userID;
+                    window.location.href = "/NA/admin/teacher/detail/" + userID;
                 }
             })
 
@@ -102,7 +102,7 @@ function TeacherDetail() {
     }, [])
 
     const GoToTeacherEdit = (userID) => {
-        window.location.href = "/admin/teacher/edit/" + userID
+        window.location.href = "/NA/admin/teacher/edit/" + userID
     }
 
     return (

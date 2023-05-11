@@ -45,7 +45,7 @@ function EditTeacher() {
     }
 
     const backToTeacherDetail = (userID) => {
-        window.location.href = "/admin/teacher/detail/" + userID;
+        window.location.href = "/NA/admin/teacher/detail/" + userID;
     }
 
     useEffect(() => {
@@ -88,7 +88,7 @@ function EditTeacher() {
                         showConfirmButton: false,
                         timer: 1000,                        
                     })
-                        .then(() => { window.location.href = "/admin/teacher/detail/" + userID; })
+                        .then(() => { window.location.href = "/NA/admin/teacher/detail/" + userID; })
 
                 })
 

@@ -76,7 +76,7 @@ function AddCourse() {
                 showConfirmButton: false,
                 timer: 1000,
               })
-                .then(() => { window.location.href = "/admin/course/all"; })
+                .then(() => { window.location.href = "/NA/admin/course/all"; })
 
         })
         .catch((error) => {
@@ -90,7 +90,7 @@ function AddCourse() {
     }
 
     const BacktoCourse = () => {
-        window.location.href = '/admin/course/all';
+        window.location.href = '/NA/admin/course/all';
     }
 
     const fetchData = () => {

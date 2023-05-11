@@ -100,7 +100,7 @@ function AddWorkHistory() {
                 showConfirmButton: false,
                 timer: 1000,
             })
-                .then(() => { window.location.href = "/admin/student/work/list/" + userID; })
+                .then(() => { window.location.href = "/NA/admin/student/work/list/" + userID; })
         })
         .catch((error) => {
             Swal.fire({
@@ -169,7 +169,7 @@ function AddWorkHistory() {
     }, [])
 
     const BacktoStudentDetail = (userID) => {
-        window.location.href = '/admin/student/work/list/' + userID;
+        window.location.href = '/NA/admin/student/work/list/' + userID;
     }
 
     const onchangeProvince = (event) => {

@@ -60,6 +60,15 @@ function Classdetail() {
       })
       // window.location.href = "/admin/class/detail/" + classID;
     })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "โปรดตรวจสอบข้อมูล",
+        text: "นิสิตคนนี้อาจมีอยู่แล้ว",
+        showConfirmButton: false,
+        timer: 2000,
+      })
+    })
   }
   ///Teacher post
   const [showModal2, setShowModal2] = useState(false);
@@ -277,7 +286,7 @@ function Classdetail() {
             });
         }
         else if (results.isDenied) {
-          window.location.href = "/admin/class/detail/" + classID;
+          window.location.href = "/NA/admin/class/detail/" + classID;
         }
       })
 
@@ -506,7 +515,7 @@ function Classdetail() {
   // }, [])
 
   const backToClass = () => {
-    window.location.href = "/admin/class"
+    window.location.href = "/NA/admin/class"
   }
 
   const deleteClass = (classID) => {
@@ -535,7 +544,7 @@ function Classdetail() {
                 showConfirmButton: false,
                 timer: 1000,
               })
-                .then(() => { window.location.href = "/admin/class" })
+                .then(() => { window.location.href = "/NA/admin/class" })
             })
         }
         else if (results.isDenied) {
@@ -687,7 +696,7 @@ function Classdetail() {
                             </>
                             <div className="items-center gap-2 mt-3 sm:flex">
                               <button
-                                className="w-full mt-2 p-2.5 flex-1 text-white  bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                                className="w-full mt-2 p-2.5 flex-1 text-white  bg-orange-400 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                                 onClick={() => {
                                   AddStudent();
                                   setShowModal1(false);

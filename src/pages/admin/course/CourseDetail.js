@@ -67,7 +67,7 @@ function CourseDetail() {
                                 showConfirmButton: false,
                                 timer: 1000,
                             })
-                                .then(() => { window.location.href = "/admin/course/all"; })
+                                .then(() => { window.location.href = "/NA/admin/course/all"; })
 
 
                         }).catch(function (error) {
@@ -77,7 +77,7 @@ function CourseDetail() {
                         });
                 }
                 else if (results.isDenied) {
-                    window.location.href = "/admin/course/all";
+                    window.location.href = "/NA/admin/course/all";
                 }
             })
 
@@ -183,7 +183,7 @@ function CourseDetail() {
                                 showConfirmButton: false,
                                 timer: 1000,
                             })
-                                .then(() => { window.location.href = "/admin/course/all" })
+                                .then(() => { window.location.href = "/NA/admin/course/all" })
                         })
                 }
                 else if (result.isDenied) {
@@ -195,13 +195,13 @@ function CourseDetail() {
                         showConfirmButton: false,
                         timer: 1000,
                     })
-                        .then(() => { window.location.href = "/admin/course/all" })
+                        .then(() => { window.location.href = "/NA/admin/course/all" })
                 }
             });
     }
 
     const backToAdminCourseAll = () => {
-        window.location.href = "/admin/course/all";
+        window.location.href = "/NA/admin/course/all";
     }
 
     const onchangeCategory = (event) => {

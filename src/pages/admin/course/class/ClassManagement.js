@@ -14,7 +14,7 @@ function ClassManagement() {
     }, [])
 
     const goToAddClass = () => {
-        window.location.href = '/admin/add/class';
+        window.location.href = '/NA/admin/add/class';
     }
     return (
         <>

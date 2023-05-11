@@ -330,6 +330,15 @@ function SyllabusDetail() {
       // .then(() => { window.location.href = "/admin/course/syllabus/" + syllabusID; })
 
     })
+    .catch((error) => {
+      Swal.fire({
+        icon: "error",
+        title: "พบข้อผิดพลาด",
+        text: "รายวิชานี้อาจมีอยู่แล้ว",
+        showConfirmButton: false,
+        timer: 2000,
+      })
+    })
   }
 
   // useEffect(() => {
@@ -378,7 +387,7 @@ function SyllabusDetail() {
   // }, [Path]);
 
   const backToAdminSyllabus = () => {
-    window.location.href = "/admin/course/syllabus/adminsyllabus"
+    window.location.href = "/NA/admin/course/syllabus/adminsyllabus"
   }
 
   const deleteSyllabus = (syllabusID) => {
@@ -407,7 +416,7 @@ function SyllabusDetail() {
                   showConfirmButton: false,
                   timer: 1000,
                 })
-                  .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus" })
+                  .then(() => { window.location.href = "/NA/admin/course/syllabus/adminsyllabus" })
               });
           }
           else {
@@ -434,7 +443,7 @@ function SyllabusDetail() {
                   showConfirmButton: false,
                   timer: 1000,
                 })
-                  .then(() => { window.location.href = "/admin/course/syllabus/adminsyllabus" })
+                  .then(() => { window.location.href = "/NA/admin/course/syllabus/adminsyllabus" })
               });
           }
 
@@ -465,7 +474,7 @@ function SyllabusDetail() {
           //   });
         }
         else if (results.isDenied) {
-          window.location.href = "/admin/course/syllabus/" + syllabusID;
+          window.location.href = "/NA/admin/course/syllabus/" + syllabusID;
         }
       })
 
@@ -847,7 +856,7 @@ function SyllabusDetail() {
                             </select>
                             <div className="items-center gap-2 mt-3 sm:flex">
                               <button
-                                className="w-full mt-2 p-2.5 flex-1 text-white bg-green-500 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                                className="w-full mt-2 p-2.5 flex-1 text-white bg-orange-400 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                                 onClick={addCoursein_syllabus}
                               >
                                 เพิ่ม

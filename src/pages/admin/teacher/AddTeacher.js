@@ -59,7 +59,7 @@ function AddTeacher() {
                 showConfirmButton: false,
                 timer: 1000,
               })
-            .then(() => { window.location.href = "/admin/home"; })
+            .then(() => { window.location.href = "/NA/admin/home"; })
         })
         .catch((error) => {
             Swal.fire({
@@ -72,7 +72,7 @@ function AddTeacher() {
     }
 
     const BacktoHomeAdmin = () => {
-        window.location.href = '/admin/home';
+        window.location.href = '/NA/admin/home';
     }
 
     useEffect(() => {

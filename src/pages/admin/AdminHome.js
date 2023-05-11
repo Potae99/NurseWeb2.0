@@ -22,7 +22,7 @@ function AdminHome() {
   }, []);
 
   const goToImportExcell = () => {
-    window.location.href = "/admin/Gptimport_excel";
+    window.location.href = "/NA/admin/Gptimport_excel";
   }
 
   return (

@@ -68,7 +68,7 @@ export default function Login({ setToken }) {
           showConfirmButton: false,
           timer: 1000,
         }).then(() => {
-          window.location.href = "/admin/overall";
+          window.location.href = "/NA/admin/overall";
         });
           
         }
@@ -85,7 +85,7 @@ export default function Login({ setToken }) {
           showConfirmButton: false,
           timer: 1000,
         }).then(() => {
-          window.location.href = "/teacher/home";
+          window.location.href = "/NA/teacher/home";
         });
           
         }
@@ -102,7 +102,7 @@ export default function Login({ setToken }) {
           showConfirmButton: false,
           timer: 1000,
         }).then(() => {
-          window.location.href = "/student/home";
+          window.location.href = "/NA/student/home";
         });
         }
         else {

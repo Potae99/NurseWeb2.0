@@ -196,7 +196,7 @@ function AddStudent() {
                 showConfirmButton: false,
                 timer: 1000,
             })
-                .then(() => { window.location.href = "/admin/home"; })
+                .then(() => { window.location.href = "/NA/admin/home"; })
         })
             .catch(error => {
                 // console.log(error.request)
@@ -211,7 +211,7 @@ function AddStudent() {
     }
 
     const BacktoHomeAdmin = () => {
-        window.location.href = '/admin/home';
+        window.location.href = '/NA/admin/home';
     }
 
     const onchangeProvince = (event) => {

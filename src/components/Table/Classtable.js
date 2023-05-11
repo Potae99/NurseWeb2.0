@@ -51,7 +51,7 @@ function Classtable() {
     }, [searchTerm])
 
     const gotoClassdetail = (classID) => {
-        window.location.href = "/admin/class/detail/" + classID;
+        window.location.href = "/NA/admin/class/detail/" + classID;
     }
 
     const handleClick = (e, page) => {

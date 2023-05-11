@@ -59,7 +59,7 @@ function AdminDetail() {
                             })
                                 .then(
                                     () => {
-                                        window.location.href = "/admin/home";
+                                        window.location.href = "/NA/admin/home";
                                     }
                                 )
                         }).catch(function (error) {
@@ -69,7 +69,7 @@ function AdminDetail() {
                         });
                 }
                 else if (results.isDenied) {
-                    window.location.href = "/admin/detail/" + userID;
+                    window.location.href = "/NA/admin/detail/" + userID;
                 }
             })
 
@@ -106,7 +106,7 @@ function AdminDetail() {
     }, [])
 
     const goToEditAdmin = (userID) => {
-        window.location.href = "/admin/edit/" + userID;
+        window.location.href = "/NA/admin/edit/" + userID;
     }
 
     return (

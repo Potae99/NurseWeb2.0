@@ -424,7 +424,7 @@ function AddCategory() {
   };
 
   const backToCourseAll = () => {
-    window.location.href = "/admin/course/all";
+    window.location.href = "/NA/admin/course/all";
   }
 
   return (

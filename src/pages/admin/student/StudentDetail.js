@@ -63,7 +63,7 @@ function StudentDetail() {
                                 showConfirmButton: false,
                                 timer: 1000,
                             })
-                                .then(() => { window.location.href = "/admin/home"; })
+                                .then(() => { window.location.href = "/NA/admin/home"; })
 
                         }).catch(function (error) {
                             if (error.response) {
@@ -129,15 +129,15 @@ function StudentDetail() {
     }
 
     const gotoStudentEdit = (userID) => {
-        window.location.href = "/admin/student/edit/" + userID;
+        window.location.href = "/NA/admin/student/edit/" + userID;
     }
 
     const goToAddWorkHistoryList = (userID) => {
-        window.location.href = "/admin/student/work/add/" + userID;
+        window.location.href = "/NA/admin/student/work/add/" + userID;
     }
 
     const goToWorkHistoryList = (userID) => {
-        window.location.href = "/admin/student/work/list/" + userID
+        window.location.href = "/NA/admin/student/work/list/" + userID
     }
 
     useEffect(() => {

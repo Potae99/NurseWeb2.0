@@ -95,268 +95,244 @@ const router = [
 
   },
   {
-    path: "/course/add",
+    path: "/NA/course/add",
     element: <AddCourse />,
     level: "admin"
 
   },
   {
-    path: "/course/category/add",
+    path: "/NA/course/category/add",
     element: <AddCategory />,
     level: "admin"
 
   },
   {
-    path: "/admin/edit/:userID/*",
+    path: "/NA/admin/edit/:userID/*",
     element: <EditAdmin />,
     level: "admin"
 
   },
   {
-    path: "/admin/student/edit/:userID/*",
+    path: "/NA/admin/student/edit/:userID/*",
     element: <EditStudent />,
     level: "admin"
 
   },
   {
-    path: "/admin/teacher/edit/:userID/*",
+    path: "/NA/admin/teacher/edit/:userID/*",
     element: <EditTeacher />,
     level: "admin"
 
   },
   {
-    path: "/admin/home/*",
+    path: "/NA/admin/home/*",
     element: <AdminHome />,
     level: "admin"
 
   },
   {
-    path: "/admin/add/student",
+    path: "/NA/admin/add/student",
     element: <AddStudent />,
     level: "admin"
 
   },
   {
-    path: "/admin/add/teacher",
+    path: "/NA/admin/add/teacher",
     element: <AddTeacher />,
     level: "admin"
 
   },
   {
-    path: "/admin/add/admin",
+    path: "/NA/admin/add/admin",
     element: <AddAdmin />,
     level: "admin"
 
   },
   {
-    path: "/admin/detail/:userID/*",
+    path: "/NA/admin/detail/:userID/*",
     element: <AdminDetail />,
     level: "admin"
 
   },
   {
-    path: "/admin/student/detail/:userID/*",
+    path: "/NA/admin/student/detail/:userID/*",
     element: <StudentDetail />,
     level: "admin"
 
   },
   {
-    path: "/admin/teacher/detail/:userID/*",
+    path: "/NA/admin/teacher/detail/:userID/*",
     element: <TeacherDetail />,
     level: "admin"
 
   },
   {
-    path: "/student/home",
+    path: "/NA/student/home",
     element: <Studenthome />,
     level: "student"
 
   },
   {
-    path: "/teacher/home",
+    path: "/NA/teacher/home",
     element: <Teacherhome />,
     level: "teacher"
 
   },
   {
-    path: "/admin/course/category/Add",
-    element: <AddCategory />,
-    level: "student"
-
-  },
-  {
-    path: "/admin/course/syllabus/Add",
+    path: "/NA/admin/course/syllabus/Add",
     element: <AddSyllabus />,
     level: "admin"
 
   },
   {
-    path: "/admin/course/syllabus/adminsyllabus",
+    path: "/NA/admin/course/syllabus/adminsyllabus",
     element: <AdminSyllabus />,
     level: "admin"
 
   },
   {
-    path: "/admin/course/syllabus/:syllabusID/*",
+    path: "/NA/admin/course/syllabus/:syllabusID/*",
     element: <SyllabusDetail />,
     level: "admin"
 
   },
   {
-    path: "/admin/course/all",
+    path: "/NA/admin/course/all",
     element: <Allcourse />,
     level: "admin"
 
   },
   {
-    path: "/admin/course/detail/:courseID/*",
+    path: "/NA/admin/course/detail/:courseID/*",
     element: <CourseDetail />,
     level: "admin"
   },
   {
-    path: "/admin/student/work/add/:userID/*",
+    path: "/NA/admin/student/work/add/:userID/*",
     element: <AddWorkHistory />,
     level: "admin"
   },
   {
-    path: "/admin/student/work/list/:userID/*",
+    path: "/NA/admin/student/work/list/:userID/*",
     element: <WorkHistoryList />,
     level: "admin"
   },
   {
-    path: "/admin/student/work/detail/:workHistoryID/*",
+    path: "/NA/admin/student/work/detail/:workHistoryID/*",
     element: <WorkHistoryDetail />,
     level: "admin"
   },
   {
-    path: "/admin/scholarship/add",
+    path: "/NA/admin/scholarship/add",
     element: <Addscholarship />,
     level: "admin"
 
   },
   {
-    path: "/student/eval/practice/:evalTaughID/*",
+    path: "/NA/student/eval/practice/:evalTaughID/*",
     element: <Studentevalpractice />,
     level: "student"
 
   },
   {
-    path: "/student/eval/theory/:evalTaughID/*",
+    path: "/NA/student/eval/theory/:evalTaughID/*",
     element: <Studentevaltheory />,
     level: "student"
 
   },
   {
-    path: "/admin/course/syllabus/adminsyllabus/addcourse",
-    element: <Addcourse_tosyllabus />,
-    level: "admin"
-
-  },
-  {
-    path: "/admin/course/category/detail/:categoryID/*",
-    element: <CategoryDetail />,
-    level: "admin"
-
-  },
-  {
-    path: "/admin/add/class",
+    path: "/NA/admin/add/class",
     element: <Addclass />,
     level: "admin"
 
   },
   {
-    path: "/admin/class/detail/:classID/*",
+    path: "/NA/admin/class/detail/:classID/*",
     element: <Classdetail />,
     level: "admin"
 
   },
   {
-    path: "/student/eval/course/:studyID/*",
+    path: "/NA/student/eval/course/:studyID/*",
     element: <StudentevalCourse />,
     level: "student"
 
   },
   {
-    path: "/student/eval/all",
+    path: "/NA/student/eval/all",
     element: <StudentallEval />,
     level: "student"
 
   },
   {
-    path: "/admin/eval/sum/:classID/*",
+    path: "/NA/admin/eval/sum/:classID/*",
     element: <Evalsum />,
     level: "admin"
 
   },
   {
-    path: "/teacher/eval/sum/:classID/*",
+    path: "/NA/teacher/eval/sum/:classID/*",
     element: <Evalsum />,
     level: "teacher"
 
   },
   {
-    path: "/admin/eval/search",
+    path: "/NA/admin/eval/search",
     element: <Evalsearch />,
     level: "admin"
 
   },
   {
-    path: "/teacher/eval/search",
+    path: "/NA/teacher/eval/search",
     element: <TeacherEval_search />,
     level: "teacher"
 
   },
   {
-    path: "/admin/overall",
+    path: "/NA/admin/overall",
     element: <Adminoverall />,
     level: "admin"
   },
   {
-    path: "/teacher/subject",
+    path: "/NA/teacher/subject",
     element: <SubjectManagement />,
     level: "teacher"
 
   },
   {
-    path: "/teacher/Taughview",
+    path: "/NA/teacher/Taughview",
     element: <View_taugheval />,
     level: "teacher"
 
   },
   {
-    path: "/teacher/sum/theory/:classID/*",
+    path: "/NA/teacher/sum/theory/:classID/*",
     element: <Taugh_sum />,
     level: "teacher"
 
   },
   {
-    path: "/teacher/sum/practice/:classID/*",
+    path: "/NA/teacher/sum/practice/:classID/*",
     element: <Taugh_sumprac />,
     level: "teacher"
 
   },
   {
-    path: "/credit",
+    path: "/NA/credit",
     element: <Credit />,
     level: "admin"
 
   },
   {
-    path: "/credit",
+    path: "/NA/credit",
     element: <Credit />,
     level: "student"
 
   },
   {
-    path: "/credit",
+    path: "/NA/credit",
     element: <Credit />,
     level: "teacher"
-
-  },
-  {
-    path: "/chart",
-    element: <Chart_bar />,
-    level: "admin"
 
   },
   ///////excel/////
@@ -366,12 +342,12 @@ const router = [
     level: "admin"
   },                                                                                                            
   {
-    path: "/admin/Gptimport_excel",
+    path: "/NA/admin/Gptimport_excel",
     element: <Chatgpt_import_excel />,
     level: "admin"
   },
   {
-    path: "/admin/class",
+    path: "/NA/admin/class",
     element: <ClassManagement />,
     level: "admin"
 

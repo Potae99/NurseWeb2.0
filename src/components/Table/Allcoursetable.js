@@ -12,7 +12,7 @@ function Allcoursetable() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const gotoCoursedetail = (courseID) => {
-    window.location.href = "/admin/course/detail/" + courseID;
+    window.location.href = "/NA/admin/course/detail/" + courseID;
 
   }
 

@@ -61,7 +61,7 @@ function AddAdmin() {
               })
             .then(
                 () => {
-                    window.location.href = "/admin/home";
+                    window.location.href = "/NA/admin/home";
                 }
             )
 
@@ -77,7 +77,7 @@ function AddAdmin() {
     }
 
     const BacktoHomeAdmin = () => {
-        window.location.href = '/admin/home';
+        window.location.href = '/NA/admin/home';
     }
 
     useEffect(() => {

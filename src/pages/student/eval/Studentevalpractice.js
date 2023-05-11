@@ -115,7 +115,7 @@ function Studentevalpractice() {
 
                 }
             )
-            window.location.href = "/student/eval/all";
+            window.location.href = "/NA/student/eval/all";
         })
     }
 
@@ -158,7 +158,7 @@ function Studentevalpractice() {
     }, []);
 
     const Back = () => {
-        window.location.href = "/student/eval/all"
+        window.location.href = "/NA/student/eval/all"
 
     }
 

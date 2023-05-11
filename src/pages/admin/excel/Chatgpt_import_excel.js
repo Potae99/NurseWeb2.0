@@ -103,7 +103,7 @@ function Chatgpt_import_excel() {
             timer: 1000,
           })
             .then(() => {
-              window.location.href = "/admin/home"; 
+              window.location.href = "/NA/admin/home"; 
             })
         })
         .catch(error => {

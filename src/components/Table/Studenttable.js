@@ -34,7 +34,7 @@ function Studenttable() {
 
 
   const GotoStudentDetail = (userID) => {
-    window.location = '/admin/student/detail/' + userID;
+    window.location = '/NA/admin/student/detail/' + userID;
   }
 
   useEffect(() => {

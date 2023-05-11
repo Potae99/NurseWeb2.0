@@ -45,7 +45,7 @@ function EditAdmin() {
     }
 
     const backToAdminDetail = (userID) => {
-        window.location.href = "/admin/detail/" + userID;
+        window.location.href = "/NA/admin/detail/" + userID;
     }
 
     useEffect(() => {
@@ -90,7 +90,7 @@ function EditAdmin() {
                         showConfirmButton: false,
                         timer: 1000,
                     })
-                        .then(() => { window.location.href = "/admin/detail/" + userID; })
+                        .then(() => { window.location.href = "/NA/admin/detail/" + userID; })
 
                 })
 

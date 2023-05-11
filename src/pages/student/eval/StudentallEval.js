@@ -39,7 +39,7 @@ function StudentallEval() {
 
 
   const Gotaclasseval = (studyID) => {
-    window.location.href = "/student/eval/course/" + studyID;
+    window.location.href = "/NA/student/eval/course/" + studyID;
   }
   // {taugh.taughtType == "ภาคทฤษฎี" ?
   //   const GotaTaugheval = (evalTaughID) => {
@@ -50,9 +50,9 @@ function StudentallEval() {
   // }
   function GotaTaugheval(taughtType, evalTaughID) {
     if (taughtType === "Theory") {
-      window.location.href = "/student/eval/theory/" + evalTaughID;
+      window.location.href = "/NA/student/eval/theory/" + evalTaughID;
     } else if (taughtType === "Practice") {
-      window.location.href = "/student/eval/practice/" + evalTaughID;
+      window.location.href = "/NA/student/eval/practice/" + evalTaughID;
     }
   }
 

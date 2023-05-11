@@ -210,7 +210,7 @@ function WorkHistorytable() {
     );
 
     const goToWorkHistorydetail = (workHistoryID) => {
-        window.location.href = "/admin/student/work/detail/" + workHistoryID;
+        window.location.href = "/NA/admin/student/work/detail/" + workHistoryID;
     }
 
     return (

@@ -199,7 +199,7 @@ function Curriculumtable() {
 
   const GotoAdminDetail = (syllabusID
   ) => {
-    window.location.href = "/admin/course/syllabus/" + syllabusID
+    window.location.href = "/NA/admin/course/syllabus/" + syllabusID
       ;
   }
 

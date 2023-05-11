@@ -77,9 +77,9 @@ function View_taugheval() {
 
     function onchangeCourse(taughtType, classID) {
         if (taughtType === "Theory") {
-            window.location.href = "/teacher/sum/theory/" + classID; // redirect to /teacher/sum/{classID}
+            window.location.href = "/NA/teacher/sum/theory/" + classID; // redirect to /teacher/sum/{classID}
         } else if (taughtType === "Practice") {
-            window.location.href = "/teacher/sum/practice/" + classID; // redirect to /teacher/sum/{classID}
+            window.location.href = "/NA/teacher/sum/practice/" + classID; // redirect to /teacher/sum/{classID}
         }
 
     }

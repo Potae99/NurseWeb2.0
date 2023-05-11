@@ -72,15 +72,15 @@ function WorkHistoryList() {
     }, [])
 
     const backToStudentDetail = (userID) => {
-        window.location.href = "/admin/student/detail/" + userID;
+        window.location.href = "/NA/admin/student/detail/" + userID;
     }
 
     const goToWorkHistorydetail = (workHistoryID) => {
-        window.location.href = "/admin/student/work/detail/" + workHistoryID;
+        window.location.href = "/NA/admin/student/work/detail/" + workHistoryID;
     }
 
     const goToAddWorkHistoryList = (userID) => {
-        window.location.href = "/admin/student/work/add/" + userID;
+        window.location.href = "/NA/admin/student/work/add/" + userID;
     }
 
     return (

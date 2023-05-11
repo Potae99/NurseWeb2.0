@@ -105,7 +105,7 @@ function Addclass() {
     }, [])
 
     const backToClassManageMent = () => {
-        window.location.href = "/admin/class"
+        window.location.href = "/NA/admin/class"
     }
 
     const [teachersDataArray, setTeachersDataArray] = useState([]);
@@ -250,7 +250,7 @@ function Addclass() {
                     showConfirmButton: false,
                     timer: 1000,
                 })
-                    .then(() => { window.location.href = "/admin/class"; })
+                    .then(() => { window.location.href = "/NA/admin/class"; })
 
             })
             .catch(error => {

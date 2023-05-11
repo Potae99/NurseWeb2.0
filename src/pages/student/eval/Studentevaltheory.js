@@ -123,11 +123,11 @@ function Studentevaltheory() {
 
                 }
             ])
-            window.location.href = "/student/eval/all";
+            window.location.href = "/NA/student/eval/all";
         })
     }
     const Back = () => {
-        window.location.href = "/student/eval/all";
+        window.location.href = "/NA/student/eval/all";
     }
 
     return (
