@@ -231,7 +231,7 @@ function WorkHistoryDetail() {
     }
 
     const BacktoWorkHistoryList = (userID) => {
-        window.location.href = "/admin/student/work/list/" + userID;
+        window.location.href = "/NA/admin/student/work/list/" + userID;
     }
 
     const onchangeProvince = (event) => {
