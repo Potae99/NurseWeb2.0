@@ -873,7 +873,7 @@ function AddStudent() {
                             </div>
                             <div className=' grid grid-cols-2'>
                                 <div className=''><p>ไฟล์ผลการเรียน</p>
-                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf เท่านั้น***</p>
+                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf ขนาดไม่เกิน 5 MB เท่านั้น***</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
                                             onChange={handleTranscriptChange}
@@ -899,7 +899,7 @@ function AddStudent() {
                             </div>
                             <div className=' grid grid-cols-2'>
                                 <div><p>รูปนิสิต</p>
-                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .jpg .jpeg และ .png เท่านั้น***</p>
+                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .jpg .jpeg และ .png ขนาดไม่เกิน 5 MB เท่านั้น***</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
                                             onChange={handleProfileChange}
@@ -925,7 +925,7 @@ function AddStudent() {
                             </div>
                             <div className=' grid grid-cols-2'>
                                 <div className=''><p>ไฟล์บัตรประจำตัวประชาชน</p>
-                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf .jpg .jpeg และ .png เท่านั้น***</p>
+                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf .jpg .jpeg และ .png ขนาดไม่เกิน 5 MB เท่านั้น***</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
                                             onChange={handleIDnumberChange}
@@ -951,7 +951,7 @@ function AddStudent() {
                             </div>
                             <div className=' grid grid-cols-2'>
                                 <div className=''><p>ไฟล์ใบประกาศนียบัตร</p>
-                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf .jpg .jpeg และ .png เท่านั้น***</p>
+                                    <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf .jpg .jpeg และ .png ขนาดไม่เกิน 5 MB เท่านั้น***</p>
                                     <div className="mb-5 flex justify-center ">
                                         <input
                                             onChange={handleCertificateChange}

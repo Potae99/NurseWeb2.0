@@ -190,7 +190,7 @@ function AddSyllabus() {
         const data = new FormData();
         data.append('file', file);
 
-        axios.post(process.env.REACT_APP_API_URL + "/upload/syllabus", data)
+        axios.post(process.env.REACT_APP_API_URL + "/upload/upload/syllabus", data)
             .then((response) => {
                 // console.log("Success");
                 response.data.filename = file.name;
@@ -323,7 +323,7 @@ function AddSyllabus() {
                             </div>
                         </div>
                         <div ><label htmlFor="file-input">เพิ่มไฟล์หลักสูตร</label>
-                        <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf, .xlsx, .docx และ .doc เท่านั้น***</p>
+                        <p className=' text-red-500'>***ใส่ไฟล์ที่มีนามสกุล .pdf, .xlsx, .docx และ .doc ขนาดไม่เกิน 5 MB เท่านั้น***</p>
                             <div className="mb-5 flex justify-center ">
                                 <input
                                     onChange={handleFileChange}
