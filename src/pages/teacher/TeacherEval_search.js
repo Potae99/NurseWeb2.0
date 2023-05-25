@@ -87,7 +87,7 @@ function TeacherEval_search() {
                     <td className="py-4 px-6">{_.studyRoom}</td>
                     <td className="py-4 px-6 flex flex-row">
                         <div className=' ml-3'
-                            content="View Admin"
+                            title="ดูผลการประเมิน"
                             color="error"
                            /* onClick={() => console.log("View Class", _.classID)}*/>
                             <button onClick={() => gotoClassdetail(_.classID)}>

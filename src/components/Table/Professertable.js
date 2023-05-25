@@ -65,12 +65,12 @@ function Professertable() {
     return filterTeacher.slice(start, end).map((_, index) => (
       <tbody key={start + index}>
         <tr className="hover:bg-gray-200 bg-white border-b">
-          <td className="py-4 px-6" >{index + 1}</td>
+          <td className="py-4 px-6" >{start + index + 1}</td>
           <td className="py-4 px-6">{_.teacherID}</td>
           <td className="py-4 px-6">{_.nameTH}</td>
           <td className="py-4 px-6 flex flex-row">
             <div className=' ml-3'
-              content="View professor"
+              title="ดูข้อมูล"
               color="error"
               /*onClick={() => console.log("View professor", _.userID)}*/>
               <button onClick={() => GotoTeacherDetail(_.userID)}>

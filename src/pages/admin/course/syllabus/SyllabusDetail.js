@@ -133,23 +133,47 @@ function SyllabusDetail() {
     return filterCourseInSyllabus.slice(start, end).map((_, index) => (
       <tbody key={start + index}>
         <tr className="hover:bg-gray-200 bg-white border-b">
-          <td className="py-4 px-6" >{index + 1}</td>
+          <td className="py-4 px-6" >{start + index + 1}</td>
           <td className="py-4 px-6" >{_.courseID_number}</td>
           <td className="py-4 px-6">{_.courseNameTH}</td>
-          {/* <td className="py-4 px-6">{_.courseNameENG}</td> */}
           <td className="py-4 px-6">{_.creditStudy}</td>
           <td className="py-4 px-6 flex flex-row">
             <div className=' ml-3'
-              content="View Admin"
+              title="ลบรายวิชา"
               color="error"
               onClick={() => { deleteCourse(_.courseID) }}
             >
               <button >
-                <svg width="20" height="20" viewBox="0 0 47 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M19.4258 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M28.2407 38.0104V23.4346" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185" stroke="black" strokeWidth="6.54545" strokeLinecap="round" strokeLinejoin="round" />
+                <svg width="20"
+                  height="20"
+                  viewBox="0 0 47 51"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M39.2592 23.4346V46.2701C39.2592 47.0752 38.6673 47.7277 37.937 47.7277H9.72969C8.99945 47.7277 8.40747 47.0752 8.40747 46.2701V23.4346"
+                    stroke="black"
+                    strokeWidth="6.54545"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path d="M19.4258 38.0104V23.4346"
+                    stroke="black"
+                    strokeWidth="6.54545"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path d="M28.2407 38.0104V23.4346"
+                    stroke="black"
+                    strokeWidth="6.54545"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path d="M43.6665 13.7172H32.648M32.648 13.7172V5.45759C32.648 4.65259 32.0561 4 31.3258 4H16.3407C15.6105 4 15.0185 4.65259 15.0185 5.45759V13.7172M32.648 13.7172H15.0185M4 13.7172H15.0185"
+                    stroke="black"
+                    strokeWidth="6.54545"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </button>
             </div>
@@ -330,15 +354,15 @@ function SyllabusDetail() {
       // .then(() => { window.location.href = "/admin/course/syllabus/" + syllabusID; })
 
     })
-    .catch((error) => {
-      Swal.fire({
-        icon: "error",
-        title: "พบข้อผิดพลาด",
-        text: "รายวิชานี้อาจมีอยู่แล้ว",
-        showConfirmButton: false,
-        timer: 2000,
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "พบข้อผิดพลาด",
+          text: "รายวิชานี้อาจมีอยู่แล้ว",
+          showConfirmButton: false,
+          timer: 2000,
+        })
       })
-    })
   }
 
   // useEffect(() => {
@@ -573,7 +597,7 @@ function SyllabusDetail() {
 
       const filename = data.syllabus_Path.split("\\").pop();
 
-      axios.post( process.env.REACT_APP_API_URL + `/upload/edit/syllabus/${filename}`, form)
+      axios.post(process.env.REACT_APP_API_URL + `/upload/edit/syllabus/${filename}`, form)
         .then((response) => {
           // console.log("Success");
           setNewSyllabus_Path(response.data.path);

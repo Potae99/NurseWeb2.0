@@ -74,12 +74,12 @@ function Studenttable() {
     return filterStudent.slice(start, end).map((_, index) => (
       <tbody key={start + index}>
         <tr className="hover:bg-gray-200 bg-white border-b">
-          <td className="py-4 px-6" >{index + 1}</td>
+          <td className="py-4 px-6" >{start + index + 1}</td>
           <td className="py-4 px-6">{_.studentID}</td>
           <td className="py-4 px-6">{_.nameTH}</td>
           <td className="py-4 px-6 flex flex-row">
             <div className=' ml-3'
-              content="View student"
+              title="ดูข้อมูล"
               color="error"
               /*onClick={() => console.log("View student", _.userID)}*/>
               <button onClick={() => GotoStudentDetail(_.userID)}>

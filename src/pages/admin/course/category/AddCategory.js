@@ -150,7 +150,7 @@ function AddCategory() {
           <td className="py-4 px-6">{_.categoryName}</td>
           <td className='py-4 px-6 flex flex-row'>
             <div className=''
-              content="Delete professor"
+              title="ลบหมวดวิชา"
               color="error"
             >
               <button onClick={() => handleDeleteCategoryClick(_.categoryID)}>

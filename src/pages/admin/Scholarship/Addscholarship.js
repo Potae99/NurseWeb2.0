@@ -147,11 +147,11 @@ function Addscholarship() {
         return filterScholarship.slice(start, end).map((_, index) => (
             <tbody key={start + index}>
                 <tr className="hover:bg-gray-200 bg-white border-b">
-                    <td className="py-4 px-6" >{index + 1}</td>
+                    <td className="py-4 px-6" >{start + index + 1}</td>
                     <td className="py-4 px-6">{_.scholarship_name}</td>
                     <td className='py-4 px-6 flex flex-row'>
                         <div className=''
-                            content="Delete professor"
+                            title="ลบทุนการศึกษา"
                             color="error"
                         >
                             <button onClick={() => { handleDeleteScholarshipClick(_.scholarship_id) }}>

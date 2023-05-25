@@ -47,13 +47,13 @@ function Curriculumtable() {
     return filterSyllabus.slice(start, end).map((_, index) => (
       <tbody key={start + index}>
         <tr className="hover:bg-gray-200 bg-white border-b">
-          <td className="py-4 px-6" >{index + 1}</td>
+          <td className="py-4 px-6" >{start + index + 1}</td>
           <td className="py-4 px-6" >{format(new Date(_.syllabusDate), "yyyy")}</td>
           <td className="py-4 px-6">{_.syllabusName}</td>
           <td className="py-4 px-6">{format(new Date(_.startUse), 'dd/MM/yyyy')} - {format(new Date(_.endUse), 'dd/MM/yyyy')}</td>
           <td className="py-4 px-6 flex flex-row">
             <div className=' ml-3'
-              content="View Admin"
+              title="ดูข้อมูล"
               color="error"
               /*onClick={() => console.log("View Admin", _.syllabusID
               )}*/>

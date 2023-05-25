@@ -25,8 +25,17 @@ function StudentallEval() {
   const [taugh, setTaugh] = useState([]);
   const [currentPage2, setCurrentPage2] = useState(1);
   const itemsPerPage2 = 5;
-  const totalPages2 = taugh ? Math.ceil(taugh.length / itemsPerPage) : 0;
+  const totalPages2 = taugh ? Math.ceil(taugh.length / itemsPerPage2) : 0;
   const [searchTerm2, setSearchTerm2] = useState("");
+
+  const [subject, setSubject] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const [currentPageForSubject, setCurrentPageForSubject] = useState(1);
+  const itemsPerPageForSubject = 5;
+  const totalPagesForSubject = subject ? Math.ceil(subject.length / itemsPerPageForSubject) : 0;
+  const [searchTermForSubject, setSearchTermForSubject] = useState("");
+
+  const [courseNameTH, setCourseNameTH] = useState("");
 
 
 
@@ -86,25 +95,59 @@ function StudentallEval() {
           // console.log(error.res);
         });
 
-      axios.get(process.env.REACT_APP_API_URL + "/eval/taugh/info", { params: { userID: token.userID } })
+      // axios.get(process.env.REACT_APP_API_URL + "/eval/taugh/info", { params: { userID: token.userID } })
+      //   .then(res => {
+      //     // console.log(res.data);
+
+      //     if (res.data.error === true) {
+      //       // console.log(res.data)
+      //       // console.log("ERROR FOUND WHEN GET DATA FROM API");
+      //       return;
+      //     }
+      //     setTaugh(res.data.data);
+
+      //   }).catch(error => {
+      //     // console.log(error.res);
+      //   });
+
+      axios.get(process.env.REACT_APP_API_URL + "/class/viewClassThatStudentLearn", { params: { userID: token.userID } })
         .then(res => {
           // console.log(res.data);
-
-          if (res.data.error === true) {
-            // console.log(res.data)
-            // console.log("ERROR FOUND WHEN GET DATA FROM API");
-            return;
-          }
-          setTaugh(res.data.data);
-
-        }).catch(error => {
-          // console.log(error.res);
+          // ทำการเข้าถึงข้อมูลทั้งหมดในไฟล์ JSON
+          const data = res.data.data;
+          const keys = Object.keys(data); // ดึงคีย์ทั้งหมดใน Object
+          const allCourses = [];
+          keys.forEach(key => {
+            const courses = data[key]; // ดึงข้อมูลคอร์สในแต่ละเทอม
+            courses.forEach(course => {
+              allCourses.push(course); // เก็บข้อมูลคอร์สใน Array
+            });
+          });
+          // console.log(allCourses);
+          setSubject(allCourses);
+          // setSuccess(true);
+        })
+        .catch(error => {
+          console.error("Error", error);
         });
+
     }
 
     fetchData();
 
-  }, [searchTerm, searchTerm2]);
+  }, [searchTerm, searchTerm2, searchTermForSubject]);
+
+  const getInfo = (classID,courseNameTH) => {
+    setCourseNameTH (courseNameTH);
+    axios.get(process.env.REACT_APP_API_URL + "/eval/taugh/infoByClassID", { params: { userID: token.userID, classID: classID } })
+      .then(res => {
+        setSuccess(true);
+        setTaugh(res.data.data);
+      })
+      .catch(error => {
+        console.error("Error", error);
+      });
+  }
 
   const handleClick = (e, page) => {
     e.preventDefault();
@@ -116,6 +159,11 @@ function StudentallEval() {
     setCurrentPage2(page);
   };
 
+  const handleClickForSubject = (e, page) => {
+    e.preventDefault();
+    setCurrentPageForSubject(page);
+  };
+
   const renderTable = () => {
     if (!data) {
       return null;
@@ -125,7 +173,7 @@ function StudentallEval() {
     return filterData.slice(start, end).map((_, index) => (
       <tbody key={start + index}>
         <tr className="hover:bg-gray-200 bg-white border-b">
-          <td className="py-4 px-6" >{index + 1}</td>
+          <td className="py-4 px-6" >{start + index + 1}</td>
           <td className="py-4 px-6">{_.courseID_number}</td>
           <td className="py-4 px-6">{_.courseNameTH}</td>
           <td className="py-4 px-6">
@@ -151,9 +199,10 @@ function StudentallEval() {
               _.isEval === 0 ?
                 <>
                   <div className=' ml-3'
-                    content="View Admin"
+                    title="ประเมินรายวิชา"
                     color="error"
-                    onClick={() => console.log("View Admin", _.studyID)}>
+                  // onClick={() => console.log("View Admin", _.studyID)}
+                  >
                     <button onClick={() => Gotaclasseval(_.studyID)}>
                       <svg width="20" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.0572 0.5C4.86 0.5 0 10.22 0 10.22C0 10.22 4.86 19.94 13.0572 19.94C21.06 19.94 25.92 10.22 25.92 10.22C25.92 10.22 21.06 0.5 13.0572 0.5ZM12.96 3.74C16.5564 3.74 19.44 6.656 19.44 10.22C19.44 13.8164 16.5564 16.7 12.96 16.7C9.396 16.7 6.48 13.8164 6.48 10.22C6.48 6.656 9.396 3.74 12.96 3.74ZM12.96 6.98C11.178 6.98 9.72 8.438 9.72 10.22C9.72 12.002 11.178 13.46 12.96 13.46C14.742 13.46 16.2 12.002 16.2 10.22C16.2 9.896 16.0704 9.6044 16.0056 9.3128C15.7464 9.8312 15.228 10.22 14.58 10.22C13.6728 10.22 12.96 9.5072 12.96 8.6C12.96 7.952 13.3488 7.4336 13.8672 7.1744C13.5756 7.0772 13.284 6.98 12.96 6.98Z" fill="black" />
@@ -177,7 +226,7 @@ function StudentallEval() {
     return filterTaugh.slice(start, end).map((_, index) => (
       <tbody key={start + index}>
         <tr className="hover:bg-gray-200 bg-white border-b">
-          <td className="py-4 px-6" >{index + 1}</td>
+          <td className="py-4 px-6" >{start + index + 1}</td>
           <td className="py-4 px-6">{_.nameTH}</td>
           <td className="py-4 px-6">{_.taughtType}</td>
           <td className="py-4 px-6">
@@ -203,7 +252,7 @@ function StudentallEval() {
               _.isEval === 0 ?
                 <>
                   <div className=' ml-3'
-                    content="View Admin"
+                    title="ประเมินอาจารย์"
                     color="error"
                     onClick={() => GotaTaugheval(_.taughtType, _.evalTaughID)}>
                     <button>
@@ -220,6 +269,37 @@ function StudentallEval() {
     ));
   };
 
+  const renderTableForSubject = () => {
+    if (!subject) {
+      return null;
+    }
+    const start = (currentPageForSubject - 1) * itemsPerPageForSubject;
+    const end = start + itemsPerPageForSubject;
+    return filterSubject.slice(start, end).map((_, index) => (
+      <tbody key={start + index}>
+        <tr className="hover:bg-gray-200 bg-white border-b">
+          <td className="py-4 px-6" >{start + index + 1}</td>
+          <td className="py-4 px-6">{_.courseID_number}</td>
+          <td className="py-4 px-6">{_.courseNameTH}</td>
+          <td className="py-4 px-6 flex flex-row">
+            <div className=' ml-3'
+              title="ดูข้อมูล"
+              color="error"
+            // onClick={() => console.log("View Admin", _.studyID)}
+            >
+              <button onClick={() => getInfo(_.classID,_.courseNameTH)}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                </svg>
+
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    ));
+  };
+
   const handlePrevClick = (e) => {
     e.preventDefault();
     handleClick(e, currentPage - 1);
@@ -230,6 +310,11 @@ function StudentallEval() {
     handleClick2(e, currentPage2 - 1);
   };
 
+  const handlePrevClickForSubject = (e) => {
+    e.preventDefault();
+    handleClickForSubject(e, currentPageForSubject - 1);
+  };
+
   const handleNextClick = (e) => {
     e.preventDefault();
     handleClick(e, currentPage + 1);
@@ -238,6 +323,11 @@ function StudentallEval() {
   const handleNextClick2 = (e) => {
     e.preventDefault();
     handleClick2(e, currentPage2 + 1);
+  };
+
+  const handleNextClickForSubject = (e) => {
+    e.preventDefault();
+    handleClickForSubject(e, currentPageForSubject + 1);
   };
 
   const renderPageNumbers = () => {
@@ -420,12 +510,106 @@ function StudentallEval() {
     return pageNumbers;
   };
 
+  const renderPageNumbersForSubject = () => {
+    if (!subject) {
+      return null;
+    }
+    const pageNumbers = [];
+    const nextPage = currentPageForSubject + 1;
+    const prevPage = currentPageForSubject - 1;
+    const maxPageRange = 3;
+    const startPageRange = Math.max(1, currentPageForSubject - maxPageRange);
+    const endPageRange = Math.min(totalPagesForSubject, currentPageForSubject + maxPageRange);
+
+    pageNumbers.push(
+      <li
+        href="#!"
+        onClick={(e) => handleClickForSubject(e, 1)}
+        key={"first"}
+        className={`bg-white text-black hover:bg-orange-200 inline-block mx-1 px-3 py-1 rounded-lg cursor-pointer`}
+      >
+        <a href="#!" onClick={(e) => handleClickForSubject(e, 1)}>
+          หน้าแรก
+        </a>
+      </li>
+    );
+
+    if (currentPageForSubject > 1) {
+      pageNumbers.push(
+        <li
+          href="#!"
+          onClick={handlePrevClickForSubject}
+          key={"prev"}
+          className={`bg-white text-black hover:bg-orange-200 inline-block mx-1 px-3 py-1 rounded-lg cursor-pointer`}
+        >
+          <a href="#!" onClick={handlePrevClickForSubject}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.405-1.683.977l-7.108-4.062a1.125 1.125 0 010-1.953l7.108-4.062A1.125 1.125 0 0121 8.688v8.123zM11.25 16.811c0 .864-.933 1.405-1.683.977l-7.108-4.062a1.125 1.125 0 010-1.953L9.567 7.71a1.125 1.125 0 011.683.977v8.123z" />
+            </svg>
+          </a>
+        </li>
+      );
+    }
+
+    for (let i = startPageRange; i <= endPageRange; i++) {
+      pageNumbers.push(
+        <li
+          href="#!"
+          onClick={(e) => handleClickForSubject(e, i)}
+          key={i}
+          className={`${currentPageForSubject === i ? "bg-orange-500 text-white" : "bg-white text-black"
+            } hover:bg-orange-200 inline-block mx-1 px-3 py-1 rounded-lg cursor-pointer`}
+        >
+          <a href="#!" onClick={(e) => handleClickForSubject(e, i)}>
+            {i}
+          </a>
+        </li>
+      );
+    }
+
+    if (currentPageForSubject < totalPagesForSubject) {
+      pageNumbers.push(
+        <li
+          href="#!"
+          onClick={handleNextClickForSubject}
+          key={"next"}
+          className={`bg-white text-black hover:bg-orange-200 inline-block mx-1 px-3 py-1 rounded-lg cursor-pointer`}
+        >
+          <a href="#!" onClick={handleNextClickForSubject}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062A1.125 1.125 0 013 16.81V8.688zM12.75 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062a1.125 1.125 0 01-1.683-.977V8.688z" />
+            </svg>
+          </a>
+        </li>
+      );
+    }
+
+    pageNumbers.push(
+      <li
+        href="#!"
+        onClick={(e) => handleClickForSubject(e, totalPagesForSubject)}
+        key={"last"}
+        className={`bg-white text-black hover:bg-orange-200 inline-block mx-1 px-3 py-1 rounded-lg cursor-pointer`}
+      >
+        <a href="#!" onClick={(e) => handleClickForSubject(e, totalPagesForSubject)}>
+          หน้าสุดท้าย
+        </a>
+      </li>
+    );
+
+    return pageNumbers;
+  };
+
   const filterData = data.filter((item) =>
     item.courseID_number.toString().toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const filterTaugh = taugh.filter((item) =>
     item.nameTH.toString().toLowerCase().includes(searchTerm2.toLowerCase())
+  );
+
+  const filterSubject = subject.filter((item) =>
+    item.courseID_number.toString().toLowerCase().includes(searchTermForSubject.toLowerCase())
   );
 
   // console.log(token.userID)
@@ -466,29 +650,62 @@ function StudentallEval() {
           <p className=' mt-3'>ประเมินอาจารย์ผู้สอน</p>
           <input
             className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
-            placeholder="ค้นหาอาจารย์"
-            value={searchTerm2}
-            onChange={(e) => setSearchTerm2(e.target.value)}
+            placeholder="ค้นหารายวิชา...( รหัสวิชา )"
+            value={searchTermForSubject}
+            onChange={(e) => setSearchTermForSubject(e.target.value)}
           />
           <div className=' relative overflow-x-auto shadow-md mt-3 sm:rounded-lg'>
             <table className=" w-full text-sm text-left text-black">
               <thead className="text-sm text-black uppercase bg-orange-300">
                 <tr  >
                   <th scope="col" className="py-3 px-6" >ลำดับ</th>
-                  <th scope="col" className="py-3 px-6">ชื่ออาจารย์ผู้สอน</th>
-                  <th scope="col" className="py-3 px-6">ประเภทการสอน</th>
-                  <th scope="col" className="py-3 px-6">สถานะ</th>
+                  <th scope="col" className="py-3 px-6">รหัสวิชา</th>
+                  <th scope="col" className="py-3 px-6">ชื่อวิชา</th>
                   <th scope="col" className="py-3 px-6">การกระทำ</th>
                 </tr>
               </thead>
-              {renderTable2()}
+              {renderTableForSubject()}
             </table>
           </div>
           <div className="flex justify-center mt-4">
             <ul className="flex">
-              {renderPageNumbers2()}
+              {renderPageNumbersForSubject()}
             </ul>
           </div>
+          <>
+            {!success ? (<></>) :
+              <div className=' text-black mt-3'>
+                <p className=' mt-5 mb-3 text-2xl'>อาจารย์ในรายวิชา : {courseNameTH}</p>
+                <>
+                  <input
+                    className=" mb-5 w-full rounded-md border border-black bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-black focus:shadow-md"
+                    placeholder="ค้นหาอาจารย์...( ชื่ออาจารย์ )"
+                    value={searchTerm2}
+                    onChange={(e) => setSearchTerm2(e.target.value)}
+                  />
+                  <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
+                    <table className="w-full text-sm text-left text-black">
+                      <thead className="text-sm text-black uppercase bg-orange-300">
+                        <tr>
+                          <th scope="col" className="py-3 px-6" >ลำดับ</th>
+                          <th scope="col" className="py-3 px-6">ชื่อไทย</th>
+                          <th scope="col" className="py-3 px-6">รูปแบบการสอน</th>
+                          <th scope="col" className="py-3 px-6">สถานะ</th>
+                          <th scope="col" className="py-3 px-6">การกระทำ</th>
+                        </tr>
+                      </thead>
+                      {renderTable2()}
+                    </table>
+                  </div>
+                  <div className="flex justify-center mt-4">
+                    <ul className="flex">
+                      {renderPageNumbers2()}
+                    </ul>
+                  </div>
+                </>
+              </div>
+            }
+          </>
         </div>
       )}
 

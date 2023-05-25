@@ -307,7 +307,7 @@ function Classdetail() {
           <td className="py-4 px-6">{_.gender}</td>
           <td className="py-4 px-6 flex flex-row">
             <div className=' ml-3'
-              content="View Admin"
+              title="ลบนิสิต"
               color="error"
               onClick={() => { deleteStudent(_.userID) }}
             >

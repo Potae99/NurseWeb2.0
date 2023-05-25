@@ -61,7 +61,7 @@ function Allcoursetable() {
           <td className="py-4 px-6">{_.creditStudy}</td>
           <td className="py-4 px-6 flex flex-row">
             <div className=' ml-3'
-              content="View Admin"
+              title="ดูข้อมูล"
               color="error"
               /*onClick={() => console.log("View Admin", _.courseID)}*/>
               <button onClick={() => gotoCoursedetail(_.courseID)}>
