@@ -29,14 +29,12 @@ import AddWorkHistory from './pages/admin/workHistory/AddWorkHistory';
 import WorkHistoryList from './pages/admin/workHistory/WorkHistoryList';
 import WorkHistoryDetail from './pages/admin/workHistory/WorkHistoryDetail';
 import Addscholarship from './pages/admin/Scholarship/Addscholarship';
-import Addcourse_tosyllabus from './pages/admin/course/syllabus/Addcourse_tosyllabus';
-import CategoryDetail from "./pages/admin/course/category/CategoryDetail"
 import Addclass from './pages/admin/course/class/Addclass';
 import Classdetail from './pages/admin/course/class/Classdetail';
 import Evalsum from './pages/admin/eval/Evalsum';
 import Evalsearch from './pages/admin/eval/Evalsearch';
 import Adminoverall from './pages/admin/Adminoverall';
-import Chart_bar from './components/chart/Chart_bar';
+import EditUserPassword from './pages/admin/EditUserPassword';
 //// import excell
 
 import { Import_excel } from './pages/admin/excel/Import_excel';
@@ -372,6 +370,11 @@ const router = [
   {
     path: "/Evalsumcomment",
     element: <Evalsum_comment />,
+    level: "admin"
+  },
+  {
+    path: "/NA/admin/edit/password",
+    element: <EditUserPassword/>,
     level: "admin"
   },
  

@@ -167,7 +167,7 @@ function AddTeacher() {
                                         onChange={(event) => {
                                             setpassword(event.target.value)
                                         }}
-                                        type="text"
+                                        type="password"
                                         name="Password"
                                         value={password}
                                         placeholder="Password"
